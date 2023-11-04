@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\Tests;
+namespace TypeLang\PhpDocParser\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

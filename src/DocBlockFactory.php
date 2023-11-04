@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader;
+namespace TypeLang\PhpDocParser;
 
 use TypeLang\Parser\Parser;
-use TypeLang\Reader\DocBlock\Description;
-use TypeLang\Reader\DocBlock\DescriptionFactory;
-use TypeLang\Reader\DocBlock\DescriptionFactoryInterface;
-use TypeLang\Reader\DocBlock\StandardTagFactory;
-use TypeLang\Reader\DocBlock\Tag\AuthorTagFactory;
-use TypeLang\Reader\DocBlock\Tag\DeprecatedTagFactory;
-use TypeLang\Reader\DocBlock\Tag\FinalTagFactory;
-use TypeLang\Reader\DocBlock\Tag\ImmutableTagFactory;
-use TypeLang\Reader\DocBlock\Tag\InternalTagFactory;
-use TypeLang\Reader\DocBlock\Tag\NoNamedArgumentsTagFactory;
-use TypeLang\Reader\DocBlock\Tag\ParamTagFactory;
-use TypeLang\Reader\DocBlock\Tag\ReturnTagFactory;
-use TypeLang\Reader\DocBlock\Tag\TagInterface;
-use TypeLang\Reader\DocBlock\Tag\ThrowsTag;
-use TypeLang\Reader\DocBlock\Tag\ThrowsTagFactory;
-use TypeLang\Reader\DocBlock\Tag\VarTagFactory;
-use TypeLang\Reader\DocBlock\TagFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\DescriptionFactory;
+use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\StandardTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\AuthorTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\DeprecatedTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\FinalTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\ImmutableTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\InternalTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\NoNamedArgumentsTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\ParamTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\ReturnTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDocParser\DocBlock\Tag\ThrowsTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\ThrowsTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\VarTagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 final class DocBlockFactory implements DocBlockFactoryInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader;
+namespace TypeLang\PhpDocParser;
 
 final class VoidExceptionHandler implements ExceptionHandlerInterface
 {

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\Parser\Node\Name;
 use TypeLang\Parser\Node\Stmt\NamedTypeNode;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface;
 use TypeLang\Parser\Traverser;
-use TypeLang\Reader\DocBlock\DescriptionFactoryInterface;
-use TypeLang\Reader\ExceptionHandlerInterface;
-use TypeLang\Reader\Visitor\NodeCompleteOffsetVisitor;
+use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\ExceptionHandlerInterface;
+use TypeLang\PhpDocParser\Visitor\NodeCompleteOffsetVisitor;
 
 /**
  * @template TReturn of TagInterface

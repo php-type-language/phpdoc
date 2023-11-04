@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
-use TypeLang\Reader\DocBlock\Description;
-use TypeLang\Reader\DocBlock\DescriptionFactoryInterface;
-use TypeLang\Reader\DocBlock\TagFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 /**
  * @template TReturn of TagInterface

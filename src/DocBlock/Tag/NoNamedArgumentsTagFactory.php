@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 /**
  * @template-extends TypedTagFactory<NoNamedArgumentsTag>

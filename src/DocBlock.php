@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader;
+namespace TypeLang\PhpDocParser;
 
-use TypeLang\Reader\DocBlock\Description;
-use TypeLang\Reader\DocBlock\Tag\TagInterface;
-use TypeLang\Reader\DocBlock\TagProvider;
-use TypeLang\Reader\DocBlock\TagProviderInterface;
+use TypeLang\PhpDocParser\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDocParser\DocBlock\TagProvider;
+use TypeLang\PhpDocParser\DocBlock\TagProviderInterface;
 
 final class DocBlock implements TagProviderInterface, \Stringable
 {

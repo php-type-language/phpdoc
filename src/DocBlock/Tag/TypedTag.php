@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
-use TypeLang\Reader\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\Description;
 
 abstract class TypedTag extends Tag
 {

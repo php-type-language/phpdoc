@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\Visitor;
+namespace TypeLang\PhpDocParser\Visitor;
 
 use TypeLang\Parser\Node\Node;
 use TypeLang\Parser\Traverser\Command;
@@ -10,7 +10,7 @@ use TypeLang\Parser\Traverser\Visitor;
 
 /**
  * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal TypeLang\Reader
+ * @psalm-internal TypeLang\PhpDocParser
  */
 final class NodeCompleteOffsetVisitor extends Visitor
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\Reader\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
-use TypeLang\Reader\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\Description;
 
 final class NoNamedArgumentsTag extends Tag
 {

@@ -1,12 +1,12 @@
 {
-    "name": "phptl/reader",
+    "name": "phptl/phpdoc-parser",
     "type": "library",
     "description": "PHP Types Reader",
     "keywords": ["language", "php", "reader", "phpdoc", "docblock"],
     "license": "MIT",
     "support": {
-        "source": "https://github.com/php-type-language/reader",
-        "issues": "https://github.com/php-type-language/reader/issues"
+        "source": "https://github.com/php-type-language/phpdoc-parser",
+        "issues": "https://github.com/php-type-language/phpdoc-parser/issues"
     },
     "require": {
         "php": "^8.1",
@@ -14,14 +14,11 @@
     },
     "autoload": {
         "psr-4": {
-            "TypeLang\\Reader\\": "src"
+            "TypeLang\\PhpDocParser\\": "src"
         }
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.35",
-        "nikic/php-parser": "^4.17",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpstan/phpdoc-parser": "^1.24",
         "phpunit/phpunit": "^10.4",
         "rector/rector": "^0.18",
         "symfony/var-dumper": "^5.4|^6.0",
@@ -29,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "TypeLang\\Reader\\Tests\\": "tests"
+            "TypeLang\\PhpDocParser\\Tests\\": "tests"
         }
     },
     "extra": {
