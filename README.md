@@ -16,7 +16,10 @@
     <a href="https://github.com/php-type-language/reader/actions"><img src="https://github.com/php-type-language/reader/workflows/tests/badge.svg"></a>
 </p>
 
-The PHP reference implementation for Type Language PhpDoc Parser.
+The PHP reference implementation for Type Language phpdoc parser.
+
+Read [documentation pages](https://nesk.gitbook.io/php-type-language) for more
+information.
 
 ## Installation
 
