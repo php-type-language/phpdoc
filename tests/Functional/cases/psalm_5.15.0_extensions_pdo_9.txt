@@ -1,0 +1,3 @@
+/**
+ * @psalm-taint-sink sql $var
+ */

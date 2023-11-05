@@ -1,0 +1,8 @@
+/**
+ * @param string|array<mixed> $pattern
+ * @param callable(array<int|string, string>):string $callback
+ * @param string|array<mixed> $subject
+ * @param int $count
+ * @param-out 0|positive-int $count
+ * @return ($subject is array ? list<string>|null : string|null)
+ */

@@ -1,0 +1,12 @@
+/**
+ * @template TDefault
+ * @param TKey $key
+ * @param TDefault $default
+ * @return (
+ *     func_num_args() is 1
+ *     ? TValue
+ *     : TValue|TDefault
+ * )
+ * @throws OutOfBoundsException
+ * @psalm-mutation-free
+ */

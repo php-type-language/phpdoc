@@ -1,0 +1,16 @@
+/**
+ * Sort the entries by keys using a user-defined comparison function
+ * @link http://php.net/manual/en/arrayobject.uksort.php
+ *
+ * Function <i>cmp_function</i> should accept two
+ * parameters which will be filled by pairs of entry keys.
+ * The comparison function must return an integer less than, equal
+ * to, or greater than zero if the first argument is considered to
+ * be respectively less than, equal to, or greater than the
+ * second.
+ *
+ * @param callable(TKey, TKey):int $cmp_function The callable comparison function.
+ * @return void
+ *
+ * @since 5.2.0
+ */

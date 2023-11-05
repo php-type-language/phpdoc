@@ -1,0 +1,5 @@
+/**
+ * @return TValue
+ * @throws \OutOfRangeException
+ * @psalm-mutation-free
+ */

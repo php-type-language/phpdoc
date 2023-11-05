@@ -1,0 +1,4 @@
+/**
+ * @return Map<TKey, TValue>
+ * @psalm-mutation-free
+ */

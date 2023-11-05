@@ -1,0 +1,5 @@
+/**
+ * @param TKey $index The index to set for.
+ * @param TValue $newval The new value to store at the index.
+ * @return void
+ */

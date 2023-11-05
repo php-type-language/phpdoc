@@ -1,0 +1,4 @@
+/**
+ * @return string
+ * @psalm-taint-source input
+ */

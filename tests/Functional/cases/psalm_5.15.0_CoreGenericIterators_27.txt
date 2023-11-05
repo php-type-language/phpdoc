@@ -1,0 +1,4 @@
+/**
+ * @param TKey $index The offset being checked.
+ * @return bool true if the offset exists, otherwise false
+ */

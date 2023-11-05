@@ -1,0 +1,3 @@
+/**
+ * @return array<array-key, TValue|null>
+ */

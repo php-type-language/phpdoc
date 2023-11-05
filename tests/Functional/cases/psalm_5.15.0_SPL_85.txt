@@ -1,0 +1,9 @@
+/**
+ * Unserializes a storage from its string representation
+ * @link https://php.net/manual/en/splobjectstorage.unserialize.php
+ *
+ * @param string $serialized The serialized representation of a storage.
+ * @return void
+ *
+ * @since 5.2.2
+ */

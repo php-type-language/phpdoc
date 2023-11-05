@@ -1,0 +1,4 @@
+/**
+ * @template TValue
+ * @implements Sequence<TValue>
+ */

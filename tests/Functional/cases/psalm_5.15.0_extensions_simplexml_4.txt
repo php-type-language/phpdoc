@@ -1,0 +1,4 @@
+/**
+ * @implements Traversable<string, SimpleXMLElement>
+ * @psalm-no-seal-properties
+ */

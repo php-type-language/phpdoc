@@ -1,0 +1,4 @@
+/**
+ * @return Pair<TKey, TValue>
+ * @throws UnderflowException
+ */

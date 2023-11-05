@@ -1,0 +1,4 @@
+/**
+ * @return int|false
+ * @psalm-ignore-falsable-return
+ */

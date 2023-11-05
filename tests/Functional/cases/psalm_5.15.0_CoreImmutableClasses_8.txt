@@ -1,0 +1,5 @@
+/**
+ * @psalm-mutation-free
+ * @return static
+
+ */

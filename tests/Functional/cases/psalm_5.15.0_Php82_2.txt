@@ -1,0 +1,1 @@
+/** @return non-empty-list<ReflectionNamedType|ReflectionIntersectionType> */

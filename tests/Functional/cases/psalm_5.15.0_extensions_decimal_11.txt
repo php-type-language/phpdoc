@@ -1,0 +1,1 @@
+/* This value may change across platforms */

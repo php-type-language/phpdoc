@@ -1,0 +1,6 @@
+/**
+ * @return ($string is non-empty-string ? non-empty-list<string> : non-empty-list<string>|array{null})
+ * @psalm-pure
+ *
+ * @psalm-flow ($string) -> return
+ */

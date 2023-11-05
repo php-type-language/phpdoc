@@ -1,0 +1,3 @@
+/**
+ * @var list<array{errno: int, sqlstate: string, error: string}>
+ */

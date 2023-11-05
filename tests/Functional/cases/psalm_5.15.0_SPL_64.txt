@@ -1,0 +1,8 @@
+/**
+ * Move to the next node.
+ * @link https://php.net/manual/en/splpriorityqueue.next.php
+ *
+ * @return void
+ *
+ * @since 5.3.0
+ */

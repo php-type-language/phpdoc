@@ -1,0 +1,8 @@
+/**
+ * Extracts a node from top of the queue and sift up
+ * @link https://php.net/manual/en/splpriorityqueue.extract.php
+ *
+ * @return TValue The current node value
+ *
+ * @since 5.3.0
+ */

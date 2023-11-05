@@ -1,0 +1,4 @@
+/**
+ * @return RecursiveDirectoryIterator|string|SplFileInfo|null current value or null when iterator is drained
+ * @psalm-ignore-nullable-return
+ */

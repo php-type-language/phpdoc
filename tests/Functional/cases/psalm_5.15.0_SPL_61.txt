@@ -1,0 +1,8 @@
+/**
+ * Tells if the queue is in a corrupted state
+ * @link https://php.net/manual/en/splpriorityqueue.isCorrupted.php
+ *
+ * @return bool true if the queue is corrupted, false otherwise.
+ *
+ * @since 7.0.0
+ */

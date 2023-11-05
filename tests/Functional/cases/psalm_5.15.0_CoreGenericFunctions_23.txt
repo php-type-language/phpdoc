@@ -1,0 +1,9 @@
+/**
+ * @psalm-template TKey
+ * @psalm-template T
+ * @psalm-template TArray as array<TKey,T>
+ *
+ * @param TArray $array
+ * @param callable(TKey,TKey):int $callback
+ * @param-out (TArray is non-empty-array ? non-empty-array<TKey,T> : array<TKey,T>) $array
+ */

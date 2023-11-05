@@ -1,0 +1,4 @@
+/**
+ * @param (callable(TValue): bool)|null $callback
+ * @return Sequence<TValue>
+ */

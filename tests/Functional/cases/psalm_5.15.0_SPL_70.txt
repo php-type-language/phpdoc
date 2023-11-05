@@ -1,0 +1,11 @@
+/**
+ * The SplObjectStorage class provides a map from objects to data or, by
+ * ignoring data, an object set. This dual purpose can be useful in many
+ * cases involving the need to uniquely identify objects.
+ * @link https://php.net/manual/en/class.splobjectstorage.php
+ *
+ * @template TObject as object
+ * @template TArrayValue
+ * @template-implements ArrayAccess<TObject, TArrayValue>
+ * @template-implements Iterator<int, TObject>
+ */

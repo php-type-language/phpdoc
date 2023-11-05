@@ -1,0 +1,4 @@
+/**
+ * @return TKey|null current key value or null when iterator is drained
+ * @psalm-ignore-nullable-return
+ */

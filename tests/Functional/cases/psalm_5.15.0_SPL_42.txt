@@ -1,0 +1,8 @@
+/**
+ * Checks whether the heap is empty
+ * @link https://php.net/manual/en/splheap.isEmpty.php
+ *
+ * @return bool Whether the heap is empty
+ *
+ * @since 5.3.0
+ */

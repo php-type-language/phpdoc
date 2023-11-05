@@ -1,0 +1,3 @@
+/**
+ * @return bool TRUE if this decimal is an integer and odd, FALSE otherwise.
+ */

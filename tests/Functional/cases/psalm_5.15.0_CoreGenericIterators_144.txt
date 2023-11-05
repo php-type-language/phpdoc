@@ -1,0 +1,8 @@
+/**
+ * @template TKey
+ * @template TValue
+ * @template TIterator as RecursiveIterator<TKey, TValue>
+ *
+ * @template-implements RecursiveIterator<TKey, TValue>
+ * @template-extends RegexIterator<TKey, TValue, TIterator>
+ */

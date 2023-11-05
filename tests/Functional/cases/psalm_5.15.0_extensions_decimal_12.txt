@@ -1,0 +1,13 @@
+/**
+ * Constructor
+ *
+ * Initializes a new instance using a given value and minimum precision.
+ *
+ * @param Decimal|string|int $value
+ * @param int                $precision
+ *
+ * @throws \BadMethodCallException if already constructed.
+ * @throws \TypeError if the value is not a decimal, string, or integer.
+ * @throws \DomainException is the type is supported but the value could not
+ *                          be converted to decimal.
+ */

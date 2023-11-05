@@ -1,0 +1,7 @@
+/**
+ * @param resource $stream
+ * @param mixed $vars
+ * @param-out string|int|float|null $vars
+ *
+ * @return list<mixed>|int|false
+ */

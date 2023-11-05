@@ -1,0 +1,4 @@
+/**
+ * @return DOMProcessingInstruction|false
+ * @psalm-ignore-falsable-return
+ */

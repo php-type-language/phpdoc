@@ -1,0 +1,8 @@
+/**
+ * @psalm-pure
+ *
+ * @return array|false
+ * @psalm-ignore-falsable-return
+ *
+ * @psalm-flow ($string) -> return
+ */

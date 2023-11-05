@@ -1,0 +1,7 @@
+/**
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @template-implements RecursiveIterator<TKey, TValue>
+ * @template-extends ArrayIterator<TKey, TValue>
+ */

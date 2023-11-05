@@ -1,0 +1,12 @@
+/**
+ * @param array $array
+ *
+ * @return (
+ *     $array is array<int>
+ *     ? int
+ *     : ($array is array<float>
+ *         ? float
+ *         : float|int
+ *     )
+ * )
+ */

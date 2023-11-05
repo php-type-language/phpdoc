@@ -1,0 +1,9 @@
+/**
+ * Creates a copy of the ArrayObject.
+ * @link http://php.net/manual/en/arrayobject.getarraycopy.php
+ *
+ * @return array<TKey, TValue>  a copy of the array. When the ArrayObject refers to an object
+ *                              an array of the public properties of that object will be returned.
+ *
+ * @since 5.0.0
+ */

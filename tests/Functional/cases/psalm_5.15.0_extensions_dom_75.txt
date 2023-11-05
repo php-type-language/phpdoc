@@ -1,0 +1,4 @@
+/**
+ * @return DOMEntityReference|false
+ * @psalm-ignore-falsable-return
+ */

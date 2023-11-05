@@ -1,0 +1,3 @@
+/**
+ * @implements RecursiveIterator<string, SimpleXMLElement>
+ */

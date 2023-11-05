@@ -1,0 +1,3 @@
+/**
+ * @return ($value is array ? true : false)
+ */

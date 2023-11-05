@@ -1,0 +1,8 @@
+/**
+ * Return current node index
+ * @link https://php.net/manual/en/spldoublylinkedlist.key.php
+ *
+ * @return int The current node index.
+ *
+ * @since 5.3.0
+ */

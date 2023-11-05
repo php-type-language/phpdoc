@@ -1,0 +1,3 @@
+/**
+ * @return array<TKey, TValue>
+ */

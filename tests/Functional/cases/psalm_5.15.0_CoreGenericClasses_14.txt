@@ -1,0 +1,9 @@
+/**
+ * Offset to unset
+ * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+ *
+ * @param TKey $offset The offset to unset.
+ * @return void
+ *
+ * @since 5.0.0
+ */

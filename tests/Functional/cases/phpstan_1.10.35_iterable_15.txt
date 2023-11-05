@@ -1,0 +1,4 @@
+/**
+ * @param array<TKey, TValue> $array
+ * @param int $flags
+ */

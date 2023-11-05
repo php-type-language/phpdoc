@@ -1,0 +1,3 @@
+/**
+ * @return ($string is non-empty-string ? non-empty-string : string)
+ */

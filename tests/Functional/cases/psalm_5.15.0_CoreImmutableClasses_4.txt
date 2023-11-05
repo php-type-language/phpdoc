@@ -1,0 +1,4 @@
+/**
+ * @psalm-mutation-free
+ * @return int
+ */

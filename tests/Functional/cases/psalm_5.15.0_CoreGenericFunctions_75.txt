@@ -1,0 +1,16 @@
+/**
+ * @psalm-pure
+ *
+ * @todo update $times to be `0|positive-int`
+ * @return (
+ *      $string is non-empty-string
+ *      ? (
+ *          $times is positive-int
+ *          ? non-empty-string
+ *          : ($times is 0 ? '' : string)
+ *      )
+ *      : ($times is 0 ? '' : string)
+ * )
+ *
+ * @psalm-flow ($string) -> return
+ */

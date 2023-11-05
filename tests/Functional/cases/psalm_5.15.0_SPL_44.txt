@@ -1,0 +1,8 @@
+/**
+ * Move to the next node. This will delete the top node of the heap.
+ * @link https://php.net/manual/en/splheap.next.php
+ *
+ * @return void
+ *
+ * @since 5.3.0
+ */

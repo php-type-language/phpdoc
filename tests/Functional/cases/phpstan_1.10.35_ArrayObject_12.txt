@@ -1,0 +1,4 @@
+/**
+ * @param class-string $iterator_class
+ * @return void
+ */

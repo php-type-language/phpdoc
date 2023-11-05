@@ -1,0 +1,4 @@
+/**
+ * @param class-string<SimpleXMLElement> $class_name
+ * @php-from 8.1
+ */

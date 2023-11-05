@@ -1,0 +1,8 @@
+/**
+ * @psalm-pure
+ *
+ * @return (PHP_MAJOR_VERSION is 5|7 ? string|false : string)
+ * @psalm-ignore-falsable-return
+ *
+ * @psalm-flow ($string) -> return
+ */

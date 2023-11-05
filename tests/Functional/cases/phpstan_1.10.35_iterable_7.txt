@@ -1,0 +1,8 @@
+/**
+ * @template-covariant TKey
+ * @template-covariant TValue
+ * @template TSend
+ * @template-covariant TReturn
+ *
+ * @implements Iterator<TKey, TValue>
+ */

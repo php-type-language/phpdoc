@@ -1,0 +1,6 @@
+/**
+ * @template J as object
+ * @param J $object
+ * @psalm-assert-if-true T&J $object
+ * @psalm-pure
+ */

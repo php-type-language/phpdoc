@@ -1,0 +1,7 @@
+/**
+ * @psalm-pure
+ *
+ * @return non-empty-string
+ *
+ * @psalm-flow ($prefix) -> return
+ */

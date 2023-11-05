@@ -1,0 +1,5 @@
+/**
+ * @template TNewValue
+ * @param callable(TValue): TNewValue $callback
+ * @return Vector<TNewValue>
+ */

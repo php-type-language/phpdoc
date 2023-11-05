@@ -1,0 +1,8 @@
+/**
+ * @psalm-pure
+ *
+ * @param numeric-string $num1
+ * @param numeric-string $num2
+ * @param int|null $scale
+ * @return (PHP_MAJOR_VERSION is 8 ? numeric-string : ($num2 is "0" ? null : numeric-string))
+ */

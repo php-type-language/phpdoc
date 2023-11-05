@@ -1,0 +1,10 @@
+/**
+ * Returns the size of the array.
+ * @link https://php.net/manual/en/splfixedarray.getsize.php
+ *
+ * @return int The size of the array
+
+ * @see SplFixedArray::count()
+ *
+ * @since 5.3.0
+ */

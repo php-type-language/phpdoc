@@ -1,0 +1,5 @@
+/**
+ * @var bool
+ * @since 8.1
+ * @readonly
+ */

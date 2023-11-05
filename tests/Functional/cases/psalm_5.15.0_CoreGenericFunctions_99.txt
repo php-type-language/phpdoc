@@ -1,0 +1,12 @@
+/**
+ * @psalm-pure
+ *
+ * @param string|int|float $values
+ * @return (PHP_MAJOR_VERSION is 8 ? int<0, max> : int<0, max>|false)
+ * @psalm-ignore-falsable-return
+ *
+ * @psalm-taint-specialize
+ * @psalm-flow ($format, $values) -> return
+ * @psalm-taint-sink html $format
+ * @psalm-taint-sink html $values
+ */

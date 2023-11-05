@@ -1,0 +1,3 @@
+/**
+ * @return ($filename is null ? string|false : bool)
+ */

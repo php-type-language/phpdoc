@@ -1,0 +1,8 @@
+/**
+ * @psalm-pure
+ * @param string $haystack
+ * @param string $needle
+ * @param int $offset
+ * @psalm-assert-if-true =non-empty-string $haystack
+ * @psalm-return positive-int|0|false
+ */

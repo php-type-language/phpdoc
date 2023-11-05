@@ -1,0 +1,6 @@
+/**
+ * @template TCarry
+ * @param callable(TCarry, TKey, TValue): TCarry $callback
+ * @param TCarry $initial
+ * @return TCarry
+ */

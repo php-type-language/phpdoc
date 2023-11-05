@@ -1,0 +1,4 @@
+/**
+ * @return DOMCdataSection|false
+ * @psalm-ignore-falsable-return
+ */

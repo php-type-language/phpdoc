@@ -1,0 +1,10 @@
+/**
+ * Get the flags of extraction
+ * @link https://php.net/manual/en/splpriorityqueue.getextractflags.php
+ *
+ * @return SplPriorityQueue::EXTR_* Returns the current extraction mode
+ *
+ * @see SplPriorityQueue::setExtractFlags
+ *
+ * @since 5.3.0
+ */

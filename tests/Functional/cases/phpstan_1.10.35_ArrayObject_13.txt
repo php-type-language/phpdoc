@@ -1,0 +1,6 @@
+/**
+ * @template TValue
+ * @implements Iterator<int, TValue|null>
+ * @implements IteratorAggregate<int, TValue|null>
+ * @implements ArrayAccess<int, TValue|null>
+ */

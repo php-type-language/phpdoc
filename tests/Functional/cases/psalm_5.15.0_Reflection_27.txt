@@ -1,0 +1,5 @@
+/**
+ * @return array<trait-string, self>
+ *
+ * @psalm-pure
+ */

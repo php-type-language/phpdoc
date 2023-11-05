@@ -1,0 +1,4 @@
+/**
+ * @return TKey|null The current array key or null when iterator is drained
+ * @psalm-ignore-nullable-return
+ */

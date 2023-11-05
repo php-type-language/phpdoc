@@ -1,0 +1,9 @@
+/**
+ * @param mixed $output
+ * @param mixed $result_code
+ *
+ * @param-out list<string> $output
+ * @param-out int $result_code
+ *
+ * @return string|false
+ */

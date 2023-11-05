@@ -1,0 +1,8 @@
+/**
+ * Returns the number of objects in the storage
+ * @link https://php.net/manual/en/splobjectstorage.count.php
+ *
+ * @return int The number of objects in the storage.
+ *
+ * @since 5.1.0
+ */

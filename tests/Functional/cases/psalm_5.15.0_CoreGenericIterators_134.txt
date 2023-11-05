@@ -1,0 +1,3 @@
+/**
+ * @return TValue|null current value or null when iterator is drained
+ */

@@ -1,0 +1,8 @@
+/**
+ * Returns the current array entry
+ * @link https://php.net/manual/en/splfixedarray.current.php
+ *
+ * @return TValue The current element value
+ *
+ * @since 5.3.0
+ */

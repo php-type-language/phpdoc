@@ -1,0 +1,8 @@
+/**
+ * Rewind the iterator to the first storage element
+ * @link https://php.net/manual/en/splobjectstorage.rewind.php
+ *
+ * @return void
+ *
+ * @since 5.1.0
+ */

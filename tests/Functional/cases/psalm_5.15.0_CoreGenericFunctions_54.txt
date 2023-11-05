@@ -1,0 +1,11 @@
+/**
+ * @psalm-pure
+ *
+ * @return (
+ *      $string is class-string
+ *          ? ($characters is '\\' ? class-string : string)
+ *          : ($string is lowercase-string ? lowercase-string : string)
+ * )
+ *
+ * @psalm-flow ($string) -> return
+ */

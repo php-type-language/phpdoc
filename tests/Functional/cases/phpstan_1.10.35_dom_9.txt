@@ -1,0 +1,4 @@
+/**
+ * @param int $index
+ * @return TNode|null
+ */

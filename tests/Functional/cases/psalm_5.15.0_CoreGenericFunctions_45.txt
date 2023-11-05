@@ -1,0 +1,8 @@
+/**
+ * @psalm-pure
+ *
+ * @param mixed $vars
+ * @param-out string|int|float|null $vars
+ * @psalm-flow ($string, $format) -> return
+ * @return (func_num_args() is 2 ? (null|list<float|int|string|null>) : int)
+ */

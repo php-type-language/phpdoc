@@ -1,0 +1,4 @@
+/**
+ * @param TKey $key
+ * @param TValue $value
+ */

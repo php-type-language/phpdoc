@@ -1,0 +1,4 @@
+/**
+ * @return non-empty-string|false
+ * @psalm-pure
+ */

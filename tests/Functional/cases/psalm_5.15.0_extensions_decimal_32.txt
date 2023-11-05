@@ -1,0 +1,5 @@
+/**
+ * Trims trailing zeroes.
+ *
+ * @return Decimal A copy of this decimal without trailing zeroes.
+ */

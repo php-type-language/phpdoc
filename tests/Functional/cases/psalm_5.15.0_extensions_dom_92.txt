@@ -1,0 +1,4 @@
+/**
+ * @return DOMNode|false
+ * @psalm-ignore-falsable-return
+ */

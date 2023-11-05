@@ -1,0 +1,4 @@
+/**
+ * @return int The number of elements or public properties in the associated
+ *             array or object, respectively.
+ */

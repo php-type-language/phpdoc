@@ -1,0 +1,10 @@
+/**
+ * Constructs a new fixed array
+ *
+ * Initializes a fixed array with a number of NULL values equal to size.
+ * @link https://php.net/manual/en/splfixedarray.construct.php
+ *
+ * @param int $size The size of the fixed array. This expects a number between 0 and PHP_INT_MAX.
+
+ * @since 5.3.0
+ */

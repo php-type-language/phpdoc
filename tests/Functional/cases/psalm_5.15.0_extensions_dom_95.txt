@@ -1,0 +1,4 @@
+/**
+ * @template-covariant TNode as DOMNode
+ * @template-implements Traversable<int, TNode>
+ */

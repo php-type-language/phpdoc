@@ -1,0 +1,7 @@
+/**
+ * The SplHeap class provides the main functionalities of a Heap.
+ * @link https://php.net/manual/en/class.splheap.php
+ *
+ * @template TValue
+ * @template-implements Iterator<int, TValue>
+ */

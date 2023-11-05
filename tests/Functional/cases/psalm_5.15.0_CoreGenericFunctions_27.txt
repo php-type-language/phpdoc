@@ -1,0 +1,12 @@
+/**
+ * @psalm-pure
+ *
+ * @no-named-arguments
+ *
+ * @psalm-template TKey as array-key
+ * @psalm-template TValue
+ *
+ * @param array<TKey, TValue> ...$arrays
+ *
+ * @return array<TKey, TValue>
+ */

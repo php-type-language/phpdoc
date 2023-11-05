@@ -1,0 +1,4 @@
+/**
+ * @return int-mask-of<self::IS_>
+ * @psalm-pure
+ */

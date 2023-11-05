@@ -1,0 +1,7 @@
+/**
+ * @param array<mixed>|string $search
+ * @param array<mixed>|string $replace
+ * @param array<mixed>|string $subject
+ * @param-out int $count
+ * @return list<string>|string
+ */

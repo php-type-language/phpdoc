@@ -1,0 +1,4 @@
+/**
+ * @return DOMComment|false
+ * @psalm-ignore-falsable-return
+ */

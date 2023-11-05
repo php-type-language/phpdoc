@@ -1,0 +1,5 @@
+/**
+ * @param (callable(TKey, TValue): bool)|null $callback
+ * @return Map<TKey, TValue>
+ * @psalm-mutation-free
+ */

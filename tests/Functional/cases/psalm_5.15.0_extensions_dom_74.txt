@@ -1,0 +1,4 @@
+/**
+ * @return DOMElement|false
+ * @psalm-ignore-falsable-return
+ */

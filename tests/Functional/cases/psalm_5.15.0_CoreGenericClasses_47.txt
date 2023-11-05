@@ -1,0 +1,5 @@
+/**
+ * @param TKey $offset
+ * @return TVal|null
+ * @psalm-ignore-nullable-return
+ */

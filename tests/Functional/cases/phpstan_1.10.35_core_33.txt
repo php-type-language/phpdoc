@@ -1,0 +1,4 @@
+/**
+ * @param-out string $filename
+ * @param-out int $line
+ */

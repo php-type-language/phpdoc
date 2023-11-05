@@ -1,0 +1,5 @@
+/**
+ * @return positive-int|0
+ *
+ * @psalm-pure
+ */

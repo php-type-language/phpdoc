@@ -1,0 +1,6 @@
+/**
+ * @template-covariant TNode as DOMNode
+ * @template-implements Traversable<int, TNode>
+ *
+ * @php-from 7.2
+ */

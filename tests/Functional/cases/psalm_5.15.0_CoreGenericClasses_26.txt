@@ -1,0 +1,8 @@
+/**
+ * Gets the behavior flags.
+ * @link http://php.net/manual/en/arrayobject.getflags.php
+ *
+ * @return int the behavior flags of the ArrayObject.
+ *
+ * @since 5.1.0
+ */

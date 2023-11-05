@@ -1,0 +1,6 @@
+/**
+ * Returns a list of all cookies
+ * @link https://php.net/manual/en/soapclient.getcookies.php
+ * @return array The array of all cookies
+ * @since 5.4.3
+ */

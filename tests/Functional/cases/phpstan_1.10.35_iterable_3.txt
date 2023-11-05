@@ -1,0 +1,6 @@
+/**
+ * @template-covariant TKey
+ * @template-covariant TValue
+ *
+ * @extends Traversable<TKey, TValue>
+ */

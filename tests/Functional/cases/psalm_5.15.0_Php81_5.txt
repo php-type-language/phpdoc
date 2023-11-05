@@ -1,0 +1,4 @@
+/**
+ * @psalm-pure
+ * @return list<static>
+ */

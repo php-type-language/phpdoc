@@ -1,0 +1,5 @@
+/**
+ * @return TValue
+ * @throws UnderflowException
+ * @phpstan-impure
+ */

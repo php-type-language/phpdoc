@@ -1,0 +1,10 @@
+/**
+ * Offset to retrieve
+ * @link http://php.net/manual/en/arrayaccess.offsetget.php
+ *
+ * @param TKey $offset The offset to retrieve.
+ * @return TValue|null Can return all value types.
+ * @psalm-ignore-nullable-return
+ *
+ * @since 5.0.0
+ */

@@ -1,0 +1,9 @@
+/**
+ * Calculate a unique identifier for the contained objects
+ * @link https://php.net/manual/en/splobjectstorage.gethash.php
+ *
+ * @param object $object object whose identifier is to be calculated.
+ * @return string A string with the calculated identifier.
+ *
+ * @since 5.4.0
+ */

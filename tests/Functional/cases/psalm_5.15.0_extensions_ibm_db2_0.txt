@@ -1,0 +1,6 @@
+/**
+ * @param resource $connection
+ * @param 0|1      $value
+ *
+ * @return (func_num_args() > 1 ? bool : (0|1))
+ */

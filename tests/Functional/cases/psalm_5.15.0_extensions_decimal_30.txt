@@ -1,0 +1,12 @@
+/**
+ * Round
+ *
+ * @param int $places The number of places behind the decimal to round to.
+ * @param int $mode   The rounding mode, which are constants of Decimal.
+ *
+ * @return Decimal the value of this decimal with the same precision,
+ *                 rounded according to the specified number of decimal
+ *                 places and rounding mode
+ *
+ * @throws \InvalidArgumentException if the rounding mode is not supported.
+ */

@@ -1,0 +1,14 @@
+/**
+ * Remainder
+ *
+ * The precision of the result will be the max of this decimal's precision
+ * and the given value's precision, where scalar values assume the default.
+ *
+ * @param Decimal|string|int $value
+ *
+ * @return Decimal the remainder after dividing this decimal by a given value.
+ *
+ * @throws \TypeError if the value is not a decimal, string or integer.
+ * @throws \DivisionByZeroError if the integer value of $value is zero.
+ * @throws \ArithmeticError if the operation is undefined, eg. INF, -INF
+ */

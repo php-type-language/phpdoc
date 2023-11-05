@@ -1,0 +1,7 @@
+/**
+ * @psalm-pure
+ *
+ * @param int<1, 2147483647> $depth
+ * @return mixed
+ * @psalm-flow ($json) -> return
+ */

@@ -1,0 +1,4 @@
+/**
+ * @param int-mask-of<self::MIT_*> $flags
+ * @return void
+ */

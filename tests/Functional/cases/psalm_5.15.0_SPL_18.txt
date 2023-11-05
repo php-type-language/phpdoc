@@ -1,0 +1,12 @@
+/**
+ * Import a PHP array in a new SplFixedArray instance
+ * @link https://php.net/manual/en/splfixedarray.fromarray.php
+ *
+ * @template TInValue
+ * @param array<int, TInValue> $array The array to import
+ * @param bool $save_indexes [optional] Try to save the numeric indexes used in the original array.
+ *
+ * @return SplFixedArray<TInValue> Instance of SplFixedArray containing the array content
+
+ * @since 5.3.0
+ */

@@ -1,0 +1,9 @@
+/**
+ * Removes all objects except for those contained in another storage from the current storage
+ * @link https://php.net/manual/en/splobjectstorage.removeallexcept.php
+ *
+ * @param SplObjectStorage<TObject, TArrayValue> $storage The storage containing the elements to retain in the current storage.
+ * @return void
+ *
+ * @since 5.3.6
+ */

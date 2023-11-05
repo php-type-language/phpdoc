@@ -1,0 +1,3 @@
+/**
+ * @template-extends SeekableIterator<string, FilesystemIterator|SplFileInfo|string>
+ */

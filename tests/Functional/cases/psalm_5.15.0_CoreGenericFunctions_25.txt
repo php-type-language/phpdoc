@@ -1,0 +1,10 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-template TKey as array-key
+ *
+ * @param TKey $key
+ * @param array<TKey, mixed> $array
+ *
+ * @return bool
+ */

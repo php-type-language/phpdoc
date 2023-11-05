@@ -1,0 +1,7 @@
+/**
+ * @psalm-pure
+ *
+ * Tainting is handled in a plugin
+ *
+ * @psalm-flow ($string) -> return
+ */

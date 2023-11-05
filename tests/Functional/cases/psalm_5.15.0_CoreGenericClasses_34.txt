@@ -1,0 +1,9 @@
+/**
+ * Unserialize an ArrayObject
+ * @link http://php.net/manual/en/arrayobject.unserialize.php
+ *
+ * @param string $serialized  The serialized ArrayObject
+ * @return void The unserialized ArrayObject
+ *
+ * @since 5.3.0
+ */

@@ -1,0 +1,8 @@
+/**
+ * Get the current datastructure node.
+ * @link https://php.net/manual/en/splheap.current.php
+ *
+ * @return TValue The current node value
+ *
+ * @since 5.3.0
+ */

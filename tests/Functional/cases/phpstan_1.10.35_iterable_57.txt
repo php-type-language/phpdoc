@@ -1,0 +1,7 @@
+/**
+ * @template TKey
+ * @template TValue
+ * @template TIterator of Traversable<TKey, TValue>
+ *
+ * @template-extends FilterIterator<TKey, TValue, TIterator>
+ */

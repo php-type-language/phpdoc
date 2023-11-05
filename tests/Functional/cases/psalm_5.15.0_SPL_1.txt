@@ -1,0 +1,10 @@
+/**
+ * Add/insert a new value at the specified index
+ *
+ * @param int $index The index where the new value is to be inserted.
+ * @param TValue $newval The new value for the index.
+ * @return void
+ *
+ * @link https://php.net/spldoublylinkedlist.add
+ * @since 5.5.0
+ */

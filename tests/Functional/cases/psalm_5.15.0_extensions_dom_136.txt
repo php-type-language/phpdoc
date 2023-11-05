@@ -1,0 +1,6 @@
+/**
+ * Inherited from DOMNode, but always non-null.
+ *
+ * @readonly
+ * @var DOMNamedNodeMap<DOMAttr>
+ */

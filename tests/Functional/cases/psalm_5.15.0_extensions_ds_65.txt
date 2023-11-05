@@ -1,0 +1,4 @@
+/**
+ * @template-covariant TKey
+ * @template-covariant TValue
+ */

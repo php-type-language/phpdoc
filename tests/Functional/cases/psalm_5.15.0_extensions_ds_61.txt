@@ -1,0 +1,5 @@
+/**
+ * @param (callable(TKey, TKey): int)|null $comparator
+ * @return Map<TKey, TValue>
+ * @psalm-mutation-free
+ */

@@ -1,0 +1,8 @@
+/**
+ * Move to the next entry
+ * @link https://php.net/manual/en/splobjectstorage.next.php
+ *
+ * @return void
+ *
+ * @since 5.1.0
+ */

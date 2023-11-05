@@ -1,0 +1,5 @@
+/**
+ * @param Iterator<TKey,TValue> $iterator
+ * @param string|int $infos
+ * @return void
+ */

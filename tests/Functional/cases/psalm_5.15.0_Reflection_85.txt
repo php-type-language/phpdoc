@@ -1,0 +1,4 @@
+/**
+ * @since 7.4
+ * @psalm-pure
+ */

@@ -1,0 +1,10 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-template K of array-key
+ * @psalm-template T
+ *
+ * @param array<K,T> $array
+ *
+ * @return array<K,T>
+ */

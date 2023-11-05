@@ -1,0 +1,3 @@
+/**
+ * @template-covariant T as object
+ */

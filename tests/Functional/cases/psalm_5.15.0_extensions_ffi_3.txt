@@ -1,0 +1,3 @@
+/**
+ * @param array<int<0,max>> $dimensions
+ */

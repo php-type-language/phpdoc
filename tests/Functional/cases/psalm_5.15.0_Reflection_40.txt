@@ -1,0 +1,5 @@
+/**
+ * @return array<non-empty-string, mixed>
+ *
+ * @psalm-pure
+ */

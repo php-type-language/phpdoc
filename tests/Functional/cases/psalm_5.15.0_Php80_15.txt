@@ -1,0 +1,5 @@
+/**
+ * @param list<mixed>|array<string, mixed> $args
+ *
+ * @return T
+ */

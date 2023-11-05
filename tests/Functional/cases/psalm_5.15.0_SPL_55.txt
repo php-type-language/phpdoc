@@ -1,0 +1,10 @@
+/**
+ * Compare priorities in order to place them correctly in the queue while sifting up
+ * @link https://php.net/manual/en/splpriorityqueue.compare.php
+ *
+ * @param TValue $priority1 The priority of the first node being compared.
+ * @param TValue $priority2 The priority of the second node being compared.
+ * @return int Positive integer if priority1 is greater than priority2, 0 if they are equal, negative integer otherwise.
+ *
+ * @since 5.3.0
+ */

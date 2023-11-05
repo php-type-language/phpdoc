@@ -1,0 +1,4 @@
+/**
+ * @param callable(TKey, TValue): TValue $callback
+ * @return void
+ */

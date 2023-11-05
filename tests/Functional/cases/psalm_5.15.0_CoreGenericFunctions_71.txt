@@ -1,0 +1,13 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-return (
+ *     $string is ''
+ *     ? 0
+ *     : (
+ *          $string is non-empty-string
+ *              ? positive-int
+ *              : (0|positive-int)
+ *     )
+ * )
+ */

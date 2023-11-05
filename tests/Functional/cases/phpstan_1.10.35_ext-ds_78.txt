@@ -1,0 +1,5 @@
+/**
+ * @template TValue2
+ * @param iterable<TValue2> $values
+ * @return Vector<TValue|TValue2>
+ */

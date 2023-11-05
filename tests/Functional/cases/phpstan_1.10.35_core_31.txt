@@ -1,0 +1,4 @@
+/**
+ * @param resource $stream
+ * @param-out 0|1 $would_block
+ */

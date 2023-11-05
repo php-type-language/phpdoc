@@ -1,0 +1,6 @@
+/**
+ * @param Start $start
+ * @param (Start is string ? int-mask<self::EXCLUDE_START_DATE, self::INCLUDE_END_DATE> : DateInterval) $interval
+ * @param (Start is string ? never : (DateTimeInterface|positive-int)) $end
+ * @param (Start is string ? never : int-mask<self::EXCLUDE_START_DATE, self::INCLUDE_END_DATE>) $options
+ */

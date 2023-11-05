@@ -1,0 +1,6 @@
+/**
+ * @template TNewValue
+ * @param callable(TKey, TValue): TNewValue $callback
+ * @return Map<TKey, TNewValue>
+ * @psalm-mutation-free
+ */

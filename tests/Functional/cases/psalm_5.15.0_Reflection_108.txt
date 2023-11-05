@@ -1,0 +1,4 @@
+/**
+ * @var class-string
+ * @readonly
+ */

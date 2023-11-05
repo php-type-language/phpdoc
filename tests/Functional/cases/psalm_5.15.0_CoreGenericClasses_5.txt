@@ -1,0 +1,3 @@
+/**
+ * @return bool The return value will be casted to boolean and then evaluated.
+ */

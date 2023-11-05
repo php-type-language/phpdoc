@@ -1,0 +1,4 @@
+/**
+ * @return TValue|null returns current value or null when iterator is drained
+ * @psalm-ignore-nullable-return
+ */

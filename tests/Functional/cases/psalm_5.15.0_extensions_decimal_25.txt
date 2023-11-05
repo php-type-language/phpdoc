@@ -1,0 +1,6 @@
+/**
+ * Base-10 logarithm
+ *
+ * @return Decimal the base-10 logarithm of this decimal, with the same
+ *                 precision as this decimal.
+ */

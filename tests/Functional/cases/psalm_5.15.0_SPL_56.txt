@@ -1,0 +1,8 @@
+/**
+ * Counts the number of elements in the queue
+ * @link https://php.net/manual/en/splpriorityqueue.count.php
+ *
+ * @return int The number of elements in the queue.
+ *
+ * @since 5.3.0
+ */

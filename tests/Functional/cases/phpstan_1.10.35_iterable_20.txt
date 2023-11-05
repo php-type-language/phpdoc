@@ -1,0 +1,4 @@
+/**
+ * @template T of \RecursiveIterator|\IteratorAggregate
+ * @mixin T
+ */

@@ -1,0 +1,4 @@
+/**
+ * @param T|class-string<T>|interface-string<T>|trait-string|enum-string<T> $argument
+ * @psalm-pure
+ */

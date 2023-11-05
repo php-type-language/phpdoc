@@ -1,0 +1,4 @@
+/**
+ * @param string $args
+ * @return mixed|Redis
+ */

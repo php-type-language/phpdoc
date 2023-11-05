@@ -1,0 +1,9 @@
+/**
+ * Prepends the doubly linked list with an element
+ * @link https://php.net/manual/en/spldoublylinkedlist.unshift.php
+ *
+ * @param TValue $value The value to unshift.
+ * @return void
+ *
+ * @since 5.3.0
+ */

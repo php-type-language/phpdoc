@@ -1,0 +1,4 @@
+/**
+ * @return list<array{function:string,line?:int,file?:string,class?:class-string,type?:'::'|'->',args?:mixed[],object?:object}>
+ * @throws void
+ */

@@ -1,0 +1,4 @@
+/**
+ * @param string|string[]|self $name
+ * @param array                $attributes
+ */

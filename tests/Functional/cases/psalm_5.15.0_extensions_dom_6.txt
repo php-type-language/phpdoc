@@ -1,0 +1,3 @@
+/**
+ * @param DOMNode|string ...$nodes
+ */

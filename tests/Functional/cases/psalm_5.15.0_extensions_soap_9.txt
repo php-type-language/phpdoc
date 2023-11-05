@@ -1,0 +1,6 @@
+/**
+ * Returns a list of SOAP types
+ * @link https://php.net/manual/en/soapclient.gettypes.php
+ * @return array|null The array of SOAP types, detailing all structures and types.
+ * @since 5.0.1
+ */

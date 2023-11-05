@@ -1,0 +1,4 @@
+/**
+ * @param TValue $value The value to append.
+ * @return void
+ */

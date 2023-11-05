@@ -1,0 +1,3 @@
+/**
+ * @param iterable<TKey, TValue> $values
+ */

@@ -1,0 +1,8 @@
+/**
+ * Sort entries using a "natural order" algorithm
+ * @link http://php.net/manual/en/arrayobject.natsort.php
+ *
+ * @return void
+ *
+ * @since 5.2.0
+ */

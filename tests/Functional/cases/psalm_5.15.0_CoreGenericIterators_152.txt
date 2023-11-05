@@ -1,0 +1,6 @@
+/**
+ * @param RecursiveIterator<TKey, TValue>|IteratorAggregate<TKey, TValue> $it
+ * @param int-mask<self::BYPASS_CURRENT, self::BYPASS_KEY> $flags
+ * @param int-mask<self::CATCH_GET_CHILD> $cit_flags
+ * @param self::LEAVES_ONLY|self::SELF_FIRST|self::CHILD_FIRST $mode
+ */

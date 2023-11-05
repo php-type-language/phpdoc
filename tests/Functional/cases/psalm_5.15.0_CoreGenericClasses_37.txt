@@ -1,0 +1,9 @@
+/**
+ * Exchange the array for another one.
+ * @link http://php.net/manual/en/arrayobject.exchangearray.php
+ *
+ * @param mixed $input The new array or object to exchange with the current array.
+ * @return array the old array.
+ *
+ * @since 5.1.0
+ */

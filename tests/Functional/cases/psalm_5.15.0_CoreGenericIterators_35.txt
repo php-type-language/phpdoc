@@ -1,0 +1,4 @@
+/**
+ * @param int-mask-of<self::*> $flags bitmask
+ * @return void
+ */

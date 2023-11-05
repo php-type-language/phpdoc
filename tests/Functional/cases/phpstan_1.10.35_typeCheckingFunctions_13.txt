@@ -1,0 +1,4 @@
+/**
+ * @phpstan-assert-if-true resource $value
+ * @return bool
+ */

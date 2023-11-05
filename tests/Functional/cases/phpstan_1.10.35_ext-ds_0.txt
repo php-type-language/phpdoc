@@ -1,0 +1,5 @@
+/**
+ * @template-covariant TKey
+ * @template-covariant TValue
+ * @extends IteratorAggregate<TKey, TValue>
+ */

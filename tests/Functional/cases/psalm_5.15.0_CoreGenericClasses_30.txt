@@ -1,0 +1,16 @@
+/**
+ * Sort the entries with a user-defined comparison function and maintain key association
+ * @link http://php.net/manual/en/arrayobject.uasort.php
+ *
+ * Function <i>cmp_function</i> should accept two
+ * parameters which will be filled by pairs of entries.
+ * The comparison function must return an integer less than, equal
+ * to, or greater than zero if the first argument is considered to
+ * be respectively less than, equal to, or greater than the
+ * second.
+ *
+ * @param callable(TValue, TValue):int $cmp_function
+ * @return void
+ *
+ * @since 5.2.0
+ */

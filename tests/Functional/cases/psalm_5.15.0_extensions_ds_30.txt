@@ -1,0 +1,6 @@
+/**
+ * @template TKey
+ * @template TValue
+ * @implements Collection<TKey, TValue>
+ * @implements ArrayAccess<TKey, TValue>
+ */

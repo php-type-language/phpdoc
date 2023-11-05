@@ -1,0 +1,4 @@
+/**
+ * @return array<interface-string, self>
+ * @psalm-pure
+ */

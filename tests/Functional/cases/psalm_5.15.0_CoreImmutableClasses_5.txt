@@ -1,0 +1,5 @@
+/**
+ * @psalm-mutation-free
+ * @param bool $absolute
+ * @return DateInterval
+ */

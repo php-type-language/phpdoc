@@ -1,0 +1,5 @@
+/**
+ * @param (callable(TValue, TValue): int)|null $comparator
+ * @return Vector<TValue>
+ * @psalm-mutation-free
+ */

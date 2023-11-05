@@ -1,0 +1,3 @@
+/**
+ * @return ArrayIterator<array-key, TValue>
+ */

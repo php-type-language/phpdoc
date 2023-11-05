@@ -1,0 +1,7 @@
+/**
+ * Interface to provide accessing objects as arrays.
+ * @link http://php.net/manual/en/class.arrayaccess.php
+ *
+ * @template TKey
+ * @template TValue
+ */

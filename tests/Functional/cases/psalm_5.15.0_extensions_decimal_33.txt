@@ -1,0 +1,5 @@
+/**
+ * Precision
+ *
+ * @return int the precision of this decimal.
+ */

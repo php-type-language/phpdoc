@@ -1,0 +1,5 @@
+/**
+ * Negate
+ *
+ * @return Decimal the same value as this decimal, but the sign inverted.
+ */

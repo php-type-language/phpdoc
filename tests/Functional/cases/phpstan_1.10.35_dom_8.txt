@@ -1,0 +1,5 @@
+/**
+ * @template-covariant TNode as DOMNode
+ * @implements Traversable<int, TNode>
+ * @implements IteratorAggregate<int, TNode>
+ */

@@ -1,0 +1,8 @@
+/**
+ * nullable values are returned when MIT_NEED_ANY is set
+ * and one of the iterators is already drained.
+ * When MIT_NEED_ALL is set and one of the iterators
+ * is already drained, `current()` throws
+ *
+ * @return array<array-key, TValue|null>
+ */

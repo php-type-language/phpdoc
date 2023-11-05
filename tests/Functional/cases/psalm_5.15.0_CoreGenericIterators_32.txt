@@ -1,0 +1,4 @@
+/**
+ * @return array<TKey, TValue> A copy of the array, or array of public properties
+ *                             if ArrayIterator refers to an object.
+ */

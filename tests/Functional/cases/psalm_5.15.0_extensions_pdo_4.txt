@@ -1,0 +1,5 @@
+/**
+ * @psalm-taint-sink sql $query
+ *
+ * @return PDOStatement|false
+ */

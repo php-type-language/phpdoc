@@ -1,0 +1,7 @@
+/**
+ * @template TKey
+ * @template TValue
+ *
+ * @template-extends RecursiveIteratorIterator<TKey, TValue>
+ * @template-implements OuterIterator<TKey, TValue>
+ */

@@ -1,0 +1,4 @@
+/**
+ * @param TSend $value
+ * @return TValue
+ */

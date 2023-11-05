@@ -1,0 +1,6 @@
+/**
+ * Formats the interval
+ * @return string
+ * @link https://php.net/manual/en/dateinterval.format.php
+ * @psalm-pure
+ */

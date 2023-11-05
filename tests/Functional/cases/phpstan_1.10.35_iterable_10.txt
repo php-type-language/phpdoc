@@ -1,0 +1,6 @@
+/**
+ * @implements Traversable<string, static>
+ * @implements ArrayAccess<int|string, static>
+ * @implements Iterator<string, static>
+ * @implements RecursiveIterator<string, static>
+ */

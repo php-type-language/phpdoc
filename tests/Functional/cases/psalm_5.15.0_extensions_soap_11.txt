@@ -1,0 +1,12 @@
+/**
+ * The __setCookie purpose
+ * @link https://php.net/manual/en/soapclient.setcookie.php
+ * @param string $name <p>
+ * The name of the cookie.
+ * </p>
+ * @param string $value [optional] <p>
+ * The value of the cookie. If not specified, the cookie will be deleted.
+ * </p>
+ * @return void No value is returned.
+ * @since 5.0.4
+ */

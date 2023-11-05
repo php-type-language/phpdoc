@@ -1,0 +1,20 @@
+/**
+ * @template TFlags as int-mask<0, 256, 512>
+ *
+ * @param string $pattern
+ * @param string $subject
+ * @param mixed $matches
+ * @param TFlags $flags
+ * @param-out (
+ *             TFlags is 256
+ *             ? array<array-key, array{string, 0|positive-int}|array{'', -1}>
+ *             : (TFlags is 512
+ *                 ? array<array-key, string|null>
+ *                 : (TFlags is 768
+ *                     ? array<array-key, array{string, 0|positive-int}|array{null, -1}>
+ *                     : array<array-key, string>
+ *                     )
+ *                 )
+ *             ) $matches
+ * @return 1|0|false
+ */

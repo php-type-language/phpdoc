@@ -1,0 +1,5 @@
+/**
+ * @param TValue $value
+ * @param TPriority $priority
+ * @return true
+ */

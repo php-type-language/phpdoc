@@ -1,0 +1,9 @@
+/**
+ * @template-covariant TKey
+ * @template-covariant TValue
+ * @template TIterator as Traversable<TKey, TValue>
+ *
+ * @template-implements OuterIterator<TKey, TValue>
+ *
+ * @mixin TIterator
+ */

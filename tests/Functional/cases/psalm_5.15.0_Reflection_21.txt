@@ -1,0 +1,6 @@
+/**
+ * @return ReflectionClassConstant|false
+ *
+ * @psalm-pure
+ * @throws ReflectionException
+ */

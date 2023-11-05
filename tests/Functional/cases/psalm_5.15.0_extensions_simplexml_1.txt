@@ -1,0 +1,4 @@
+/**
+ * @param class-string<SimpleXMLElement> $class_name
+ * @return SimpleXMLElement|false
+ */

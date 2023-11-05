@@ -1,0 +1,5 @@
+/**
+ * @param TValue ...$values
+ * @throws \OutOfRangeException
+ * @return void
+ */

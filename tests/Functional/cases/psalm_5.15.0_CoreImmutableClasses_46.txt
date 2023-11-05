@@ -1,0 +1,6 @@
+/**
+ * @psalm-external-mutation-free
+ * @param string $message
+ * @param int $code
+ * @param Throwable $previous
+ */

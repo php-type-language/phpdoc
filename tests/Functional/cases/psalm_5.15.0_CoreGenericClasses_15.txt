@@ -1,0 +1,9 @@
+/**
+ * This class allows objects to work as arrays.
+ * @link http://php.net/manual/en/class.arrayobject.php
+ *
+ * @template TKey
+ * @template TValue
+ * @template-implements IteratorAggregate<TKey, TValue>
+ * @template-implements ArrayAccess<TKey, TValue>
+ */

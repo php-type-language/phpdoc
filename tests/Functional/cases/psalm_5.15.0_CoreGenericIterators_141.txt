@@ -1,0 +1,4 @@
+/**
+ * @return string|null current key or null when iterator is drained
+ * @psalm-ignore-nullable-return
+ */

@@ -1,0 +1,5 @@
+/**
+ * Floor
+ *
+ * @return Decimal the closest integer towards negative infinity.
+ */

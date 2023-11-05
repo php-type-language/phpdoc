@@ -1,0 +1,3 @@
+/**
+ * @template-implements Iterator<never, never>
+ */

@@ -1,0 +1,9 @@
+/**
+ * @psalm-pure
+ *
+ * @return (
+ *     $string is non-empty-string ? non-empty-lowercase-string : lowercase-string
+ * )
+ *
+ * @psalm-flow ($string) -> return
+ */

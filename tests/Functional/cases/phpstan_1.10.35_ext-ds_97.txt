@@ -1,0 +1,4 @@
+/**
+ * @param (callable(TValue, TValue): int)|null $comparator
+ * @return Set<TValue>
+ */

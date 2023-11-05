@@ -1,0 +1,6 @@
+/**
+ * Number of microseconds
+ * @since 7.1.0
+ * @var float
+ * @readonly
+ */

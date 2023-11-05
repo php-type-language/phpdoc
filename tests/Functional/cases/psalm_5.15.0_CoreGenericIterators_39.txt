@@ -1,0 +1,4 @@
+/**
+ * @param callable(TKey,TKey):int $cmp_function The compare function used for the sort.
+ * @return void
+ */

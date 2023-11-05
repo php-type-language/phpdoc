@@ -1,0 +1,5 @@
+/**
+ * @template TInput
+ * @param array<int, TInput> $array
+ * @return SplFixedArray<TInput>
+ */

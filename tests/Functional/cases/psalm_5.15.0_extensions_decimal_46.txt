@@ -1,0 +1,9 @@
+/**
+ * @param int  $places   The number of places behind the decimal point.
+ * @param bool $commas   TRUE if thousands should be separated by a comma.
+ * @param int  $rounding
+ *
+ * @return string the value of this decimal formatted to a fixed number of
+ *                decimal places, optionally with thousands comma-separated,
+ *                using a given rounding mode.
+ */

@@ -1,0 +1,8 @@
+/**
+ * Natural logarithm
+ *
+ * This method is equivalent in function to PHP's `log`.
+ *
+ * @return Decimal the natural logarithm of this decimal (log base e),
+ *                 with the same precision as this decimal.
+ */

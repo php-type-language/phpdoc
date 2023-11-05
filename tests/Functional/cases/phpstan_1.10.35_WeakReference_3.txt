@@ -1,0 +1,6 @@
+/**
+ * @template TKey of object
+ * @template TValue
+ * @implements \ArrayAccess<TKey, TValue>
+ * @implements \IteratorAggregate<TKey, TValue>
+ */

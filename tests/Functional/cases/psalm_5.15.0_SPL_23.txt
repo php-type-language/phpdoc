@@ -1,0 +1,8 @@
+/**
+ * Check whether the array contains more elements
+ * @link https://php.net/manual/en/splfixedarray.valid.php
+ *
+ * @return bool true if the array contains any more elements, false otherwise.
+ *
+ * @since 5.3.0
+ */

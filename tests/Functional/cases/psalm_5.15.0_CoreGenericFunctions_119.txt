@@ -1,0 +1,6 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-taint-escape ldap
+ * @psalm-flow ($value) -> return
+ */

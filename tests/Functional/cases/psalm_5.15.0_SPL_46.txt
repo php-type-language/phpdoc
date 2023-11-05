@@ -1,0 +1,8 @@
+/**
+ * Rewind iterator back to the start (no-op)
+ * @link https://php.net/manual/en/splheap.rewind.php
+ *
+ * @return void
+ *
+ * @since 5.3.0
+ */

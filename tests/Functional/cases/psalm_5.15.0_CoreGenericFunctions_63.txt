@@ -1,0 +1,6 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-taint-escape html
+ * @psalm-flow ($string) -> return
+ */

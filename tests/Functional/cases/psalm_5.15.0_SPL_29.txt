@@ -1,0 +1,9 @@
+/**
+ * Unsets the value at the specified $index
+ * @link https://php.net/manual/en/splfixedarray.offsetunset.php
+ *
+ * @param int $index The index being unset
+ * @return void
+ *
+ * @since 5.3.0
+ */

@@ -1,0 +1,5 @@
+/**
+ * @psalm-taint-sink sql $statement
+ *
+ * @return int|false
+ */

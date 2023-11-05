@@ -1,0 +1,5 @@
+/**
+ * @deprecated
+ * @alias Redis::del
+ * @return false|int|Redis
+ */

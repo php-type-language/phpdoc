@@ -1,0 +1,3 @@
+/**
+ * @psalm-assert-if-false class-string|'self'|'static' $this->getName()
+ */

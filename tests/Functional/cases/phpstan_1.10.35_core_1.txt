@@ -1,0 +1,6 @@
+/**
+ * @param ($allow_string is false ? object : object|string) $object_or_class
+ * @param string $class
+ * @param bool $allow_string
+ * @return ($allow_string is false ? ($object_or_class is object ? bool : false) : bool)
+ */

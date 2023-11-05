@@ -1,0 +1,4 @@
+/**
+ * @param TValue $value
+ * @return int|false
+ */

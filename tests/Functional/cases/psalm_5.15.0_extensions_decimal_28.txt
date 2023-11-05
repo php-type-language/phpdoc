@@ -1,0 +1,5 @@
+/**
+ * Ceiling
+ *
+ * @return Decimal the closest integer towards positive infinity.
+ */

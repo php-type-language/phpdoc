@@ -1,0 +1,4 @@
+/**
+ * @param callable(TValue): TValue $callback
+ * @return void
+ */

@@ -1,0 +1,4 @@
+/**
+ * @return Stack<TValue>
+ * @psalm-mutation-free
+ */

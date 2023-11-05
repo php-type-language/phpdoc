@@ -1,0 +1,4 @@
+/**
+ * @return Deque<TValue>
+ * @psalm-mutation-free
+ */

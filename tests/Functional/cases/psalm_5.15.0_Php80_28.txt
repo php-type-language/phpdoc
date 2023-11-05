@@ -1,0 +1,6 @@
+/**
+ * @psalm-immutable
+ *
+ * @template-covariant Start of string|DateTimeInterface
+ * @implements IteratorAggregate<int, DateTimeInterface>
+ */

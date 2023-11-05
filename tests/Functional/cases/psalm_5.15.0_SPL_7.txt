@@ -1,0 +1,8 @@
+/**
+ * Peeks at the node from the beginning of the doubly linked list
+ * @link https://php.net/manual/en/spldoublylinkedlist.bottom.php
+ *
+ * @return TValue The value of the first node.
+ *
+ * @since 5.3.0
+ */

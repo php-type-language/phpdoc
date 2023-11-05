@@ -1,0 +1,4 @@
+/**
+ * @param T|class-string<T> $argument
+ * @throws ReflectionException
+ */

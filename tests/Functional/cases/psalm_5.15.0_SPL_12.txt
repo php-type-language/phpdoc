@@ -1,0 +1,10 @@
+/**
+ * Sets the value at the specified $index to $newval
+ * @link https://php.net/manual/en/spldoublylinkedlist.offsetset.php
+ *
+ * @param int $index The index being set.
+ * @param TValue $newval The new value for the index.
+ * @return void
+ *
+ * @since 5.3.0
+ */

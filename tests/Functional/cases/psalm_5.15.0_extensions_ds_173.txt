@@ -1,0 +1,4 @@
+/**
+ * @return PriorityQueue<TValue>
+ * @psalm-mutation-free
+ */

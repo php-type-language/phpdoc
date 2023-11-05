@@ -1,0 +1,4 @@
+/**
+ * @readonly
+ * @var DOMNodeList<DOMNode>
+ */

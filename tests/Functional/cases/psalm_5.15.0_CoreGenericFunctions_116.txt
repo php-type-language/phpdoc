@@ -1,0 +1,4 @@
+/**
+ * @psalm-pure
+ * @psalm-flow ($string, $separator) -> return
+ */

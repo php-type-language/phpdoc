@@ -1,0 +1,3 @@
+/**
+ * @return Traversable<TKey, TValue> An instance of an object implementing Iterator or Traversable
+ */

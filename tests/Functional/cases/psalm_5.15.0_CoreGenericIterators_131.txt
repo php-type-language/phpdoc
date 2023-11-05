@@ -1,0 +1,4 @@
+/**
+ * @param TIterator $iterator
+ * @param callable(TValue, TKey, TIterator): bool $callback
+ */

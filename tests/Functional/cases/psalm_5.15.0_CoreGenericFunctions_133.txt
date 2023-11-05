@@ -1,0 +1,6 @@
+/**
+ * @template T of array|string
+ * @param T $string
+ * @return (T is array<int, string> ? array<int, string> : T is array ? array : string|false)
+ * @psalm-ignore-falsable-return
+ */

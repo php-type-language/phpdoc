@@ -1,0 +1,4 @@
+/**
+ * @param TObject $object
+ * @param TData $data
+ */

@@ -1,0 +1,38 @@
+/**
+ * Sets the behavior flags.
+ *
+ * It takes on either a bitmask, or named constants. Using named
+ * constants is strongly encouraged to ensure compatibility for future
+ * versions.
+ *
+ * The available behavior flags are listed below. The actual
+ * meanings of these flags are described in the
+ * predefined constants.
+ *
+ * <table>
+ * ArrayObject behavior flags
+ * <tr valign="top">
+ * <td>value</td>
+ * <td>constant</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>1</td>
+ * <td>
+ * ArrayObject::STD_PROP_LIST
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>2</td>
+ * <td>
+ * ArrayObject::ARRAY_AS_PROPS
+ * </td>
+ * </tr>
+ * </table>
+ *
+ * @link http://php.net/manual/en/arrayobject.setflags.php
+ *
+ * @param int $flags The new ArrayObject behavior.
+ * @return void
+ *
+ * @since 5.1.0
+ */

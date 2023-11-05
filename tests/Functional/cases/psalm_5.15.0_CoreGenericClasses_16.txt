@@ -1,0 +1,3 @@
+/**
+ * Properties of the object have their normal functionality when accessed as list (var_dump, foreach, etc.).
+ */

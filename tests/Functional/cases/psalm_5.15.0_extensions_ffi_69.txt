@@ -1,0 +1,4 @@
+/**
+ * @since 8.1.0
+ * @return int<0,max>
+ */

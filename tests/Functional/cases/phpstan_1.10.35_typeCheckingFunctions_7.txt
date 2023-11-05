@@ -1,0 +1,3 @@
+/**
+ * @return ($value is array<array-key, mixed>|\Countable ? true : false)
+ */

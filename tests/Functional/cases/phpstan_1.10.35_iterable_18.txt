@@ -1,0 +1,4 @@
+/**
+ * @param callable(TValue, TValue): int $cmp_function
+ * @return void
+ */

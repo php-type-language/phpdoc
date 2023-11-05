@@ -180,7 +180,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         }
 
         $docblock = \preg_replace(
-            pattern: '/[ \t]*(?:\/\*\*|\*\/|\*)?[ \t]?(.*)?/u',
+            pattern: '/[ \t]*(?:\/\*+|\*+\/|\*+)?[ \t]?(.*)?/u',
             replacement: '$1',
             subject: $docblock,
         )

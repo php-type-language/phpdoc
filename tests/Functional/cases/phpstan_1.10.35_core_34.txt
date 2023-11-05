@@ -1,0 +1,4 @@
+/**
+ * @param-out callable-string $callable_name
+ * @return ($value is callable ? true : false)
+ */

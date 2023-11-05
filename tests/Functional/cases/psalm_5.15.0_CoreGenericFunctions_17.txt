@@ -1,0 +1,10 @@
+/**
+ * @psalm-template T
+ *
+ * @param mixed           $needle
+ * @param array<T, mixed> $haystack
+ * @param bool            $strict
+ *
+ * @return T|false
+ * @psalm-pure
+ */

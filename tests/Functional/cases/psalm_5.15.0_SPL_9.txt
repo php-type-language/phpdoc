@@ -1,0 +1,8 @@
+/**
+ * Checks whether the doubly linked list is empty.
+ * @link https://php.net/manual/en/spldoublylinkedlist.isempty.php
+ *
+ * @return bool whether the doubly linked list is empty.
+ *
+ * @since 5.3.0
+ */

@@ -1,0 +1,4 @@
+/**
+ * @param int<0,max> $index
+ * @since 8.1.0
+ */

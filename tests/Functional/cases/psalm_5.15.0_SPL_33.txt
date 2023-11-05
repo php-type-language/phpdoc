@@ -1,0 +1,9 @@
+/**
+ * Adds an element to the queue.
+ * @link https://php.net/manual/en/splqueue.enqueue.php
+ *
+ * @param TValue $value The value to enqueue.
+ * @return void
+ *
+ * @since 5.3.0
+ */

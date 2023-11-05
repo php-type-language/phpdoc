@@ -1,0 +1,11 @@
+/**
+ * Binary floating point representation.
+ *
+ * This method is equivalent to a cast to float, and is not affected by the
+ * 'precision' INI setting.
+ *
+ * @return float the native PHP floating point value of this decimal.
+ *
+ * @throws \OverflowException  if the value is greater than PHP_FLOAT_MAX.
+ * @throws \UnderflowException if the value is smaller than PHP_FLOAT_MIN.
+ */

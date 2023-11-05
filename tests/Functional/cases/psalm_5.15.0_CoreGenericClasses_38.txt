@@ -1,0 +1,10 @@
+/**
+ * Sets the iterator classname for the ArrayObject.
+ * @link http://php.net/manual/en/arrayobject.setiteratorclass.php
+ *
+ * @param string $iterator_class The classname of the array iterator to use when iterating over this object.
+ * @psalm-param class-string<ArrayIterator<TKey,TValue>>|class-string<ArrayObject<TKey,TValue>> $iterator_class
+ * @return void
+ *
+ * @since 5.1.0
+ */

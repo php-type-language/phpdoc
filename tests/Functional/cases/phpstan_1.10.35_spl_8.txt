@@ -1,0 +1,4 @@
+/**
+ * @param int $offset
+ * @return TValue
+ */

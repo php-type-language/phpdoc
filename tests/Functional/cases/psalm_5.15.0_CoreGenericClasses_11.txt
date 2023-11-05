@@ -1,0 +1,10 @@
+/**
+ * Whether a offset exists
+ * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+ *
+ * @param TKey $offset An offset to check for.
+ * @return bool true on success or false on failure.
+ *              The return value will be casted to boolean if non-boolean was returned.
+ *
+ * @since 5.0.0
+ */

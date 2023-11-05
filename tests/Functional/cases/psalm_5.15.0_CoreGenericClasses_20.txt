@@ -1,0 +1,9 @@
+/**
+ * Returns the value at the specified index
+ * @link http://php.net/manual/en/arrayobject.offsetget.php
+ *
+ * @param TKey $index The index with the value.
+ * @return TValue The value at the specified index or false.
+ *
+ * @since 5.0.0
+ */

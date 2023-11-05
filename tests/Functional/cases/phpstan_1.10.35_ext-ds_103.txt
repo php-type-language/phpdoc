@@ -1,0 +1,3 @@
+/**
+ * @return Stack<TValue>
+ */

@@ -1,0 +1,9 @@
+/**
+ * @psalm-template TKey as array-key
+ * @psalm-template TValue
+ *
+ * @param array<TKey, TValue> $array
+ *
+ * @return ($array is non-empty-array ? non-empty-array<TValue, TKey> : array<TValue, TKey>)
+ * @psalm-pure
+ */

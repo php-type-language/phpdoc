@@ -1,0 +1,3 @@
+/**
+ * @template TClass as object
+ */

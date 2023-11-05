@@ -1,0 +1,41 @@
+/**
+ * Calls a SOAP function
+ * @link https://php.net/manual/en/soapclient.soapcall.php
+ * @param string $function_name <p>
+ * The name of the SOAP function to call.
+ * </p>
+ * @param array $arguments <p>
+ * An array of the arguments to pass to the function. This can be either
+ * an ordered or an associative array. Note that most SOAP servers require
+ * parameter names to be provided, in which case this must be an
+ * associative array.
+ * </p>
+ * @param array $options [optional] <p>
+ * An associative array of options to pass to the client.
+ * </p>
+ * <p>
+ * The location option is the URL of the remote Web service.
+ * </p>
+ * <p>
+ * The uri option is the target namespace of the SOAP service.
+ * </p>
+ * <p>
+ * The soapaction option is the action to call.
+ * </p>
+ * @param mixed $input_headers [optional] <p>
+ * An array of headers to be sent along with the SOAP request.
+ * </p>
+ * @param array $output_headers [optional] <p>
+ * If supplied, this array will be filled with the headers from the SOAP response.
+ * </p>
+ * @return mixed SOAP functions may return one, or multiple values. If only one value is returned
+ * by the SOAP function, the return value of __soapCall will be
+ * a simple value (e.g. an integer, a string, etc). If multiple values are
+ * returned, __soapCall will return
+ * an associative array of named output parameters.
+ * </p>
+ * <p>
+ * On error, if the SoapClient object was constructed with the exceptions
+ * option set to <b>FALSE</b>, a SoapFault object will be returned.
+ * @since 5.0.1
+ */

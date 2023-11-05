@@ -1,0 +1,9 @@
+/**
+ * Inserts an element in the heap by sifting it up
+ * @link https://php.net/manual/en/splheap.insert.php
+ *
+ * @param TValue $value The value to insert.
+ * @return void
+ *
+ * @since 5.3.0
+ */

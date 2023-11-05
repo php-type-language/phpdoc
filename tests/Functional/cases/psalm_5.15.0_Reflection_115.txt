@@ -1,0 +1,4 @@
+/**
+ * @var non-empty-string
+ * @readonly
+ */

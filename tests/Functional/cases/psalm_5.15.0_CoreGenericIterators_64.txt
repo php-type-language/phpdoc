@@ -1,0 +1,3 @@
+/**
+ * @template-implements SeekableIterator<int, DirectoryIterator>
+ */

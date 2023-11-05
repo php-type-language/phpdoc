@@ -1,0 +1,5 @@
+/**
+ * @psalm-mutation-free
+ *
+ * @return int|string https://www.php.net/manual/en/throwable.getcode.php
+ */

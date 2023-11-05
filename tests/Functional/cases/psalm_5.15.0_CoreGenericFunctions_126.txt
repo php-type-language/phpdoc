@@ -1,0 +1,11 @@
+/**
+ * @psalm-pure
+ *
+ * @template T of bool
+ * @param T $strict
+ * @return string|false
+ * @psalm-return (T is false ? string : string|false)
+ *
+ * @psalm-flow ($string) -> return
+ * @psalm-ignore-falsable-return
+ */

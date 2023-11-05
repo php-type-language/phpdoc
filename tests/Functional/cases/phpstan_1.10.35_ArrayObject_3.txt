@@ -1,0 +1,5 @@
+/**
+ * @param TKey|null $offset
+ * @param TValue $value
+ * @return void
+ */

@@ -1,0 +1,10 @@
+/**
+ * @psalm-pure
+ *
+ * @psalm-template TKey
+ *
+ * @param non-empty-string $pattern
+ * @param array<TKey, string> $array
+ * @param 0|1 $flags 1=PREG_GREP_INVERT
+ * @return array<TKey, string>
+ */

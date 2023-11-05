@@ -1,0 +1,9 @@
+/**
+ * Returns whether the requested index exists
+ * @link http://php.net/manual/en/arrayobject.offsetexists.php
+ *
+ * @param TKey $index The index being checked.
+ * @return bool true if the requested index exists, otherwise false
+ *
+ * @since 5.0.0
+ */

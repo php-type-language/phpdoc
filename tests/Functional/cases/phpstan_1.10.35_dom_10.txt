@@ -1,0 +1,6 @@
+/**
+ * @param string $expression
+ * @param DOMNode|null $contextNode
+ * @param boolean $registerNodeNS
+ * @return DOMNodeList<DOMNode>|false
+ */

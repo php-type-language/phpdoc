@@ -1,0 +1,1 @@
+/** @psalm-return (Start is string ? Iterator<int, DateTime> : Iterator<int, Start>) */

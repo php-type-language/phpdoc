@@ -1,0 +1,7 @@
+/**
+ * The SplStack class provides the main functionalities of a stack implemented using a doubly linked list.
+ * @link https://php.net/manual/en/class.splstack.php
+ *
+ * @template TValue
+ * @template-extends SplDoublyLinkedList<TValue>
+ */

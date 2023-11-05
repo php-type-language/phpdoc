@@ -1,0 +1,5 @@
+/**
+ * @param string|\FFI\CData $ptr1
+ * @param string|\FFI\CData $ptr2
+ * @param int<0,max> $size
+ */

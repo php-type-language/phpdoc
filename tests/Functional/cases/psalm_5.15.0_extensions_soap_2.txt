@@ -1,0 +1,8 @@
+/**
+ * Calls a SOAP function (deprecated)
+ * @link https://php.net/manual/en/soapclient.call.php
+ * @param string $function_name
+ * @param array $arguments
+ * @return mixed
+ * @since 5.0.1
+ */

@@ -1,0 +1,9 @@
+/**
+ * Seeks to a position
+ * @link https://php.net/manual/en/seekableiterator.seek.php
+ *
+ * @param int $position The position to seek to.
+ * @return void
+ *
+ * @since 5.1.0
+ */

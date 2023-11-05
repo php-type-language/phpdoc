@@ -1,0 +1,5 @@
+/**
+ * @return DOMDocument|false
+ * @psalm-ignore-falsable-return
+ * @php-from 8.0
+ */

@@ -1,0 +1,9 @@
+/**
+ * Get the number of public properties in the ArrayObject
+ * When the ArrayObject is constructed from an array all properties are public.
+ * @link http://php.net/manual/en/arrayobject.count.php
+ *
+ * @return int The number of public properties in the ArrayObject.
+ *
+ * @since 5.0.0
+ */
