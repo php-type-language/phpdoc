@@ -5,22 +5,45 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser;
 
 use TypeLang\Parser\Parser;
+use TypeLang\Parser\ParserInterface;
 use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactory;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\StandardTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\AuthorTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\DeprecatedTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\FinalTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\ImmutableTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\InternalTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\NoNamedArgumentsTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\ParamTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\ReturnTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\ApiTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\AuthorTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\ExampleTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\FilesourceTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\GlobalTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\IgnoreTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\LicenseTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\LinkTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\MethodTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\PackageTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\CopyrightTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\DeprecatedTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\FinalTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\CommonTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\CommonTypedTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\ImmutableTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\InheritDocTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\InternalTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\NoNamedArgumentsTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\ParamTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\PropertyReadTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\PropertyTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\PropertyWriteTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\ReturnTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\SeeTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\SinceTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\SourceTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\ThrowsTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\ThrowsTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\VarTagFactory;
+use TypeLang\PhpDocParser\DocBlock\Tag\TodoTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\UsedByTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\UsesTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\VarTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\VersionTag;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 final class DocBlockFactory implements DocBlockFactoryInterface
@@ -33,9 +56,8 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         public readonly TagFactoryInterface $tags,
     ) {}
 
-    public static function createInstance(
-        ExceptionHandlerInterface $exceptions = new VoidExceptionHandler(),
-    ): self {
+    public static function createInstance(?ParserInterface $parser = null): self
+    {
         $tags = new StandardTagFactory();
 
         foreach (self::getStandardPrefixes() as $prefix) {
@@ -44,7 +66,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
 
         $descriptions = new DescriptionFactory($tags);
 
-        foreach (self::getStandardTags($descriptions, $exceptions) as $tag => $factory) {
+        foreach (self::getStandardTags($descriptions, $parser) as $tag => $factory) {
             $tags->add($factory, ...(array)$tag);
         }
 
@@ -65,23 +87,44 @@ final class DocBlockFactory implements DocBlockFactoryInterface
      */
     public static function getStandardTags(
         DescriptionFactoryInterface $descriptions,
-        ExceptionHandlerInterface $exceptions = new VoidExceptionHandler(),
+        ?ParserInterface $parser = null
     ): iterable {
-        $parser = new Parser(true);
+        $parser ??= new Parser(true);
 
         // Typed doc blocks
-        yield 'var' => new VarTagFactory($exceptions, $parser, $descriptions);
-        yield 'return' => new ReturnTagFactory($exceptions, $parser, $descriptions);
-        yield 'param' => new ParamTagFactory($exceptions, $parser, $descriptions);
-        yield ['throw', 'throws'] => new ThrowsTagFactory($exceptions, $parser, $descriptions);
+        yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser, $descriptions);
+        yield 'global' => new CommonTypedTagFactory(GlobalTag::class, $parser, $descriptions);
+        yield 'param' => new CommonTypedTagFactory(ParamTag::class, $parser, $descriptions);
+        yield 'return' => new CommonTypedTagFactory(ReturnTag::class, $parser, $descriptions);
+        yield ['throw', 'throws'] => new CommonTypedTagFactory(ThrowsTag::class, $parser, $descriptions);
 
         // Common doc blocks
-        yield 'author' => new AuthorTagFactory($descriptions);
-        yield 'final' => new FinalTagFactory($descriptions);
-        yield 'deprecated' => new DeprecatedTagFactory($descriptions);
-        yield 'immutable' => new ImmutableTagFactory($descriptions);
-        yield 'internal' => new InternalTagFactory($descriptions);
-        yield 'no-named-arguments' => new NoNamedArgumentsTagFactory($descriptions);
+        yield 'api' => new CommonTagFactory(ApiTag::class, $descriptions);
+        yield 'author' => new CommonTagFactory(AuthorTag::class, $descriptions);
+        yield ['category', 'package', 'subpackage'] => new CommonTagFactory(PackageTag::class, $descriptions);
+        yield 'copyright' => new CommonTagFactory(CopyrightTag::class, $descriptions);
+        yield 'deprecated' => new CommonTagFactory(DeprecatedTag::class, $descriptions);
+        yield 'example' => new CommonTagFactory(ExampleTag::class, $descriptions);
+        yield 'filesource' => new CommonTagFactory(FilesourceTag::class, $descriptions);
+        yield 'final' => new CommonTagFactory(FinalTag::class, $descriptions);
+        yield 'ignore' => new CommonTagFactory(IgnoreTag::class, $descriptions);
+        yield 'immutable' => new CommonTagFactory(ImmutableTag::class, $descriptions);
+        yield 'inheritdoc' => new CommonTagFactory(InheritDocTag::class, $descriptions);
+        yield 'internal' => new CommonTagFactory(InternalTag::class, $descriptions);
+        yield 'license' => new CommonTagFactory(LicenseTag::class, $descriptions);
+        yield 'link' => new CommonTagFactory(LinkTag::class, $descriptions);
+        yield 'method' => new CommonTagFactory(MethodTag::class, $descriptions);
+        yield 'no-named-arguments' => new CommonTagFactory(NoNamedArgumentsTag::class, $descriptions);
+        yield 'property' => new CommonTagFactory(PropertyTag::class, $descriptions);
+        yield 'property-read' => new CommonTagFactory(PropertyReadTag::class, $descriptions);
+        yield 'property-write' => new CommonTagFactory(PropertyWriteTag::class, $descriptions);
+        yield 'see' => new CommonTagFactory(SeeTag::class, $descriptions);
+        yield 'since' => new CommonTagFactory(SinceTag::class, $descriptions);
+        yield 'source' => new CommonTagFactory(SourceTag::class, $descriptions);
+        yield 'todo' => new CommonTagFactory(TodoTag::class, $descriptions);
+        yield 'used-by' => new CommonTagFactory(UsedByTag::class, $descriptions);
+        yield 'uses' => new CommonTagFactory(UsesTag::class, $descriptions);
+        yield 'version' => new CommonTagFactory(VersionTag::class, $descriptions);
     }
 
     public function create(string $docblock): DocBlock
@@ -99,7 +142,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
      */
     private function splitByDocBlockTags(string $docblock): array
     {
-        $description = new Description();
+        $description = '';
         $tags = [];
 
         foreach (\explode("\n@", $docblock) as $i => $tag) {
@@ -107,16 +150,21 @@ final class DocBlockFactory implements DocBlockFactoryInterface
                 if (\str_starts_with($tag, '@')) {
                     $tags[] = $this->tags->create($tag);
                 } else {
-                    $description = $this->descriptions->create($tag);
+                    $description = $tag;
                 }
 
+                continue;
+            }
+
+            if (\str_starts_with($tag, ' ')) {
+                $description .= "\n@$tag";
                 continue;
             }
 
             $tags[] = $this->tags->create("@$tag");
         }
 
-        return [$description, $tags];
+        return [$this->descriptions->create($description), $tags];
     }
 
     private function normalizeLineDelimiters(string $docblock): string
@@ -136,6 +184,10 @@ final class DocBlockFactory implements DocBlockFactoryInterface
             subject: $docblock,
         )
             ?: $docblock;
+
+        if (\str_ends_with($docblock, '*/')) {
+            $docblock = \substr($docblock, 0, -2);
+        }
 
         return \trim($docblock);
     }

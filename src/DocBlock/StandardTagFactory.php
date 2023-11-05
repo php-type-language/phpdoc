@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock;
 
-use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 
 /**
@@ -77,11 +77,13 @@ final class StandardTagFactory implements TagFactoryInterface
             return $factory->create($body ?? '');
         }
 
+        $name = \strtolower($name);
+
         if ($body === null) {
-            return new GenericTag($name);
+            return new InvalidTag($name);
         }
 
-        return new GenericTag($name, $body);
+        return new InvalidTag($name, $body);
     }
 
     private function getFactory(string $tag): ?TagFactoryInterface

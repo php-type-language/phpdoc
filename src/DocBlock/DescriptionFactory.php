@@ -26,9 +26,13 @@ final class DescriptionFactory implements DescriptionFactoryInterface
         $description = '';
 
         foreach ($this->getDocBlockChunks($contents) as $chunk) {
+            if ($chunk === '@') {
+                $description .= '{@}';
+                continue;
+            }
+
             if (\str_starts_with($chunk, '@')) {
                 $tags[] = $this->tags->create($chunk);
-
                 $description .= $this->createTagDescriptionChunk(++$tagIdentifier);
                 continue;
             }
@@ -58,9 +62,7 @@ final class DescriptionFactory implements DescriptionFactoryInterface
     }
 
     /**
-     * @param string $contents
-     *
-     * @return ($contents is non-empty-string ? non-empty-list<non-empty-string> : list{})
+     * @return list<non-empty-string>
      */
     private function getDocBlockChunks(string $contents): array
     {
@@ -81,7 +83,8 @@ final class DescriptionFactory implements DescriptionFactoryInterface
             $result[] = \substr($contents, $offset);
         }
 
-        return $result;
+        /** @var list<non-empty-string> */
+        return \array_filter($result);
     }
 
     /**

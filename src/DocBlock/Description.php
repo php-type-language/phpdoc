@@ -30,6 +30,7 @@ final class Description implements TagProviderInterface, \Stringable
 
     public function __toString(): string
     {
+        /** @psalm-suppress ImplicitToStringCast */
         return \vsprintf($this->bodyTemplate, $this->tags);
     }
 }

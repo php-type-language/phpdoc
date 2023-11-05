@@ -34,7 +34,7 @@ abstract class Tag implements TagInterface
 
         return \vsprintf('@%s %s', [
             $this->name,
-            $this->description,
+            (string)$this->description,
         ]);
     }
 }

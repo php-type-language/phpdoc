@@ -9,7 +9,7 @@ use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\DocBlock\TagProvider;
 use TypeLang\PhpDocParser\DocBlock\TagProviderInterface;
 
-final class DocBlock implements TagProviderInterface, \Stringable
+final class DocBlock implements TagProviderInterface
 {
     use TagProvider;
 
@@ -26,16 +26,5 @@ final class DocBlock implements TagProviderInterface, \Stringable
     public function getDescription(): Description
     {
         return $this->description;
-    }
-
-    public function __toString(): string
-    {
-        $result = $this->description . "\n";
-
-        foreach ($this->tags as $tag) {
-            $result .= $tag . "\n";
-        }
-
-        return $result;
     }
 }

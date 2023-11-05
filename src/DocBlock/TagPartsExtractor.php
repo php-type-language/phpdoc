@@ -76,6 +76,7 @@ final class TagPartsExtractor
             throw $this->emptyNameError();
         }
 
+        /** @var list{non-empty-string, null} */
         return [\substr($tag, 1), null];
     }
 

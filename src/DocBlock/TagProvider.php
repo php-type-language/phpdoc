@@ -13,6 +13,7 @@ trait TagProvider
 {
     /**
      * @var list<TagInterface>
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private readonly array $tags;
 

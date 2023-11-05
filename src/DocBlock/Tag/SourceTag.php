@@ -7,12 +7,12 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
 use TypeLang\PhpDocParser\DocBlock\Description;
 
 /**
- * TODO Add version support: {@link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/deprecated.html#deprecated}
+ * TODO Add lines support: {@link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/source.html#source}
  */
-final class DeprecatedTag extends Tag
+final class SourceTag extends Tag
 {
     public function __construct(Description|string|null $description = null)
     {
-        parent::__construct('deprecated', $description);
+        parent::__construct('source', $description);
     }
 }

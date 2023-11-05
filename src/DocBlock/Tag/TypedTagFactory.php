@@ -10,7 +10,6 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface;
 use TypeLang\Parser\Traverser;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\ExceptionHandlerInterface;
 use TypeLang\PhpDocParser\Visitor\NodeCompleteOffsetVisitor;
 
 /**
@@ -23,7 +22,6 @@ abstract class TypedTagFactory extends TagFactory
     private static ?NamedTypeNode $mixed = null;
 
     public function __construct(
-        protected readonly ExceptionHandlerInterface $exceptions,
         protected readonly ParserInterface $parser,
         DescriptionFactoryInterface $descriptions,
     ) {
@@ -42,11 +40,9 @@ abstract class TypedTagFactory extends TagFactory
                 return [$type, $this->slice($type, $body)];
             }
 
-            return [$this->createMixedType(), $body];
-        } catch (\Throwable $e) {
-            $this->exceptions->throw($e);
-
-            return [$this->createMixedType(), $body];
+            return [$this->createMixedType(), $body ?: null];
+        } catch (\Throwable) {
+            return [$this->createMixedType(), $body ?: null];
         }
     }
 
