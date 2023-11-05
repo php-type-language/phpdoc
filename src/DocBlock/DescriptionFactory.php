@@ -50,7 +50,7 @@ final class DescriptionFactory implements DescriptionFactoryInterface
      */
     private function createTagDescriptionChunk(int $tagId): string
     {
-        return "%$tagId\$s";
+        return "%{$tagId}\$s";
     }
 
     /**

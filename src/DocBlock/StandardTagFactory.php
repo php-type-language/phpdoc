@@ -80,7 +80,8 @@ final class StandardTagFactory extends TagFactory
     {
         [$name, $body] = $this->parts->extract($tag);
 
-        if ($factory = $this->getFactory($name)) {
+        $factory = $this->getFactory($name);
+        if ($factory !== null) {
             $body ??= '';
 
             try {

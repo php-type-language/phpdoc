@@ -168,11 +168,11 @@ final class DocBlockFactory implements DocBlockFactoryInterface
             }
 
             if (\str_starts_with($tag, ' ')) {
-                $description .= "\n@$tag";
+                $description .= "\n@{$tag}";
                 continue;
             }
 
-            $tags[] = $this->tags->create("@$tag");
+            $tags[] = $this->tags->create("@{$tag}");
         }
 
         return [$this->descriptions->create($description), $tags];
