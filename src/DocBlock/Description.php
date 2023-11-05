@@ -27,12 +27,17 @@ final class Description implements TagProviderInterface, \Stringable
 
     /**
      * Returns the body template.
+     *
+     * @psalm-immutable
      */
     public function getBodyTemplate(): string
     {
         return $this->bodyTemplate;
     }
 
+    /**
+     * @psalm-immutable
+     */
     public function __toString(): string
     {
         /** @psalm-suppress ImplicitToStringCast */

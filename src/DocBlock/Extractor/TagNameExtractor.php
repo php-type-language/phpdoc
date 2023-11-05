@@ -21,8 +21,8 @@ final class TagNameExtractor
      *   - "@tag With\TypeName $andVariableName And description"
      *   - etc...
      *
+     * @psalm-immutable
      * @return list{non-empty-string, non-empty-string|null}
-     *
      * @throws \Throwable
      */
     public function extract(string $body): array
@@ -48,8 +48,8 @@ final class TagNameExtractor
     }
 
     /**
+     * @psalm-immutable
      * @return list{non-empty-string, non-empty-string|null}
-     *
      * @throws \Throwable
      */
     private function createFromNamed(string $body, int $offset): array
@@ -70,10 +70,9 @@ final class TagNameExtractor
     }
 
     /**
+     * @psalm-immutable
      * @param non-empty-string $tag
-     *
      * @return list{non-empty-string, null}
-     *
      * @throws \Throwable
      */
     private function createFromBodiless(string $body): array

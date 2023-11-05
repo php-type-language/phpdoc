@@ -15,25 +15,35 @@ abstract class Tag implements TagInterface
      */
     public function __construct(
         protected readonly string $name,
-        Description|string|null $description = null,
+        \Stringable|string|null $description = null,
     ) {
-        if (\is_string($description)) {
-            $description = Description::create($description);
-        }
-
-        $this->description = $description;
+        $this->description = match (true) {
+            $description instanceof Description => $description,
+            $description instanceof \Stringable => Description::create((string)$description),
+            \is_string($description) => Description::create($description),
+            default => $description,
+        };
     }
 
+    /**
+     * @psalm-immutable
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @psalm-immutable
+     */
     public function getDescription(): Description|null
     {
         return $this->description;
     }
 
+    /**
+     * @psalm-immutable
+     */
     public function __toString(): string
     {
         if ($this->description === null) {

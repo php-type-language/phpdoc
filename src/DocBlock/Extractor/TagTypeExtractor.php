@@ -21,8 +21,8 @@ final class TagTypeExtractor
     ) {}
 
     /**
+     * @psalm-immutable
      * @return array{TypeStatement, non-empty-string|null}
-     *
      * @throws InvalidTagTypeException
      */
     public function extractTypeOrFail(string $body): array

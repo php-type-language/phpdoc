@@ -8,11 +8,15 @@ interface TagInterface extends \Stringable
 {
     /**
      * @return non-empty-string
+     *
+     * @psalm-immutable
      */
     public function getName(): string;
 
     /**
      * Returns description of the tag.
+     *
+     * @psalm-immutable
      */
     public function getDescription(): \Stringable|string|null;
 
@@ -21,6 +25,7 @@ interface TagInterface extends \Stringable
      * allows a class to decide how it will react when it is treated like
      * a string.
      *
+     * @psalm-immutable
      * @return string Returns string representation of the object that
      *         implements this interface (and/or {@see __toString()} magic
      *         method).

@@ -9,6 +9,7 @@ use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 final class TagVariableExtractor
 {
     /**
+     * @psalm-immutable
      * @return array{non-empty-string|null, non-empty-string|null}
      */
     public function extractOrNull(?string $body): array
@@ -34,6 +35,7 @@ final class TagVariableExtractor
     }
 
     /**
+     * @psalm-immutable
      * @return array{non-empty-string, non-empty-string|null}
      */
     public function extractOrFail(?string $body): array

@@ -8,5 +8,8 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 
 interface TypeProviderInterface extends TagInterface
 {
+    /**
+     * @psalm-immutable
+     */
     public function getType(): TypeStatement;
 }
