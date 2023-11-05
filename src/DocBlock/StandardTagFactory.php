@@ -83,15 +83,16 @@ final class StandardTagFactory implements TagFactoryInterface
             try {
                 return $factory->create($body);
             } catch (InvalidTagVariableNameException $e) {
+                $type = $e->getType();
                 $body = Description::fromNonTagged(
                     body: \substr($body, $e->getTypeOffset()),
                 );
 
-                if ($e->getType() === null) {
+                if ($type === null) {
                     return new InvalidTag($name, $body);
                 }
 
-                return new InvalidTypedTag($name, $e->getType(), $body);
+                return new InvalidTypedTag($name, $type, $body);
             } catch (\InvalidArgumentException) {
                 return new InvalidTag($name, Description::fromNonTagged($body));
             }
@@ -118,7 +119,7 @@ final class StandardTagFactory implements TagFactoryInterface
     }
 
     /**
-     * @return list<non-empty-lowercase-string>
+     * @return array<array-key, non-empty-lowercase-string>
      */
     private function getTagMappings(string $tag): array
     {
@@ -128,17 +129,20 @@ final class StandardTagFactory implements TagFactoryInterface
 
         $lower = \strtolower($tag);
 
-        return $this->mappings[$lower] ??= [...$this->getTagVariants($lower)];
+        return $this->mappings[$lower] ??= \array_values([
+            ...$this->getTagVariants($lower),
+        ]);
     }
 
     /**
      * @param lowercase-string $tag
      * @return iterable<array-key, non-empty-lowercase-string>
+     * @psalm-suppress MoreSpecificReturnType
      */
     private function getTagVariants(string $tag): iterable
     {
         if ($tag === '') {
-            return;
+            return [];
         }
 
         yield $tag;

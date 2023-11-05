@@ -9,7 +9,7 @@ use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
 /**
  * @template TTag of Tag
- * @template-extends TypedTagFactory<TTag>
+ * @template-extends TagFactory<TTag>
  */
 final class CommonTagFactory extends TagFactory
 {

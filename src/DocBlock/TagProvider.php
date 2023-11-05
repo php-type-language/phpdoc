@@ -19,6 +19,7 @@ trait TagProvider
 
     /**
      * @param iterable<array-key, TagInterface> $tags
+     * @psalm-suppress InaccessibleProperty
      */
     protected function initializeTags(iterable $tags): void
     {
