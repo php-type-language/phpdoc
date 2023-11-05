@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock;
 
+use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTagInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 
 /**
@@ -16,7 +17,7 @@ interface TagFactoryInterface
      *
      * @param string $tag The text for this tag, including description.
      *
-     * @return TagInterface A new tag object.
+     * @return TReturn|InvalidTagInterface A new tag object.
      */
     public function create(string $tag): TagInterface;
 }

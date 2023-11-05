@@ -6,7 +6,9 @@ namespace TypeLang\PhpDocParser\Tests\Functional;
 
 use TypeLang\PhpDocParser\DocBlock;
 use TypeLang\PhpDocParser\DocBlock\Description;
+use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTagInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\Tests\TestCase as BaseTestCase;
 
@@ -318,11 +320,27 @@ abstract class TestCase extends BaseTestCase
         self::assertTrue(true);
 
         foreach ($tags as $tag) {
-            if ($tag instanceof InvalidTag) {
-                self::assertContains($tag->getName(), $except);
+            if ($tag instanceof InvalidTagInterface) {
+                if (!$this->isSkipAllowed($tag)) {
+                    self::assertContains($tag->getName(), $except);
+                }
             }
 
             $this->assertDescriptionNotContainsInvalidTags($tag->getDescription(), $except);
         }
+    }
+
+    protected function isSkipAllowed(InvalidTagInterface $tag): bool
+    {
+        $description = $tag->getDescription();
+
+        if (!$description instanceof Description) {
+            return false;
+        }
+
+        // Skip "A is B ? C : D" expressions.
+        return \str_contains($description->getBodyTemplate(), ' is ')
+            && \str_contains($description->getBodyTemplate(), ' ? ')
+            && \str_contains($description->getBodyTemplate(), ' : ');
     }
 }

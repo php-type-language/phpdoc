@@ -8,20 +8,28 @@ use TypeLang\PhpDocParser\DocBlock\Description;
 
 abstract class Tag implements TagInterface
 {
+    protected readonly ?Description $description;
+
     /**
      * @param non-empty-string $name
      */
     public function __construct(
         protected readonly string $name,
-        protected readonly Description|string|null $description = null,
-    ) {}
+        Description|string|null $description = null,
+    ) {
+        if (\is_string($description)) {
+            $description = Description::fromNonTagged($description);
+        }
+
+        $this->description = $description;
+    }
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function getDescription(): Description|string|null
+    public function getDescription(): Description|null
     {
         return $this->description;
     }

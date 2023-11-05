@@ -7,8 +7,11 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\PhpDocParser\DocBlock\Description;
 
-abstract class TypedTag extends Tag
+abstract class TypedTag extends Tag implements TypeProviderInterface
 {
+    /**
+     * @param non-empty-string $name
+     */
     public function __construct(
         string $name,
         protected readonly TypeStatement $type,

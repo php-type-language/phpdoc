@@ -12,6 +12,7 @@ use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\StandardTagFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\ApiTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\AuthorTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\CommonTypedTagWithNameFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\ExampleTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\FilesourceTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\GlobalTag;
@@ -94,8 +95,8 @@ final class DocBlockFactory implements DocBlockFactoryInterface
 
         // Typed doc blocks
         yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser, $descriptions);
-        yield 'global' => new CommonTypedTagFactory(GlobalTag::class, $parser, $descriptions);
-        yield 'param' => new CommonTypedTagFactory(ParamTag::class, $parser, $descriptions);
+        yield 'global' => new CommonTypedTagWithNameFactory(GlobalTag::class, $parser, $descriptions);
+        yield 'param' => new CommonTypedTagWithNameFactory(ParamTag::class, $parser, $descriptions);
         yield 'property' => new CommonTypedTagFactory(PropertyTag::class, $parser, $descriptions);
         yield 'property-read' => new CommonTypedTagFactory(PropertyReadTag::class, $parser, $descriptions);
         yield 'property-write' => new CommonTypedTagFactory(PropertyWriteTag::class, $parser, $descriptions);

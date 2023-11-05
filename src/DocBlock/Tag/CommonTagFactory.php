@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
 /**
  * @template TTag of Tag
@@ -25,9 +26,13 @@ final class CommonTagFactory extends TagFactory
 
     public function create(string $tag): Tag
     {
-        /** @psalm-suppress UnsafeInstantiation */
-        return new ($this->class)(
-            description: $this->extractDescription($tag),
-        );
+        try {
+            /** @psalm-suppress UnsafeInstantiation */
+            return new ($this->class)(
+                description: $this->extractDescription($tag),
+            );
+        } catch (\Throwable $e) {
+            throw InvalidTagException::fromException($e);
+        }
     }
 }

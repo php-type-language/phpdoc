@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDocParser\DocBlock\Extractor;
 
-final class TagPartsExtractor
+use TypeLang\PhpDocParser\Exception\TagWithoutNameException;
+
+final class TagNameExtractor
 {
     /**
      * Extracts all components for a tag: Name + Description (with
@@ -23,22 +25,26 @@ final class TagPartsExtractor
      *
      * @throws \Throwable
      */
-    public function extract(string $tag): array
+    public function extract(string $body): array
     {
-        if ($tag === '' || $tag[0] !== '@') {
-            throw new \InvalidArgumentException('Could not extract tag parts from empty tag');
+        if ($body === '') {
+            throw TagWithoutNameException::fromEmptyBody();
         }
 
-        $foundBreakChar = \strpbrk($tag, " \t\n\r\0\x0B");
+        if ($body[0] !== '@') {
+            throw TagWithoutNameException::fromNonTaggedBody();
+        }
+
+        $foundBreakChar = \strpbrk($body, " \t\n\r\0\x0B");
 
         if ($foundBreakChar === false) {
-            return $this->createFromBodiless($tag);
+            return $this->createFromBodiless($body);
         }
 
         /** @var int<0, max> $foundBreakOffset */
-        $foundBreakOffset = \strpos($tag, $foundBreakChar);
+        $foundBreakOffset = \strpos($body, $foundBreakChar);
 
-        return $this->createFromNamed($tag, $foundBreakOffset);
+        return $this->createFromNamed($body, $foundBreakOffset);
     }
 
     /**
@@ -46,15 +52,15 @@ final class TagPartsExtractor
      *
      * @throws \Throwable
      */
-    private function createFromNamed(string $tag, int $offset): array
+    private function createFromNamed(string $body, int $offset): array
     {
-        $name = \substr($tag, 1, $offset - 1);
+        $name = \substr($body, 1, $offset - 1);
 
         if ($name === '') {
-            throw $this->emptyNameError();
+            throw TagWithoutNameException::fromTagWithoutName();
         }
 
-        $body = \ltrim(\substr($tag, $offset));
+        $body = \ltrim(\substr($body, $offset));
 
         if ($body === '') {
             return [$name, null];
@@ -70,18 +76,13 @@ final class TagPartsExtractor
      *
      * @throws \Throwable
      */
-    private function createFromBodiless(string $tag): array
+    private function createFromBodiless(string $body): array
     {
-        if (\strlen($tag) === 1) {
-            throw $this->emptyNameError();
+        if (\strlen($body) === 1) {
+            throw TagWithoutNameException::fromTagWithoutName();
         }
 
         /** @var list{non-empty-string, null} */
-        return [\substr($tag, 1), null];
-    }
-
-    private function emptyNameError(): \Throwable
-    {
-        return new \InvalidArgumentException('Could not extract tag name from tag without name');
+        return [\substr($body, 1), null];
     }
 }

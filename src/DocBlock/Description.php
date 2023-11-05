@@ -20,6 +20,11 @@ final class Description implements TagProviderInterface, \Stringable
         $this->initializeTags($tags);
     }
 
+    public static function fromNonTagged(string $body): self
+    {
+        return new self($body);
+    }
+
     /**
      * Returns the body template.
      */
