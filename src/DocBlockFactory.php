@@ -97,9 +97,9 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser, $descriptions);
         yield 'global' => new CommonTypedTagWithNameFactory(GlobalTag::class, $parser, $descriptions);
         yield 'param' => new CommonTypedTagWithNameFactory(ParamTag::class, $parser, $descriptions);
-        yield 'property' => new CommonTypedTagFactory(PropertyTag::class, $parser, $descriptions);
-        yield 'property-read' => new CommonTypedTagFactory(PropertyReadTag::class, $parser, $descriptions);
-        yield 'property-write' => new CommonTypedTagFactory(PropertyWriteTag::class, $parser, $descriptions);
+        yield 'property' => new CommonTypedTagWithNameFactory(PropertyTag::class, $parser, $descriptions);
+        yield 'property-read' => new CommonTypedTagWithNameFactory(PropertyReadTag::class, $parser, $descriptions);
+        yield 'property-write' => new CommonTypedTagWithNameFactory(PropertyWriteTag::class, $parser, $descriptions);
         yield ['return', 'returns'] => new CommonTypedTagFactory(ReturnTag::class, $parser, $descriptions);
         yield ['throw', 'throws'] => new CommonTypedTagFactory(ThrowsTag::class, $parser, $descriptions);
 
