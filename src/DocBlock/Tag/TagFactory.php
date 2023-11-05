@@ -6,7 +6,6 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface as TReturn;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 /**

@@ -44,8 +44,10 @@ trait TagProvider
         foreach ($this->tags as $tag) {
             yield $tag;
 
-            if ($tag->getDescription() instanceof TagProviderInterface) {
-                yield from $tag->getDescription();
+            $description = $tag->getDescription();
+
+            if ($description instanceof TagProviderInterface) {
+                yield from $description;
             }
         }
     }

@@ -48,6 +48,9 @@ use TypeLang\PhpDocParser\DocBlock\Tag\VersionTag;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 use JetBrains\PhpStorm\Language;
 
+/**
+ * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
+ */
 final class DocBlockFactory implements DocBlockFactoryInterface
 {
     /**
