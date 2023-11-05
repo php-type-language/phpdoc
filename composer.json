@@ -21,7 +21,6 @@
         "friendsofphp/php-cs-fixer": "^3.35",
         "phpunit/phpunit": "^10.4",
         "rector/rector": "^0.18",
-        "symfony/var-dumper": "^5.4|^6.0",
         "vimeo/psalm": "^5.15"
     },
     "autoload-dev": {

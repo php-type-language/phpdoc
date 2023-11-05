@@ -80,6 +80,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
     {
         yield 'psalm';
         yield 'phpstan';
+        yield 'phan';
     }
 
     /**
@@ -95,7 +96,10 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser, $descriptions);
         yield 'global' => new CommonTypedTagFactory(GlobalTag::class, $parser, $descriptions);
         yield 'param' => new CommonTypedTagFactory(ParamTag::class, $parser, $descriptions);
-        yield 'return' => new CommonTypedTagFactory(ReturnTag::class, $parser, $descriptions);
+        yield 'property' => new CommonTypedTagFactory(PropertyTag::class, $parser, $descriptions);
+        yield 'property-read' => new CommonTypedTagFactory(PropertyReadTag::class, $parser, $descriptions);
+        yield 'property-write' => new CommonTypedTagFactory(PropertyWriteTag::class, $parser, $descriptions);
+        yield ['return', 'returns'] => new CommonTypedTagFactory(ReturnTag::class, $parser, $descriptions);
         yield ['throw', 'throws'] => new CommonTypedTagFactory(ThrowsTag::class, $parser, $descriptions);
 
         // Common doc blocks
@@ -115,14 +119,11 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         yield 'link' => new CommonTagFactory(LinkTag::class, $descriptions);
         yield 'method' => new CommonTagFactory(MethodTag::class, $descriptions);
         yield 'no-named-arguments' => new CommonTagFactory(NoNamedArgumentsTag::class, $descriptions);
-        yield 'property' => new CommonTagFactory(PropertyTag::class, $descriptions);
-        yield 'property-read' => new CommonTagFactory(PropertyReadTag::class, $descriptions);
-        yield 'property-write' => new CommonTagFactory(PropertyWriteTag::class, $descriptions);
         yield 'see' => new CommonTagFactory(SeeTag::class, $descriptions);
         yield 'since' => new CommonTagFactory(SinceTag::class, $descriptions);
         yield 'source' => new CommonTagFactory(SourceTag::class, $descriptions);
         yield 'todo' => new CommonTagFactory(TodoTag::class, $descriptions);
-        yield 'used-by' => new CommonTagFactory(UsedByTag::class, $descriptions);
+        yield ['used-by', 'usedby'] => new CommonTagFactory(UsedByTag::class, $descriptions);
         yield 'uses' => new CommonTagFactory(UsesTag::class, $descriptions);
         yield 'version' => new CommonTagFactory(VersionTag::class, $descriptions);
     }
