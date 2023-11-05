@@ -20,7 +20,7 @@ final class CommonTypedTagFactory extends TypedTagFactory
     public function __construct(
         private readonly string $class,
         ParserInterface $parser,
-        DescriptionFactoryInterface $descriptions,
+        ?DescriptionFactoryInterface $descriptions = null,
     ) {
         parent::__construct($parser, $descriptions);
     }
@@ -33,7 +33,7 @@ final class CommonTypedTagFactory extends TypedTagFactory
             /** @psalm-suppress UnsafeInstantiation */
             return new ($this->class)(
                 type: $type,
-                description: $this->extractDescription($description),
+                description: $this->createDescription($description),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);

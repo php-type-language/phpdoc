@@ -46,6 +46,7 @@ use TypeLang\PhpDocParser\DocBlock\Tag\UsesTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\VarTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\VersionTag;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
+use JetBrains\PhpStorm\Language;
 
 final class DocBlockFactory implements DocBlockFactoryInterface
 {
@@ -67,11 +68,18 @@ final class DocBlockFactory implements DocBlockFactoryInterface
 
         $descriptions = new DescriptionFactory($tags);
 
-        foreach (self::getStandardTags($descriptions, $parser) as $tag => $factory) {
+        foreach (self::getStandardTags($parser) as $tag => $factory) {
+            if ($factory->getDescriptionFactory() === null) {
+                $factory = $factory->withDescriptionFactory($descriptions);
+            }
+
             $tags->add($factory, ...(array)$tag);
         }
 
-        return new self($descriptions, $tags);
+        return new self(
+            descriptions: $descriptions,
+            tags: $tags->withDescriptionFactory($descriptions),
+        );
     }
 
     /**
@@ -87,49 +95,47 @@ final class DocBlockFactory implements DocBlockFactoryInterface
     /**
      * @return iterable<non-empty-lowercase-string|list<non-empty-lowercase-string>, TagFactoryInterface>
      */
-    public static function getStandardTags(
-        DescriptionFactoryInterface $descriptions,
-        ?ParserInterface $parser = null
-    ): iterable {
+    public static function getStandardTags(?ParserInterface $parser = null): iterable
+    {
         $parser ??= new Parser(true);
 
         // Typed doc blocks
-        yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser, $descriptions);
-        yield 'global' => new CommonTypedTagWithNameFactory(GlobalTag::class, $parser, $descriptions);
-        yield 'param' => new CommonTypedTagWithNameFactory(ParamTag::class, $parser, $descriptions);
-        yield 'property' => new CommonTypedTagWithNameFactory(PropertyTag::class, $parser, $descriptions);
-        yield 'property-read' => new CommonTypedTagWithNameFactory(PropertyReadTag::class, $parser, $descriptions);
-        yield 'property-write' => new CommonTypedTagWithNameFactory(PropertyWriteTag::class, $parser, $descriptions);
-        yield ['return', 'returns'] => new CommonTypedTagFactory(ReturnTag::class, $parser, $descriptions);
-        yield ['throw', 'throws'] => new CommonTypedTagFactory(ThrowsTag::class, $parser, $descriptions);
+        yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser);
+        yield 'global' => new CommonTypedTagWithNameFactory(GlobalTag::class, $parser);
+        yield 'param' => new CommonTypedTagWithNameFactory(ParamTag::class, $parser);
+        yield 'property' => new CommonTypedTagWithNameFactory(PropertyTag::class, $parser);
+        yield 'property-read' => new CommonTypedTagWithNameFactory(PropertyReadTag::class, $parser);
+        yield 'property-write' => new CommonTypedTagWithNameFactory(PropertyWriteTag::class, $parser);
+        yield ['return', 'returns'] => new CommonTypedTagFactory(ReturnTag::class, $parser);
+        yield ['throw', 'throws'] => new CommonTypedTagFactory(ThrowsTag::class, $parser);
 
         // Common doc blocks
-        yield 'api' => new CommonTagFactory(ApiTag::class, $descriptions);
-        yield 'author' => new CommonTagFactory(AuthorTag::class, $descriptions);
-        yield ['category', 'package', 'subpackage'] => new CommonTagFactory(PackageTag::class, $descriptions);
-        yield 'copyright' => new CommonTagFactory(CopyrightTag::class, $descriptions);
-        yield 'deprecated' => new CommonTagFactory(DeprecatedTag::class, $descriptions);
-        yield 'example' => new CommonTagFactory(ExampleTag::class, $descriptions);
-        yield 'filesource' => new CommonTagFactory(FilesourceTag::class, $descriptions);
-        yield 'final' => new CommonTagFactory(FinalTag::class, $descriptions);
-        yield 'ignore' => new CommonTagFactory(IgnoreTag::class, $descriptions);
-        yield 'immutable' => new CommonTagFactory(ImmutableTag::class, $descriptions);
-        yield 'inheritdoc' => new CommonTagFactory(InheritDocTag::class, $descriptions);
-        yield 'internal' => new CommonTagFactory(InternalTag::class, $descriptions);
-        yield 'license' => new CommonTagFactory(LicenseTag::class, $descriptions);
-        yield 'link' => new CommonTagFactory(LinkTag::class, $descriptions);
-        yield 'method' => new CommonTagFactory(MethodTag::class, $descriptions);
-        yield 'no-named-arguments' => new CommonTagFactory(NoNamedArgumentsTag::class, $descriptions);
-        yield 'see' => new CommonTagFactory(SeeTag::class, $descriptions);
-        yield 'since' => new CommonTagFactory(SinceTag::class, $descriptions);
-        yield 'source' => new CommonTagFactory(SourceTag::class, $descriptions);
-        yield 'todo' => new CommonTagFactory(TodoTag::class, $descriptions);
-        yield ['used-by', 'usedby'] => new CommonTagFactory(UsedByTag::class, $descriptions);
-        yield 'uses' => new CommonTagFactory(UsesTag::class, $descriptions);
-        yield 'version' => new CommonTagFactory(VersionTag::class, $descriptions);
+        yield 'api' => new CommonTagFactory(ApiTag::class);
+        yield 'author' => new CommonTagFactory(AuthorTag::class);
+        yield ['category', 'package', 'subpackage'] => new CommonTagFactory(PackageTag::class);
+        yield 'copyright' => new CommonTagFactory(CopyrightTag::class);
+        yield 'deprecated' => new CommonTagFactory(DeprecatedTag::class);
+        yield 'example' => new CommonTagFactory(ExampleTag::class);
+        yield 'filesource' => new CommonTagFactory(FilesourceTag::class);
+        yield 'final' => new CommonTagFactory(FinalTag::class);
+        yield 'ignore' => new CommonTagFactory(IgnoreTag::class);
+        yield 'immutable' => new CommonTagFactory(ImmutableTag::class);
+        yield 'inheritdoc' => new CommonTagFactory(InheritDocTag::class);
+        yield 'internal' => new CommonTagFactory(InternalTag::class);
+        yield 'license' => new CommonTagFactory(LicenseTag::class);
+        yield 'link' => new CommonTagFactory(LinkTag::class);
+        yield 'method' => new CommonTagFactory(MethodTag::class);
+        yield 'no-named-arguments' => new CommonTagFactory(NoNamedArgumentsTag::class);
+        yield 'see' => new CommonTagFactory(SeeTag::class);
+        yield 'since' => new CommonTagFactory(SinceTag::class);
+        yield 'source' => new CommonTagFactory(SourceTag::class);
+        yield 'todo' => new CommonTagFactory(TodoTag::class);
+        yield ['used-by', 'usedby'] => new CommonTagFactory(UsedByTag::class);
+        yield 'uses' => new CommonTagFactory(UsesTag::class);
+        yield 'version' => new CommonTagFactory(VersionTag::class);
     }
 
-    public function create(string $docblock): DocBlock
+    public function create(#[Language('PHP')] string $docblock): DocBlock
     {
         $docblock = $this->stripDocComment($docblock);
         $docblock = $this->normalizeLineDelimiters($docblock);

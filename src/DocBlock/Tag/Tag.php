@@ -18,7 +18,7 @@ abstract class Tag implements TagInterface
         Description|string|null $description = null,
     ) {
         if (\is_string($description)) {
-            $description = Description::fromNonTagged($description);
+            $description = Description::create($description);
         }
 
         $this->description = $description;

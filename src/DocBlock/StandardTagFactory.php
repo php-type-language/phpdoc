@@ -8,13 +8,14 @@ use TypeLang\PhpDocParser\DocBlock\Extractor\TagNameExtractor;
 use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTypedTag;
+use TypeLang\PhpDocParser\DocBlock\Tag\TagFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 
 /**
- * @template-implements TagFactoryInterface<TagInterface>
+ * @template-extends TagFactory<TagInterface>
  */
-final class StandardTagFactory implements TagFactoryInterface
+final class StandardTagFactory extends TagFactory
 {
     private readonly TagNameExtractor $parts;
 
@@ -48,6 +49,8 @@ final class StandardTagFactory implements TagFactoryInterface
         foreach ($factories as $name => $factory) {
             $this->add($factory, $name);
         }
+
+        parent::__construct();
     }
 
     /**
@@ -84,9 +87,7 @@ final class StandardTagFactory implements TagFactoryInterface
                 return $factory->create($body);
             } catch (InvalidTagVariableNameException $e) {
                 $type = $e->getType();
-                $body = Description::fromNonTagged(
-                    body: \substr($body, $e->getTypeOffset()),
-                );
+                $body = $this->createDescription(\substr($body, $e->getTypeOffset()));
 
                 if ($type === null) {
                     return new InvalidTag($name, $body);
@@ -94,7 +95,7 @@ final class StandardTagFactory implements TagFactoryInterface
 
                 return new InvalidTypedTag($name, $type, $body);
             } catch (\InvalidArgumentException) {
-                return new InvalidTag($name, Description::fromNonTagged($body));
+                return new InvalidTag($name, $this->createDescription($body));
             }
         }
 
@@ -104,7 +105,7 @@ final class StandardTagFactory implements TagFactoryInterface
             return new GenericTag($name);
         }
 
-        return new GenericTag($name, Description::fromNonTagged($body));
+        return new GenericTag($name, $this->createDescription($body));
     }
 
     private function getFactory(string $tag): ?TagFactoryInterface

@@ -41,7 +41,13 @@ trait TagProvider
      */
     public function getIterator(): \Traversable
     {
-        return new \ArrayIterator($this->tags);
+        foreach ($this->tags as $tag) {
+            yield $tag;
+
+            if ($tag->getDescription() instanceof TagProviderInterface) {
+                yield from $tag->getDescription();
+            }
+        }
     }
 
     /**

@@ -24,7 +24,7 @@ final class CommonTypedTagWithNameFactory extends TypedTagFactory
     public function __construct(
         private readonly string $class,
         ParserInterface $parser,
-        DescriptionFactoryInterface $descriptions,
+        ?DescriptionFactoryInterface $descriptions = null,
     ) {
         $this->variables = new TagVariableExtractor();
 
@@ -48,7 +48,7 @@ final class CommonTypedTagWithNameFactory extends TypedTagFactory
             return new ($this->class)(
                 variable: $variable,
                 type: $type,
-                description: $this->extractDescription($description),
+                description: $this->createDescription($description),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);

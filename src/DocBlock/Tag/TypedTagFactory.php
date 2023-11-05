@@ -19,7 +19,7 @@ abstract class TypedTagFactory extends TagFactory
 
     public function __construct(
         ParserInterface $parser,
-        DescriptionFactoryInterface $descriptions,
+        ?DescriptionFactoryInterface $descriptions = null,
     ) {
         $this->types = new TagTypeExtractor($parser);
 

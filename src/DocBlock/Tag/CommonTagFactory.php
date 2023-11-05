@@ -15,11 +15,10 @@ final class CommonTagFactory extends TagFactory
 {
     /**
      * @param class-string<TTag> $class
-     * @param DescriptionFactoryInterface $descriptions
      */
     public function __construct(
         private readonly string $class,
-        DescriptionFactoryInterface $descriptions,
+        ?DescriptionFactoryInterface $descriptions = null,
     ) {
         parent::__construct($descriptions);
     }
@@ -29,7 +28,7 @@ final class CommonTagFactory extends TagFactory
         try {
             /** @psalm-suppress UnsafeInstantiation */
             return new ($this->class)(
-                description: $this->extractDescription($tag),
+                description: $this->createDescription($tag),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);

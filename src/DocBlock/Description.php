@@ -20,7 +20,7 @@ final class Description implements TagProviderInterface, \Stringable
         $this->initializeTags($tags);
     }
 
-    public static function fromNonTagged(string $body): self
+    public static function create(string $body): self
     {
         return new self($body);
     }

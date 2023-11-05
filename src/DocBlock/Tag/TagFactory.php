@@ -6,6 +6,7 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface as TReturn;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 /**
@@ -16,15 +17,30 @@ use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 abstract class TagFactory implements TagFactoryInterface
 {
     public function __construct(
-        protected readonly DescriptionFactoryInterface $descriptions,
+        protected ?DescriptionFactoryInterface $descriptions = null,
     ) {}
 
-    protected function extractDescription(?string $description): ?Description
+    protected function createDescription(?string $description): ?Description
     {
         if ($description !== null) {
-            return $this->descriptions->create($description);
+            return $this->descriptions?->create($description)
+                ?? Description::create($description)
+            ;
         }
 
         return null;
+    }
+
+    public function withDescriptionFactory(?DescriptionFactoryInterface $factory): self
+    {
+        $self = clone $this;
+        $self->descriptions = $factory;
+
+        return $self;
+    }
+
+    public function getDescriptionFactory(): ?DescriptionFactoryInterface
+    {
+        return $this->descriptions;
     }
 }

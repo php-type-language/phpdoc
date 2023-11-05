@@ -20,4 +20,14 @@ interface TagFactoryInterface
      * @return TReturn|InvalidTagInterface A new tag object.
      */
     public function create(string $tag): TagInterface;
+
+    /**
+     * @psalm-immutable
+     */
+    public function withDescriptionFactory(?DescriptionFactoryInterface $factory): self;
+
+    /**
+     * @psalm-immutable
+     */
+    public function getDescriptionFactory(): ?DescriptionFactoryInterface;
 }
