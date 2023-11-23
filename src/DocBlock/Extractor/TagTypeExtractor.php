@@ -7,17 +7,15 @@ namespace TypeLang\PhpDocParser\DocBlock\Extractor;
 use TypeLang\Parser\Node\Name;
 use TypeLang\Parser\Node\Stmt\NamedTypeNode;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
-use TypeLang\Parser\ParserInterface;
-use TypeLang\Parser\Traverser;
+use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\Exception\InvalidTagTypeException;
-use TypeLang\PhpDocParser\Visitor\NodeCompleteOffsetVisitor;
 
 final class TagTypeExtractor
 {
     private static ?NamedTypeNode $mixed = null;
 
     public function __construct(
-        private readonly ParserInterface $parser,
+        private readonly Parser $parser,
     ) {}
 
     /**
@@ -31,7 +29,7 @@ final class TagTypeExtractor
             $type = $this->parser->parse($body);
 
             if ($type instanceof TypeStatement) {
-                return [$type, $this->slice($type, $body)];
+                return [$type, $this->slice($body)];
             }
 
             throw InvalidTagTypeException::fromNonTyped();
@@ -62,20 +60,10 @@ final class TagTypeExtractor
     /**
      * @return non-empty-string|null
      */
-    private function slice(TypeStatement $type, string $body): ?string
+    private function slice(string $body): ?string
     {
-        $offset = $this->getTypeOffset($type);
+        $offset = $this->parser->lastProcessedTokenOffset;
 
-        return \ltrim(\substr($body, $offset)) ?: null;
-    }
-
-    /**
-     * @return int<0, max>
-     */
-    public function getTypeOffset(TypeStatement $stmt): int
-    {
-        $visitor = Traverser::through(new NodeCompleteOffsetVisitor(), [$stmt]);
-
-        return $visitor->offset;
+        return \trim(\substr($body, $offset)) ?: null;
     }
 }

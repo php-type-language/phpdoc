@@ -293,9 +293,10 @@ abstract class TestCase extends BaseTestCase
     protected function assertDocBlockNotContainsInvalidTags(
         DocBlock $docBlock,
         array $except = [],
+        string $message = '',
     ): void {
-        $this->assertDescriptionNotContainsInvalidTags($docBlock->getDescription(), $except);
-        $this->assertTagsNotContainsInvalidTags($docBlock->getTags(), $except);
+        $this->assertDescriptionNotContainsInvalidTags($docBlock->getDescription(), $except, $message);
+        $this->assertTagsNotContainsInvalidTags($docBlock->getTags(), $except, $message);
     }
 
     /**
@@ -304,9 +305,10 @@ abstract class TestCase extends BaseTestCase
     protected function assertDescriptionNotContainsInvalidTags(
         \Stringable|string|null $description,
         array $except = [],
+        string $message = '',
     ): void {
         if ($description instanceof Description) {
-            $this->assertTagsNotContainsInvalidTags($description->getTags(), $except);
+            $this->assertTagsNotContainsInvalidTags($description->getTags(), $except, $message);
         }
     }
 
@@ -314,19 +316,22 @@ abstract class TestCase extends BaseTestCase
      * @param iterable<TagInterface> $tags
      * @param list<non-empty-string> $except
      */
-    protected function assertTagsNotContainsInvalidTags(iterable $tags, array $except = []): void
-    {
+    protected function assertTagsNotContainsInvalidTags(
+        iterable $tags,
+        array $except = [],
+        string $message = '',
+    ): void {
         // Suppress "no assertions" notice
         self::assertTrue(true);
 
         foreach ($tags as $tag) {
             if ($tag instanceof InvalidTagInterface) {
                 if (!$this->isSkipAllowed($tag)) {
-                    self::assertContains($tag->getName(), $except);
+                    self::assertContains($tag->getName(), $except, $message);
                 }
             }
 
-            $this->assertDescriptionNotContainsInvalidTags($tag->getDescription(), $except);
+            $this->assertDescriptionNotContainsInvalidTags($tag->getDescription(), $except, $message);
         }
     }
 

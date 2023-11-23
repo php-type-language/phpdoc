@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
+use TypeLang\Parser\Parser;
 use TypeLang\Parser\ParserInterface;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
@@ -19,7 +20,7 @@ final class CommonTypedTagFactory extends TypedTagFactory
      */
     public function __construct(
         private readonly string $class,
-        ParserInterface $parser,
+        Parser $parser = new Parser(true),
         ?DescriptionFactoryInterface $descriptions = null,
     ) {
         parent::__construct($parser, $descriptions);

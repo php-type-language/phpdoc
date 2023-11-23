@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
+use TypeLang\Parser\Parser;
 use TypeLang\Parser\ParserInterface;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagTypeExtractor;
@@ -18,7 +19,7 @@ abstract class TypedTagFactory extends TagFactory
     protected readonly TagTypeExtractor $types;
 
     public function __construct(
-        ParserInterface $parser,
+        Parser $parser = new Parser(true),
         ?DescriptionFactoryInterface $descriptions = null,
     ) {
         $this->types = new TagTypeExtractor($parser);

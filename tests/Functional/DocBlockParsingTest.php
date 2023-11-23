@@ -36,6 +36,11 @@ final class DocBlockParsingTest extends TestCase
     {
         $phpdoc = $factory->create($comment);
 
-        $this->assertDocBlockNotContainsInvalidTags($phpdoc, self::NOT_IMPLEMENTED_TAGS);
+        try {
+            $this->assertDocBlockNotContainsInvalidTags($phpdoc, self::NOT_IMPLEMENTED_TAGS, $comment);
+        } catch (\Throwable $e) {
+            dump($phpdoc);
+            throw $e;
+        }
     }
 }
