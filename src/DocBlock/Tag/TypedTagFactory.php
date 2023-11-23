@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\Parser\Parser;
-use TypeLang\Parser\ParserInterface;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagTypeExtractor;
 

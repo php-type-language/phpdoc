@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser;
 
 use TypeLang\Parser\Parser;
-use TypeLang\Parser\ParserInterface;
 use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactory;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
@@ -61,7 +60,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         public readonly TagFactoryInterface $tags,
     ) {}
 
-    public static function createInstance(?ParserInterface $parser = null): self
+    public static function createInstance(?Parser $parser = null): self
     {
         $tags = new StandardTagFactory();
 
@@ -98,9 +97,13 @@ final class DocBlockFactory implements DocBlockFactoryInterface
     /**
      * @return iterable<non-empty-lowercase-string|list<non-empty-lowercase-string>, TagFactoryInterface>
      */
-    public static function getStandardTags(?ParserInterface $parser = null): iterable
+    public static function getStandardTags(?Parser $parser = null): iterable
     {
         $parser ??= new Parser(true);
+
+        if (!$parser->tolerant) {
+            throw new \InvalidArgumentException('Tolerant parser mode required');
+        }
 
         // Typed doc blocks
         yield 'var' => new CommonTypedTagFactory(VarTag::class, $parser);

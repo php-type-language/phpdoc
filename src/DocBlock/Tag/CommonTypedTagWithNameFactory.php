@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
-use TypeLang\Parser\ParserInterface;
+use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagVariableExtractor;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
@@ -23,7 +23,7 @@ final class CommonTypedTagWithNameFactory extends TypedTagFactory
      */
     public function __construct(
         private readonly string $class,
-        ParserInterface $parser,
+        private readonly Parser $parser,
         ?DescriptionFactoryInterface $descriptions = null,
     ) {
         $this->variables = new TagVariableExtractor();
@@ -38,7 +38,7 @@ final class CommonTypedTagWithNameFactory extends TypedTagFactory
         try {
             [$variable, $description] = $this->variables->extractOrFail($description);
         } catch (InvalidTagVariableNameException $e) {
-            $offset = $this->types->getTypeOffset($type);
+            $offset = $this->parser->lastProcessedTokenOffset;
 
             throw InvalidTagVariableNameException::fromTyped($type, $offset, $e);
         }
