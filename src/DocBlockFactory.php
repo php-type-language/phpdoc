@@ -6,12 +6,13 @@ namespace TypeLang\PhpDocParser;
 
 use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\DocBlock\DescriptionFactory;
-use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\StandardTagFactory;
+use TypeLang\PhpDocParser\Description\DescriptionFactory;
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\LinkTagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactorySelector;
 use TypeLang\PhpDocParser\DocBlock\Tag\ApiTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\AuthorTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\CommonTypedTagWithNameFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\CommonTypedTagWithNameFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\ExampleTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\FilesourceTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\GlobalTag;
@@ -23,8 +24,8 @@ use TypeLang\PhpDocParser\DocBlock\Tag\PackageTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\CopyrightTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\DeprecatedTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\FinalTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\CommonTagFactory;
-use TypeLang\PhpDocParser\DocBlock\Tag\CommonTypedTagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\CommonTagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\CommonTypedTagFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\ImmutableTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InheritDocTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InternalTag;
@@ -62,7 +63,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
 
     public static function createInstance(?Parser $parser = null): self
     {
-        $tags = new StandardTagFactory();
+        $tags = new TagFactorySelector();
 
         foreach (self::getStandardPrefixes() as $prefix) {
             $tags->addPrefix($prefix);
@@ -129,16 +130,17 @@ final class DocBlockFactory implements DocBlockFactoryInterface
         yield 'inheritdoc' => new CommonTagFactory(InheritDocTag::class);
         yield 'internal' => new CommonTagFactory(InternalTag::class);
         yield 'license' => new CommonTagFactory(LicenseTag::class);
-        yield 'link' => new CommonTagFactory(LinkTag::class);
         yield 'method' => new CommonTagFactory(MethodTag::class);
         yield 'no-named-arguments' => new CommonTagFactory(NoNamedArgumentsTag::class);
-        yield 'see' => new CommonTagFactory(SeeTag::class);
         yield 'since' => new CommonTagFactory(SinceTag::class);
         yield 'source' => new CommonTagFactory(SourceTag::class);
         yield 'todo' => new CommonTagFactory(TodoTag::class);
         yield ['used-by', 'usedby'] => new CommonTagFactory(UsedByTag::class);
         yield 'uses' => new CommonTagFactory(UsesTag::class);
         yield 'version' => new CommonTagFactory(VersionTag::class);
+
+        yield 'see' => new LinkTagFactory(SeeTag::class);
+        yield 'link' => new LinkTagFactory(LinkTag::class);
     }
 
     public function create(#[Language('PHP')] string $docblock): DocBlock

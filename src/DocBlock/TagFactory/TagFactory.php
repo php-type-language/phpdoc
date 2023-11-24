@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 /**

@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDocParser\Description;
 
+use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 final class DescriptionFactory implements DescriptionFactoryInterface
 {

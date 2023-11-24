@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock;
 
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTagInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 

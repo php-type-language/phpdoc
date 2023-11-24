@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDocParser\Description;
+
+use TypeLang\PhpDocParser\DocBlock\Description;
 
 interface DescriptionFactoryInterface
 {

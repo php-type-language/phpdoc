@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\DocBlock\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagVariableExtractor;
+use TypeLang\PhpDocParser\DocBlock\Tag\TypedTag;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\TypedTagFactory;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 

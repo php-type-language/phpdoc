@@ -8,14 +8,14 @@ use TypeLang\PhpDocParser\DocBlock\Extractor\TagNameExtractor;
 use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTypedTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\TagFactory;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 
 /**
  * @template-extends TagFactory<TagInterface>
  */
-final class StandardTagFactory extends TagFactory
+final class TagFactorySelector extends TagFactory
 {
     private readonly TagNameExtractor $parts;
 
