@@ -50,12 +50,55 @@ use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 final class StandardTagProvider
 {
     /**
-     * @var list<non-empty-lowercase-string>
+     * - For psalm see {@link https://github.com/vimeo/psalm/blob/5.16.0/src/Psalm/DocComment.php#L21}.
+     * - For phpstan see {@link https://github.com/phpstan/phpstan-src/blob/1.10.44/src/Rules/PhpDoc/InvalidPHPStanDocTagRule.php#L23}.
+     * - For phan see {@link https://github.com/phan/phan/blob/5.4.2/src/Phan/Language/Element/Comment/Builder.php}.
+     *
+     * @var array<non-empty-lowercase-string, list<non-empty-lowercase-string>>
      */
     private const COMMON_PREFIXES = [
-        'psalm',
-        'phpstan',
-        'phan'
+        'psalm' => [
+            'return', 'param', 'template', 'var', 'type',
+            'template-covariant', 'property', 'property-read', 'property-write', 'method',
+            'assert', 'assert-if-true', 'assert-if-false', 'suppress',
+            'ignore-nullable-return', 'override-property-visibility',
+            'override-method-visibility', 'seal-properties', 'seal-methods',
+            'no-seal-properties', 'no-seal-methods',
+            'ignore-falsable-return', 'variadic', 'pure',
+            'ignore-variable-method', 'ignore-variable-property', 'internal',
+            'taint-sink', 'taint-source', 'assert-untainted', 'scope-this',
+            'mutation-free', 'external-mutation-free', 'immutable', 'readonly',
+            'allow-private-mutation', 'readonly-allow-private-mutation',
+            'yield', 'trace', 'import-type', 'flow', 'taint-specialize', 'taint-escape',
+            'taint-unescape', 'self-out', 'consistent-constructor', 'stub-override',
+            'require-extends', 'require-implements', 'param-out', 'ignore-var',
+            'consistent-templates', 'if-this-is', 'this-out', 'check-type', 'check-type-exact',
+            'api', 'inheritors',
+        ],
+        'phpstan' => [
+            'param', 'param-out', 'var', 'extends', 'implements', 'use',
+            'template', 'template-contravariant', 'template-covariant',
+            'return', 'throws', 'ignore-next-line', 'ignore-line', 'method',
+            'pure', 'impure', 'immutable', 'type', 'import-type', 'property',
+            'property-read', 'property-write', 'consistent-constructor', 'assert',
+            'assert-if-true', 'assert-if-false', 'self-out', 'this-out',
+            'allow-private-mutation', 'readonly', 'readonly-allow-private-mutation',
+        ],
+        'phan' => [
+            'abstract', 'assert', 'assert', 'assert-false-condition',
+            'assert-true-condition', 'closure-scope',
+            'constructor-used-for-side-effects', 'extends',
+            'external-mutation-free', 'file-suppress',
+            'forbid-undeclared-magic-methods', 'forbid-undeclared-magic-properties',
+            'hardcode-return-type', 'ignore-reference', 'immutable', 'inherits',
+            'mandatory-param', 'method', 'mixin', 'output-reference', 'override',
+            'param', 'property', 'property-read', 'property-write', 'pure',
+            'read-only', 'real-return', 'real-throws', 'return',
+            'side-effect-free', 'suppress', 'suppress-current-line',
+            'suppress-next-line', 'suppress-next-next-line',
+            'suppress-previous-line', 'template', 'type', 'unused-param',
+            'var', 'write-only',
+        ]
     ];
 
     /**
@@ -136,23 +179,6 @@ final class StandardTagProvider
     }
 
     /**
-     * @return iterable<array-key, non-empty-lowercase-string>
-     */
-    private function getAllPrefixes(): iterable
-    {
-        return self::COMMON_PREFIXES;
-    }
-
-    /**
-     * @param non-empty-lowercase-string $tag
-     * @param non-empty-lowercase-string $prefix
-     */
-    private function isSupportedBy(string $tag, string $prefix): bool
-    {
-        return true;
-    }
-
-    /**
      * @return iterable<non-empty-lowercase-string, TagFactoryInterface>
      */
     public function getTags(): iterable
@@ -160,8 +186,8 @@ final class StandardTagProvider
         foreach ($this->getAllTags() as $tag => $factory) {
             yield $tag => $factory;
 
-            foreach ($this->getAllPrefixes() as $prefix) {
-                if (!$this->isSupportedBy($tag, $prefix)) {
+            foreach (self::COMMON_PREFIXES as $prefix => $tags) {
+                if (!\in_array($tag, $tags, true)) {
                     continue;
                 }
 
