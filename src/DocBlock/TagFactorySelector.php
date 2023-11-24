@@ -20,47 +20,22 @@ final class TagFactorySelector extends TagFactory
     private readonly TagNameExtractor $parts;
 
     /**
-     * @var list<non-empty-lowercase-string>
-     */
-    private array $prefixes = [];
-
-    /**
      * @var array<non-empty-lowercase-string, TagFactoryInterface>
      */
     private array $factories = [];
 
     /**
-     * @var array<non-empty-lowercase-string, list<non-empty-lowercase-string>>
-     */
-    private array $mappings = [];
-
-    /**
      * @param iterable<non-empty-string, TagFactoryInterface> $factories
-     * @param iterable<array-key, non-empty-string> $prefixes
      */
-    public function __construct(
-        iterable $factories = [],
-        iterable $prefixes = [],
-    ) {
+    public function __construct(iterable $factories = [])
+    {
         $this->parts = new TagNameExtractor();
-
-        $this->addPrefix(...$prefixes);
 
         foreach ($factories as $name => $factory) {
             $this->add($factory, $name);
         }
 
         parent::__construct();
-    }
-
-    /**
-     * @param non-empty-string ...$prefix
-     */
-    public function addPrefix(string ...$prefix): void
-    {
-        foreach ($prefix as $item) {
-            $this->prefixes[] = \strtolower($item);
-        }
     }
 
     /**
@@ -111,52 +86,6 @@ final class TagFactorySelector extends TagFactory
 
     private function getFactory(string $tag): ?TagFactoryInterface
     {
-        foreach ($this->getTagMappings($tag) as $variant) {
-            if (isset($this->factories[$variant])) {
-                return $this->factories[$variant];
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @return array<array-key, non-empty-lowercase-string>
-     */
-    private function getTagMappings(string $tag): array
-    {
-        if ($tag === '') {
-            return [];
-        }
-
-        $lower = \strtolower($tag);
-
-        return $this->mappings[$lower] ??= \array_values([
-            ...$this->getTagVariants($lower),
-        ]);
-    }
-
-    /**
-     * @param lowercase-string $tag
-     * @return iterable<array-key, non-empty-lowercase-string>
-     * @psalm-suppress MoreSpecificReturnType
-     */
-    private function getTagVariants(string $tag): iterable
-    {
-        if ($tag === '') {
-            return [];
-        }
-
-        yield $tag;
-
-        foreach ($this->prefixes as $prefix) {
-            if (\str_starts_with($tag, $prefix . '-')) {
-                $result = \substr($tag, \strlen($prefix) + 1);
-
-                if ($result !== '') {
-                    yield $result;
-                }
-            }
-        }
+        return $this->factories[\strtolower($tag)] ?? null;
     }
 }

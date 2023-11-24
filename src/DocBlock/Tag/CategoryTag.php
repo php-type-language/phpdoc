@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 /**
- * TODO Add FQSEN support.
+ * TODO Replace description to simple string scalar.
  *
- * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/uses.html#uses-used-by
+ * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/category.html#category
  */
-final class UsedByTag extends Tag implements CreatableFromDescriptionInterface
+final class CategoryTag extends Tag implements CreatableFromDescriptionInterface
 {
     public function __construct(\Stringable|string|null $description = null)
     {
-        parent::__construct('used-by', $description);
+        parent::__construct('category', $description);
     }
 
     public static function createFromDescription(\Stringable|string|null $description = null): self

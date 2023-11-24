@@ -6,15 +6,15 @@ namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromTagAndDescriptionInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TypedTag;
-use TypeLang\PhpDocParser\DocBlock\TagFactory\TypedTagFactory;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
 /**
- * @template TTag of TypedTag
+ * @template TTag of CreatableFromTagAndDescriptionInterface
  * @template-extends TypedTagFactory<TTag>
  */
-final class CommonTypedTagFactory extends TypedTagFactory
+final class CreatableFromTagAndDescriptionTagFactory extends TypedTagFactory
 {
     /**
      * @param class-string<TTag> $class
@@ -32,8 +32,7 @@ final class CommonTypedTagFactory extends TypedTagFactory
         [$type, $description] = $this->types->extractTypeOrMixed($tag);
 
         try {
-            /** @psalm-suppress UnsafeInstantiation */
-            return new ($this->class)(
+            return $this->class::createFromTagAndDescription(
                 type: $type,
                 description: $this->createDescription($description),
             );

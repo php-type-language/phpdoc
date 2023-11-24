@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromDescriptionInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\Tag;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
 /**
- * @template TTag of Tag
+ * @template TTag of CreatableFromDescriptionInterface
  * @template-extends TagFactory<TTag>
  */
-final class CommonTagFactory extends TagFactory
+final class CreatableFromDescriptionTagFactory extends TagFactory
 {
     /**
      * @param class-string<TTag> $class
@@ -27,8 +28,7 @@ final class CommonTagFactory extends TagFactory
     public function create(string $tag): Tag
     {
         try {
-            /** @psalm-suppress UnsafeInstantiation */
-            return new ($this->class)(
+            return ($this->class)::createFromDescription(
                 description: $this->createDescription($tag),
             );
         } catch (\Throwable $e) {

@@ -7,16 +7,16 @@ namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagVariableExtractor;
+use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromNameTypeAndDescriptionInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TypedTag;
-use TypeLang\PhpDocParser\DocBlock\TagFactory\TypedTagFactory;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 
 /**
- * @template TTag of TypedTag
+ * @template TTag of CreatableFromNameTypeAndDescriptionInterface
  * @template-extends TypedTagFactory<TTag>
  */
-final class CommonTypedTagWithNameFactory extends TypedTagFactory
+final class CreatableFromNameTypeAndDescriptionTagFactory extends TypedTagFactory
 {
     protected readonly TagVariableExtractor $variables;
 
@@ -46,9 +46,8 @@ final class CommonTypedTagWithNameFactory extends TypedTagFactory
         }
 
         try {
-            /** @psalm-suppress UnsafeInstantiation */
-            return new ($this->class)(
-                variable: $variable,
+            return $this->class::createFromNameTypeAndDescription(
+                name: $variable,
                 type: $type,
                 description: $this->createDescription($description),
             );

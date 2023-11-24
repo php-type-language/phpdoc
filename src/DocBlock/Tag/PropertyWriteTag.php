@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 /**
  * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/property.html#property-property-read-property-write
  */
-final class PropertyWriteTag extends TypedTag implements VariableNameProviderInterface
+final class PropertyWriteTag extends TypedTag implements CreatableFromNameTypeAndDescriptionInterface
 {
     /**
      * @param non-empty-string $variable
@@ -20,6 +20,14 @@ final class PropertyWriteTag extends TypedTag implements VariableNameProviderInt
         \Stringable|string|null $description = null
     ) {
         parent::__construct('property-write', $type, $description);
+    }
+
+    public static function createFromNameTypeAndDescription(
+        string $name,
+        TypeStatement $type,
+        \Stringable|string|null $description = null,
+    ): self {
+        return new self($name, $type, $description);
     }
 
     /**

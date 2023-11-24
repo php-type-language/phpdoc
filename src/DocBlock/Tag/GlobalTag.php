@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 /**
  * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/global.html#global
  */
-final class GlobalTag extends TypedTag implements VariableNameProviderInterface
+final class GlobalTag extends TypedTag implements CreatableFromNameTypeAndDescriptionInterface
 {
     /**
      * @param non-empty-string $variable
@@ -20,6 +20,14 @@ final class GlobalTag extends TypedTag implements VariableNameProviderInterface
         \Stringable|string|null $description = null
     ) {
         parent::__construct('global', $type, $description);
+    }
+
+    public static function createFromNameTypeAndDescription(
+        string $name,
+        TypeStatement $type,
+        \Stringable|string|null $description = null,
+    ): self {
+        return new self($name, $type, $description);
     }
 
     /**
