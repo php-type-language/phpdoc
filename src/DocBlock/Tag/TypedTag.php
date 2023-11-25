@@ -23,4 +23,18 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
     {
         return $this->type;
     }
+
+    /**
+     * @psalm-immutable
+     */
+    public function __toString(): string
+    {
+        return \rtrim(\vsprintf('@%s %s %s', [
+            $this->name,
+            \property_exists($this->type, 'name')
+                ? (string)$this->type->name
+                : $this->type::class,
+            (string)$this->description,
+        ]));
+    }
 }

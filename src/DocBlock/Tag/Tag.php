@@ -46,13 +46,9 @@ abstract class Tag implements TagInterface
      */
     public function __toString(): string
     {
-        if ($this->description === null) {
-            return \sprintf('@%s', $this->name);
-        }
-
-        return \vsprintf('@%s %s', [
+        return \rtrim(\vsprintf('@%s %s', [
             $this->name,
             (string)$this->description,
-        ]);
+        ]));
     }
 }
