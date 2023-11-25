@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
+use TypeLang\Printer\PrettyPrinter;
 
 abstract class TypedTag extends Tag implements TypeProviderInterface
 {
@@ -29,11 +30,19 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
      */
     public function __toString(): string
     {
+        $type = $this->type::class;
+
+        if (\property_exists($this->type, 'name')) {
+            $type = (string)$this->type->name;
+        }
+
+        if (\class_exists(PrettyPrinter::class)) {
+            $type = (new PrettyPrinter())->print($this->type);
+        }
+
         return \rtrim(\vsprintf('@%s %s %s', [
             $this->name,
-            \property_exists($this->type, 'name')
-                ? (string)$this->type->name
-                : $this->type::class,
+            $type,
             (string)$this->description,
         ]));
     }
