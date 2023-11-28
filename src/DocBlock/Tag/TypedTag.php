@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
+use TypeLang\Parser\Node\Name;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Printer\PrettyPrinter;
 
@@ -32,7 +33,9 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
     {
         $type = $this->type::class;
 
-        if (\property_exists($this->type, 'name')) {
+        /** @psalm-suppress UndefinedPropertyFetch : Psalm false-positive */
+        if (\property_exists($this->type, 'name')
+            && $this->type->name instanceof Name) {
             $type = (string)$this->type->name;
         }
 

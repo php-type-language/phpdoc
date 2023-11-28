@@ -19,6 +19,9 @@ use TypeLang\PhpDocParser\DocBlock\Reference\UriReference;
 
 final class TagReferenceExtractor
 {
+    /**
+     * @return array{ReferenceInterface, string|null}
+     */
     public function extract(string $body): array
     {
         $description = \strpbrk($body, " \t\n\r\0\x0B");
@@ -47,9 +50,11 @@ final class TagReferenceExtractor
         }
 
         if (\str_contains($body, '::')) {
-            return \str_contains($body, '$')
+            $result = \str_contains($body, '$')
                 ? $this->tryParseClassProperty($body)
                 : $this->tryParseClassConst($body);
+
+            return $result ?? new GenericReference($body);
         }
 
         if ($result = $this->tryParseNameReference($body)) {

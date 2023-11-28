@@ -180,6 +180,8 @@ final class StandardTagProvider
 
     /**
      * @return iterable<non-empty-lowercase-string, TagFactoryInterface>
+     *
+     * @psalm-suppress MoreSpecificReturnType : Psalm false-positive
      */
     public function getTags(): iterable
     {

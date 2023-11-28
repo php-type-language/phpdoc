@@ -7,7 +7,6 @@ namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromTagAndDescriptionInterface;
-use TypeLang\PhpDocParser\DocBlock\Tag\TypedTag;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
 /**
@@ -27,7 +26,7 @@ final class CreatableFromTagAndDescriptionTagFactory extends TypedTagFactory
         parent::__construct($parser, $descriptions);
     }
 
-    public function create(string $tag): TypedTag
+    public function create(string $tag): CreatableFromTagAndDescriptionInterface
     {
         [$type, $description] = $this->types->extractTypeOrMixed($tag);
 
