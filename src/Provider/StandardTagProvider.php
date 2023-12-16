@@ -119,7 +119,6 @@ final class StandardTagProvider
         'inheritdoc' => InheritDocTag::class,
         'internal' => InternalTag::class,
         'license' => LicenseTag::class,
-        'method' => MethodTag::class,
         'no-named-arguments' => NoNamedArgumentsTag::class,
         'package' => PackageTag::class,
         'since' => SinceTag::class,
