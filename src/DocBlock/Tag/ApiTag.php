@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 /**
- * TODO This tag doesnt support description: Should support for this
- *      functionality be removed?
+ * TBD This tag doesnt support description: Should support for this
+ *     functionality be removed?
  *
  * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/api.html#api
  */

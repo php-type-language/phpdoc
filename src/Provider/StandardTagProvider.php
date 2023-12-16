@@ -37,8 +37,6 @@ use TypeLang\PhpDocParser\DocBlock\Tag\SourceTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\SubPackageTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\ThrowsTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\TodoTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\UsedByTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\UsesTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\VarTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\VersionTag;
 use TypeLang\PhpDocParser\DocBlock\TagFactory\CreatableFromDescriptionTagFactory;
@@ -125,9 +123,6 @@ final class StandardTagProvider
         'source' => SourceTag::class,
         'subpackage' => SubPackageTag::class,
         'todo' => TodoTag::class,
-        'used-by' => UsedByTag::class,
-        'usedby' => UsedByTag::class,
-        'uses' => UsesTag::class,
         'version' => VersionTag::class,
     ];
 

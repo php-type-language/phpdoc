@@ -70,6 +70,10 @@ abstract class TestCase extends BaseTestCase
 
         // phpDocumentor 2.x
         'index',
+        'uses',
+        'used-by',
+        'usedby',
+        'method',
 
         // PHPUnit 9.x
         'author',
