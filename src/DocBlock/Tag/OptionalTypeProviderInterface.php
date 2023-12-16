@@ -6,10 +6,10 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 
-interface TypeProviderInterface extends OptionalTypeProviderInterface
+interface OptionalTypeProviderInterface extends TagInterface
 {
     /**
      * @psalm-immutable
      */
-    public function getType(): TypeStatement;
+    public function getType(): ?TypeStatement;
 }

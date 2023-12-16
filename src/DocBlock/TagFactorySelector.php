@@ -66,12 +66,12 @@ final class TagFactorySelector extends TagFactory
                 $body = $this->createDescription(\substr($body, $e->getTypeOffset()));
 
                 if ($type === null) {
-                    return new InvalidTag($name, $body);
+                    return new InvalidTag($name, $e, $body);
                 }
 
-                return new InvalidTypedTag($name, $type, $body);
-            } catch (\InvalidArgumentException) {
-                return new InvalidTag($name, $this->createDescription($body));
+                return new InvalidTypedTag($name, $type, $e, $body);
+            } catch (\InvalidArgumentException $e) {
+                return new InvalidTag($name, $e, $this->createDescription($body));
             }
         }
 

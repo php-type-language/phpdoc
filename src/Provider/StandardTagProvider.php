@@ -45,6 +45,7 @@ use TypeLang\PhpDocParser\DocBlock\TagFactory\CreatableFromDescriptionTagFactory
 use TypeLang\PhpDocParser\DocBlock\TagFactory\CreatableFromNameTypeAndDescriptionTagFactory;
 use TypeLang\PhpDocParser\DocBlock\TagFactory\CreatableFromTagAndDescriptionTagFactory;
 use TypeLang\PhpDocParser\DocBlock\TagFactory\LinkTagFactory;
+use TypeLang\PhpDocParser\DocBlock\TagFactory\TemplateTagFactory;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 
 final class StandardTagProvider
@@ -164,6 +165,7 @@ final class StandardTagProvider
     {
         yield 'link' => new LinkTagFactory(LinkTag::class);
         yield 'see' => new LinkTagFactory(SeeTag::class);
+        yield 'template' => new TemplateTagFactory($this->parser);
 
         foreach (self::COMMON_TAGS as $name => $tag) {
             yield $name => new CreatableFromDescriptionTagFactory($tag);

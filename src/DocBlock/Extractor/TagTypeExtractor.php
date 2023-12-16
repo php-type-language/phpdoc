@@ -50,6 +50,18 @@ final class TagTypeExtractor
         }
     }
 
+    /**
+     * @return array{TypeStatement|null, non-empty-string|null}
+     */
+    public function extractTypeOrNull(string $body): array
+    {
+        try {
+            return $this->extractTypeOrFail($body);
+        } catch (InvalidTagTypeException) {
+            return [null, $body ?: null];
+        }
+    }
+
     protected function createMixedType(): NamedTypeNode
     {
         return self::$mixed ??= new NamedTypeNode(

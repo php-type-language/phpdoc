@@ -27,25 +27,30 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
     }
 
     /**
+     * @return non-empty-string
+     */
+    public static function getTypeAsString(TypeStatement $type): string
+    {
+        if (\class_exists(PrettyPrinter::class)) {
+            return (new PrettyPrinter())->print($type);
+        }
+
+        /** @psalm-suppress UndefinedPropertyFetch : Psalm false-positive */
+        if (\property_exists($type, 'name') && $type->name instanceof Name) {
+            return (string)$type->name;
+        }
+
+        return $type::class;
+    }
+
+    /**
      * @psalm-immutable
      */
     public function __toString(): string
     {
-        $type = $this->type::class;
-
-        /** @psalm-suppress UndefinedPropertyFetch : Psalm false-positive */
-        if (\property_exists($this->type, 'name')
-            && $this->type->name instanceof Name) {
-            $type = (string)$this->type->name;
-        }
-
-        if (\class_exists(PrettyPrinter::class)) {
-            $type = (new PrettyPrinter())->print($this->type);
-        }
-
         return \rtrim(\vsprintf('@%s %s %s', [
             $this->name,
-            $type,
+            self::getTypeAsString($this->type),
             (string)$this->description,
         ]));
     }
