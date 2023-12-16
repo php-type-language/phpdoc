@@ -29,9 +29,11 @@ final class DocBlockFactory implements DocBlockFactoryInterface
 
     public static function createInstance(?Parser $parser = null): self
     {
-        $tags = new TagFactorySelector();
+        $descriptions = new DescriptionFactory(
+            tags: $tags = new TagFactorySelector(),
+        );
 
-        $descriptions = new DescriptionFactory($tags);
+        $tags->setDescriptionFactory($descriptions);
 
         // Load standard tags
         $provider = new StandardTagProvider($parser ?? new Parser(true));

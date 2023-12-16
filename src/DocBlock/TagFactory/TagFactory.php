@@ -31,6 +31,11 @@ abstract class TagFactory implements TagFactoryInterface
         return null;
     }
 
+    public function setDescriptionFactory(?DescriptionFactoryInterface $factory): void
+    {
+        $this->descriptions = $factory;
+    }
+
     public function withDescriptionFactory(?DescriptionFactoryInterface $factory): self
     {
         $self = clone $this;

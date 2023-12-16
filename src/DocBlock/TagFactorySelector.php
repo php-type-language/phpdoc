@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock;
 
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagNameExtractor;
 use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
@@ -27,15 +28,17 @@ final class TagFactorySelector extends TagFactory
     /**
      * @param iterable<non-empty-string, TagFactoryInterface> $factories
      */
-    public function __construct(iterable $factories = [])
-    {
+    public function __construct(
+        iterable $factories = [],
+        ?DescriptionFactoryInterface $descriptions = null,
+    ) {
         $this->parts = new TagNameExtractor();
 
         foreach ($factories as $name => $factory) {
             $this->add($factory, $name);
         }
 
-        parent::__construct();
+        parent::__construct($descriptions);
     }
 
     /**
@@ -81,7 +84,10 @@ final class TagFactorySelector extends TagFactory
             return new GenericTag($name);
         }
 
-        return new GenericTag($name, $this->createDescription($body));
+        return new GenericTag(
+            name: $name,
+            description: $this->createDescription($body),
+        );
     }
 
     private function getFactory(string $tag): ?TagFactoryInterface
