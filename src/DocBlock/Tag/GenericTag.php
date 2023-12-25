@@ -10,11 +10,11 @@ namespace TypeLang\PhpDocParser\DocBlock\Tag;
  */
 final class GenericTag extends Tag implements InvalidTagInterface
 {
-    private static ?\Throwable $reason = null;
+    private ?\Throwable $reason = null;
 
     public function getReason(): \Throwable
     {
-        return self::$reason ??= new \OutOfRangeException(
+        return $this->reason ??= new \OutOfRangeException(
             message: \sprintf('Tag "@%s" is not supported', $this->getName()),
         );
     }
