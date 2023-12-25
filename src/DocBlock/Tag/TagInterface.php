@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Tag;
 
-interface TagInterface extends \Stringable
+use TypeLang\Parser\Node\SerializableInterface;
+
+interface TagInterface extends SerializableInterface, \Stringable
 {
     /**
      * @return non-empty-string

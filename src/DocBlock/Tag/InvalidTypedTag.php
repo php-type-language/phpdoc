@@ -28,4 +28,29 @@ final class InvalidTypedTag extends TypedTag implements InvalidTagInterface
     {
         return $this->reason;
     }
+
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     error: non-empty-string,
+     *     type: array{
+     *         kind: int<0, max>,
+     *         ...
+     *     },
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        $reason = $this->getReason();
+
+        return [
+            ...parent::toArray(),
+            'type' => $this->type->toArray(),
+            'error' => $reason->getMessage(),
+        ];
+    }
 }

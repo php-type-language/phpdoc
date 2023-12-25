@@ -18,6 +18,27 @@ final class SeeTag extends Tag
         parent::__construct('see', $description);
     }
 
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     reference: array{
+     *         kind: int<0, max>,
+     *         ...
+     *     },
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            ...parent::toArray(),
+            'reference' => $this->reference->toArray(),
+        ];
+    }
+
     public function getReference(): ReferenceInterface
     {
         return $this->reference;

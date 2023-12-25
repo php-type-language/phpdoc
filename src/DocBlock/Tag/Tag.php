@@ -42,6 +42,46 @@ abstract class Tag implements TagInterface
     }
 
     /**
+     * @return array{
+     *     name: non-empty-string,
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        $result = ['name' => $this->name];
+
+        $description = $this->description;
+
+        if (!$description instanceof Description && $description !== null) {
+            $description = Description::create((string)$description);
+        }
+
+        if ($description !== null) {
+            $result['description'] = $description->toArray();
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
+    }
+
+    /**
      * @psalm-immutable
      */
     public function __toString(): string

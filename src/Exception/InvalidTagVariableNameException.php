@@ -45,7 +45,7 @@ class InvalidTagVariableNameException extends InvalidTagException implements Doc
 
     public static function fromNonTyped(\Throwable $e = null): self
     {
-        $message = 'Could not parse tag variable name';
+        $message = 'Could not parse tag variable name, expected "<@tag> <$name> [<description>]"';
 
         return new static($message, self::CODE_WITHOUT_TYPE, $e);
     }
@@ -55,7 +55,7 @@ class InvalidTagVariableNameException extends InvalidTagException implements Doc
      */
     public static function fromTyped(TypeStatement $type, int $offset, \Throwable $e = null): self
     {
-        $message = 'Could not parse tag variable name';
+        $message = 'Could not parse typed tag variable name, expected "<@tag> <type> <$name> [<description>]"';
 
         return new static($message, self::CODE_WITH_TYPE, $e, $type, $offset);
     }

@@ -24,4 +24,24 @@ final class InvalidTag extends Tag implements InvalidTagInterface
     {
         return $this->reason;
     }
+
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     error: non-empty-string,
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        $reason = $this->getReason();
+
+        return [
+            ...parent::toArray(),
+            'error' => $reason->getMessage(),
+        ];
+    }
 }

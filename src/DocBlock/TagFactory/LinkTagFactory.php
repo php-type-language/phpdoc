@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
-
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
 use TypeLang\PhpDocParser\DocBlock\Extractor\TagReferenceExtractor;
 use TypeLang\PhpDocParser\DocBlock\Tag\Tag;

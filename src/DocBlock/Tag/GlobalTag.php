@@ -22,6 +22,29 @@ final class GlobalTag extends TypedTag implements CreatableFromNameTypeAndDescri
         parent::__construct('global', $type, $description);
     }
 
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     variable: non-empty-string,
+     *     type: array{
+     *         kind: int<0, max>,
+     *         ...
+     *     },
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            ...parent::toArray(),
+            'variable' => $this->variable,
+            'type' => $this->type->toArray(),
+        ];
+    }
+
     public static function createFromNameTypeAndDescription(
         string $name,
         TypeStatement $type,

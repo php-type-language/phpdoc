@@ -348,8 +348,8 @@ abstract class TestCase extends BaseTestCase
         }
 
         // Skip "A is B ? C : D" expressions.
-        return \str_contains($description->getBodyTemplate(), ' is ')
-            && \str_contains($description->getBodyTemplate(), ' ? ')
-            && \str_contains($description->getBodyTemplate(), ' : ');
+        return \str_contains($description->getTemplate(), ' is ')
+            && \str_contains($description->getTemplate(), ' ? ')
+            && \str_contains($description->getTemplate(), ' : ');
     }
 }

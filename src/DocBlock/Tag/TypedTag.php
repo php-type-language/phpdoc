@@ -44,6 +44,27 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
     }
 
     /**
+     * @return array{
+     *     name: non-empty-string,
+     *     type: array{
+     *         kind: int<0, max>,
+     *         ...
+     *     },
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            ...parent::toArray(),
+            'type' => $this->type->toArray(),
+        ];
+    }
+
+    /**
      * @psalm-immutable
      */
     public function __toString(): string

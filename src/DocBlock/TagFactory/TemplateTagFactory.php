@@ -29,7 +29,7 @@ final class TemplateTagFactory extends TypedTagFactory
 
         if ($matches === []) {
             return new TemplateTag(
-                typeName: $typeName,
+                alias: $typeName,
                 description: $this->createDescription($suffix),
             );
         }
@@ -37,7 +37,7 @@ final class TemplateTagFactory extends TypedTagFactory
         [$type, $description] = $this->types->extractTypeOrNull($matches[1]);
 
         return new TemplateTag(
-            typeName: $typeName,
+            alias: $typeName,
             type: $type,
             description: $this->createDescription($description),
         );

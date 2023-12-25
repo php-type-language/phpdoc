@@ -9,7 +9,7 @@ use Psr\Http\Message\UriInterface;
 /**
  * Representation of the "https://example.com/path/to/file" like format.
  */
-final class UriReference implements ReferenceInterface, UriInterface
+final class UriReference extends Reference implements UriInterface
 {
     private ?string $uri = null;
 
@@ -240,6 +240,21 @@ final class UriReference implements ReferenceInterface, UriInterface
         }
 
         return $this->authority;
+    }
+
+    /**
+     * @return array{
+     *     kind: int<0, max>,
+     *     uri: non-empty-string
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            ...parent::toArray(),
+            'kind' => ReferenceKind::NAME_KIND,
+            'uri' => (string)$this,
+        ];
     }
 
     public function __toString(): string

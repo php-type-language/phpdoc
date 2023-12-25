@@ -15,9 +15,27 @@ final class GenericTag extends Tag implements InvalidTagInterface
     public function getReason(): \Throwable
     {
         return self::$reason ??= new \OutOfRangeException(
-            message: \vsprintf('Tag "%s" is not supported by the parser', [
-                $this->getName(),
-            ]),
+            message: \sprintf('Tag "@%s" is not supported', $this->getName()),
         );
+    }
+
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     error: non-empty-string,
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        $reason = $this->getReason();
+
+        return [
+            ...parent::toArray(),
+            'error' => $reason->getMessage(),
+        ];
     }
 }

@@ -40,7 +40,7 @@ final class TagReferenceExtractor
 
     private function parseReference(string $body): ReferenceInterface
     {
-        if ($result = $this->tryParseUriReference($body)) {
+        if (($result = $this->tryParseUriReference($body)) !== null) {
             return $result;
         }
 
@@ -57,7 +57,7 @@ final class TagReferenceExtractor
             return $result ?? new GenericReference($body);
         }
 
-        if ($result = $this->tryParseNameReference($body)) {
+        if (($result = $this->tryParseNameReference($body)) !== null) {
             return $result;
         }
 

@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.1",
         "psr/http-message": "^1.0|^2.0",
-        "type-lang/parser": "^1.0"
+        "type-lang/parser": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -19,10 +19,10 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.35",
-        "phpunit/phpunit": "^10.4",
+        "friendsofphp/php-cs-fixer": "^3.42",
+        "phpunit/phpunit": "^10.5",
         "rector/rector": "^0.18",
-        "vimeo/psalm": "^5.15"
+        "vimeo/psalm": "^5.18"
     },
     "autoload-dev": {
         "psr-4": {

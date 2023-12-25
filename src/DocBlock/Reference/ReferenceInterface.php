@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\Reference;
 
-interface ReferenceInterface extends \Stringable
+use TypeLang\Parser\Node\SerializableInterface;
+
+interface ReferenceInterface extends
+    SerializableInterface,
+    \Stringable
 {
     /**
      * Returns string representation of the reference.

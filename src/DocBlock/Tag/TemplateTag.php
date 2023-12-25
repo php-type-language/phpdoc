@@ -9,12 +9,12 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 final class TemplateTag extends Tag implements OptionalTypeProviderInterface
 {
     /**
-     * @param non-empty-string $typeName
+     * @param non-empty-string $alias
      * @param TypeStatement|null $type
      * @param \Stringable|string|null $description
      */
     public function __construct(
-        private readonly string $typeName,
+        private readonly string $alias,
         private readonly ?TypeStatement $type = null,
         \Stringable|string|null $description = null
     ) {
@@ -24,14 +24,37 @@ final class TemplateTag extends Tag implements OptionalTypeProviderInterface
     /**
      * @return non-empty-string
      */
-    public function getTypeName(): string
+    public function getAlias(): string
     {
-        return $this->typeName;
+        return $this->alias;
     }
 
     public function getType(): ?TypeStatement
     {
         return $this->type;
+    }
+
+    /**
+     * @return array{
+     *     name: non-empty-string,
+     *     alias: non-empty-string,
+     *     type: null|array{
+     *         kind: int<0, max>,
+     *         ...
+     *     },
+     *     description?: array{
+     *         template: string,
+     *         tags: list<array>
+     *     }
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            ...parent::toArray(),
+            'alias' => $this->alias,
+            'type' => $this->type?->toArray(),
+        ];
     }
 
     /**
@@ -42,14 +65,14 @@ final class TemplateTag extends Tag implements OptionalTypeProviderInterface
         if ($this->type === null) {
             return \rtrim(\vsprintf('@%s %s %s', [
                 $this->name,
-                $this->typeName,
+                $this->alias,
                 (string)$this->description,
             ]));
         }
 
         return \rtrim(\vsprintf('@%s %s of %s %s', [
             $this->name,
-            $this->typeName,
+            $this->alias,
             TypedTag::getTypeAsString($this->type),
             (string)$this->description,
         ]));
