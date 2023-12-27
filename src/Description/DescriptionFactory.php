@@ -7,8 +7,9 @@ namespace TypeLang\PhpDocParser\Description;
 use TypeLang\PhpDocParser\DocBlock\Description;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
+use TypeLang\PhpDocParser\Exception\InvalidTagNameException;
 
-final class DescriptionFactory implements DescriptionFactoryInterface
+abstract class DescriptionFactory implements DescriptionFactoryInterface
 {
     /**
      * @param TagFactoryInterface<TagInterface> $tags
@@ -34,12 +35,17 @@ final class DescriptionFactory implements DescriptionFactoryInterface
             }
 
             if (\str_starts_with($chunk, '@')) {
-                $tags[] = $this->tags->create($chunk);
-                $description .= $this->createTagDescriptionChunk(++$tagIdentifier);
+                try {
+                    $tags[] = $this->tags->create($chunk);
+                    $description .= $this->createDescriptionChunkPlaceholder(++$tagIdentifier);
+                } catch (InvalidTagNameException) {
+                    $description .= "{{$chunk}}";
+                }
+
                 continue;
             }
 
-            $description .= $this->formatDescriptionChunk($chunk);
+            $description .= $this->escapeDescriptionChunk($chunk);
         }
 
         return new Description($description, $tags);
@@ -50,18 +56,12 @@ final class DescriptionFactory implements DescriptionFactoryInterface
      *
      * @return non-empty-string
      */
-    private function createTagDescriptionChunk(int $tagId): string
-    {
-        return "%{$tagId}\$s";
-    }
+    abstract protected function createDescriptionChunkPlaceholder(int $tagId): string;
 
     /**
      * @return ($chunk is non-empty-string ? non-empty-string : string)
      */
-    private function formatDescriptionChunk(string $chunk): string
-    {
-        return \str_replace('%', '%%', $chunk);
-    }
+    abstract protected function escapeDescriptionChunk(string $chunk): string;
 
     /**
      * @return list<non-empty-string>

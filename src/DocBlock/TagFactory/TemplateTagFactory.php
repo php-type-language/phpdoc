@@ -4,42 +4,73 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
+use TypeLang\Parser\Parser;
+use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDocParser\DocBlock\Reader\OptionalTypeReader;
+use TypeLang\PhpDocParser\DocBlock\Reader\Reader;
 use TypeLang\PhpDocParser\DocBlock\Tag\TemplateTag;
 
 /**
- * @template-extends TypedTagFactory<TemplateTag>
+ * @template-extends TagFactory<TemplateTag>
  */
-final class TemplateTagFactory extends TypedTagFactory
+final class TemplateTagFactory extends TagFactory
 {
-    public function create(string $tag): TemplateTag
+    private readonly OptionalTypeReader $types;
+
+    public function __construct(
+        Parser $parser = new Parser(true),
+        ?DescriptionFactoryInterface $descriptions = null,
+    ) {
+        $this->types = new OptionalTypeReader($parser);
+
+        parent::__construct($descriptions);
+    }
+
+    public function create(string $content): TemplateTag
     {
-        if (\trim($tag) === '') {
+        $content = \ltrim($content);
+
+        if (\trim($content) === '') {
             throw new \InvalidArgumentException('Template parameter name required');
         }
 
-        $suffix = \strpbrk($tag, " \t\n\r\0\x0B");
+        // Read template alias "@template <ALIAS> ..."
+        $alias = Reader::findUpToSpace($content);
 
-        if ($suffix === false) {
-            return new TemplateTag($tag);
+        if ($alias === '') {
+            return new TemplateTag($content);
         }
 
-        $typeName = \substr($tag, 0, -\strlen($suffix));
+        // >> Shift template alias from content.
+        $content = \substr($content, \strlen($alias));
 
-        \preg_match('/^\s+of\s+(.+?)$/isum', $suffix, $matches);
+        // Read template type prefix "@template <alias> OF ..."
+        \preg_match('/^(\s*of\s+)(.+?)$/isum', $content, $matches);
 
+        // In case of "of" prefix is not defined, then return
+        // other captured content as description.
         if ($matches === []) {
-            return new TemplateTag(
-                alias: $typeName,
-                description: $this->createDescription($suffix),
-            );
+            $description = $this->createDescription($content);
+
+            return new TemplateTag($alias, null, $description);
         }
 
-        [$type, $description] = $this->types->extractTypeOrNull($matches[1]);
+        // Read template type "@template <alias> of <TYPE> ..."
+        $type = $this->types->read($matches[2]);
 
-        return new TemplateTag(
-            alias: $typeName,
-            type: $type,
-            description: $this->createDescription($description),
-        );
+        // In case of type is not defined, then return empty type
+        // and use "of ..." as description.
+        if ($type === null) {
+            $description = $this->createOptionalDescription($content);
+
+            return new TemplateTag($alias, null, $description);
+        }
+
+        // >> Shift template type from content.
+        $content = \substr($content, \strlen($matches[1]) + $type->offset);
+
+        $description = $this->createDescription(\trim($content));
+
+        return new TemplateTag($alias, $type->data, $description);
     }
 }

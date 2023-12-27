@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDocParser\Tests\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
 use TypeLang\PhpDocParser\DocBlock;
 use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTagInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\Tests\TestCase as BaseTestCase;
 
+#[Group('functional'), Group('type-lang/phpdoc-parser')]
 abstract class TestCase extends BaseTestCase
 {
     protected const NOT_IMPLEMENTED_TAGS = [

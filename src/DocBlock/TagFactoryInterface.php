@@ -16,11 +16,11 @@ interface TagFactoryInterface
     /**
      * Factory method responsible for instantiating the correct tag type.
      *
-     * @param string $tag The text for this tag, including description.
+     * @param string $content The text for this tag, including description.
      *
      * @return TReturn|InvalidTagInterface A new tag object.
      */
-    public function create(string $tag): TagInterface;
+    public function create(string $content): TagInterface;
 
     /**
      * @psalm-immutable

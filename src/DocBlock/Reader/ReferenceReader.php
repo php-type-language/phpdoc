@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Extractor;
+namespace TypeLang\PhpDocParser\DocBlock\Reader;
 
 use TypeLang\Parser\Node\FullQualifiedName;
 use TypeLang\Parser\Node\Identifier;
@@ -17,28 +17,34 @@ use TypeLang\PhpDocParser\DocBlock\Reference\NameReference;
 use TypeLang\PhpDocParser\DocBlock\Reference\ReferenceInterface;
 use TypeLang\PhpDocParser\DocBlock\Reference\UriReference;
 
-final class TagReferenceExtractor
+/**
+ * @template-extends Reader<ReferenceInterface>
+ */
+final class ReferenceReader extends Reader
 {
     /**
-     * @return array{ReferenceInterface, string|null}
+     * @return Sequence<ReferenceInterface>
      */
-    public function extract(string $body): array
+    public function read(string $content): Sequence
     {
-        $description = \strpbrk($body, " \t\n\r\0\x0B");
+        $description = \strpbrk($content, " \t\n\r\0\x0B");
 
         if ($description === false) {
-            return [$this->parseReference($body), null];
+            return new Sequence(
+                data: $this->parse($content),
+                offset: \strlen($content),
+            );
         }
 
-        $descriptionOffset = \strlen($body) - \strlen($description);
+        $descriptionOffset = \strlen($content) - \strlen($description);
 
-        return [
-            $this->parseReference(\substr($body, 0, $descriptionOffset)),
-            \ltrim($description),
-        ];
+        return new Sequence(
+            data: $this->parse(\substr($content, 0, $descriptionOffset)),
+            offset: $descriptionOffset,
+        );
     }
 
-    private function parseReference(string $body): ReferenceInterface
+    private function parse(string $body): ReferenceInterface
     {
         if (($result = $this->tryParseUriReference($body)) !== null) {
             return $result;

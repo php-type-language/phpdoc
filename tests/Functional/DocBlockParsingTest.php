@@ -6,9 +6,11 @@ namespace TypeLang\PhpDocParser\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 use TypeLang\PhpDocParser\DocBlockFactory;
 use TypeLang\PhpDocParser\DocBlockFactoryInterface;
 
+#[Group('functional'), Group('type-lang/phpdoc-parser')]
 final class DocBlockParsingTest extends TestCase
 {
     public static function docBlockDataProvider(): iterable

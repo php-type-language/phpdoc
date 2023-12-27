@@ -25,11 +25,11 @@ final class CreatableFromDescriptionTagFactory extends TagFactory
         parent::__construct($descriptions);
     }
 
-    public function create(string $tag): Tag
+    public function create(string $content): Tag
     {
         try {
             return ($this->class)::createFromDescription(
-                description: $this->createDescription($tag),
+                description: $this->createDescription($content),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);

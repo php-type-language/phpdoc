@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser;
 
 use TypeLang\Parser\Parser;
+use TypeLang\PhpDocParser\Description\SprintfDescriptionFactory;
 use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\Description\DescriptionFactory;
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\TagFactorySelector;
+use TypeLang\PhpDocParser\DocBlock\Registry;
+use TypeLang\PhpDocParser\DocBlock\RegistryInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
 use JetBrains\PhpStorm\Language;
@@ -17,20 +18,30 @@ use TypeLang\PhpDocParser\Provider\StandardTagProvider;
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
  */
-final class DocBlockFactory implements DocBlockFactoryInterface
+class DocBlockFactory implements DocBlockFactoryInterface
 {
     /**
      * @param TagFactoryInterface<TagInterface> $tags
      */
-    public function __construct(
+    final public function __construct(
         public readonly DescriptionFactoryInterface $descriptions,
         public readonly TagFactoryInterface $tags,
     ) {}
 
+    protected static function createDescriptionFactory(TagFactoryInterface $tags): DescriptionFactoryInterface
+    {
+        return new SprintfDescriptionFactory($tags);
+    }
+
+    protected static function createRegistry(): RegistryInterface
+    {
+        return new Registry();
+    }
+
     public static function createInstance(?Parser $parser = null): self
     {
-        $descriptions = new DescriptionFactory(
-            tags: $tags = new TagFactorySelector(),
+        $descriptions = static::createDescriptionFactory(
+            tags: $tags = static::createRegistry(),
         );
 
         $tags->setDescriptionFactory($descriptions);
@@ -46,10 +57,7 @@ final class DocBlockFactory implements DocBlockFactoryInterface
             $tags->add($factory, ...(array)$tag);
         }
 
-        return new self(
-            descriptions: $descriptions,
-            tags: $tags->withDescriptionFactory($descriptions),
-        );
+        return new static($descriptions, $tags);
     }
 
     public function create(#[Language('PHP')] string $docblock): DocBlock

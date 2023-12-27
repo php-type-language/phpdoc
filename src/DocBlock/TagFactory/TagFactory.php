@@ -24,11 +24,20 @@ abstract class TagFactory implements TagFactoryInterface
     {
         if ($description !== null) {
             return $this->descriptions?->create($description)
-                ?? Description::create($description)
-            ;
+                ?? Description::create($description);
         }
 
         return null;
+    }
+
+    protected function createOptionalDescription(?string $description): ?Description
+    {
+        if ($description === null || \trim($description) === '') {
+            return null;
+        }
+
+        return $this->descriptions?->create($description)
+            ?? Description::create($description);
     }
 
     public function setDescriptionFactory(?DescriptionFactoryInterface $factory): void

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Extractor\TagReferenceExtractor;
+use TypeLang\PhpDocParser\DocBlock\Reader\ReferenceReader;
 use TypeLang\PhpDocParser\DocBlock\Tag\Tag;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
 
@@ -15,7 +15,7 @@ use TypeLang\PhpDocParser\Exception\InvalidTagException;
  */
 final class LinkTagFactory extends TagFactory
 {
-    private readonly TagReferenceExtractor $references;
+    private readonly ReferenceReader $references;
 
     /**
      * @param class-string<TTag> $class
@@ -24,20 +24,22 @@ final class LinkTagFactory extends TagFactory
         private readonly string $class,
         ?DescriptionFactoryInterface $descriptions = null,
     ) {
-        $this->references = new TagReferenceExtractor();
+        $this->references = new ReferenceReader();
 
         parent::__construct($descriptions);
     }
 
-    public function create(string $tag): Tag
+    public function create(string $content): Tag
     {
-        [$reference, $description] = $this->references->extract($tag);
+        $reference = $this->references->read($content);
+
+        $description = \substr($content, $reference->offset);
 
         try {
             /** @psalm-suppress UnsafeInstantiation */
             return new ($this->class)(
-                $reference,
-                description: $this->createDescription($description),
+                $reference->data,
+                $this->createDescription($description),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);

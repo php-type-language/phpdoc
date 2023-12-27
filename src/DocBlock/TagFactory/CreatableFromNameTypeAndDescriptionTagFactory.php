@@ -6,50 +6,50 @@ namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
 
 use TypeLang\Parser\Parser;
 use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Extractor\TagVariableExtractor;
+use TypeLang\PhpDocParser\DocBlock\Reader\OptionalTypeReader;
+use TypeLang\PhpDocParser\DocBlock\Reader\TolerantTypeReader;
+use TypeLang\PhpDocParser\DocBlock\Reader\VariableNameReader;
 use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromNameTypeAndDescriptionInterface;
 use TypeLang\PhpDocParser\DocBlock\Tag\TypedTag;
 use TypeLang\PhpDocParser\Exception\InvalidTagException;
-use TypeLang\PhpDocParser\Exception\InvalidTagVariableNameException;
 
 /**
  * @template TTag of CreatableFromNameTypeAndDescriptionInterface
- * @template-extends TypedTagFactory<TTag>
+ * @template-extends TagFactory<TTag>
  */
-final class CreatableFromNameTypeAndDescriptionTagFactory extends TypedTagFactory
+final class CreatableFromNameTypeAndDescriptionTagFactory extends TagFactory
 {
-    protected readonly TagVariableExtractor $variables;
+    private readonly VariableNameReader $variables;
+
+    private readonly TolerantTypeReader $types;
 
     /**
      * @param class-string<TTag> $class
      */
     public function __construct(
         private readonly string $class,
-        private readonly Parser $parser,
+        Parser $parser = new Parser(true),
         ?DescriptionFactoryInterface $descriptions = null,
     ) {
-        $this->variables = new TagVariableExtractor();
+        $this->variables = new VariableNameReader();
+        $this->types = new TolerantTypeReader(new OptionalTypeReader($parser));
 
-        parent::__construct($parser, $descriptions);
+        parent::__construct($descriptions);
     }
 
-    public function create(string $tag): TypedTag
+    public function create(string $content): TypedTag
     {
-        [$type, $description] = $this->types->extractTypeOrMixed($tag);
+        $type = $this->types->read($content);
+        $content = \substr($content, $type->offset);
 
-        try {
-            [$variable, $description] = $this->variables->extractOrFail($description);
-        } catch (InvalidTagVariableNameException $e) {
-            $offset = $this->parser->lastProcessedTokenOffset;
-
-            throw InvalidTagVariableNameException::fromTyped($type, $offset, $e);
-        }
+        $selection = $this->variables->read($content);
+        $content = \substr($content, $selection->offset);
 
         try {
             return $this->class::createFromNameTypeAndDescription(
-                name: $variable,
-                type: $type,
-                description: $this->createDescription($description),
+                name: $selection->data,
+                type: $type->data,
+                description: $this->createDescription($content),
             );
         } catch (\Throwable $e) {
             throw InvalidTagException::fromException($e);
