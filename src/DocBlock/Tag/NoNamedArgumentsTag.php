@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Tag;
 
 /**
  * @link https://php.watch/articles/no-named-arguments-docblock-attribute

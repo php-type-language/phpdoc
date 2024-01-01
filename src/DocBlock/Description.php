@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDoc\Parser\DocBlock;
 
 use TypeLang\Parser\Node\SerializableInterface;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
 
 final class Description implements
     TagProviderInterface,

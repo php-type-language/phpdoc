@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDoc\Parser\DocBlock;
 
-use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Reader\TagNameReader;
-use TypeLang\PhpDocParser\DocBlock\Tag\GenericTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\InvalidTypedTag;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDocParser\DocBlock\TagFactory\TagFactory;
-use TypeLang\PhpDocParser\Exception\DocBlockExceptionInterface;
-use TypeLang\PhpDocParser\Exception\InvalidTypedTagExceptionInterface;
+use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\TagNameReader;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\GenericTag;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\InvalidTag;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\InvalidTypedTag;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\TagFactory\TagFactory;
+use TypeLang\PhpDoc\Parser\Exception\DocBlockExceptionInterface;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTypedTagExceptionInterface;
 
 /**
  * @template-extends TagFactory<TagInterface>

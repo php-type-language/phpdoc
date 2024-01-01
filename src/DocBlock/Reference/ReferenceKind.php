@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reference;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reference;
 
 use TypeLang\Parser\Node\SerializableInterface;
 use TypeLang\Parser\Node\SerializableKind;

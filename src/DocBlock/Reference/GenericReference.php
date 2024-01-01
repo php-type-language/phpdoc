@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reference;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reference;
 
 /**
  * Representation of a reference in the case that the reference could not

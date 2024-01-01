@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Tests\Unit\Reader;
+namespace TypeLang\PhpDoc\Parser\Tests\Unit\Reader;
 
 use PHPUnit\Framework\Attributes\Group;
-use TypeLang\PhpDocParser\DocBlock\Reader\ReaderInterface;
-use TypeLang\PhpDocParser\DocBlock\Reader\Sequence;
-use TypeLang\PhpDocParser\Tests\TestCase as BaseTestCase;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\ReaderInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\Sequence;
+use TypeLang\PhpDoc\Parser\Tests\TestCase as BaseTestCase;
 
 #[Group('unit'), Group('type-lang/phpdoc-parser')]
 abstract class TestCase extends BaseTestCase

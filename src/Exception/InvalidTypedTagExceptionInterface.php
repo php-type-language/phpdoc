@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Exception;
+namespace TypeLang\PhpDoc\Parser\Exception;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 

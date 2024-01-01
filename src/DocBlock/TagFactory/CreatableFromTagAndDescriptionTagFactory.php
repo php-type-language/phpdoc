@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
+namespace TypeLang\PhpDoc\Parser\DocBlock\TagFactory;
 
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Reader\OptionalTypeReader;
-use TypeLang\PhpDocParser\DocBlock\Reader\TolerantTypeReader;
-use TypeLang\PhpDocParser\DocBlock\Tag\CreatableFromTagAndDescriptionInterface;
-use TypeLang\PhpDocParser\Exception\InvalidTagException;
+use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\OptionalTypeReader;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\TolerantTypeReader;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\CreatableFromTagAndDescriptionInterface;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTagException;
 
 /**
  * @template TTag of CreatableFromTagAndDescriptionInterface

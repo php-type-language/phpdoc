@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
+namespace TypeLang\PhpDoc\Parser\DocBlock\TagFactory;
 
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Reader\OptionalTypeReader;
-use TypeLang\PhpDocParser\DocBlock\Reader\Reader;
-use TypeLang\PhpDocParser\DocBlock\Tag\TemplateTag;
+use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\OptionalTypeReader;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\Reader;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TemplateTag;
 
 /**
  * @template-extends TagFactory<TemplateTag>

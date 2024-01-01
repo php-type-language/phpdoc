@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\TagFactory;
+namespace TypeLang\PhpDoc\Parser\DocBlock\TagFactory;
 
-use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Description;
+use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\TagFactoryInterface;
 
 /**
  * @template TReturn of TagInterface

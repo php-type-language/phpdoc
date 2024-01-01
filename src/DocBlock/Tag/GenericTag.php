@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Tag;
 
 /**
  * This tag is created if the docblock is not supported by parser but looks

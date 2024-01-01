@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reader;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reader;
 
-use TypeLang\PhpDocParser\Exception\InvalidVariableNameException;
+use TypeLang\PhpDoc\Parser\Exception\InvalidVariableNameException;
 
 /**
  * @template-extends Reader<non-empty-string>

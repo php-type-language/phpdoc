@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDoc\Parser\DocBlock;
 
 /**
  * @template-extends \Traversable<non-empty-string, TagFactoryInterface>

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reader;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reader;
 
-use TypeLang\PhpDocParser\Exception\InvalidTagNameException;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTagNameException;
 
 /**
  * @template-extends Reader<non-empty-string>

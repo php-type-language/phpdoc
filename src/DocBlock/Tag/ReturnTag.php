@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Tag;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 

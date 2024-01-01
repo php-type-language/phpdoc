@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Tests\Unit\Reader;
+namespace TypeLang\PhpDoc\Parser\Tests\Unit\Reader;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
-use TypeLang\PhpDocParser\DocBlock\Reader\VariableNameReader;
-use TypeLang\PhpDocParser\Exception\InvalidVariableNameException;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\VariableNameReader;
+use TypeLang\PhpDoc\Parser\Exception\InvalidVariableNameException;
 
 #[Group('unit'), Group('type-lang/phpdoc-parser')]
 final class VariableNameReaderTest extends TestCase

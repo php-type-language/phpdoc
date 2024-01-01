@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock;
+namespace TypeLang\PhpDoc\Parser\DocBlock;
 
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
 
 /**
  * @template-extends \IteratorAggregate<array-key, TagInterface>

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Tests\Unit\Reader;
+namespace TypeLang\PhpDoc\Parser\Tests\Unit\Reader;
 
 use PHPUnit\Framework\Attributes\Group;
 use TypeLang\Parser\Node\Stmt\NamedTypeNode;
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\DocBlock\Reader\TypeReader;
-use TypeLang\PhpDocParser\Exception\InvalidTypeException;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\TypeReader;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTypeException;
 
 #[Group('unit'), Group('type-lang/phpdoc-parser')]
 final class TypeReaderTest extends TestCase

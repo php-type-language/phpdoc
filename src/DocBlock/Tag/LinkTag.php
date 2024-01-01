@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Tag;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Tag;
 
-use TypeLang\PhpDocParser\DocBlock\Reference\ReferenceInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\ReferenceInterface;
 
 /**
  * @link https://docs.phpdoc.org/3.0/guide/references/phpdoc/tags/link.html#link

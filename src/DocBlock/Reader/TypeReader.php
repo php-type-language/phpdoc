@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reader;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reader;
 
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\Exception\InvalidTypeException;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTypeException;
 
 /**
  * @template-extends Reader<TypeStatement>

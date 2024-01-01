@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser;
+namespace TypeLang\PhpDoc\Parser;
 
 use TypeLang\Parser\Parser;
-use TypeLang\PhpDocParser\Description\SprintfDescriptionFactory;
-use TypeLang\PhpDocParser\DocBlock\Description;
-use TypeLang\PhpDocParser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDocParser\DocBlock\Registry;
-use TypeLang\PhpDocParser\DocBlock\RegistryInterface;
-use TypeLang\PhpDocParser\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDocParser\DocBlock\TagFactoryInterface;
+use TypeLang\PhpDoc\Parser\Description\SprintfDescriptionFactory;
+use TypeLang\PhpDoc\Parser\DocBlock\Description;
+use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Registry;
+use TypeLang\PhpDoc\Parser\DocBlock\RegistryInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\TagFactoryInterface;
 use JetBrains\PhpStorm\Language;
-use TypeLang\PhpDocParser\Provider\StandardTagProvider;
+use TypeLang\PhpDoc\Parser\Provider\StandardTagProvider;
 
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available

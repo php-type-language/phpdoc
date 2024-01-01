@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\DocBlock\Reader;
+namespace TypeLang\PhpDoc\Parser\DocBlock\Reader;
 
 use TypeLang\Parser\Node\FullQualifiedName;
 use TypeLang\Parser\Node\Identifier;
 use TypeLang\Parser\Node\Literal\VariableLiteralNode;
 use TypeLang\Parser\Node\Name;
-use TypeLang\PhpDocParser\DocBlock\Reference\ClassConstReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\ClassPropertyReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\FunctionReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\GenericReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\MethodReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\NameReference;
-use TypeLang\PhpDocParser\DocBlock\Reference\ReferenceInterface;
-use TypeLang\PhpDocParser\DocBlock\Reference\UriReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\ClassConstReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\ClassPropertyReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\FunctionReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\GenericReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\MethodReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\NameReference;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\ReferenceInterface;
+use TypeLang\PhpDoc\Parser\DocBlock\Reference\UriReference;
 
 /**
  * @template-extends Reader<ReferenceInterface>

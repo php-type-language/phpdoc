@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Tests\Unit\Reader;
+namespace TypeLang\PhpDoc\Parser\Tests\Unit\Reader;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
-use TypeLang\PhpDocParser\DocBlock\Reader\TagNameReader;
-use TypeLang\PhpDocParser\Exception\InvalidTagNameException;
+use TypeLang\PhpDoc\Parser\DocBlock\Reader\TagNameReader;
+use TypeLang\PhpDoc\Parser\Exception\InvalidTagNameException;
 
 #[Group('unit'), Group('type-lang/phpdoc-parser')]
 final class TagNameReaderTest extends TestCase

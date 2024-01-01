@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Tests\Functional;
+namespace TypeLang\PhpDoc\Parser\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
-use TypeLang\PhpDocParser\DocBlockFactory;
-use TypeLang\PhpDocParser\DocBlockFactoryInterface;
+use TypeLang\PhpDoc\Parser\DocBlockFactory;
+use TypeLang\PhpDoc\Parser\DocBlockFactoryInterface;
 
 #[Group('functional'), Group('type-lang/phpdoc-parser')]
 final class DocBlockParsingTest extends TestCase

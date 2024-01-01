@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDocParser\Description;
+namespace TypeLang\PhpDoc\Parser\Description;
 
 final class SprintfDescriptionFactory extends DescriptionFactory
 {
