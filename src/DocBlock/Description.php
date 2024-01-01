@@ -26,7 +26,7 @@ final class Description implements
 
     public static function create(string $body): self
     {
-        return new self($body);
+        return new self(\trim($body));
     }
 
     /**

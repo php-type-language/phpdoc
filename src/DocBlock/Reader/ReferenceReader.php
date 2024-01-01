@@ -110,6 +110,14 @@ final class ReferenceReader extends Reader
 
     private function tryParseNameReference(string $body): ?NameReference
     {
+        if (\ctype_alpha(\str_replace('\\', '', $body))) {
+            if (\str_starts_with($body, '\\')) {
+                return new NameReference(new FullQualifiedName($body));
+            }
+
+            return new NameReference(new Name($body));
+        }
+
         return null;
     }
 

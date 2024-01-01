@@ -48,7 +48,7 @@ abstract class DescriptionFactory implements DescriptionFactoryInterface
             $description .= $this->escapeDescriptionChunk($chunk);
         }
 
-        return new Description($description, $tags);
+        return new Description(\trim($description), $tags);
     }
 
     /**
