@@ -18,12 +18,12 @@
 
 The PHP reference implementation for Type Language phpdoc parser.
 
-Read [documentation pages](https://nesk.gitbook.io/php-type-language) for more
+Read [documentation pages](https://docs.phpdoc.io) for more
 information.
 
 ## Installation
 
-Type Language PhpDoc Parser is available as composer repository and can be
+PhpDoc Generator is available as composer repository and can be
 installed using the following command in a root of your project:
 
 ```sh
