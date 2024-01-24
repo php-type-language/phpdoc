@@ -16,10 +16,9 @@
     <a href="https://github.com/php-type-language/phpdoc-parser/actions"><img src="https://github.com/php-type-language/phpdoc-parser/workflows/tests/badge.svg"></a>
 </p>
 
-The PHP reference implementation for Type Language phpdoc parser.
+The PHP reference implementation for Type Language PhpDoc Parser.
 
-Read [documentation pages](https://docs.phpdoc.io) for more
-information.
+Read [documentation pages](https://docs.phpdoc.io) for more information.
 
 ## Installation
 
