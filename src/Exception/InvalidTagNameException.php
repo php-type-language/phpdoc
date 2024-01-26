@@ -9,13 +9,13 @@ namespace TypeLang\PhpDoc\Parser\Exception;
  */
 class InvalidTagNameException extends InvalidTagException implements DocBlockExceptionInterface
 {
-    final public const CODE_EMPTY = 0x01 + parent::CODE_LAST;
+    final public const ERROR_CODE_EMPTY = 0x01 + parent::CODE_LAST;
 
-    final public const CODE_EMPTY_NAME = 0x02 + parent::CODE_LAST;
+    final public const ERROR_CODE_EMPTY_NAME = 0x02 + parent::CODE_LAST;
 
-    final public const CODE_INVALID_PREFIX = 0x03 + parent::CODE_LAST;
+    final public const ERROR_CODE_INVALID_PREFIX = 0x03 + parent::CODE_LAST;
 
-    protected const CODE_LAST = self::CODE_INVALID_PREFIX;
+    protected const CODE_LAST = self::ERROR_CODE_INVALID_PREFIX;
 
     /**
      * Occurs when a tag name is empty.
@@ -24,7 +24,7 @@ class InvalidTagNameException extends InvalidTagException implements DocBlockExc
     {
         $message = 'Can not read tag name from empty value';
 
-        return new self($message, self::CODE_EMPTY);
+        return new self($message, self::ERROR_CODE_EMPTY);
     }
 
     /**
@@ -34,7 +34,7 @@ class InvalidTagNameException extends InvalidTagException implements DocBlockExc
     {
         $message = 'Tag name cannot be empty';
 
-        return new self($message, self::CODE_EMPTY_NAME);
+        return new self($message, self::ERROR_CODE_EMPTY_NAME);
     }
 
     /**
@@ -44,6 +44,6 @@ class InvalidTagNameException extends InvalidTagException implements DocBlockExc
     {
         $message = 'The tag name must starts with the "@" character';
 
-        return new self($message, self::CODE_INVALID_PREFIX);
+        return new self($message, self::ERROR_CODE_INVALID_PREFIX);
     }
 }

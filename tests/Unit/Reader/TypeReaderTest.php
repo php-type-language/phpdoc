@@ -43,7 +43,7 @@ final class TypeReaderTest extends TestCase
     public function testSyntaxError(): void
     {
         self::expectException(InvalidTypeException::class);
-        self::expectExceptionCode(InvalidTypeException::CODE_WITHOUT_TYPE);
+        self::expectExceptionCode(InvalidTypeException::ERROR_CODE_WITHOUT_TYPE);
 
         $this->read(':type');
     }
@@ -51,7 +51,7 @@ final class TypeReaderTest extends TestCase
     public function testEmpty(): void
     {
         self::expectException(InvalidTypeException::class);
-        self::expectExceptionCode(InvalidTypeException::CODE_WITHOUT_TYPE);
+        self::expectExceptionCode(InvalidTypeException::ERROR_CODE_WITHOUT_TYPE);
 
         $this->read('');
     }

@@ -70,7 +70,7 @@ final class TagNameReaderTest extends TestCase
 
         if (!$allowed) {
             self::expectException(InvalidTagNameException::class);
-            self::expectExceptionCode(InvalidTagNameException::CODE_EMPTY_NAME);
+            self::expectExceptionCode(InvalidTagNameException::ERROR_CODE_EMPTY_NAME);
         }
 
         $sequence = $this->read($tag = "@{$char}suffix");
@@ -84,7 +84,7 @@ final class TagNameReaderTest extends TestCase
     public function testWithoutName(): void
     {
         self::expectException(InvalidTagNameException::class);
-        self::expectExceptionCode(InvalidTagNameException::CODE_EMPTY_NAME);
+        self::expectExceptionCode(InvalidTagNameException::ERROR_CODE_EMPTY_NAME);
 
         $this->read('@ description');
     }
@@ -92,7 +92,7 @@ final class TagNameReaderTest extends TestCase
     public function testWithoutNameAndDescription(): void
     {
         self::expectException(InvalidTagNameException::class);
-        self::expectExceptionCode(InvalidTagNameException::CODE_EMPTY_NAME);
+        self::expectExceptionCode(InvalidTagNameException::ERROR_CODE_EMPTY_NAME);
 
         $this->read('@');
     }
@@ -100,7 +100,7 @@ final class TagNameReaderTest extends TestCase
     public function testEmptyTag(): void
     {
         self::expectException(InvalidTagNameException::class);
-        self::expectExceptionCode(InvalidTagNameException::CODE_EMPTY);
+        self::expectExceptionCode(InvalidTagNameException::ERROR_CODE_EMPTY);
 
         $this->read('');
     }
@@ -108,7 +108,7 @@ final class TagNameReaderTest extends TestCase
     public function testWithoutTag(): void
     {
         self::expectException(InvalidTagNameException::class);
-        self::expectExceptionCode(InvalidTagNameException::CODE_INVALID_PREFIX);
+        self::expectExceptionCode(InvalidTagNameException::ERROR_CODE_INVALID_PREFIX);
 
         $this->read('description');
     }
