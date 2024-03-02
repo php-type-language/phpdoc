@@ -18,47 +18,6 @@
 
 The PHP reference implementation for Type Language PhpDoc Parser.
 
-Read [documentation pages](https://phpdoc.io) for more information.
+## Resources
 
-## Installation
-
-PhpDoc Generator is available as composer repository and can be
-installed using the following command in a root of your project:
-
-```sh
-$ composer require type-lang/phpdoc
-```
-
-## Quick Start
-
-```php
-use TypeLang\PHPDoc\DocBlockFactory;
-
-$phpdoc = DocBlockFactory::createInstance()
-    ->create(<<<'PHP'
-        /**
-         * Example description.
-         *
-         * @param non-empty-string $foo Foo param.
-         * @param int<0, max> $bar Bar param.
-         *
-         * @return void Returns nothing.
-         */
-        PHP);
-
-echo $phpdoc->getDescription() . "\n";
-// Output: string("Example description.\n")
-
-foreach ($phpdoc->getTags() as $tag) {
-    echo $tag->getName() . ': '
-       . $tag->getDescription() . "\n";
-    // Output 3 lines:
-    //   param: Foo param.
-    //   param: Bar param.
-    //   return: Returns nothing.
-}
-```
-
-### Supported Tags
-
-
+- [Documentation](https://phpdoc.io)
