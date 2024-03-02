@@ -1,5 +1,0 @@
-/**
- * @psalm-pure
- *
- * @psalm-taint-sink file $filename
- */

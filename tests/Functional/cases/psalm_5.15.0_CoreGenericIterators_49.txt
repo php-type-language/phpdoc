@@ -1,4 +1,0 @@
-/**
- * @param int $position The position to seek to.
- * @return void
- */

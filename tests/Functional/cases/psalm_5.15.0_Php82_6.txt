@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- * @param positive-int $length
- * @return list<non-empty-string>
- *
- * @psalm-flow ($string) -> return
- */

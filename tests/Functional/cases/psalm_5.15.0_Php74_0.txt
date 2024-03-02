@@ -1,8 +1,0 @@
-/**
- * @psalm-pure
- *
- * @psalm-taint-escape html
- * @psalm-flow ($string) -> return
- *
- * @param null|string|array<array-key,string> $allowed_tags
- */

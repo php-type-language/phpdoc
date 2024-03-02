@@ -1,4 +1,0 @@
-/**
- * @param mixed $var
- * @return ($return is true ? string : bool)
- */

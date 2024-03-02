@@ -1,3 +1,0 @@
-/**
- * These constants are for auto-complete only.
- */

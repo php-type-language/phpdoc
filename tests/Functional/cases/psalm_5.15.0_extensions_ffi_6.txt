@@ -1,4 +1,0 @@
-/**
- * @param \FFI\CData|string $from
- * @param int<0,max> $size
- */

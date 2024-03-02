@@ -1,3 +1,0 @@
-/**
- * @param (callable(TKey, TKey): int)|null $comparator
- */

@@ -1,9 +1,0 @@
-/**
- * Sets the data associated with the current iterator entry
- * @link https://php.net/manual/en/splobjectstorage.setinfo.php
- *
- * @param TArrayValue $data The data to associate with the current iterator entry.
- * @return void
- *
- * @since 5.3.0
- */

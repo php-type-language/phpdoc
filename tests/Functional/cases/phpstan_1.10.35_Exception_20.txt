@@ -1,4 +1,0 @@
-/**
- * @return null|Throwable
- * @throws void
- */

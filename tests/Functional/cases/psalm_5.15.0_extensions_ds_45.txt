@@ -1,4 +1,0 @@
-/**
- * @param TKey $key
- * @psalm-mutation-free
- */

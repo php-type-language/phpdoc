@@ -1,8 +1,0 @@
-/**
- * The SplDoublyLinkedList class provides the main functionalities of a doubly linked list.
- * @link https://php.net/manual/en/class.spldoublylinkedlist.php
- *
- * @template TValue
- * @template-implements Iterator<int, TValue>
- * @template-implements ArrayAccess<int, TValue>
- */

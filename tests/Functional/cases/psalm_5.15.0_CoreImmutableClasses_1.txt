@@ -1,7 +1,0 @@
-/**
- * @psalm-mutation-free
- *
- * @param string $format
- *
- * @return ($format is non-empty-string ? non-empty-string : string)
- */

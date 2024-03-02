@@ -1,9 +1,0 @@
-/**
- * @template TKey of object
- * @template TVal of mixed
- * @implements ArrayAccess<TKey, TVal>
- * @implements IteratorAggregate<TKey,TVal>
- * @implements Traversable<TKey,TVal>
- *
- * @since 8.0.0
- */

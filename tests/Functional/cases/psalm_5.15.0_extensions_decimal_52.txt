@@ -1,8 +1,0 @@
-/**
- * String representation.
- *
- * This method is equivalent to a cast to string, as well as `toString`.
- *
- * @return string the value of this decimal represented exactly, in either
- *                fixed or scientific form, depending on the value.
- */

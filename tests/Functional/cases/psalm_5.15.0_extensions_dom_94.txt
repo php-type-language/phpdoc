@@ -1,4 +1,0 @@
-/**
- * @return DOMNode|string ...$nodes
- * @php-from 8.0
- */

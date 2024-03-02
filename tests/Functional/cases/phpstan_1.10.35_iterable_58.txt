@@ -1,4 +1,0 @@
-/**
- * @param Iterator<TKey, TValue> $iterator
- * @param self::MATCH|self::GET_MATCH|self::ALL_MATCHES|self::SPLIT|self::REPLACE $mode
- */

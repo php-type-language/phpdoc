@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- *
- * @param string|int $in_codepage
- * @param string|int $out_codepage
- * @psalm-flow ($subject) -> return
- */

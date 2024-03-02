@@ -1,8 +1,0 @@
-/**
- * Returns the index at which the iterator currently is
- * @link https://php.net/manual/en/splobjectstorage.key.php
- *
- * @return int The index corresponding to the position of the iterator.
- *
- * @since 5.1.0
- */

@@ -1,3 +1,0 @@
-/**
- * @psalm-assert-if-true ReflectionType $this->getType()
- */

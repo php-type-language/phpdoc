@@ -1,5 +1,0 @@
-/**
- * @return TValue
- * @throws UnderflowException
- * @psalm-mutation-free
- */

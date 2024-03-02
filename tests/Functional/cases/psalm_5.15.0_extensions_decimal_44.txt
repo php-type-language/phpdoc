@@ -1,4 +1,0 @@
-/**
- * @return bool TRUE if this decimal is an integer, ie. does not have
- *              significant figures behind the decimal point, otherwise FALSE.
- */

@@ -1,9 +1,0 @@
-/**
- * Decimal point shift.
- *
- * @param int $places The number of places to shift the decimal point by.
- *                    A positive shift moves the decimal point to the right,
- *                    a negative shift moves the decimal point to the left.
- *
- * @return Decimal A copy of this decimal with its decimal place shifted.
- */

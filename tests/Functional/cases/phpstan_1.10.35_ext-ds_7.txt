@@ -1,4 +1,0 @@
-/**
- * @param (callable(TValue): bool)|null $callback
- * @return Deque<TValue>
- */

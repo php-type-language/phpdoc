@@ -1,6 +1,0 @@
-/**
- * @template TValue2
- * @param iterable<TValue2> $values
- * @return Set<TValue|TValue2>
- * @psalm-mutation-free
- */

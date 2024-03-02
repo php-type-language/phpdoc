@@ -1,4 +1,0 @@
-/**
- * @template TIterator as RecursiveIterator|IteratorAggregate
- * @mixin TIterator
- */

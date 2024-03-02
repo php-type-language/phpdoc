@@ -1,4 +1,0 @@
-/**
- * @psalm-pure
- * @throws ReflectionException
- */

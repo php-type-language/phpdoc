@@ -2,33 +2,33 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDoc\Parser;
+namespace TypeLang\PHPDoc;
 
 use TypeLang\Parser\Node\SerializableInterface;
-use TypeLang\PhpDoc\Parser\DocBlock\Description;
-use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDoc\Parser\DocBlock\TagProvider;
-use TypeLang\PhpDoc\Parser\DocBlock\TagProviderInterface;
+use TypeLang\PHPDoc\Tag\Description\Description;
+use TypeLang\PHPDoc\Tag\Description\DescriptionInterface;
+use TypeLang\PHPDoc\Tag\TagInterface;
+use TypeLang\PHPDoc\Tag\TagProvider;
+use TypeLang\PHPDoc\Tag\TagProviderInterface;
 
-final class DocBlock implements TagProviderInterface, SerializableInterface
+/**
+ * @template-implements \IteratorAggregate<array-key, TagInterface>
+ */
+final class DocBlock implements
+    TagProviderInterface,
+    SerializableInterface,
+    \IteratorAggregate
 {
-    use TagProvider {
-        getIterator as private getTagProviderIterator;
-    }
+    use TagProvider;
 
     /**
-     * @param iterable<array-key, TagInterface> $tags
+     * @param iterable<TagInterface> $tags
      */
     public function __construct(
-        private readonly Description $description = new Description(),
+        private readonly DescriptionInterface $description = new Description(),
         iterable $tags = [],
     ) {
-        $this->initializeTags($tags);
-    }
-
-    public function getDescription(): Description
-    {
-        return $this->description;
+        $this->bootTagProvider($tags);
     }
 
     /**
@@ -66,11 +66,5 @@ final class DocBlock implements TagProviderInterface, SerializableInterface
     public function jsonSerialize(): array
     {
         return $this->toArray();
-    }
-
-    public function getIterator(): \Traversable
-    {
-        yield from $this->description;
-        yield from $this->getTagProviderIterator();
     }
 }

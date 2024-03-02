@@ -1,9 +1,0 @@
-/**
- * Returns whether the specified index exists
- * @link https://php.net/manual/en/splfixedarray.offsetexists.php
- *
- * @param int $index The index being checked.
- * @return bool true if the requested index exists, and false otherwise.
- *
- * @since 5.3.0
- */

@@ -1,4 +1,0 @@
-/**
- * @psalm-pure
- * @return int-mask-of<Attribute::TARGET_*>
- */

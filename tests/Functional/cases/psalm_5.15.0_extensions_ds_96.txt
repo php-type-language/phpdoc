@@ -1,4 +1,0 @@
-/**
- * @return Sequence<TValue>
- * @psalm-mutation-free
- */

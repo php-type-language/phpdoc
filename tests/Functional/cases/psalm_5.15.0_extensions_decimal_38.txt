@@ -1,3 +1,0 @@
-/**
- * @return bool TRUE if this decimal is an integer and even, FALSE otherwise.
- */

@@ -1,7 +1,0 @@
-/**
- * The SplMinHeap class provides the main functionalities of a heap, keeping the maximum on the top.
- * @link https://php.net/manual/en/class.splminheap.php
- *
- * @template TValue
- * @template-extends SplHeap<TValue>
- */

@@ -1,5 +1,0 @@
-/**
- * @param array<int|string, mixed> $args
- *
- * @return T
- */

@@ -1,4 +1,0 @@
-/**
- * @return TValue
- * @throws \OutOfRangeException
- */

@@ -1,6 +1,0 @@
-/**
- * Square root
- *
- * @return Decimal the square root of this decimal, with the same precision
- *                 as this decimal.
- */

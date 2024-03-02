@@ -1,5 +1,0 @@
-/**
- * Total number of days the interval spans. If this is unknown, days will be FALSE.
- * @var int|false
- * @readonly
- */

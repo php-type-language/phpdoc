@@ -1,5 +1,0 @@
-/**
- * @param int-mask-of<ReflectionMethod::IS_*>|null $filter
- * @return list<ReflectionMethod>
- * @psalm-pure
- */

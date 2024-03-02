@@ -1,3 +1,0 @@
-/**
- * @return TValue Can return any type.
- */

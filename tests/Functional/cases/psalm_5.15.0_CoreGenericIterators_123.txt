@@ -1,3 +1,0 @@
-/**
- * @return RecursiveArrayIterator<TKey, TValue>
- */

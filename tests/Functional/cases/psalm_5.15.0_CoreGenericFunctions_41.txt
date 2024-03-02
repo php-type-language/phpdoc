@@ -1,5 +1,0 @@
-/**
- * @psalm-pure
- *
- * @return ($as_float is true ? float : string)
- */

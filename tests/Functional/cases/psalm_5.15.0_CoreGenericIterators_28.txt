@@ -1,5 +1,0 @@
-/**
- * @param TKey $index The offset to get the value from.
- * @return TValue|null The value at offset index, null when accessing invalid indexes
- * @psalm-ignore-nullable-return
- */

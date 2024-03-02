@@ -1,6 +1,0 @@
-/**
- * @template-covariant TNode as DOMNode
- * @template-implements IteratorAggregate<string, TNode>
- *
- * @php-from 8.0
- */

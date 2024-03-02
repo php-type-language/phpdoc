@@ -1,6 +1,0 @@
-/**
- * @psalm-pure
- * @return string
- *
- * @psalm-flow ($string) -> return
- */

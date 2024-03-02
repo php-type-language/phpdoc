@@ -1,4 +1,0 @@
-/**
- * @since 8.1.0
- * @return self::ABI_*
- */

@@ -1,6 +1,0 @@
-/**
- * @psalm-immutable
- *
- * @template-covariant Start of string|DateTimeInterface
- * @implements Traversable<int, DateTimeInterface>
- */

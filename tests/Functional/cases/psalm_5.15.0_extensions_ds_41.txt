@@ -1,5 +1,0 @@
-/**
- * @return Pair<TKey, TValue>
- * @throws OutOfRangeException
- * @psalm-mutation-free
- */

@@ -1,5 +1,0 @@
-/**
- * @param T $iterator
- * @param int $mode
- * @param int $flags
- */

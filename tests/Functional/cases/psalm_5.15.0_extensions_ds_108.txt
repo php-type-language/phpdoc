@@ -1,4 +1,0 @@
-/**
- * @return float|int
- * @psalm-mutation-free
- */

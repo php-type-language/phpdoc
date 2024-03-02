@@ -1,4 +1,0 @@
-/**
- * @return Pair<TKey, TValue>
- * @throws OutOfRangeException
- */

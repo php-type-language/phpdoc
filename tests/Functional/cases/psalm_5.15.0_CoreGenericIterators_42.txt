@@ -1,4 +1,0 @@
-/**
- * @param string $serialized The serialized ArrayIterator object to be unserialized.
- * @return void
- */

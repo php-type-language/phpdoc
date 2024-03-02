@@ -1,6 +1,0 @@
-/**
- * @template TValue2
- * @param Set<TValue2> $set
- * @return Set<TValue&TValue2>
- * @psalm-mutation-free
- */

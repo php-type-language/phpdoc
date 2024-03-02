@@ -1,5 +1,0 @@
-/**
- * @param (callable(TValue, TValue): int)|null $comparator
- * @return Deque<TValue>
- * @psalm-mutation-free
- */

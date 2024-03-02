@@ -1,4 +1,0 @@
-/**
- * @return class-string<T>
- * @psalm-pure
- */

@@ -1,4 +1,0 @@
-/**
- * @param string $name
- * @return DOMNodeList<DOMElement>
- */

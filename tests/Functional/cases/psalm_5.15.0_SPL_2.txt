@@ -1,8 +1,0 @@
-/**
- * Pops a node from the end of the doubly linked list
- * @link https://php.net/manual/en/spldoublylinkedlist.pop.php
- *
- * @return TValue The value of the popped node.
- *
- * @since 5.3.0
- */

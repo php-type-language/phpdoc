@@ -1,4 +1,0 @@
-/**
- * @param mixed $elements
- * @return false|int|Redis
- */

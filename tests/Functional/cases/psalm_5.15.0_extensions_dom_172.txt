@@ -1,3 +1,0 @@
-/**
- * @return DOMNodeList<DOMNode>|false
- */

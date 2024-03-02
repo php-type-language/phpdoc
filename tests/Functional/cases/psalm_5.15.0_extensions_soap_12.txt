@@ -1,9 +1,0 @@
-/**
- * Sets the location of the Web service to use
- * @link https://php.net/manual/en/soapclient.setlocation.php
- * @param string $new_location [optional] <p>
- * The new endpoint URL.
- * </p>
- * @return string The old endpoint URL.
- * @since 5.0.1
- */

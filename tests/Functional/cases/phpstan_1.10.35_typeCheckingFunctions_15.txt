@@ -1,3 +1,0 @@
-/**
- * @return ($value is iterable<mixed, mixed> ? true : false)
- */

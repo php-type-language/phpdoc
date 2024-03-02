@@ -1,4 +1,0 @@
-/**
- * @param resource $stream
- * @param-out closed-resource $stream
- */

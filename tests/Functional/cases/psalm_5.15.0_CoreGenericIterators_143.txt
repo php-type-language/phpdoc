@@ -1,7 +1,0 @@
-/**
- * @param TIterator $iterator
- * @param int $mode
- * @param int $flags
- *
- * @return void
- */

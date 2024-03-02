@@ -1,8 +1,0 @@
-/**
- * Checks whether the queue is empty
- * @link https://php.net/manual/en/splpriorityqueue.isEmpty.php
- *
- * @return bool Whether the queue is empty
- *
- * @since 5.3.0
- */

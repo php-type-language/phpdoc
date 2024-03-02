@@ -1,7 +1,0 @@
-/**
- * Sets up a DateInterval from the relative parts of the string
- * @return DateInterval|false Returns a new {@link https://www.php.net/manual/en/class.dateinterval.php DateInterval}
- * instance on success, or <b>FALSE</b> on failure.
- * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
- * @psalm-ignore-falsable-return
- */

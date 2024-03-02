@@ -1,3 +1,0 @@
-/**
- * @return void Any returned value is ignored.
- */

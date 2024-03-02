@@ -1,4 +1,0 @@
-/**
- * @return int-mask-of<ReflectionMethod::IS_*>
- * @psalm-pure
- */

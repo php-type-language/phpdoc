@@ -1,4 +1,0 @@
-/**
- * @return Pair<TKey, TValue>
- * @psalm-mutation-free
- */

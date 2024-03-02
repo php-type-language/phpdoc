@@ -1,4 +1,0 @@
-/**
- * Is 1 if the interval is inverted and 0 otherwise
- * @var int
- */

@@ -1,9 +1,0 @@
-/**
- * Removes an object from the storage
- * @link https://php.net/manual/en/splobjectstorage.offsetunset.php
- *
- * @param TObject $object The object to remove.
- * @return void
- *
- * @since 5.3.0
- */

@@ -1,9 +1,0 @@
-/**
- * JSON
- *
- * This method is only here to honour the interface, and is equivalent to
- * `toString`. JSON does not have a decimal type so all decimals are encoded
- * as strings in the same format as `toString`.
- *
- * @return string
- */

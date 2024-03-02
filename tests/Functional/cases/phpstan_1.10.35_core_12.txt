@@ -1,4 +1,0 @@
-/**
- * @param array<mixed> $result
- * @param-out array<string, array|string> $result
- */

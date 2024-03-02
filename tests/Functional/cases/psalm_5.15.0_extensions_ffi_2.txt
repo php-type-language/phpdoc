@@ -1,4 +1,0 @@
-/**
- * @param \FFI\CType $type
- * @param \FFI\CData|int|float|bool|null $ptr
- */

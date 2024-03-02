@@ -1,4 +1,0 @@
-/**
- * @return ($filename is null ? string|false : bool)
- * @alias SimpleXMLElement::asXML
- */

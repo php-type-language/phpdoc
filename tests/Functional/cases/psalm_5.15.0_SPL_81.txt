@@ -1,8 +1,0 @@
-/**
- * Returns if the current iterator entry is valid
- * @link https://php.net/manual/en/splobjectstorage.valid.php
- *
- * @return bool true if the iterator entry is valid, false otherwise.
- *
- * @since 5.1.0
- */

@@ -1,5 +1,0 @@
-/**
- * @param TValue $value
- * @return int|false
- * @psalm-mutation-free
- */

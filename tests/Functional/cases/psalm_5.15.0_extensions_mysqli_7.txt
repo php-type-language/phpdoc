@@ -1,3 +1,0 @@
-/**
- * @var int<0,max>|numeric-string
- */

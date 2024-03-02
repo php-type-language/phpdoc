@@ -1,8 +1,0 @@
-/**
- * Sort the entries by value
- * @link http://php.net/manual/en/arrayobject.asort.php
- *
- * @return void
- *
- * @since 5.2.0
- */

@@ -1,5 +1,0 @@
-/**
- * Signum
- *
- * @return int 0 if zero, -1 if negative, or 1 if positive.
- */

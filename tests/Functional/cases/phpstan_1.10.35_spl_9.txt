@@ -1,4 +1,0 @@
-/**
- * @template TValue
- * @extends \SplDoublyLinkedList<TValue>
- */

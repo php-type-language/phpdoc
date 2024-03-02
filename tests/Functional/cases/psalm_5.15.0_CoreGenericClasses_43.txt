@@ -1,5 +1,0 @@
-/**
- * @template TIn as object
- * @param TIn $object
- * @return WeakReference<TIn>
- */

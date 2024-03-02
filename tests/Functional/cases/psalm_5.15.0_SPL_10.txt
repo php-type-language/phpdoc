@@ -1,9 +1,0 @@
-/**
- * Returns whether the requested $index exists
- * @link https://php.net/manual/en/spldoublylinkedlist.offsetexists.php
- *
- * @param int $index The index being checked.
- * @return bool true if the requested index exists, otherwise false
- *
- * @since 5.3.0
- */

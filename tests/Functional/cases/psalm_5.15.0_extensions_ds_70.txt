@@ -1,5 +1,0 @@
-/**
- * @template TValue
- * @extends Collection<int, TValue>
- * @extends ArrayAccess<int, TValue>
- */

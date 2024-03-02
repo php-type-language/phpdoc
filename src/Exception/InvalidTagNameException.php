@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDoc\Parser\Exception;
+namespace TypeLang\PHPDoc\Exception;
 
-/**
- * @psalm-consistent-constructor
- */
-class InvalidTagNameException extends InvalidTagException implements DocBlockExceptionInterface
+use Phplrt\Contracts\Source\ReadableInterface;
+
+class InvalidTagNameException extends InvalidTagException
 {
     final public const ERROR_CODE_EMPTY = 0x01 + parent::CODE_LAST;
 
@@ -20,30 +19,30 @@ class InvalidTagNameException extends InvalidTagException implements DocBlockExc
     /**
      * Occurs when a tag name is empty.
      */
-    public static function fromEmptyTag(): self
+    public static function fromEmptyTag(int $offset = 0): self
     {
         $message = 'Can not read tag name from empty value';
 
-        return new self($message, self::ERROR_CODE_EMPTY);
+        return new static('', $offset, $message, self::ERROR_CODE_EMPTY);
     }
 
     /**
      * Occurs when a tag name contains only the "@" character.
      */
-    public static function fromEmptyTagName(): self
+    public static function fromEmptyTagName(ReadableInterface|string $source, int $offset = 0): self
     {
         $message = 'Tag name cannot be empty';
 
-        return new self($message, self::ERROR_CODE_EMPTY_NAME);
+        return new self($source, $offset, $message, self::ERROR_CODE_EMPTY_NAME);
     }
 
     /**
      * Occurs when a tag name does not start with the "@" character.
      */
-    public static function fromInvalidTagPrefix(): self
+    public static function fromInvalidTagPrefix(ReadableInterface|string $source, int $offset = 0): self
     {
         $message = 'The tag name must starts with the "@" character';
 
-        return new self($message, self::ERROR_CODE_INVALID_PREFIX);
+        return new self($source, $offset, $message, self::ERROR_CODE_INVALID_PREFIX);
     }
 }

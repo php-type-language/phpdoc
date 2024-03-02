@@ -1,8 +1,0 @@
-/**
- * @param array<string>|null|string $search
- * @param int $format
- * @param int $chunk_size
- * @param int $list
- *
- * @return void
- */

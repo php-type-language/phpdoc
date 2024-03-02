@@ -1,3 +1,0 @@
-/**
- * @return ($value is string ? true : false)
- */

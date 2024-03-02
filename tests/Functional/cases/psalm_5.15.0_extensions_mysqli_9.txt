@@ -1,3 +1,0 @@
-/**
- * @var non-empty-string
- */

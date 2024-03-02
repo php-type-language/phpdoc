@@ -1,4 +1,0 @@
-/**
- * @param TIterator $iterator
- * @param int-mask-of<self::*> $flags
- */

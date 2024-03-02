@@ -1,3 +1,0 @@
-/**
- * @property-read int $length
- */

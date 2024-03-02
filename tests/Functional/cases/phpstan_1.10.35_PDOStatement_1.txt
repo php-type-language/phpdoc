@@ -1,6 +1,0 @@
-/**
- * @template T of object
- * @param class-string<T> $class
- * @param array<mixed> $ctorArgs
- * @return false|T
- */

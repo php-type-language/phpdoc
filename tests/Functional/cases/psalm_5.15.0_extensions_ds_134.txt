@@ -1,4 +1,0 @@
-/**
- * @param TValue ...$values
- * @psalm-mutation-free
- */

@@ -1,5 +1,0 @@
-/**
- * @param TKey $key
- * @param TValue $value
- * @return void
- */

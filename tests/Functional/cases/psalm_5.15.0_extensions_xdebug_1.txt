@@ -1,3 +1,0 @@
-/**
- * @param array<int, string> $configuration
- */

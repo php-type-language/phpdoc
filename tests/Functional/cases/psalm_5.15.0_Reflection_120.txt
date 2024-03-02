@@ -1,3 +1,0 @@
-/**
- * @psalm-assert-if-true string $this->getDefaultValueConstantName()
- */

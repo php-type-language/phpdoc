@@ -1,9 +1,0 @@
-/**
- * Unsets the value at the specified index
- * @link http://php.net/manual/en/arrayobject.offsetunset.php
- *
- * @param TKey $index The index being unset.
- * @return void
- *
- * @since 5.0.0
- */

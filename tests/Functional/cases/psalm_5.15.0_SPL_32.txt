@@ -1,7 +1,0 @@
-/**
- * The SplQueue class provides the main functionalities of a queue implemented using a doubly linked list.
- * @link https://php.net/manual/en/class.splqueue.php
- *
- * @template TValue
- * @template-extends SplDoublyLinkedList<TValue>
- */

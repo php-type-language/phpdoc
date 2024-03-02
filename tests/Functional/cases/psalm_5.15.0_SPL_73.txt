@@ -1,9 +1,0 @@
-/**
- * Checks if the storage contains a specific object
- * @link https://php.net/manual/en/splobjectstorage.contains.php
- *
- * @param TObject $object The object to look for.
- * @return bool true if the object is in the storage, false otherwise.
- *
- * @since 5.1.0
- */

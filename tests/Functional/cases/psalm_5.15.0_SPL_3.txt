@@ -1,8 +1,0 @@
-/**
- * Shifts a node from the beginning of the doubly linked list
- * @link https://php.net/manual/en/spldoublylinkedlist.shift.php
- *
- * @return TValue The value of the shifted node.
- *
- * @since 5.3.0
- */

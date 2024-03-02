@@ -1,3 +1,0 @@
-/**
- * @return string|int|float|\FFI\CData|null
- */

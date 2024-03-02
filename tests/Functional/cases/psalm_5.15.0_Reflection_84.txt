@@ -1,5 +1,0 @@
-/**
- * @since 7.4
- * @psalm-assert-if-true ReflectionType $this->getType()
- * @psalm-pure
- */

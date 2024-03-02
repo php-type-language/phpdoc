@@ -1,4 +1,0 @@
-/**
- * @param TKey $index The offset to unset.
- * @return void
- */

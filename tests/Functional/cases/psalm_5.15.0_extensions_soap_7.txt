@@ -1,6 +1,0 @@
-/**
- * Returns the SOAP headers from the last response
- * @link https://php.net/manual/en/soapclient.getlastresponseheaders.php
- * @return string|null The last SOAP response headers.
- * @since 5.0.1
- */

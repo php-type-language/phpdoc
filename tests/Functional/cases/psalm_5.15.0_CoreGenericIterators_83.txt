@@ -1,3 +1,0 @@
-/**
- * @template-extends SeekableIterator<string, GlobIterator|SplFileInfo|string>
- */

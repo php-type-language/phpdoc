@@ -1,4 +1,0 @@
-/**
- * @implements RecursiveIterator<string, SimpleXMLElement>
- * @php-from 8.0
- */

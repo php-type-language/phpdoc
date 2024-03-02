@@ -1,4 +1,0 @@
-/**
- * Inherited from DOMNode, but always non-null
- * @readonly
- */

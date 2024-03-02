@@ -1,4 +1,0 @@
-/**
- * @param positive-int $length
- * @return non-empty-string
- */

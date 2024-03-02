@@ -1,8 +1,0 @@
-/**
- * @param mixed $war
- * @param mixed $vars
- * @param-out string|int|float|null $war
- * @param-out string|int|float|null $vars
- *
- * @return int|array<mixed>|null
- */

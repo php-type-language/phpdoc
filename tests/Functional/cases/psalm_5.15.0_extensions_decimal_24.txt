@@ -1,6 +1,0 @@
-/**
- * Exponent
- *
- * @return Decimal the exponent of this decimal, ie. e to the power of this,
- *                 with the same precision as this decimal.
- */

@@ -1,3 +1,0 @@
-/**
- * @return RecursiveIterator<TKey, TValue> An iterator for the current entry.
- */

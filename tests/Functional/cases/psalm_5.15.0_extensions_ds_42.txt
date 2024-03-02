@@ -1,7 +1,0 @@
-/**
- * @template TKey2
- * @template TValue2
- * @param iterable<TKey2, TValue2> $values
- * @return Map<TKey|TKey2, TValue|TValue2>
- * @psalm-mutation-free
- */

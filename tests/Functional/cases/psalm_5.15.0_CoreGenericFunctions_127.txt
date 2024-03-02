@@ -1,8 +1,0 @@
-/**
- * @psalm-pure
- *
- * @psalm-flow ($string) -> return
- * @template T as string
- * @param T $string
- * @return (T is non-empty-string ? non-empty-string : string)
- */

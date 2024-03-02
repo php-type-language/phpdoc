@@ -1,8 +1,0 @@
-/**
- * Return current array entry
- * @link https://php.net/manual/en/spldoublylinkedlist.current.php
- *
- * @return TValue The current node value.
- *
- * @since 5.3.0
- */

@@ -1,5 +1,0 @@
-/**
- * @param TSend $value
- * @psalm-ignore-nullable-return
- * @return ?TValue Can return any type.
- */

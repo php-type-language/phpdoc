@@ -1,9 +1,0 @@
-/**
- * @param mixed $value
- * @param bool $return
- * @return ($return is true ? string : void)
- *
- * @psalm-taint-specialize
- * @psalm-flow ($value) -> return
- * @psalm-taint-sink html $value
- */

@@ -1,4 +1,0 @@
-/**
- * @return list<TValue>
- * @psalm-mutation-free
- */

@@ -1,5 +1,0 @@
-/**
- * @template-covariant T as object
- *
- * @property-read class-string<T> $name
- */

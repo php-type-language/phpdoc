@@ -1,5 +1,0 @@
-/**
- * @template TValue2
- * @param Map<TKey, TValue2> $map
- * @return Map<TKey, TValue>
- */

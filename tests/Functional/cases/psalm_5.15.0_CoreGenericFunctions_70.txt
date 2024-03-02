@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- *
- * @psalm-taint-escape html
- * @psalm-taint-escape has_quotes
- * @psalm-flow ($string) -> return
- */

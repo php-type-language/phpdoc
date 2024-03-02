@@ -1,4 +1,0 @@
-/**
- * Notes that an attribute declaration in the same place is
- * allowed multiple times.
- */

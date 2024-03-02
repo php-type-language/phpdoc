@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDoc\Parser;
+namespace TypeLang\PHPDoc;
 
 use JetBrains\PhpStorm\Language;
 

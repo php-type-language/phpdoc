@@ -1,5 +1,0 @@
-/**
- * PHP 8.2 introduces a new PHP extension named "random".
- * @see https://github.com/php/php-src/blob/master/ext/random/random.stub.php
- * @see https://php.watch/versions/8.2/ext-random
- */

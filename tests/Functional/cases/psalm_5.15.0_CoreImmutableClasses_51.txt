@@ -1,4 +1,0 @@
-/**
- * @psalm-mutation-free
- * @return list<array{file?:string,line?:int,function?:string,class?:class-string,type?:'::'|'->',args?:array<mixed>}>
- */

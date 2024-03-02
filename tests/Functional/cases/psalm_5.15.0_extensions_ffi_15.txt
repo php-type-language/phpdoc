@@ -1,4 +1,0 @@
-/**
- * @param mixed|null $value
- * @return void
- */

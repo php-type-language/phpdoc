@@ -1,7 +1,0 @@
-/**
- * @template-covariant TKey
- * @template-covariant TValue
- * @template TIterator as Traversable<TKey, TValue>
- *
- * @extends FilterIterator<TKey, TValue, TIterator>
- */

@@ -1,5 +1,0 @@
-/**
- * Number of days
- * @var int
- * @readonly
- */

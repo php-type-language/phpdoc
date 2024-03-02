@@ -1,5 +1,0 @@
-/**
- * @param self::PREFIX_* $part
- * @param string $value
- * @return void
- */

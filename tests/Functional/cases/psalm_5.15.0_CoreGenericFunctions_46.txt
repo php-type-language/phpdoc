@@ -1,9 +1,0 @@
-/**
- * @psalm-pure
- *
- * @return (
- *     func_num_args() is 1
- *     ? array{dirname: string, basename: string, extension?: string, filename: string}
- *     : string
- * )
- */

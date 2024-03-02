@@ -1,4 +1,0 @@
-/**
- * @return list<interface-string>
- * @psalm-pure
- */

@@ -2,126 +2,150 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDoc\Parser;
+namespace TypeLang\PHPDoc;
 
-use TypeLang\Parser\Parser;
-use TypeLang\PhpDoc\Parser\Description\SprintfDescriptionFactory;
-use TypeLang\PhpDoc\Parser\DocBlock\Description;
-use TypeLang\PhpDoc\Parser\Description\DescriptionFactoryInterface;
-use TypeLang\PhpDoc\Parser\DocBlock\Registry;
-use TypeLang\PhpDoc\Parser\DocBlock\RegistryInterface;
-use TypeLang\PhpDoc\Parser\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDoc\Parser\DocBlock\TagFactoryInterface;
 use JetBrains\PhpStorm\Language;
-use TypeLang\PhpDoc\Parser\Provider\StandardTagProvider;
+use Phplrt\Contracts\Lexer\LexerExceptionInterface;
+use Phplrt\Contracts\Lexer\LexerRuntimeExceptionInterface;
+use Phplrt\Contracts\Source\SourceExceptionInterface;
+use TypeLang\PHPDoc\Exception\ParsingException;
+use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
+use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
+use TypeLang\PHPDoc\Parser\Comment\LexerAwareCommentParser;
+use TypeLang\PHPDoc\Parser\Comment\Segment;
+use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
+use TypeLang\PHPDoc\Parser\SourceMap;
+use TypeLang\PHPDoc\Parser\Tag\TagParser;
+use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
+use TypeLang\PHPDoc\Tag\MutableRepositoryInterface;
+use TypeLang\PHPDoc\Tag\Repository;
+use TypeLang\PHPDoc\Tag\RepositoryInterface;
 
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
  */
 class DocBlockFactory implements DocBlockFactoryInterface
 {
-    /**
-     * @param TagFactoryInterface<TagInterface> $tags
-     */
-    final public function __construct(
-        public readonly DescriptionFactoryInterface $descriptions,
-        public readonly TagFactoryInterface $tags,
-    ) {}
+    private readonly CommentParserInterface $comment;
 
-    protected static function createDescriptionFactory(TagFactoryInterface $tags): DescriptionFactoryInterface
+    private readonly DescriptionParserInterface $description;
+
+    private readonly MutableRepositoryInterface $tags;
+
+    private readonly TagParserInterface $parser;
+
+    public function __construct(?RepositoryInterface $tags = null)
     {
-        return new SprintfDescriptionFactory($tags);
+        $this->comment = new LexerAwareCommentParser();
+        $this->description = new SprintfDescriptionReader();
+
+        $this->tags = $this->createRepository($tags);
+        $this->parser = new TagParser($this->tags);
     }
 
-    protected static function createRegistry(): RegistryInterface
+    private function createRepository(?RepositoryInterface $tags): MutableRepositoryInterface
     {
-        return new Registry();
-    }
-
-    public static function createInstance(?Parser $parser = null): self
-    {
-        $descriptions = static::createDescriptionFactory(
-            tags: $tags = static::createRegistry(),
-        );
-
-        $tags->setDescriptionFactory($descriptions);
-
-        // Load standard tags
-        $provider = new StandardTagProvider($parser ?? new Parser(true));
-
-        foreach ($provider->getTags() as $tag => $factory) {
-            if ($factory->getDescriptionFactory() === null) {
-                $factory = $factory->withDescriptionFactory($descriptions);
-            }
-
-            $tags->add($factory, ...(array)$tag);
+        if ($tags instanceof MutableRepositoryInterface) {
+            return $tags;
         }
 
-        return new static($descriptions, $tags);
+        return new Repository($tags);
     }
 
+    /**
+     * @throws RuntimeExceptionInterface
+     */
     public function create(#[Language('PHP')] string $docblock): DocBlock
     {
-        $docblock = $this->stripDocComment($docblock);
-        $docblock = $this->normalizeLineDelimiters($docblock);
+        $mapper = new SourceMap();
 
-        [$description, $tags] = $this->splitByDocBlockTags($docblock);
+        try {
+            /** @var Segment $segment */
+            foreach ($result = $this->analyze($docblock) as $segment) {
+                $mapper->add($segment->offset, $segment->text);
+            }
+        } catch (RuntimeExceptionInterface $e) {
+            throw $e->withSource(
+                source: $docblock,
+                offset: $mapper->getOffset($e->getOffset()),
+            );
+        } catch (\Throwable $e) {
+            throw ParsingException::fromInternalError(
+                source: $docblock,
+                offset: $mapper->getOffset(0),
+                e: $e,
+            );
+        }
+
+        return $result->getReturn();
+    }
+
+    /**
+     * @return \Generator<array-key, Segment, void, DocBlock>
+     *
+     * @throws LexerExceptionInterface
+     * @throws LexerRuntimeExceptionInterface
+     * @throws RuntimeExceptionInterface
+     * @throws SourceExceptionInterface
+     */
+    private function analyze(string $docblock): \Generator
+    {
+        yield from $blocks = $this->groupByCommentSections($docblock);
+
+        $description = null;
+        $tags = [];
+        $offset = 0;
+
+        foreach ($blocks->getReturn() as $block) {
+            try {
+                if ($description === null) {
+                    $description = $this->description->parse($block, $this->parser);
+                } else {
+                    $tags[] = $this->parser->parse($block);
+                }
+            } catch (RuntimeExceptionInterface $e) {
+                throw $e->withSource(
+                    source: $docblock,
+                    offset: $offset + $e->getOffset(),
+                );
+            } catch (\Throwable $e) {
+                throw ParsingException::fromInternalError(
+                    source: $docblock,
+                    offset: $offset,
+                    e: $e,
+                );
+            }
+
+            $offset += \strlen($block);
+        }
 
         return new DocBlock($description, $tags);
     }
 
     /**
-     * @return array{Description, list<TagInterface>}
+     * @return \Generator<array-key, Segment, void, non-empty-list<string>>
+     *
+     * @throws LexerExceptionInterface
+     * @throws LexerRuntimeExceptionInterface
+     * @throws SourceExceptionInterface
      */
-    private function splitByDocBlockTags(string $docblock): array
+    private function groupByCommentSections(string $docblock): \Generator
     {
-        $description = '';
-        $tags = [];
+        $current = '';
+        $blocks = [];
 
-        foreach (\explode("\n@", $docblock) as $i => $tag) {
-            if ($i === 0) {
-                if (\str_starts_with($tag, '@')) {
-                    $tags[] = $this->tags->create($tag);
-                } else {
-                    $description = $tag;
-                }
+        foreach ($this->comment->parse($docblock) as $segment) {
+            yield $segment;
 
-                continue;
+            if (\str_starts_with($segment->text, '@')) {
+                $blocks[] = $current;
+                $current = '';
             }
 
-            if (\str_starts_with($tag, ' ')) {
-                $description .= "\n@{$tag}";
-                continue;
-            }
-
-            $tags[] = $this->tags->create("@{$tag}");
+            $current .= $segment->text;
         }
 
-        return [$this->descriptions->create($description), $tags];
-    }
-
-    private function normalizeLineDelimiters(string $docblock): string
-    {
-        return \str_replace(["\r\n", "\r"], "\n", $docblock);
-    }
-
-    private function stripDocComment(string $docblock): string
-    {
-        if ($docblock === '') {
-            return '';
-        }
-
-        $docblock = \preg_replace(
-            pattern: '/[ \t]*(?:\/\*+|\*+\/|\*+)?[ \t]?(.*)?/u',
-            replacement: '$1',
-            subject: $docblock,
-        )
-            ?: $docblock;
-
-        if (\str_ends_with($docblock, '*/')) {
-            $docblock = \substr($docblock, 0, -2);
-        }
-
-        return \trim($docblock);
+        return [...$blocks, $current];
     }
 }

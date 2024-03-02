@@ -1,4 +1,0 @@
-/**
- * @param \FFI\CData|\FFI\CType $ptr
- * @return int<0,max>
- */

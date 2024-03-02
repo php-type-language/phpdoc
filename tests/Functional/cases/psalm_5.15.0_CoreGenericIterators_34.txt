@@ -1,3 +1,0 @@
-/**
- * @return int-mask-of<self::*> The current flags.
- */

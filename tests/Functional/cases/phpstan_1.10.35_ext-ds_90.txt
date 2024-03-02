@@ -1,5 +1,0 @@
-/**
- * @template TNewValue
- * @param callable(TValue): TNewValue $callback
- * @return Set<TNewValue>
- */

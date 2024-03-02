@@ -1,4 +1,0 @@
-/**
- * @return FilesystemIterator|SplFileInfo|string|null
- * @psalm-ignore-nullable-return
- */

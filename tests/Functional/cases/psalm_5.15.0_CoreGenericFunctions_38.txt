@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- *
- * @psalm-taint-sink file $filename
- * @param mixed $filename
- * @return ($return is true ? string : bool)
- */

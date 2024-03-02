@@ -1,4 +1,0 @@
-/**
- * @return Vector<TValue>
- * @psalm-mutation-free
- */

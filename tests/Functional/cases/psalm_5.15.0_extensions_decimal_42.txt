@@ -1,3 +1,0 @@
-/**
- * @return bool TRUE if this decimal is not a defined number.
- */

@@ -1,5 +1,0 @@
-/**
- * @param list<mixed> $args
- *
- * @return T
- */

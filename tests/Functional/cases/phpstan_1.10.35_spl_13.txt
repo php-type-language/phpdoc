@@ -1,5 +1,0 @@
-/**
- * @param TPriority $priority1
- * @param TPriority $priority2
- * @return int
- */

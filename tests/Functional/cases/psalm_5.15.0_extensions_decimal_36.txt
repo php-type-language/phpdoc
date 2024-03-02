@@ -1,5 +1,0 @@
-/**
- * Absolute
- *
- * @return Decimal the absolute (positive) value of this decimal.
- */

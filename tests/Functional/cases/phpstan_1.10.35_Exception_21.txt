@@ -1,4 +1,0 @@
-/**
- * @return string
- * @throws void
- */

@@ -1,9 +1,0 @@
-/**
- * Gets the iterator classname for the ArrayObject.
- * @link http://php.net/manual/en/arrayobject.getiteratorclass.php
- *
- * @return string the iterator class name that is used to iterate over this object.
- * @psalm-return class-string<ArrayIterator<TKey,TValue>>|class-string<ArrayObject<TKey,TValue>>
- *
- * @since 5.1.0
- */

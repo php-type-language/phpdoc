@@ -1,5 +1,0 @@
-/**
- * @psalm-template TKey of int|string
- * @psalm-template TValue
- * $psalm-implements \Iterator<TKey, TValue>
- */

@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- * @template T as string
- * @param T $needle
- * @psalm-assert-if-true =(T is '' ? string : non-empty-string) $haystack
- * @return ($needle is '' ? true : ($haystack is '' ? false : bool))
- */

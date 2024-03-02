@@ -1,4 +1,0 @@
-/**
- * @template TValue
- * @template-implements IteratorAggregate<string, TValue>
- */

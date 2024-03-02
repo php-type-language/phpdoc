@@ -1,8 +1,0 @@
-/**
- * @template-covariant TKey
- * @template-covariant TValue
- * @template TSend
- * @template-covariant TReturn
- *
- * @template-implements Traversable<TKey, TValue>
- */

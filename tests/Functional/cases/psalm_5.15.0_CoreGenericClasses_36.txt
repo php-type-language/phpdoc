@@ -1,8 +1,0 @@
-/**
- * Create a new iterator from an ArrayObject instance
- * @link http://php.net/manual/en/arrayobject.getiterator.php
- *
- * @return ArrayIterator<TKey, TValue> An iterator from an ArrayObject.
- *
- * @since 5.0.0
- */

@@ -1,3 +1,0 @@
-/**
- * @return array<string, array<int, int>>
- */

@@ -1,3 +1,0 @@
-/**
- * @return int-mask<self::CURRENT_AS_PATHNAME,self::CURRENT_AS_FILEINFO,self::CURRENT_AS_SELF,self::KEY_AS_PATHNAME,self::KEY_AS_FILENAME,self::FOLLOW_SYMLINKS,self::NEW_CURRENT_AND_KEY,self::SKIP_DOTS,self::UNIX_PATH>
- */

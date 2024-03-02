@@ -1,5 +1,0 @@
-/**
- * Number of seconds
- * @var int
- * @readonly
- */

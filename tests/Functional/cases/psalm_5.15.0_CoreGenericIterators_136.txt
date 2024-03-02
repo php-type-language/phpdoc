@@ -1,4 +1,0 @@
-/**
- * @template-implements RecursiveIterator<string, RecursiveDirectoryIterator|string|SplFileInfo>
- * @template-implements SeekableIterator<string, RecursiveDirectoryIterator|string|SplFileInfo>
- */

@@ -1,6 +1,0 @@
-/**
- * @template TPriority
- * @template TValue
- *
- * @implements \Iterator<int, TValue>
- */

@@ -1,4 +1,0 @@
-/**
- * @return Set<TKey>
- * @psalm-mutation-free
- */

@@ -1,8 +1,0 @@
-/**
- * @template-covariant TKey
- * @template-covariant TValue
- * @template TIterator as Iterator<TKey, TValue>
- *
- * @template-implements OuterIterator<TKey, TValue>
- * @template-extends IteratorIterator<TKey, TValue, TIterator>
- */

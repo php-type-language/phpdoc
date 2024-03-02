@@ -1,3 +1,0 @@
-/**
- * Entries can be accessed as properties (read and write).
- */

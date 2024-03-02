@@ -1,9 +1,0 @@
-/**
- * @template TKey as (int|string)
- * @template T
- * @template TArray as array<TKey,T>
- *
- * @param TArray $array
- * @param callable(T,T):int $callback
- * @param-out (TArray is non-empty-array ? non-empty-array<TKey,T> : array<TKey,T>) $array
- */

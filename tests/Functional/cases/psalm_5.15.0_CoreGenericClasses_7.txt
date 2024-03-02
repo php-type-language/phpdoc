@@ -1,3 +1,0 @@
-/**
- * @return TReturn Can return any type.
- */

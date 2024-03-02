@@ -1,9 +1,0 @@
-/**
- * Checks whether an object exists in the storage
- * @link https://php.net/manual/en/splobjectstorage.offsetexists.php
- *
- * @param TObject $object The object to look for.
- * @return bool true if the object exists in the storage, and false otherwise.
- *
- * @since 5.3.0
- */

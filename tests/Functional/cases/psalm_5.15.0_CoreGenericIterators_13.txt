@@ -1,5 +1,0 @@
-/**
- * @template-covariant TKey
- * @template-covariant TValue
- * @template-extends Iterator<TKey, TValue>
- */

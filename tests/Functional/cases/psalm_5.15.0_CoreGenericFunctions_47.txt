@@ -1,5 +1,0 @@
-/**
- * @psalm-pure
- *
- * @return (func_num_args() is 0 ? array<string, string> : string|false)
- */

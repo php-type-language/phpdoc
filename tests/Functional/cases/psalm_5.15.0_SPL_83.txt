@@ -1,8 +1,0 @@
-/**
- * Returns the current storage entry
- * @link https://php.net/manual/en/splobjectstorage.current.php
- *
- * @return TObject The object at the current iterator position.
- *
- * @since 5.1.0
- */

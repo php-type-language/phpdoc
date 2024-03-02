@@ -1,6 +1,0 @@
-/**
- * @see https://github.com/phpredis/phpredis/blob/develop/redis.stub.php
- * @see https://github.com/phpredis/phpredis/blob/develop/redis_array.stub.php
- * @see https://github.com/phpredis/phpredis/blob/develop/redis_cluster.stub.php
- * @see https://github.com/phpredis/phpredis/blob/develop/redis_sentinel.stub.php
- */

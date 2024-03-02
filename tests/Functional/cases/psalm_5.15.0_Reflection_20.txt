@@ -1,6 +1,0 @@
-/**
- * @return mixed
- *
- * @psalm-pure
- * @throws ReflectionException
- */

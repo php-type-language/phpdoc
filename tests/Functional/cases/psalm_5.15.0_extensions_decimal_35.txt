@@ -1,6 +1,0 @@
-/**
- * Parity (integer)
- *
- * @return int 0 if the integer value of this decimal is even, 1 if odd.
- *             Special numbers like NAN and INF will return 1.
- */

@@ -1,1 +1,0 @@
-/** @var non-empty-string $name */

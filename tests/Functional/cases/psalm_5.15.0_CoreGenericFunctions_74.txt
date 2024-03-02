@@ -1,7 +1,0 @@
-/**
- * @psalm-pure
- *
- * @return ($string is non-empty-string ? non-empty-string : ($length is positive-int ? non-empty-string: string))
- *
- * @psalm-flow ($string, $pad_string) -> return
- */

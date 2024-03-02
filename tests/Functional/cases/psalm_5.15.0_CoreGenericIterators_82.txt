@@ -1,4 +1,0 @@
-/**
- * @return string|null
- * @psalm-ignore-nullable-return
- */

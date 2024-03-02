@@ -1,9 +1,0 @@
-/**
- * @psalm-pure
- *
- * @param string|int|float $values
- * @return (PHP_MAJOR_VERSION is 8 ? string : string|false)
- * @psalm-ignore-falsable-return
- *
- * @psalm-flow ($format, $values) -> return
- */

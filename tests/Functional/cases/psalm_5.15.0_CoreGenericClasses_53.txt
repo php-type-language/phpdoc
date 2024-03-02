@@ -1,5 +1,0 @@
-/**
- * Number of years
- * @var int
- * @readonly
- */

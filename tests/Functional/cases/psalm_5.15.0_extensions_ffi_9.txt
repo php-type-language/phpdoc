@@ -1,3 +1,0 @@
-/**
- * @param int<0,max>|null $size
- */

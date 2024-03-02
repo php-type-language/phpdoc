@@ -1,8 +1,0 @@
-/**
- * Returns a PHP array from the fixed array
- * @link https://php.net/manual/en/splfixedarray.toarray.php
- *
- * @return array<int, TValue>
-
- * @since 5.3.0
- */

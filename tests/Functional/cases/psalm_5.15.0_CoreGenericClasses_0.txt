@@ -1,7 +1,0 @@
-/**
- * Interface to detect if a class is traversable using &foreach;.
- * @link http://php.net/manual/en/class.traversable.php
- *
- * @template-covariant TKey
- * @template-covariant TValue
- */

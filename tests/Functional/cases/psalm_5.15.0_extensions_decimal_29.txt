@@ -1,5 +1,0 @@
-/**
- * Truncate
- *
- * @return Decimal the integer value of this decimal.
- */

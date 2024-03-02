@@ -1,4 +1,0 @@
-/**
- * @since 8.1.0
- * @return self::TYPE_UINT32|self::TYPE_UINT64
- */

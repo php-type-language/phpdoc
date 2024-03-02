@@ -1,4 +1,0 @@
-/**
- * @param string $string
- * @param-out null $string
- */

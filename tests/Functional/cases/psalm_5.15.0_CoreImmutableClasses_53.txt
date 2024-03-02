@@ -1,4 +1,0 @@
-/**
- * @psalm-mutation-free
- * @psalm-taint-source input
- */

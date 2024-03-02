@@ -1,5 +1,0 @@
-/**
- * Number of months
- * @var int
- * @readonly
- */

@@ -1,7 +1,0 @@
-/**
- * @template TObject of object
- * @template TData
- *
- * @template-implements Iterator<int, TObject>
- * @template-implements ArrayAccess<TObject, TData>
- */

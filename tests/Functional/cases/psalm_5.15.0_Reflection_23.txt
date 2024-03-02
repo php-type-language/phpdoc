@@ -1,6 +1,0 @@
-/**
- * @param int-mask-of<ReflectionClassConstant::IS_*>|null $filter
- * @return list<ReflectionClassConstant>
- *
- * @psalm-pure
- */

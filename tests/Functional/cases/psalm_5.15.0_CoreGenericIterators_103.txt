@@ -1,4 +1,0 @@
-/**
- * @param Iterator<TKey,TValue> $iterator
- * @return void
- */

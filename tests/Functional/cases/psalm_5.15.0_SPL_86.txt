@@ -1,8 +1,0 @@
-/**
- * Serializes the storage
- * @link https://php.net/manual/en/splobjectstorage.serialize.php
- *
- * @return string A string representing the storage.
- *
- * @since 5.2.2
- */

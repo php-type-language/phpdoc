@@ -1,5 +1,0 @@
-/**
- * Starting from PHP 8.1, this method is pure, and has no effect.
- *
- * @psalm-pure
- */

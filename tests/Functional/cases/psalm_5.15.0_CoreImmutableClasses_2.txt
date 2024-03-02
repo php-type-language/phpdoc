@@ -1,4 +1,0 @@
-/**
- * @psalm-mutation-free
- * @return DateTimeZone
- */

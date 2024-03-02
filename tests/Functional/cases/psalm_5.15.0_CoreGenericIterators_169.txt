@@ -1,3 +1,0 @@
-/**
- * @return TKey scalar on success, or null on failure.
- */

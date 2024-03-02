@@ -1,3 +1,0 @@
-/**
- * Marks that attribute declaration is allowed anywhere.
- */

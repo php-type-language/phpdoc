@@ -1,5 +1,0 @@
-/**
- * @param callable-string|Closure $function
- *
- * @psalm-pure
- */

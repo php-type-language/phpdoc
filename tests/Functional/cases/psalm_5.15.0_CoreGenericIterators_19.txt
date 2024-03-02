@@ -1,7 +1,0 @@
-/**
- * @template TKey
- * @template TValue
- * @template TIterator as Iterator<TKey, TValue>
- *
- * @template-extends IteratorIterator<TKey, TValue, TIterator>
- */

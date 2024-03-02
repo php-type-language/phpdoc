@@ -1,8 +1,0 @@
-/**
- * @psalm-taint-sink callable $class
- *
- * @template T of object
- * @param class-string<T> $class
- * @param array $ctorArgs
- * @return false|T
- */

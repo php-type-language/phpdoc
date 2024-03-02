@@ -1,1 +1,0 @@
-/** @return int-mask-of<self::IS_*> */

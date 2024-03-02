@@ -1,4 +1,0 @@
-/**
- * @param TObject $offset
- * @return TData
- */

@@ -1,8 +1,0 @@
-/**
- * @psalm-pure
- *
- * @param scalar|null|object $value
- * @return string The string value of var.
- *
- * @psalm-flow ($value) -> return
- */

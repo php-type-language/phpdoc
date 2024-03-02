@@ -1,5 +1,0 @@
-/**
- * @template TValue
- * @implements \Iterator<int, TValue>
- * @implements \ArrayAccess<int, TValue>
- */

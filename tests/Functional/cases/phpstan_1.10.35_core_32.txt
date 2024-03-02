@@ -1,5 +1,0 @@
-/**
- * @param-out int $error_code
- * @param-out string $error_message
- * @return resource|false
- */

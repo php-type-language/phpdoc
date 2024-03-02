@@ -1,5 +1,0 @@
-/**
- * Number of minutes
- * @var int
- * @readonly
- */

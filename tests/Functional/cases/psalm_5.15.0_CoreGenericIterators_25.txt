@@ -1,6 +1,0 @@
-/**
- * @template TKey as array-key
- * @template TValue
- * @template-implements SeekableIterator<TKey, TValue>
- * @template-implements ArrayAccess<TKey, TValue>
- */

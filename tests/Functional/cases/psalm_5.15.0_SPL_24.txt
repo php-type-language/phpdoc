@@ -1,8 +1,0 @@
-/**
- * Returns current array index
- * @link https://php.net/manual/en/splfixedarray.key.php
- *
- * @return int The current array index
- *
- * @since 5.3.0
- */

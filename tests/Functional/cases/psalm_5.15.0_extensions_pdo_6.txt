@@ -1,5 +1,0 @@
-/**
- * @template TValue
- *
- * @template-implements Traversable<int, TValue>
- */

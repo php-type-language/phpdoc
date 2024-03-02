@@ -1,3 +1,0 @@
-/**
- * @return bool true if the current entry can be iterated over, otherwise returns false.
- */

@@ -1,8 +1,0 @@
-/**
- * Move to the next entry
- * @link https://php.net/manual/en/splfixedarray.next.php
- *
- * @return void
- *
- * @since 5.3.0
- */

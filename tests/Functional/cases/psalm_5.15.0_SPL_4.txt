@@ -1,9 +1,0 @@
-/**
- * Pushes an element at the end of the doubly linked list
- * @link https://php.net/manual/en/spldoublylinkedlist.push.php
- *
- * @param TValue $value The value to push.
- * @return void
- *
- * @since 5.3.0
- */

@@ -1,4 +1,0 @@
-/**
- * @param (callable(TValue, TValue): int)|null $comparator
- * @return Sequence<TValue>
- */

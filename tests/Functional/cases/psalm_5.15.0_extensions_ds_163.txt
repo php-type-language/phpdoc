@@ -1,4 +1,0 @@
-/**
- * @return Queue<TValue>
- * @psalm-mutation-free
- */

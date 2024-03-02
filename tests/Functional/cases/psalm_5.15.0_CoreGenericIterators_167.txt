@@ -1,7 +1,0 @@
-/**
- * @param TIterator $iterator
- * @param string $regex
- * @param self::MATCH|self::GET_MATCH|self::ALL_MATCHES|self::SPLIT|self::REPLACE $mode
- * @param int-mask<self::USE_KEY> $flags
- * @param int $preg_flags
- */

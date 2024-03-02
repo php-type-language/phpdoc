@@ -1,5 +1,0 @@
-/**
- * @template TValue2
- * @param iterable<TValue2> $values
- * @return Sequence<TValue|TValue2>
- */

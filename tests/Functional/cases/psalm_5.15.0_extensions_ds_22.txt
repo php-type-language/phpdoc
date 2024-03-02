@@ -1,6 +1,0 @@
-/**
- * @template TValue2
- * @param iterable<TValue2> $values
- * @return Deque<TValue|TValue2>
- * @psalm-mutation-free
- */

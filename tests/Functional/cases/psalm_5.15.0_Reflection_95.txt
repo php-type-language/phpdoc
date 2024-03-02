@@ -1,5 +1,0 @@
-/**
- * @return mixed
- *
- * @psalm-pure
- */

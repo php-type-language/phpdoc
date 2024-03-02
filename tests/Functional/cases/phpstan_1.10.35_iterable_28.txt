@@ -1,8 +1,0 @@
-/**
- * @template-covariant TKey
- * @template-covariant TValue
- * @template TIterator as Traversable<TKey, TValue>
- *
- * @extends CallbackFilterIterator<TKey, TValue, TIterator>
- * @implements RecursiveIterator<TKey, TValue>
- */

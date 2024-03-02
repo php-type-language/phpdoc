@@ -1,3 +1,0 @@
-/**
- * @return TPriority|TValue|array{priority: TPriority, data: TValue}
- */

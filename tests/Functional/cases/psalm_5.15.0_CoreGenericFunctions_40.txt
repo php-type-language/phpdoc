@@ -1,8 +1,0 @@
-/**
- * @psalm-pure
- *
- * @param mixed $string
- * @return ($return is true ? string : bool)
- *
- * @psalm-flow ($string) -> return
- */

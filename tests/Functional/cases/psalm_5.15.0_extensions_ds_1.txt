@@ -1,4 +1,0 @@
-/**
- * @return Collection<TKey, TValue>
- * @psalm-mutation-free
- */

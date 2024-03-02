@@ -1,8 +1,0 @@
-/**
- * Tells if the heap is in a corrupted state
- * @link https://php.net/manual/en/splheap.isCorrupted.php
- *
- * @return bool true if the heap is corrupted, false otherwise.
- *
- * @since 7.0.0
- */

@@ -1,3 +1,0 @@
-/**
- * Extract the data
- */

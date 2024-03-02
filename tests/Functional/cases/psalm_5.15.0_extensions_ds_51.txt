@@ -1,4 +1,0 @@
-/**
- * @return Sequence<Pair<TKey, TValue>>
- * @psalm-mutation-free
- */

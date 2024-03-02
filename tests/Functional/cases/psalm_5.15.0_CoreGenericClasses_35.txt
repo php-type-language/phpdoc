@@ -1,8 +1,0 @@
-/**
- * Serialize an ArrayObject
- * @link http://php.net/manual/en/arrayobject.serialize.php
- *
- * @return string The serialized representation of the ArrayObject.
- *
- * @since 5.3.0
- */

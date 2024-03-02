@@ -1,4 +1,0 @@
-/**
- * @return DOMDocumentFragment|false
- * @psalm-ignore-falsable-return
- */

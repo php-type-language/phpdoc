@@ -1,4 +1,0 @@
-/**
- * @return DOMAttr|DOMNameSpaceNode|false
- * @psalm-ignore-falsable-return
- */

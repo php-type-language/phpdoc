@@ -1,4 +1,0 @@
-/**
- * @param array<array-key, mixed> $value
- * @return ($value is __always-list ? true : false)
- */

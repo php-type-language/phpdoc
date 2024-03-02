@@ -1,4 +1,0 @@
-/**
- * @return TNode|null
- * @psalm-ignore-nullable-return
- */

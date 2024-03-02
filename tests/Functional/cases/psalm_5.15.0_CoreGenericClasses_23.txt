@@ -1,9 +1,0 @@
-/**
- * Appends the value
- * @link http://php.net/manual/en/arrayobject.append.php
- *
- * @param TValue $value The value being appended.
- * @return void
- *
- * @since 5.0.0
- */

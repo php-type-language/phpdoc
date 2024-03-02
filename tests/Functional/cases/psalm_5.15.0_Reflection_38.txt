@@ -1,6 +1,0 @@
-/**
- * @template J as object
- * @param self<J>|class-string<J> $class
- * @psalm-assert-if-true self<T&J> $this
- * @psalm-pure
- */

@@ -1,6 +1,0 @@
-/**
- * @template-covariant TValue of array|object
- *
- * @template-implements Iterator<int, TValue>
- * @template-implements CursorInterface<int, TValue>
- */

@@ -1,3 +1,0 @@
-/**
- * @return ($categorize is false ? array<string,int|string|float|bool|null|array|resource> : array<string, array<string,int|string|float|bool|null|array|resource>>)
- */

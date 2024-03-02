@@ -1,7 +1,0 @@
-/**
- * @template TDefault
- * @param TKey $key
- * @param TDefault $default
- * @return TValue|TDefault
- * @throws \OutOfBoundsException
- */

@@ -1,6 +1,0 @@
-/**
- * Returns last SOAP response
- * @link https://php.net/manual/en/soapclient.getlastresponse.php
- * @return string|null The last SOAP response, as an XML string.
- * @since 5.0.1
- */

@@ -1,4 +1,0 @@
-/**
- * @throws DOMException
- * @php-from 8.1
- */

@@ -1,5 +1,0 @@
-/**
- * @param string $namespaceURI
- * @param string $localName
- * @return DOMNodeList<DOMElement>
- */

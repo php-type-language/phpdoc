@@ -1,4 +1,0 @@
-/**
- * @return DOMAttr|false
- * @psalm-ignore-falsable-return
- */

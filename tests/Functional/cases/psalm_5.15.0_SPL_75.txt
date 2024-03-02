@@ -1,9 +1,0 @@
-/**
- * Removes objects contained in another storage from the current storage
- * @link https://php.net/manual/en/splobjectstorage.removeall.php
- *
- * @param SplObjectStorage<TObject, TArrayValue> $storage The storage containing the elements to remove.
- * @return void
- *
- * @since 5.3.0
- */
