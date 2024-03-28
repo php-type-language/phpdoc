@@ -5,15 +5,9 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tag;
 
 use TypeLang\Parser\Node\SerializableInterface;
-use TypeLang\PHPDoc\Tag\Definition\DefinitionInterface;
 use TypeLang\PHPDoc\Tag\Description\Description;
 
-/**
- * @template TDefinition as DefinitionInterface
- */
-interface TagInterface extends
-    SerializableInterface,
-    \Stringable
+interface TagInterface extends SerializableInterface, \Stringable
 {
     /**
      * @return non-empty-string
@@ -28,15 +22,6 @@ interface TagInterface extends
      * @psalm-immutable
      */
     public function getDescription(): Description|null;
-
-    /**
-     * Returns definition of the tag.
-     *
-     * @psalm-immutable
-     *
-     * @return TDefinition
-     */
-    public function getDefinition(): DefinitionInterface;
 
     /**
      * Magic method {@link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring}

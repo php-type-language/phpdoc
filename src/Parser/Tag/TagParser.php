@@ -5,24 +5,16 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Tag;
 
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
-use TypeLang\PHPDoc\Tag\Definition\DefinitionInterface;
-use TypeLang\PHPDoc\Tag\Definition\ParsableInterface;
-use TypeLang\PHPDoc\Tag\Definition\UnknownDefinition;
-use TypeLang\PHPDoc\Tag\RepositoryInterface;
+use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Tag;
 use TypeLang\PHPDoc\Tag\TagInterface;
-use TypeLang\PHPDoc\Tag\UnknownTag;
 
 final class TagParser implements TagParserInterface
 {
     /**
      * @var non-empty-string
      */
-    private const PATTERN_TAG = '\G@[a-zA-Z_\x80-\xff][\w\x80-\xff\-:]*';
-
-    public function __construct(
-        private readonly RepositoryInterface $tags,
-        private readonly DefinitionInterface $unknown = new UnknownDefinition(),
-    ) {}
+    private const PATTERN_TAG = '\G@[a-zA-Z_\x80-\xff\\\][\w\x80-\xff\-:\\\]*';
 
     /**
      * Read tag name from passed content.
@@ -64,6 +56,7 @@ final class TagParser implements TagParserInterface
 
     /**
      * @return array{non-empty-string, string}
+     * @throws InvalidTagNameException
      */
     private function getTagParts(string $content): array
     {
@@ -77,30 +70,18 @@ final class TagParser implements TagParserInterface
         return [$name, $content];
     }
 
-    public function parse(string $tag): TagInterface
+    /**
+     * @throws InvalidTagNameException
+     */
+    public function parse(string $tag, DescriptionParserInterface $parser = null): TagInterface
     {
         // Tag name like ["var", "example"] extracted from "@var example"
         [$name, $content] = $this->getTagParts($tag);
 
-        $definition = $this->tags->findByName($name);
-
-        if ($definition === null) {
-            return new UnknownTag(
-                definition: $this->unknown,
-                name: $name,
-                description: $content,
-            );
+        if ($parser !== null) {
+            $content = $parser->parse($content, $this);
         }
 
-        return $this->getTagFromDefinition($definition, $name, $content);
-    }
-
-    private function getTagFromDefinition(DefinitionInterface $definition, string $name, string $content): TagInterface
-    {
-        if ($definition instanceof ParsableInterface) {
-            return $definition->parse($name, $content);
-        }
-
-        dd('ToDO');
+        return new Tag($name, $content);
     }
 }

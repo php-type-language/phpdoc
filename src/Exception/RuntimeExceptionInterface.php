@@ -16,7 +16,7 @@ interface RuntimeExceptionInterface extends PHPDocExceptionInterface
      *
      * @param int<0, max> $offset
      */
-    public function withSource(ReadableInterface $source, int $offset): self;
+    public function withSource(ReadableInterface|string $source, int $offset): self;
 
     /**
      * Returns the full content in which the error occurred.

@@ -22,7 +22,7 @@ final class DocBlock implements
     use TagProvider;
 
     /**
-     * @param iterable<TagInterface> $tags
+     * @param iterable<array-key, TagInterface> $tags
      */
     public function __construct(
         private readonly DescriptionInterface $description = new Description(),
@@ -33,11 +33,8 @@ final class DocBlock implements
 
     /**
      * @return array{
-     *     description: array{
-     *         template: string,
-     *         tags: list<array>
-     *     },
-     *     tags: list<array>
+     *     description: array<array-key, mixed>,
+     *     tags: list<array<array-key, mixed>>
      * }
      */
     public function toArray(): array
@@ -56,11 +53,8 @@ final class DocBlock implements
 
     /**
      * @return array{
-     *     description: array{
-     *         template: string,
-     *         tags: list<array>
-     *     },
-     *     tags: list<array>
+     *     description: array<array-key, mixed>,
+     *     tags: list<array<array-key, mixed>>
      * }
      */
     public function jsonSerialize(): array

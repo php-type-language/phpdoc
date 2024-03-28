@@ -18,9 +18,6 @@ use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\TagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
-use TypeLang\PHPDoc\Tag\MutableRepositoryInterface;
-use TypeLang\PHPDoc\Tag\Repository;
-use TypeLang\PHPDoc\Tag\RepositoryInterface;
 
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
@@ -31,26 +28,13 @@ class DocBlockFactory implements DocBlockFactoryInterface
 
     private readonly DescriptionParserInterface $description;
 
-    private readonly MutableRepositoryInterface $tags;
+    private readonly TagParserInterface $tags;
 
-    private readonly TagParserInterface $parser;
-
-    public function __construct(?RepositoryInterface $tags = null)
+    public function __construct()
     {
         $this->comment = new LexerAwareCommentParser();
         $this->description = new SprintfDescriptionReader();
-
-        $this->tags = $this->createRepository($tags);
-        $this->parser = new TagParser($this->tags);
-    }
-
-    private function createRepository(?RepositoryInterface $tags): MutableRepositoryInterface
-    {
-        if ($tags instanceof MutableRepositoryInterface) {
-            return $tags;
-        }
-
-        return new Repository($tags);
+        $this->tags = new TagParser();
     }
 
     /**
@@ -61,7 +45,10 @@ class DocBlockFactory implements DocBlockFactoryInterface
         $mapper = new SourceMap();
 
         try {
-            /** @var Segment $segment */
+            /**
+             * @var Segment $segment
+             * @psalm-suppress InvalidIterator
+             */
             foreach ($result = $this->analyze($docblock) as $segment) {
                 $mapper->add($segment->offset, $segment->text);
             }
@@ -91,6 +78,7 @@ class DocBlockFactory implements DocBlockFactoryInterface
      */
     private function analyze(string $docblock): \Generator
     {
+        /** @psalm-suppress InvalidIterator */
         yield from $blocks = $this->groupByCommentSections($docblock);
 
         $description = null;
@@ -100,9 +88,9 @@ class DocBlockFactory implements DocBlockFactoryInterface
         foreach ($blocks->getReturn() as $block) {
             try {
                 if ($description === null) {
-                    $description = $this->description->parse($block, $this->parser);
+                    $description = $this->description->parse($block, $this->tags);
                 } else {
-                    $tags[] = $this->parser->parse($block);
+                    $tags[] = $this->tags->parse($block, $this->description);
                 }
             } catch (RuntimeExceptionInterface $e) {
                 throw $e->withSource(

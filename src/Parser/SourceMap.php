@@ -34,6 +34,9 @@ final class SourceMap
         $this->offset += $length;
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function getOffset(int $offset): int
     {
         if ($offset >= $this->offset) {
@@ -44,12 +47,12 @@ final class SourceMap
 
         foreach ($this->mappings as $from => $to) {
             if ($from > $offset) {
-                return $result + $offset;
+                return \max(0, $result + $offset);
             }
 
             $result = $to - $from;
         }
 
-        return $result + $offset;
+        return \max(0, $result + $offset);
     }
 }
