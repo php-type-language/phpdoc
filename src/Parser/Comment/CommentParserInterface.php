@@ -7,9 +7,6 @@ namespace TypeLang\PHPDoc\Parser\Comment;
 /**
  * This interface is responsible for reading significant
  * sections of the DocBlock comment.
- *
- * @internal This is an internal library interface, please do not use it in your code.
- * @psalm-internal TypeLang\PHPDoc
  */
 interface CommentParserInterface
 {

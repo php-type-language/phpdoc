@@ -17,9 +17,6 @@ use Phplrt\Source\SourceFactory;
 /**
  * This class is responsible for reading significant
  * sections of the DocBlock comment.
- *
- * @internal This is an internal library class, please do not use it in your code.
- * @psalm-internal TypeLang\PHPDoc
  */
 final class LexerAwareCommentParser implements CommentParserInterface
 {

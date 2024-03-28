@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag\Description;
-
-use TypeLang\PHPDoc\Tag\TagInterface;
-use TypeLang\PHPDoc\Tag\TagProvider;
-use TypeLang\PHPDoc\Tag\TagProviderInterface;
+namespace TypeLang\PHPDoc\Tag;
 
 /**
- * @template-implements \IteratorAggregate<array-key, TagInterface>
+ * @template-implements \IteratorAggregate<array-key, Tag>
  */
-final class Description implements DescriptionInterface, TagProviderInterface, \IteratorAggregate
+class Description implements \Stringable, TagProviderInterface, \IteratorAggregate
 {
     use TagProvider;
 
+    private readonly string $template;
+
     /**
-     * @param iterable<array-key, TagInterface> $tags
+     * @param iterable<array-key, Tag> $tags
      */
     public function __construct(
-        private readonly string|\Stringable $template = '',
+        string|\Stringable $template = '',
         iterable $tags = [],
     ) {
+        $this->template = (string) $template;
+
         $this->bootTagProvider($tags);
     }
 
@@ -49,7 +49,7 @@ final class Description implements DescriptionInterface, TagProviderInterface, \
      * @api
      * @psalm-immutable
      */
-    public function getTemplate(): string|\Stringable
+    public function getTemplate(): string
     {
         return $this->template;
     }

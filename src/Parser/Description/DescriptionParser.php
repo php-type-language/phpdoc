@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Description;
 
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
-use TypeLang\PHPDoc\Tag\Description\Description;
-use TypeLang\PHPDoc\Tag\Description\DescriptionInterface;
+use TypeLang\PHPDoc\Tag\Description;
 
 abstract class DescriptionParser implements DescriptionParserInterface
 {
-    public function parse(string $description, TagParserInterface $parser = null): DescriptionInterface
+    public function parse(string $description, TagParserInterface $parser = null): Description
     {
         if ($parser === null || $description === '') {
             return new Description($description);
@@ -19,7 +18,7 @@ abstract class DescriptionParser implements DescriptionParserInterface
         return $this->doParseDescription($description, $parser);
     }
 
-    private function doParseDescription(string $description, TagParserInterface $parser): DescriptionInterface
+    private function doParseDescription(string $description, TagParserInterface $parser): Description
     {
         $tags = [];
         $tagIdentifier = 0;

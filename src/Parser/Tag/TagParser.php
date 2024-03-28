@@ -7,7 +7,6 @@ namespace TypeLang\PHPDoc\Parser\Tag;
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Tag;
-use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagParser implements TagParserInterface
 {
@@ -73,7 +72,7 @@ final class TagParser implements TagParserInterface
     /**
      * @throws InvalidTagNameException
      */
-    public function parse(string $tag, DescriptionParserInterface $parser = null): TagInterface
+    public function parse(string $tag, DescriptionParserInterface $parser = null): Tag
     {
         // Tag name like ["var", "example"] extracted from "@var example"
         [$name, $content] = $this->getTagParts($tag);
