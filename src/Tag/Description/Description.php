@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag\Description;
 
-use TypeLang\Parser\Node\SerializableInterface;
 use TypeLang\PHPDoc\Tag\TagInterface;
 use TypeLang\PHPDoc\Tag\TagProvider;
 use TypeLang\PHPDoc\Tag\TagProviderInterface;
@@ -53,42 +52,6 @@ final class Description implements DescriptionInterface, TagProviderInterface, \
     public function getTemplate(): string|\Stringable
     {
         return $this->template;
-    }
-
-    /**
-     * @return array{
-     *     template: array|string,
-     *     tags: list<array>
-     * }
-     */
-    public function toArray(): array
-    {
-        $tags = [];
-
-        foreach ($this->tags as $tag) {
-            $tags[] = $tag->toArray();
-        }
-
-        $template = $this->template;
-
-        return [
-            'template' => match (true) {
-                $template instanceof SerializableInterface => $template->toArray(),
-                default => (string) $template,
-            },
-            'tags' => $tags,
-        ];
-    }
-
-    /**
-     * @return array{
-     *     template: array|string,
-     *     tags: list<array>
-     * }
-     */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
     }
 
     /**

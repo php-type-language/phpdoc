@@ -9,8 +9,7 @@
         "issues": "https://github.com/php-type-language/phpdoc-parser/issues"
     },
     "require": {
-        "php": "^8.1",
-        "type-lang/parser": "^1.0"
+        "php": "^8.1"
     },
     "autoload": {
         "psr-4": {
