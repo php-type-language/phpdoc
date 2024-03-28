@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-use TypeLang\Parser\Node\SerializableInterface;
 use TypeLang\PHPDoc\Tag\Description\Description;
 
-interface TagInterface extends SerializableInterface, \Stringable
+interface TagInterface extends \Stringable
 {
     /**
      * @return non-empty-string

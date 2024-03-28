@@ -31,37 +31,6 @@ class Tag implements TagInterface
     }
 
     /**
-     * @return array{
-     *     name: non-empty-string,
-     *     description: null|array{
-     *         template: array|string,
-     *         tags: list<array>
-     *     }
-     * }
-     */
-    public function toArray(): array
-    {
-        return [
-            'name' => $this->name,
-            'description' => $this->description?->toArray(),
-        ];
-    }
-
-    /**
-     * @return array{
-     *     name: non-empty-string,
-     *     description: null|array{
-     *         template: array|string,
-     *         tags: list<array>
-     *     }
-     * }
-     */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
-
-    /**
      * @psalm-immutable
      */
     public function __toString(): string
