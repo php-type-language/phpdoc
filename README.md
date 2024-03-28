@@ -45,7 +45,7 @@ var_dump($result);
 ```
 
 **Expected Output:**
-```
+```php
 TypeLang\PHPDoc\DocBlock {
   -description: TypeLang\PHPDoc\Tag\Description\Description {
     -template: "Example description %1$s and blah-blah-blah."
