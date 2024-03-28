@@ -9,7 +9,9 @@
         "issues": "https://github.com/php-type-language/phpdoc/issues"
     },
     "require": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "phplrt/lexer": "^3.6",
+        "phplrt/source": "^3.6"
     },
     "autoload": {
         "psr-4": {
