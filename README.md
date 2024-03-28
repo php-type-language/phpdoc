@@ -5,10 +5,10 @@
 ---
 
 <p align="center">
-    <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/require/php?style=for-the-badge" alt="PHP 8.1+"></a>
-    <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/version?style=for-the-badge" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/v/unstable?style=for-the-badge" alt="Latest Unstable Version"></a>
-    <a href="https://raw.githubusercontent.com/php-type-language/phpdoc-parser/blob/master/LICENSE"><img src="https://poser.pugx.org/type-lang/phpdoc/license?style=for-the-badge" alt="License MIT"></a>
+    <a href="https://packagist.org/packages/type-lang/phpdoc-parser"><img src="https://poser.pugx.org/type-lang/phpdoc-parser/require/php?style=for-the-badge" alt="PHP 8.1+"></a>
+    <a href="https://packagist.org/packages/type-lang/phpdoc-parser"><img src="https://poser.pugx.org/type-lang/phpdoc-parser/version?style=for-the-badge" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/type-lang/phpdoc-parser"><img src="https://poser.pugx.org/type-lang/phpdoc-parser/v/unstable?style=for-the-badge" alt="Latest Unstable Version"></a>
+    <a href="https://raw.githubusercontent.com/php-type-language/phpdoc-parser/blob/master/LICENSE"><img src="https://poser.pugx.org/type-lang/phpdoc-parser/license?style=for-the-badge" alt="License MIT"></a>
 </p>
 <p align="center">
     <a href="https://github.com/php-type-language/phpdoc-parser/actions"><img src="https://github.com/php-type-language/phpdoc-parser/workflows/tests/badge.svg"></a>

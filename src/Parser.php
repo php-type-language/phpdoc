@@ -22,25 +22,18 @@ use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
  */
-class DocBlockFactory implements DocBlockFactoryInterface
+class Parser implements ParserInterface
 {
-    private readonly CommentParserInterface $comment;
-
-    private readonly DescriptionParserInterface $description;
-
-    private readonly TagParserInterface $tags;
-
-    public function __construct()
-    {
-        $this->comment = new LexerAwareCommentParser();
-        $this->description = new SprintfDescriptionReader();
-        $this->tags = new TagParser();
-    }
+    public function __construct(
+        private readonly CommentParserInterface $comments = new LexerAwareCommentParser(),
+        private readonly DescriptionParserInterface $descriptions = new SprintfDescriptionReader(),
+        private readonly TagParserInterface $tags = new TagParser(),
+    ) {}
 
     /**
      * @throws RuntimeExceptionInterface
      */
-    public function create(#[Language('PHP')] string $docblock): DocBlock
+    public function parse(#[Language('PHP')] string $docblock): DocBlock
     {
         $mapper = new SourceMap();
 
@@ -88,9 +81,9 @@ class DocBlockFactory implements DocBlockFactoryInterface
         foreach ($blocks->getReturn() as $block) {
             try {
                 if ($description === null) {
-                    $description = $this->description->parse($block, $this->tags);
+                    $description = $this->descriptions->parse($block, $this->tags);
                 } else {
-                    $tags[] = $this->tags->parse($block, $this->description);
+                    $tags[] = $this->tags->parse($block, $this->descriptions);
                 }
             } catch (RuntimeExceptionInterface $e) {
                 throw $e->withSource(
@@ -123,7 +116,7 @@ class DocBlockFactory implements DocBlockFactoryInterface
         $current = '';
         $blocks = [];
 
-        foreach ($this->comment->parse($docblock) as $segment) {
+        foreach ($this->comments->parse($docblock) as $segment) {
             yield $segment;
 
             if (\str_starts_with($segment->text, '@')) {

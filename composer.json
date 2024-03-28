@@ -1,16 +1,15 @@
 {
-    "name": "type-lang/phpdoc",
+    "name": "type-lang/phpdoc-parser",
     "type": "library",
     "description": "PHPDoc",
     "keywords": ["language", "php", "phpdoc", "docblock", "tags", "dictionary"],
     "license": "MIT",
     "support": {
-        "source": "https://github.com/php-type-language/phpdoc",
-        "issues": "https://github.com/php-type-language/phpdoc/issues"
+        "source": "https://github.com/php-type-language/phpdoc-parser",
+        "issues": "https://github.com/php-type-language/phpdoc-parser/issues"
     },
     "require": {
         "php": "^8.1",
-        "composer/semver": "^2.0|^3.0",
         "type-lang/parser": "^1.0"
     },
     "autoload": {
