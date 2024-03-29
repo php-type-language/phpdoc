@@ -24,8 +24,8 @@ interface CommentParserInterface
      *      DOC);
      *
      * // The $result contains:
-     * // 7 => 'Example line 1'
-     * // 28 => '@tag1 type Description of tag1'
+     * // - Segment{ offset: 7, text: 'Example line 1' }
+     * // - Segment{ offset: 28, text: '@tag1 type Description of tag1' }
      * ```
      *
      * @return iterable<array-key, Segment>
