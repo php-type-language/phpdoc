@@ -65,6 +65,6 @@ class Description implements \Stringable, TagProviderInterface, \IteratorAggrega
             $tags[] = (string) $tag;
         }
 
-        return \vsprintf((string) $this->template, $tags);
+        return \vsprintf($this->template, $tags);
     }
 }
