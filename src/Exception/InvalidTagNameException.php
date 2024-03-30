@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Exception;
 
-use Phplrt\Contracts\Source\ReadableInterface;
-
 class InvalidTagNameException extends InvalidTagException
 {
     final public const ERROR_CODE_EMPTY = 0x01 + parent::CODE_LAST;
@@ -33,7 +31,7 @@ class InvalidTagNameException extends InvalidTagException
      *
      * @param int<0, max> $offset
      */
-    public static function fromEmptyTagName(ReadableInterface|string $source, int $offset = 0): static
+    public static function fromEmptyTagName(string $source, int $offset = 0): static
     {
         $message = 'Tag name cannot be empty';
 
@@ -45,7 +43,7 @@ class InvalidTagNameException extends InvalidTagException
      *
      * @param int<0, max> $offset
      */
-    public static function fromInvalidTagPrefix(ReadableInterface|string $source, int $offset = 0): static
+    public static function fromInvalidTagPrefix(string $source, int $offset = 0): static
     {
         $message = 'The tag name must starts with the "@" character';
 

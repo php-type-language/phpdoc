@@ -4,31 +4,24 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Exception;
 
-use Phplrt\Contracts\Source\ReadableInterface;
-use Phplrt\Source\Source;
-
 class ParsingException extends \RuntimeException implements RuntimeExceptionInterface
 {
     final public const ERROR_CODE_INTERNAL = 0x01;
 
     protected const CODE_LAST = self::ERROR_CODE_INTERNAL;
 
-    public readonly ReadableInterface $source;
+    public readonly string $source;
 
     /**
      * @param int<0, max> $offset
      */
     final public function __construct(
-        ReadableInterface|string $source,
+        string $source,
         public readonly int $offset = 0,
         string $message = "",
         int $code = 0,
         ?\Throwable $previous = null
     ) {
-        if (\is_string($source)) {
-            $source = new Source($source);
-        }
-
         $this->source = $source;
 
         parent::__construct($message, $code, $previous);
@@ -37,7 +30,7 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
     /**
      * @param int<0, max> $offset
      */
-    public static function fromInternalError(ReadableInterface|string $source, int $offset, \Throwable $e): self
+    public static function fromInternalError(string $source, int $offset, \Throwable $e): self
     {
         return new static(
             source: $source,
@@ -51,7 +44,7 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
     /**
      * @param int<0, max> $offset
      */
-    public function withSource(ReadableInterface|string $source, int $offset): self
+    public function withSource(string $source, int $offset): self
     {
         return new static(
             source: $source,
@@ -62,7 +55,7 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
         );
     }
 
-    public function getSource(): ReadableInterface
+    public function getSource(): string
     {
         return $this->source;
     }

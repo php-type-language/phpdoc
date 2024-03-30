@@ -7,16 +7,14 @@ namespace TypeLang\PHPDoc\Tests\Unit;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
-use TypeLang\PHPDoc\Parser\Comment\LexerAwareCommentParser;
+use TypeLang\PHPDoc\Parser\Comment\RegexCommentParser;
 
 #[Group('unit'), Group('type-lang/phpdoc')]
 final class CommentParserTest extends TestCase
 {
     public static function parserDataProvider(): iterable
     {
-        yield LexerAwareCommentParser::class => [
-            new LexerAwareCommentParser(),
-        ];
+        yield RegexCommentParser::class => [new RegexCommentParser()];
     }
 
     public static function delimiterDataProvider(): array
@@ -30,8 +28,11 @@ final class CommentParserTest extends TestCase
     public static function parserWithVariantDelimitersDataProvider(): iterable
     {
         foreach (self::parserDataProvider() as $parserName => [$provider]) {
+            $parserName = (new \ReflectionClass($provider))
+                ->getShortName();
+
             foreach (self::delimiterDataProvider() as $delimiterName => [$delimiter]) {
-                yield $parserName . ' + ' . $delimiterName => [$provider, $delimiter];
+                yield \basename($parserName) . ' + ' . $delimiterName => [$provider, $delimiter];
             }
         }
     }

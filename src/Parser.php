@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc;
 
 use JetBrains\PhpStorm\Language;
-use Phplrt\Contracts\Lexer\LexerExceptionInterface;
-use Phplrt\Contracts\Lexer\LexerRuntimeExceptionInterface;
-use Phplrt\Contracts\Source\SourceExceptionInterface;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
-use TypeLang\PHPDoc\Parser\Comment\LexerAwareCommentParser;
+use TypeLang\PHPDoc\Parser\Comment\RegexCommentParser;
 use TypeLang\PHPDoc\Parser\Comment\Segment;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
@@ -25,7 +22,7 @@ use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 class Parser implements ParserInterface
 {
     public function __construct(
-        private readonly CommentParserInterface $comments = new LexerAwareCommentParser(),
+        private readonly CommentParserInterface $comments = new RegexCommentParser(),
         private readonly DescriptionParserInterface $descriptions = new SprintfDescriptionReader(),
         private readonly TagParserInterface $tags = new TagParser(),
     ) {}
@@ -64,10 +61,7 @@ class Parser implements ParserInterface
     /**
      * @return \Generator<array-key, Segment, void, DocBlock>
      *
-     * @throws LexerExceptionInterface
-     * @throws LexerRuntimeExceptionInterface
      * @throws RuntimeExceptionInterface
-     * @throws SourceExceptionInterface
      */
     private function analyze(string $docblock): \Generator
     {
@@ -106,10 +100,6 @@ class Parser implements ParserInterface
 
     /**
      * @return \Generator<array-key, Segment, void, non-empty-list<string>>
-     *
-     * @throws LexerExceptionInterface
-     * @throws LexerRuntimeExceptionInterface
-     * @throws SourceExceptionInterface
      */
     private function groupByCommentSections(string $docblock): \Generator
     {

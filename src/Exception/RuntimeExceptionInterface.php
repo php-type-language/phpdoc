@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Exception;
 
-use Phplrt\Contracts\Source\ReadableInterface;
-
 /**
  * Error occurring while processing phpdoc content.
  */
@@ -16,12 +14,12 @@ interface RuntimeExceptionInterface extends PHPDocExceptionInterface
      *
      * @param int<0, max> $offset
      */
-    public function withSource(ReadableInterface|string $source, int $offset): self;
+    public function withSource(string $source, int $offset): self;
 
     /**
      * Returns the full content in which the error occurred.
      */
-    public function getSource(): ReadableInterface;
+    public function getSource(): string;
 
     /**
      * Returns the byte offset at the location where the error occurs.
