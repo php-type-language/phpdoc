@@ -14,13 +14,13 @@
     <a href="https://github.com/php-type-language/phpdoc/actions"><img src="https://github.com/php-type-language/phpdoc/workflows/tests/badge.svg"></a>
 </p>
 
-The PHP reference implementation for Type Language PhpDoc Parser.
+Reference implementation for TypeLang PhpDoc Parser.
 
 Read [documentation pages](https://phpdoc.io) for more information.
 
 ## Installation
 
-Type Language PHPDoc Parser is available as Composer repository and can
+TypeLang PHPDoc Parser is available as Composer repository and can
 be installed using the following command in a root of your project:
 
 ```sh

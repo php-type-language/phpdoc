@@ -1,7 +1,7 @@
 {
     "name": "type-lang/phpdoc",
     "type": "library",
-    "description": "PHPDoc",
+    "description": "Library for recognizing PhpDoc annotations in PHP DocBlock comments",
     "keywords": ["language", "php", "phpdoc", "docblock", "tags", "dictionary"],
     "license": "MIT",
     "support": {
