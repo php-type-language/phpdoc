@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Tag;
 
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
+use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\FactoryInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Tag;
@@ -59,7 +60,8 @@ final class TagParser implements TagParserInterface
     }
 
     /**
-     * @throws InvalidTagNameException
+     * @throws \Throwable
+     * @throws RuntimeExceptionInterface
      */
     public function parse(string $tag, DescriptionParserInterface $parser): Tag
     {
@@ -67,9 +69,16 @@ final class TagParser implements TagParserInterface
         /** @var non-empty-string $name */
         $name = \substr($name, 1);
 
-        $content = \substr($tag, \strlen($name) + 1);
-        $content = \ltrim($content);
+        $content = \substr($tag, $offset = \strlen($name) + 1);
+        $trimmed = \ltrim($content);
 
-        return $this->tags->create($name, $content, $parser);
+        try {
+            return $this->tags->create($name, $trimmed, $parser);
+        } catch (RuntimeExceptionInterface $e) {
+            /** @var int<0, max> */
+            $offset += \strlen($content) - \strlen($trimmed);
+
+            throw $e->withSource($tag, $offset);
+        }
     }
 }
