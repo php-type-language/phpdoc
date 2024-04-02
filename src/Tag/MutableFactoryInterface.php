@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc;
+namespace TypeLang\PHPDoc\Tag;
 
 interface MutableFactoryInterface extends FactoryInterface
 {

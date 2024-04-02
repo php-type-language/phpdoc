@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc;
+namespace TypeLang\PHPDoc\Tag;
 
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Tag\Tag;
 
 final class Factory implements MutableFactoryInterface
 {

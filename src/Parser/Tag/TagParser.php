@@ -6,8 +6,8 @@ namespace TypeLang\PHPDoc\Parser\Tag;
 
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
-use TypeLang\PHPDoc\FactoryInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Tag;
 
 final class TagParser implements TagParserInterface

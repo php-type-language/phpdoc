@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc;
+namespace TypeLang\PHPDoc\Tag;
 
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Tag\Tag;
 
 interface FactoryInterface
 {

@@ -15,6 +15,8 @@ use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\TagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
+use TypeLang\PHPDoc\Tag\Factory;
+use TypeLang\PHPDoc\Tag\FactoryInterface;
 
 /**
  * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
