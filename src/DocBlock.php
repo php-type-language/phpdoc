@@ -10,9 +10,13 @@ use TypeLang\PHPDoc\Tag\TagProvider;
 use TypeLang\PHPDoc\Tag\TagProviderInterface;
 
 /**
- * @template-implements \IteratorAggregate<array-key, Tag>
+ * @template-implements \IteratorAggregate<int<0, max>, Tag>
+ * @template-implements \ArrayAccess<int<0, max>, Tag|null>
  */
-final class DocBlock implements TagProviderInterface, \IteratorAggregate
+final class DocBlock implements
+    TagProviderInterface,
+    \IteratorAggregate,
+    \ArrayAccess
 {
     use TagProvider;
 
@@ -24,6 +28,26 @@ final class DocBlock implements TagProviderInterface, \IteratorAggregate
         iterable $tags = [],
     ) {
         $this->bootTagProvider($tags);
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return isset($this->tags[$offset]);
+    }
+
+    public function offsetGet(mixed $offset): ?Tag
+    {
+        return $this->tags[$offset] ?? null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        throw new \BadMethodCallException(self::class . ' objects are immutable');
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        throw new \BadMethodCallException(self::class . ' objects are immutable');
     }
 
     public function getDescription(): Description
