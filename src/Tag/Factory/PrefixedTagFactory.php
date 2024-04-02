@@ -15,12 +15,15 @@ final class PrefixedTagFactory implements MutableFactoryInterface
     public function __construct(
         private readonly array $prefixes,
         private readonly MutableFactoryInterface $delegate = new TagFactory(),
+        private readonly bool $allowNonPrefixedTags = true,
     ) {}
 
     public function register(array|string $tags, FactoryInterface $delegate): void
     {
         foreach ((array) $tags as $tag) {
-            $this->delegate->register($tag, $delegate);
+            if ($this->allowNonPrefixedTags) {
+                $this->delegate->register($tag, $delegate);
+            }
 
             foreach ($this->prefixes as $prefix) {
                 $this->delegate->register($prefix . $tag, $delegate);
