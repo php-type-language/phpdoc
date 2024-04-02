@@ -7,8 +7,9 @@ namespace TypeLang\PHPDoc\Parser\Tag;
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Tag\FactoryInterface;
+use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Tag;
+use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagParser implements TagParserInterface
 {
@@ -63,7 +64,7 @@ final class TagParser implements TagParserInterface
      * @throws \Throwable
      * @throws RuntimeExceptionInterface
      */
-    public function parse(string $tag, DescriptionParserInterface $parser): Tag
+    public function parse(string $tag, DescriptionParserInterface $parser): TagInterface
     {
         $name = $this->getTagName($tag);
         /** @var non-empty-string $name */

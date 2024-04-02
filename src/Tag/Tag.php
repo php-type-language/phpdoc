@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-class Tag implements \Stringable
+class Tag implements TagInterface
 {
-    protected readonly ?Description $description;
+    protected readonly ?DescriptionInterface $description;
 
     /**
      * @param non-empty-string $name
@@ -15,39 +15,19 @@ class Tag implements \Stringable
         protected readonly string $name,
         \Stringable|string|null $description = null,
     ) {
-        $this->description = Description::fromStringOrNull($description);
+        $this->description = Description::fromStringableOrNull($description);
     }
 
-    /**
-     * @return non-empty-string
-     *
-     * @psalm-immutable
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Returns description of the tag.
-     *
-     * @psalm-immutable
-     */
-    public function getDescription(): ?Description
+    public function getDescription(): ?DescriptionInterface
     {
         return $this->description;
     }
 
-    /**
-     * Magic method {@link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring}
-     * allows a class to decide how it will react when it is treated like
-     * a string.
-     *
-     * @psalm-immutable
-     * @return string Returns string representation of the object that
-     *         implements this interface (and/or {@see __toString()} magic
-     *         method).
-     */
     public function __toString(): string
     {
         if ($this->description === null) {

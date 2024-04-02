@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag;
+namespace TypeLang\PHPDoc\Tag\Factory;
 
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Tag;
+use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagFactory implements MutableFactoryInterface
 {
@@ -25,7 +27,7 @@ final class TagFactory implements MutableFactoryInterface
         }
     }
 
-    public function create(string $name, string $content, DescriptionParserInterface $descriptions): Tag
+    public function create(string $name, string $content, DescriptionParserInterface $descriptions): TagInterface
     {
         $delegate = $this->factories[$name] ?? null;
 

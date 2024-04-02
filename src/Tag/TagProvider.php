@@ -17,13 +17,13 @@ namespace TypeLang\PHPDoc\Tag;
 trait TagProvider
 {
     /**
-     * @var list<Tag>
+     * @var list<TagInterface>
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    private readonly array $tags;
+    protected readonly array $tags;
 
     /**
-     * @param iterable<array-key, Tag> $tags
+     * @param iterable<array-key, TagInterface> $tags
      * @psalm-suppress InaccessibleProperty
      */
     protected function bootTagProvider(iterable $tags): void
@@ -32,9 +32,7 @@ trait TagProvider
     }
 
     /**
-     * Returns the tags for this DocBlock.
-     *
-     * @return list<Tag>
+     * {@see TagProviderInterface::getTags()}
      */
     public function getTags(): array
     {
@@ -42,7 +40,7 @@ trait TagProvider
     }
 
     /**
-     * @return \Traversable<int<0, max>, Tag>
+     * @return \Traversable<int<0, max>, TagInterface>
      */
     public function getIterator(): \Traversable
     {

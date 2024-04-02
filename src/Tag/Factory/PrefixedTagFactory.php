@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag;
+namespace TypeLang\PHPDoc\Tag\Factory;
 
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class PrefixedTagFactory implements MutableFactoryInterface
 {
@@ -25,7 +26,7 @@ final class PrefixedTagFactory implements MutableFactoryInterface
         }
     }
 
-    public function create(string $name, string $content, DescriptionParserInterface $descriptions): Tag
+    public function create(string $name, string $content, DescriptionParserInterface $descriptions): TagInterface
     {
         return $this->delegate->create($name, $content, $descriptions);
     }

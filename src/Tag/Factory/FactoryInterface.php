@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag;
+namespace TypeLang\PHPDoc\Tag\Factory;
 
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\TagInterface;
 
 interface FactoryInterface
 {
@@ -17,5 +18,5 @@ interface FactoryInterface
      * @throws RuntimeExceptionInterface In case of parsing error occurs.
      * @throws \Throwable In case of internal error occurs.
      */
-    public function create(string $name, string $content, DescriptionParserInterface $descriptions): Tag;
+    public function create(string $name, string $content, DescriptionParserInterface $descriptions): TagInterface;
 }

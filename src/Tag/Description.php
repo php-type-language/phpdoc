@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tag;
 
 /**
- * @template-implements \IteratorAggregate<int<0, max>, Tag>
+ * @template-implements \IteratorAggregate<int<0, max>, TagInterface>
  */
-class Description implements
-    TagProviderInterface,
-    \IteratorAggregate,
-    \Stringable
+class Description implements DescriptionInterface, \IteratorAggregate
 {
     use TagProvider;
 
-    private readonly string $template;
+    protected readonly string $template;
 
     /**
-     * @param iterable<array-key, Tag> $tags
+     * @param iterable<array-key, TagInterface> $tags
      */
     public function __construct(
         string|\Stringable $template = '',
@@ -28,38 +25,29 @@ class Description implements
         $this->bootTagProvider($tags);
     }
 
-    public static function fromString(string|\Stringable $description): self
+    public static function fromStringable(string|\Stringable $description): DescriptionInterface
     {
-        if ($description instanceof self) {
+        if ($description instanceof DescriptionInterface) {
             return $description;
         }
 
         return new self($description);
     }
 
-    public static function fromStringOrNull(string|\Stringable|null $description): ?self
+    public static function fromStringableOrNull(string|\Stringable|null $description): ?DescriptionInterface
     {
         if ($description === null) {
             return null;
         }
 
-        return self::fromString($description);
+        return self::fromStringable($description);
     }
 
-    /**
-     * Returns the body template.
-     *
-     * @api
-     * @psalm-immutable
-     */
     public function getTemplate(): string
     {
         return $this->template;
     }
 
-    /**
-     * @psalm-immutable
-     */
     public function __toString(): string
     {
         $tags = [];

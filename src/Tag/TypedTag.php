@@ -7,20 +7,23 @@ namespace TypeLang\PHPDoc\Tag;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 
 /**
- * Requires a `type-lang/parser` dependency for {@see TypeStatement} support.
- *
- * @psalm-suppress UndefinedClass : Expects optional `type-lang/parser` dependency `type-lang/parser`.
+ * @psalm-suppress UndefinedClass : Expects optional `type-lang/parser` dependency.
  */
-abstract class TypedTag extends Tag
+abstract class TypedTag extends Tag implements TypeProviderInterface
 {
     /**
      * @param non-empty-string $name
      */
     public function __construct(
         string $name,
-        public readonly TypeStatement $type,
+        protected readonly TypeStatement $type,
         \Stringable|string|null $description = null,
     ) {
         parent::__construct($name, $description);
+    }
+
+    public function getType(): TypeStatement
+    {
+        return $this->type;
     }
 }
