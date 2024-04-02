@@ -14,7 +14,7 @@
     <a href="https://github.com/php-type-language/phpdoc/actions"><img src="https://github.com/php-type-language/phpdoc/workflows/tests/badge.svg"></a>
 </p>
 
-Reference implementation for TypeLang PhpDoc Parser.
+Reference implementation for TypeLang PHPDoc Parser.
 
 Read [documentation pages](https://phpdoc.io) for more information.
 
