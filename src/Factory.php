@@ -18,14 +18,16 @@ final class Factory implements MutableFactoryInterface
 
     public function add(array|string $tags, FactoryInterface $delegate): void
     {
-        foreach ((array)$tags as $tag) {
+        foreach ((array) $tags as $tag) {
             $this->factories[$tag] = $delegate;
         }
     }
 
     public function create(string $name, string $content, DescriptionParserInterface $descriptions): Tag
     {
-        if (($delegate = $this->factories[$name]) !== null) {
+        $delegate = $this->factories[$name] ?? null;
+
+        if ($delegate !== null) {
             return $delegate->create($name, $content, $descriptions);
         }
 
