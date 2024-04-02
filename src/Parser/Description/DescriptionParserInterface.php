@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Parser\Description;
 
-use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PHPDoc\Tag\Description;
 
 interface DescriptionParserInterface
@@ -26,5 +25,5 @@ interface DescriptionParserInterface
      * // }
      * ```
      */
-    public function parse(string $description, TagParserInterface $parser = null): Description;
+    public function parse(string $description): Description;
 }

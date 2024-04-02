@@ -21,11 +21,19 @@ use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
  */
 class Parser implements ParserInterface
 {
+    private readonly CommentParserInterface $comments;
+
+    private readonly DescriptionParserInterface $descriptions;
+
+    private readonly TagParserInterface $tags;
+
     public function __construct(
-        private readonly CommentParserInterface $comments = new RegexCommentParser(),
-        private readonly DescriptionParserInterface $descriptions = new SprintfDescriptionReader(),
-        private readonly TagParserInterface $tags = new TagParser(),
-    ) {}
+        FactoryInterface $tags = new Factory(),
+    ) {
+        $this->tags = new TagParser($tags);
+        $this->descriptions = new SprintfDescriptionReader($this->tags);
+        $this->comments = new RegexCommentParser();
+    }
 
     /**
      * @throws RuntimeExceptionInterface
@@ -75,7 +83,7 @@ class Parser implements ParserInterface
         foreach ($blocks->getReturn() as $block) {
             try {
                 if ($description === null) {
-                    $description = $this->descriptions->parse($block, $this->tags);
+                    $description = $this->descriptions->parse($block);
                 } else {
                     $tags[] = $this->tags->parse($block, $this->descriptions);
                 }

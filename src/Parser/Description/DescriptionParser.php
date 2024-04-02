@@ -9,16 +9,11 @@ use TypeLang\PHPDoc\Tag\Description;
 
 abstract class DescriptionParser implements DescriptionParserInterface
 {
-    public function parse(string $description, TagParserInterface $parser = null): Description
-    {
-        if ($parser === null || $description === '') {
-            return new Description($description);
-        }
+    public function __construct(
+        private readonly TagParserInterface $tags,
+    ) {}
 
-        return $this->doParseDescription($description, $parser);
-    }
-
-    private function doParseDescription(string $description, TagParserInterface $parser): Description
+    public function parse(string $description): Description
     {
         $tags = [];
         $tagIdentifier = 0;
@@ -32,7 +27,7 @@ abstract class DescriptionParser implements DescriptionParserInterface
 
             if (\str_starts_with($chunk, '@')) {
                 try {
-                    $tags[] = $parser->parse($chunk, $this);
+                    $tags[] = $this->tags->parse($chunk, $this);
                     $result .= $this->createDescriptionChunkPlaceholder(++$tagIdentifier);
                 } catch (\Throwable) {
                     $result .= "{{$chunk}}";

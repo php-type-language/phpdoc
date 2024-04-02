@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Tag;
 
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
+use TypeLang\PHPDoc\FactoryInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Tag;
 
@@ -14,6 +15,10 @@ final class TagParser implements TagParserInterface
      * @var non-empty-string
      */
     private const PATTERN_TAG = '\G@[a-zA-Z_\x80-\xff\\\][\w\x80-\xff\-:\\\]*';
+
+    public function __construct(
+        private readonly FactoryInterface $tags,
+    ) {}
 
     /**
      * Read tag name from passed content.
@@ -54,33 +59,17 @@ final class TagParser implements TagParserInterface
     }
 
     /**
-     * @return array{non-empty-string, string}
      * @throws InvalidTagNameException
      */
-    private function getTagParts(string $content): array
+    public function parse(string $tag, DescriptionParserInterface $parser): Tag
     {
-        $name = $this->getTagName($content);
+        $name = $this->getTagName($tag);
         /** @var non-empty-string $name */
         $name = \substr($name, 1);
 
-        $content = \substr($content, \strlen($name) + 1);
+        $content = \substr($tag, \strlen($name) + 1);
         $content = \ltrim($content);
 
-        return [$name, $content];
-    }
-
-    /**
-     * @throws InvalidTagNameException
-     */
-    public function parse(string $tag, DescriptionParserInterface $parser = null): Tag
-    {
-        // Tag name like ["var", "example"] extracted from "@var example"
-        [$name, $content] = $this->getTagParts($tag);
-
-        if ($parser !== null) {
-            $content = $parser->parse($content, $this);
-        }
-
-        return new Tag($name, $content);
+        return $this->tags->create($name, $content, $parser);
     }
 }

@@ -24,5 +24,5 @@ interface TagParserInterface
      * // }
      * ```
      */
-    public function parse(string $tag, DescriptionParserInterface $parser = null): Tag;
+    public function parse(string $tag, DescriptionParserInterface $parser): Tag;
 }
