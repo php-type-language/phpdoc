@@ -10,20 +10,16 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
 
     protected const CODE_LAST = self::ERROR_CODE_INTERNAL;
 
-    public readonly string $source;
-
     /**
      * @param int<0, max> $offset
      */
     final public function __construct(
-        string $source,
+        public readonly string $source,
         public readonly int $offset = 0,
         string $message = "",
         int $code = 0,
         ?\Throwable $previous = null
     ) {
-        $this->source = $source;
-
         parent::__construct($message, $code, $previous);
     }
 
