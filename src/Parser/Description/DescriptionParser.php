@@ -28,7 +28,7 @@ abstract class DescriptionParser implements DescriptionParserInterface
             if (\str_starts_with($chunk, '@')) {
                 try {
                     $tags[] = $this->tags->parse($chunk, $this);
-                    $result .= $this->createDescriptionChunkPlaceholder(++$tagIdentifier);
+                    $result .= '{' . $this->createDescriptionChunkPlaceholder(++$tagIdentifier) . '}';
                 } catch (\Throwable) {
                     $result .= "{{$chunk}}";
                 }
