@@ -32,7 +32,9 @@ trait TagProvider
     }
 
     /**
-     * {@see TagProviderInterface::getTags()}
+     * @see TagProviderInterface::getTags()
+     *
+     * @return list<TagInterface>
      */
     public function getTags(): array
     {
