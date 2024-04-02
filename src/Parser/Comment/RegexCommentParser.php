@@ -14,7 +14,7 @@ final class RegexCommentParser implements CommentParserInterface
         . '|(?:(?:\h*\*\/)(*MARK:T_COMMENT_END))'
         . '|(?:(?:^\h*\*\h*)(*MARK:T_COMMENT_PREFIX))'
         . '|(?:(?:\r\n|\n)(*MARK:T_NEWLINE))'
-        . '|(?:(?:.+?(?:\r\n|\n|$))(*MARK:T_TEXT))'
+        . '|(?:(?:.+?(?:(?=\*+\/)|(?:\r\n|\n|$)))(*MARK:T_TEXT))'
         . ')/Ssum';
 
     /**
