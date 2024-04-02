@@ -19,8 +19,10 @@ final class PrefixedTagFactory implements MutableFactoryInterface
 
     public function register(array|string $tags, FactoryInterface $delegate): void
     {
-        foreach ($this->prefixes as $prefix) {
-            foreach ((array) $tags as $tag) {
+        foreach ((array) $tags as $tag) {
+            $this->delegate->register($tag, $delegate);
+
+            foreach ($this->prefixes as $prefix) {
                 $this->delegate->register($prefix . $tag, $delegate);
             }
         }
