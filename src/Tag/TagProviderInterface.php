@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tag;
 
 /**
- * @template-extends \Traversable<array-key, Tag>
+ * @template-extends \Traversable<int<0, max>, Tag>
  *
  * @internal This is an internal library interface, please do not use it in your code.
  * @psalm-internal TypeLang\PHPDoc\Tag

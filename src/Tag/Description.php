@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tag;
 
 /**
- * @template-implements \IteratorAggregate<array-key, Tag>
+ * @template-implements \IteratorAggregate<int<0, max>, Tag>
  */
-class Description implements \Stringable, TagProviderInterface, \IteratorAggregate
+class Description implements
+    TagProviderInterface,
+    \IteratorAggregate,
+    \Stringable
 {
     use TagProvider;
 
