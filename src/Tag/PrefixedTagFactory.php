@@ -12,8 +12,8 @@ final class PrefixedTagFactory implements MutableFactoryInterface
      * @param non-empty-list<non-empty-string> $prefixes
      */
     public function __construct(
-        private readonly MutableFactoryInterface $delegate,
         private readonly array $prefixes,
+        private readonly MutableFactoryInterface $delegate = new TagFactory(),
     ) {}
 
     public function register(array|string $tags, FactoryInterface $delegate): void
