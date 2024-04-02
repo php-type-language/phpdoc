@@ -15,7 +15,7 @@ use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\TagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
-use TypeLang\PHPDoc\Tag\Factory;
+use TypeLang\PHPDoc\Tag\TagFactory;
 use TypeLang\PHPDoc\Tag\FactoryInterface;
 
 /**
@@ -30,7 +30,7 @@ class Parser implements ParserInterface
     private readonly TagParserInterface $tags;
 
     public function __construct(
-        FactoryInterface $tags = new Factory(),
+        FactoryInterface $tags = new TagFactory(),
     ) {
         $this->tags = new TagParser($tags);
         $this->descriptions = new SprintfDescriptionReader($this->tags);

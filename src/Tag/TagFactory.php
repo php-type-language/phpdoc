@@ -9,7 +9,7 @@ use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
-final class Factory implements MutableFactoryInterface
+final class TagFactory implements MutableFactoryInterface
 {
     /**
      * @param array<non-empty-string, FactoryInterface> $factories

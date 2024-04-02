@@ -42,7 +42,7 @@ trait TagProvider
     }
 
     /**
-     * @return \Traversable<array-key, Tag>
+     * @return \Traversable<int<0, max>, Tag>
      */
     public function getIterator(): \Traversable
     {
