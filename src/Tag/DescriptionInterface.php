@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-interface DescriptionInterface extends TagProviderInterface, \Stringable
+interface DescriptionInterface extends TagsProviderInterface, \Stringable
 {
     /**
      * Returns the body template.

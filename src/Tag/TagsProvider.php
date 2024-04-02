@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tag;
 
 /**
- * @mixin TagProviderInterface
+ * @mixin TagsProviderInterface
  * @mixin \IteratorAggregate
  *
- * @psalm-require-implements TagProviderInterface
+ * @psalm-require-implements TagsProviderInterface
  * @psalm-require-implements \IteratorAggregate
  *
  * @internal This is an internal library trait, please do not use it in your code.
  * @psalm-internal TypeLang\PHPDoc\Tag
  */
-trait TagProvider
+trait TagsProvider
 {
     /**
      * @var list<TagInterface>
@@ -32,9 +32,9 @@ trait TagProvider
     }
 
     /**
-     * @see TagProviderInterface::getTags()
-     *
      * @return list<TagInterface>
+     *@see TagsProviderInterface::getTags()
+     *
      */
     public function getTags(): array
     {
@@ -51,7 +51,7 @@ trait TagProvider
 
             $description = $tag->getDescription();
 
-            if ($description instanceof TagProviderInterface) {
+            if ($description instanceof TagsProviderInterface) {
                 yield from $description;
             }
         }

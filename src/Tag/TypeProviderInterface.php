@@ -7,17 +7,14 @@ namespace TypeLang\PHPDoc\Tag;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 
 /**
- * Every class that implements a given interface is an implementation of a
- * tag that contains type information (that is, an AST object).
- *
- * Requires a `type-lang/parser` dependency for {@see TypeStatement} support.
- *
  * @psalm-suppress UndefinedClass : Expects optional `type-lang/parser` dependency.
  */
-interface TypeProviderInterface
+interface TypeProviderInterface extends OptionalTypeProviderInterface
 {
     /**
      * Returns an AST object of the type.
+     *
+     * @psalm-immutable Each call to the method must return the same value.
      */
     public function getType(): TypeStatement;
 }

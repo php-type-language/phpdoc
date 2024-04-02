@@ -9,7 +9,7 @@ namespace TypeLang\PHPDoc\Tag;
  */
 class Description implements DescriptionInterface, \IteratorAggregate
 {
-    use TagProvider;
+    use TagsProvider;
 
     protected readonly string $template;
 

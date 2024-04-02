@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-interface TagInterface extends DescriptionProviderInterface, \Stringable
+interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
 {
     /**
      * Returns the non-empty tag name string without the '@' prefix.

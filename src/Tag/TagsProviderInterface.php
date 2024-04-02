@@ -10,7 +10,7 @@ namespace TypeLang\PHPDoc\Tag;
  * @internal This is an internal library interface, please do not use it in your code.
  * @psalm-internal TypeLang\PHPDoc\Tag
  */
-interface TagProviderInterface extends \Traversable, \Countable
+interface TagsProviderInterface extends \Traversable, \Countable
 {
     /**
      * Returns the tags for this object.

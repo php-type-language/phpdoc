@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-interface DescriptionProviderInterface extends OptionalDescriptionProviderInterface
+interface OptionalDescriptionProviderInterface
 {
     /**
      * Returns description object which can be represented as a string and
@@ -12,5 +12,5 @@ interface DescriptionProviderInterface extends OptionalDescriptionProviderInterf
      *
      * @psalm-immutable Each call to the method must return the same value.
      */
-    public function getDescription(): DescriptionInterface;
+    public function getDescription(): ?DescriptionInterface;
 }

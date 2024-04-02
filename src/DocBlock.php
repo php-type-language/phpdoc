@@ -7,9 +7,10 @@ namespace TypeLang\PHPDoc;
 use TypeLang\PHPDoc\Tag\Description;
 use TypeLang\PHPDoc\Tag\DescriptionInterface;
 use TypeLang\PHPDoc\Tag\DescriptionProviderInterface;
+use TypeLang\PHPDoc\Tag\OptionalDescriptionProviderInterface;
 use TypeLang\PHPDoc\Tag\TagInterface;
-use TypeLang\PHPDoc\Tag\TagProvider;
-use TypeLang\PHPDoc\Tag\TagProviderInterface;
+use TypeLang\PHPDoc\Tag\TagsProvider;
+use TypeLang\PHPDoc\Tag\TagsProviderInterface;
 
 /**
  * This class represents structure containing a description and a set of tags
@@ -19,12 +20,12 @@ use TypeLang\PHPDoc\Tag\TagProviderInterface;
  * @template-implements \ArrayAccess<int<0, max>, TagInterface|null>
  */
 final class DocBlock implements
-    DescriptionProviderInterface,
-    TagProviderInterface,
+    OptionalDescriptionProviderInterface,
+    TagsProviderInterface,
     \IteratorAggregate,
     \ArrayAccess
 {
-    use TagProvider;
+    use TagsProvider;
 
     private readonly DescriptionInterface $description;
 
