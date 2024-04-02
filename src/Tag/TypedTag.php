@@ -22,6 +22,9 @@ abstract class TypedTag extends Tag implements TypeProviderInterface
         parent::__construct($name, $description);
     }
 
+    /**
+     * @psalm-suppress UndefinedClass
+     */
     public function getType(): TypeStatement
     {
         return $this->type;
