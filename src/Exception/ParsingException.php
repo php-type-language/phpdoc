@@ -47,7 +47,7 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
             offset: $offset,
             message: $this->message,
             code: $this->code,
-            previous: $this->getPrevious(),
+            previous: $this,
         );
     }
 

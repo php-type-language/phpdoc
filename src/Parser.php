@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc;
 
 use JetBrains\PhpStorm\Language;
+use TypeLang\PHPDoc\Exception\InvalidTagException;
+use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;

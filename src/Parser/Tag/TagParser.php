@@ -9,6 +9,7 @@ use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Content;
+use TypeLang\PHPDoc\Tag\InvalidTag;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagParser implements TagParserInterface
@@ -66,7 +67,14 @@ final class TagParser implements TagParserInterface
      */
     public function parse(string $tag, DescriptionParserInterface $parser): TagInterface
     {
-        $name = $this->getTagName($tag);
+        try {
+            $name = $this->getTagName($tag);
+        } catch (InvalidTagNameException $e) {
+            return new InvalidTag($e, $parser->parse(
+                description: \substr($tag, 1),
+            ));
+        }
+
         /** @var non-empty-string $name */
         $name = \substr($name, 1);
 

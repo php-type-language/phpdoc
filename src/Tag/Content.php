@@ -17,7 +17,7 @@ use TypeLang\PHPDoc\Tag\Content\VariableNameApplicator;
 
 class Content implements \Stringable
 {
-    private readonly string $original;
+    public readonly string $source;
 
     /**
      * @var int<0, max>
@@ -28,7 +28,7 @@ class Content implements \Stringable
     public function __construct(
         public string $value,
     ) {
-        $this->original = $this->value;
+        $this->source = $this->value;
     }
 
     /**
@@ -54,7 +54,7 @@ class Content implements \Stringable
     public function getTagException(string $message, \Throwable $previous = null): InvalidTagException
     {
         return new InvalidTagException(
-            source: $this->original,
+            source: $this->source,
             offset: $this->offset,
             message: $message,
             previous: $previous,

@@ -8,6 +8,7 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\InvalidTag;
 use TypeLang\PHPDoc\Tag\Tag;
 use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\TagInterface;
@@ -34,21 +35,22 @@ final class TagFactory implements MutableFactoryInterface
 
         if ($delegate !== null) {
             try {
-                return $delegate->create($name, $content, $descriptions);
-            } catch (ParsingException $e) {
-                throw $e;
+                try {
+                    return $delegate->create($name, $content, $descriptions);
+                } catch (RuntimeExceptionInterface $e) {
+                    throw $e;
+                } catch (\Throwable $e) {
+                    throw InvalidTagException::fromCreatingTag(
+                        tag: $name,
+                        source: $content->value,
+                        prev: $e,
+                    );
+                }
             } catch (RuntimeExceptionInterface $e) {
-                throw InvalidTagException::fromCreatingTag(
-                    tag: $name,
-                    source: $e->getSource(),
-                    offset: $e->getOffset(),
-                    prev: $e,
-                );
-            } catch (\Throwable $e) {
-                throw InvalidTagException::fromCreatingTag(
-                    tag: $name,
-                    source: $content->value,
-                    prev: $e,
+                return new InvalidTag(
+                    reason: $e,
+                    description: $descriptions->parse($content->source),
+                    name: $name,
                 );
             }
         }
