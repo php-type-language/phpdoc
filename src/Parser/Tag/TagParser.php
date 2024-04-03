@@ -8,7 +8,7 @@ use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
-use TypeLang\PHPDoc\Tag\Tag;
+use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagParser implements TagParserInterface
@@ -74,7 +74,7 @@ final class TagParser implements TagParserInterface
         $trimmed = \ltrim($content);
 
         try {
-            return $this->tags->create($name, $trimmed, $parser);
+            return $this->tags->create($name, new Content($trimmed), $parser);
         } catch (RuntimeExceptionInterface $e) {
             /** @var int<0, max> */
             $offset += \strlen($content) - \strlen($trimmed);

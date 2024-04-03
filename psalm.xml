@@ -9,6 +9,25 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     cacheDirectory="vendor/.cache.psalm"
 >
+    <issueHandlers>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <referencedClass name="TypeLang\Parser\Node\Stmt\TypeStatement" />
+            </errorLevel>
+        </UndefinedDocblockClass>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="TypeLang\Parser\Node\Stmt\TypeStatement" />
+                <referencedClass name="TypeLang\Parser\ParserInterface" />
+                <referencedClass name="TypeLang\Parser\Exception\ParserExceptionInterface" />
+            </errorLevel>
+        </UndefinedClass>
+        <UndefinedAttributeClass>
+            <errorLevel type="suppress">
+                <referencedClass name="JetBrains\PhpStorm\Language" />
+            </errorLevel>
+        </UndefinedAttributeClass>
+    </issueHandlers>
     <projectFiles>
         <directory name="src" />
         <ignoreFiles>

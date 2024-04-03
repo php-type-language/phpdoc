@@ -9,6 +9,7 @@ use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Tag;
+use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagFactory implements MutableFactoryInterface
@@ -27,7 +28,7 @@ final class TagFactory implements MutableFactoryInterface
         }
     }
 
-    public function create(string $name, string $content, DescriptionParserInterface $descriptions): TagInterface
+    public function create(string $name, Content $content, DescriptionParserInterface $descriptions): TagInterface
     {
         $delegate = $this->factories[$name] ?? null;
 
@@ -46,12 +47,12 @@ final class TagFactory implements MutableFactoryInterface
             } catch (\Throwable $e) {
                 throw InvalidTagException::fromCreatingTag(
                     tag: $name,
-                    source: $content,
+                    source: $content->value,
                     prev: $e,
                 );
             }
         }
 
-        return new Tag($name, $descriptions->parse($content));
+        return new Tag($name, $content->toDescription($descriptions));
     }
 }

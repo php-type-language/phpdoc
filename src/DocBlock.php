@@ -6,7 +6,6 @@ namespace TypeLang\PHPDoc;
 
 use TypeLang\PHPDoc\Tag\Description;
 use TypeLang\PHPDoc\Tag\DescriptionInterface;
-use TypeLang\PHPDoc\Tag\DescriptionProviderInterface;
 use TypeLang\PHPDoc\Tag\OptionalDescriptionProviderInterface;
 use TypeLang\PHPDoc\Tag\TagInterface;
 use TypeLang\PHPDoc\Tag\TagsProvider;
@@ -57,11 +56,21 @@ final class DocBlock implements
         return $this->tags[$offset] ?? null;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws \BadMethodCallException
+     */
     public function offsetSet(mixed $offset, mixed $value): void
     {
         throw new \BadMethodCallException(self::class . ' objects are immutable');
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws \BadMethodCallException
+     */
     public function offsetUnset(mixed $offset): void
     {
         throw new \BadMethodCallException(self::class . ' objects are immutable');

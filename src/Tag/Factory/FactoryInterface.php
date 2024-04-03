@@ -6,6 +6,7 @@ namespace TypeLang\PHPDoc\Tag\Factory;
 
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 interface FactoryInterface
@@ -18,5 +19,5 @@ interface FactoryInterface
      * @throws RuntimeExceptionInterface In case of parsing error occurs.
      * @throws \Throwable In case of internal error occurs.
      */
-    public function create(string $name, string $content, DescriptionParserInterface $descriptions): TagInterface;
+    public function create(string $name, Content $content, DescriptionParserInterface $descriptions): TagInterface;
 }

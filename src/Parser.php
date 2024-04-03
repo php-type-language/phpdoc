@@ -18,9 +18,6 @@ use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Factory\TagFactory;
 
-/**
- * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
- */
 class Parser implements ParserInterface
 {
     private readonly CommentParserInterface $comments;

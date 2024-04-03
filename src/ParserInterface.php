@@ -6,9 +6,6 @@ namespace TypeLang\PHPDoc;
 
 use JetBrains\PhpStorm\Language;
 
-/**
- * @psalm-suppress UndefinedAttributeClass : JetBrains language attribute may not be available
- */
 interface ParserInterface
 {
     /**
