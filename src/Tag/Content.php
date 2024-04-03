@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-use TypeLang\Parser\Exception\ParserExceptionInterface;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
@@ -108,6 +107,7 @@ class Content implements \Stringable
      */
     public function nextValue(string $tag, string $value): string
     {
+        /** @var T */
         return $this->apply(new ValueApplicator($tag, $value));
     }
 
@@ -115,12 +115,12 @@ class Content implements \Stringable
      * @template T of non-empty-string
      *
      * @api
-     * @param non-empty-string $tag
      * @param T $value
      * @return T|null
      */
     public function nextOptionalValue(string $value): ?string
     {
+        /** @var T|null */
         return $this->apply(new OptionalValueApplicator($value));
     }
 

@@ -17,6 +17,7 @@
         }
     },
     "require-dev": {
+        "type-lang/parser": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.42",
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^1.0",

@@ -33,6 +33,7 @@ final class ValueApplicator extends Applicator
      */
     public function __invoke(Content $lexer): string
     {
+        /** @var T */
         return ($this->identifier)($lexer)
             ?? throw $lexer->getTagException(\sprintf(
                 'Tag @%s contains an incorrect identifier value "%s"',
