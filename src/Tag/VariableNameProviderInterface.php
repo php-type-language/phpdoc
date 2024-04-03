@@ -14,5 +14,5 @@ interface VariableNameProviderInterface extends OptionalVariableNameProviderInte
      *
      * @return non-empty-string
      */
-    public function getVariable(): string;
+    public function getVariableName(): string;
 }

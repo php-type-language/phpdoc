@@ -15,5 +15,5 @@ interface OptionalVariableNameProviderInterface
      *
      * @return non-empty-string|null
      */
-    public function getVariable(): ?string;
+    public function getVariableName(): ?string;
 }

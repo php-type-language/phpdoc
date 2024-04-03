@@ -8,6 +8,8 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Content\IdentifierApplicator;
+use TypeLang\PHPDoc\Tag\Content\OptionalIdentifierApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalTypeParserApplicator;
 use TypeLang\PHPDoc\Tag\Content\ValueApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalValueApplicator;
@@ -76,6 +78,25 @@ class Content implements \Stringable
     public function nextOptionalType(TypesParserInterface $parser): ?TypeStatement
     {
         return $this->apply(new OptionalTypeParserApplicator($parser));
+    }
+
+    /**
+     * @api
+     * @param non-empty-string $tag
+     * @return non-empty-string
+     */
+    public function nextIdentifier(string $tag): string
+    {
+        return $this->apply(new IdentifierApplicator($tag));
+    }
+
+    /**
+     * @api
+     * @return non-empty-string|null
+     */
+    public function nextOptionalIdentifier(): ?string
+    {
+        return $this->apply(new OptionalIdentifierApplicator());
     }
 
     /**
