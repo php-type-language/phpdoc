@@ -53,6 +53,20 @@ class Content implements \Stringable
         $this->offset += $size - \strlen($this->value);
     }
 
+    /**
+     * @param callable(self):bool $context
+     */
+    public function transactional(callable $context): void
+    {
+        $offset = $this->offset;
+        $value = $this->value;
+
+        if ($context($this) === false) {
+            $this->offset = $offset;
+            $this->value = $value;
+        }
+    }
+
     public function getTagException(string $message, \Throwable $previous = null): InvalidTagException
     {
         return new InvalidTagException(
