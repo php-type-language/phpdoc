@@ -25,6 +25,9 @@ class Description implements DescriptionInterface, \IteratorAggregate
         $this->bootTagProvider($tags);
     }
 
+    /**
+     * @return ($description is DescriptionInterface ? DescriptionInterface : self)
+     */
     public static function fromStringable(string|\Stringable $description): DescriptionInterface
     {
         if ($description instanceof DescriptionInterface) {
@@ -34,6 +37,9 @@ class Description implements DescriptionInterface, \IteratorAggregate
         return new self($description);
     }
 
+    /**
+     * @return ($description is DescriptionInterface ? DescriptionInterface : self|null)
+     */
     public static function fromStringableOrNull(string|\Stringable|null $description): ?DescriptionInterface
     {
         if ($description === null) {

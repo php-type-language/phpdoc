@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
+use TypeLang\Parser\Exception\ParserExceptionInterface;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Content\OptionalTypeParserApplicator;
+use TypeLang\PHPDoc\Tag\Content\ValueApplicator;
+use TypeLang\PHPDoc\Tag\Content\OptionalValueApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalVariableNameApplicator;
 use TypeLang\PHPDoc\Tag\Content\TypeParserApplicator;
 use TypeLang\PHPDoc\Tag\Content\VariableNameApplicator;
@@ -69,6 +73,14 @@ class Content implements \Stringable
 
     /**
      * @api
+     */
+    public function nextOptionalType(TypesParserInterface $parser): ?TypeStatement
+    {
+        return $this->apply(new OptionalTypeParserApplicator($parser));
+    }
+
+    /**
+     * @api
      * @param non-empty-string $tag
      * @return non-empty-string
      */
@@ -84,6 +96,32 @@ class Content implements \Stringable
     public function nextOptionalVariable(): ?string
     {
         return $this->apply(new OptionalVariableNameApplicator());
+    }
+
+    /**
+     * @template T of non-empty-string
+     *
+     * @api
+     * @param non-empty-string $tag
+     * @param T $value
+     * @return T
+     */
+    public function nextValue(string $tag, string $value): string
+    {
+        return $this->apply(new ValueApplicator($tag, $value));
+    }
+
+    /**
+     * @template T of non-empty-string
+     *
+     * @api
+     * @param non-empty-string $tag
+     * @param T $value
+     * @return T|null
+     */
+    public function nextOptionalValue(string $value): ?string
+    {
+        return $this->apply(new OptionalValueApplicator($value));
     }
 
     /**

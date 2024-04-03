@@ -11,15 +11,14 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Tag\Content;
 
 /**
- * @template-extends Applicator<TypeStatement>
+ * @template-extends Applicator<TypeStatement|null>
  */
-final class TypeParserApplicator extends Applicator
+final class OptionalTypeParserApplicator extends Applicator
 {
     /**
      * @param non-empty-string $tag
      */
     public function __construct(
-        private readonly string $tag,
         private readonly TypesParserInterface $parser,
     ) {}
 
@@ -29,17 +28,12 @@ final class TypeParserApplicator extends Applicator
      * @throws \Throwable
      * @throws InvalidTagException
      */
-    public function __invoke(Content $lexer): TypeStatement
+    public function __invoke(Content $lexer): ?TypeStatement
     {
         try {
-            /** @var TypeStatement $type */
             $type = $this->parser->parse($lexer->value);
         } catch (ParserExceptionInterface $e) {
-            /** @psalm-suppress InvalidArgument */
-            throw $lexer->getTagException(
-                message: \sprintf('Tag @%s contains an incorrect type', $this->tag),
-                previous: $e,
-            );
+            return null;
         }
 
         /**
