@@ -34,9 +34,9 @@ trait TagsProvider
     }
 
     /**
-     * @return list<TagInterface>
-     *@see TagsProviderInterface::getTags()
+     * @see TagsProviderInterface::getTags()
      *
+     * @return list<TagInterface>
      */
     public function getTags(): array
     {
@@ -45,11 +45,15 @@ trait TagsProvider
 
     public function offsetExists(mixed $offset): bool
     {
+        assert(\is_int($offset));
+
         return isset($this->tags[$offset]);
     }
 
     public function offsetGet(mixed $offset): ?TagInterface
     {
+        assert(\is_int($offset));
+
         return $this->tags[$offset] ?? null;
     }
 
@@ -60,6 +64,9 @@ trait TagsProvider
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        assert(\is_int($offset));
+        assert($value instanceof TagInterface);
+
         throw new \BadMethodCallException(self::class . ' objects are immutable');
     }
 
@@ -70,6 +77,8 @@ trait TagsProvider
      */
     public function offsetUnset(mixed $offset): void
     {
+        assert(\is_int($offset));
+
         throw new \BadMethodCallException(self::class . ' objects are immutable');
     }
 
