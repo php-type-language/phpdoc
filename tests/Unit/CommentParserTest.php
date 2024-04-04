@@ -155,4 +155,14 @@ final class CommentParserTest extends TestCase
             actual: $this->parseAsArray($parser, $docBlock, $delimiter),
         );
     }
+
+    #[DataProvider('parserWithVariantDelimitersDataProvider')]
+    public function testEmptyComment(CommentParserInterface $parser, string $delimiter): void
+    {
+        self::assertSame([0 => ''], $this->parseAsArray(
+            parser: $parser,
+            docblock: '',
+            delimiter: $delimiter,
+        ));
+    }
 }
