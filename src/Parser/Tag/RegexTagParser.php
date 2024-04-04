@@ -9,10 +9,11 @@ use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Content;
+use TypeLang\PHPDoc\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\Tag\InvalidTag;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
-final class TagParser implements TagParserInterface
+final class RegexTagParser implements TagParserInterface
 {
     /**
      * @var non-empty-string
@@ -20,7 +21,7 @@ final class TagParser implements TagParserInterface
     private const PATTERN_TAG = '\G@[a-zA-Z_\x80-\xff\\\][\w\x80-\xff\-:\\\]*';
 
     public function __construct(
-        private readonly FactoryInterface $tags,
+        private readonly FactoryInterface $tags = new TagFactory(),
     ) {}
 
     /**

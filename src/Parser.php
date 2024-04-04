@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc;
 
 use JetBrains\PhpStorm\Language;
-use TypeLang\PHPDoc\Exception\InvalidTagException;
-use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
 use TypeLang\PHPDoc\Parser\Comment\RegexCommentParser;
 use TypeLang\PHPDoc\Parser\Comment\Segment;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionReader;
+use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionParser;
 use TypeLang\PHPDoc\Parser\SourceMap;
-use TypeLang\PHPDoc\Parser\Tag\TagParser;
+use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Factory\TagFactory;
@@ -31,8 +29,8 @@ class Parser implements ParserInterface
     public function __construct(
         FactoryInterface $tags = new TagFactory(),
     ) {
-        $this->tags = new TagParser($tags);
-        $this->descriptions = new SprintfDescriptionReader($this->tags);
+        $this->tags = new RegexTagParser($tags);
+        $this->descriptions = new SprintfDescriptionParser($this->tags);
         $this->comments = new RegexCommentParser();
     }
 

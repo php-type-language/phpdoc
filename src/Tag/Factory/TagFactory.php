@@ -55,6 +55,12 @@ final class TagFactory implements MutableFactoryInterface
             }
         }
 
-        return new Tag($name, $content->toDescription($descriptions));
+        $description = null;
+
+        if ($content->value !== '') {
+            $description = $content->toDescription($descriptions);
+        }
+
+        return new Tag($name, $description);
     }
 }

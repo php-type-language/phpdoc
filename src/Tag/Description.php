@@ -6,8 +6,9 @@ namespace TypeLang\PHPDoc\Tag;
 
 /**
  * @template-implements \IteratorAggregate<int<0, max>, TagInterface>
+ * @template-implements \ArrayAccess<int<0, max>, TagInterface|null>
  */
-class Description implements DescriptionInterface, \IteratorAggregate
+class Description implements DescriptionInterface, \IteratorAggregate, \ArrayAccess
 {
     use TagsProvider;
 

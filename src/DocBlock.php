@@ -46,36 +46,6 @@ final class DocBlock implements
         $this->bootTagProvider($tags);
     }
 
-    public function offsetExists(mixed $offset): bool
-    {
-        return isset($this->tags[$offset]);
-    }
-
-    public function offsetGet(mixed $offset): ?TagInterface
-    {
-        return $this->tags[$offset] ?? null;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @throws \BadMethodCallException
-     */
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        throw new \BadMethodCallException(self::class . ' objects are immutable');
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @throws \BadMethodCallException
-     */
-    public function offsetUnset(mixed $offset): void
-    {
-        throw new \BadMethodCallException(self::class . ' objects are immutable');
-    }
-
     public function getDescription(): DescriptionInterface
     {
         return $this->description;

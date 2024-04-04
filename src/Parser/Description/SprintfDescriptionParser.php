@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Parser\Description;
 
-final class SprintfDescriptionReader extends DescriptionParser
+final class SprintfDescriptionParser extends DescriptionParser
 {
     /**
      * @param int<0, max> $tagId

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Parser\Description;
 
+use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PHPDoc\Tag\Description;
 
 abstract class DescriptionParser implements DescriptionParserInterface
 {
     public function __construct(
-        private readonly TagParserInterface $tags,
+        private readonly TagParserInterface $tags = new RegexTagParser(),
     ) {}
 
     public function parse(string $description): Description
