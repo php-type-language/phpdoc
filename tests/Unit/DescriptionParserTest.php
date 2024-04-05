@@ -6,10 +6,12 @@ namespace TypeLang\PHPDoc\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionParser;
+use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Tag\Content;
-use TypeLang\PHPDoc\Tag\Description;
+use TypeLang\PHPDoc\Tag\Description\Description;
+use TypeLang\PHPDoc\Tag\Description\TaggedDescription;
+use TypeLang\PHPDoc\Tag\Description\TaggedDescriptionInterface;
 use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\Tag\InvalidTag;
@@ -29,7 +31,7 @@ final class DescriptionParserTest extends TestCase
             },
         ]);
 
-        yield SprintfDescriptionParser::class => [new SprintfDescriptionParser(
+        yield RegexDescriptionParser::class => [new RegexDescriptionParser(
             tags: new RegexTagParser($tags),
         )];
     }
@@ -47,8 +49,10 @@ final class DescriptionParserTest extends TestCase
     public function testDescriptionWithInlineTag(DescriptionParserInterface $parser): void
     {
         self::assertEquals(
-            expected: new Description('Hello {%1$s} World!', [
+            expected: new TaggedDescription([
+                new Description('Hello '),
                 new Tag('tag'),
+                new Description(' World!'),
             ]),
             actual: $parser->parse('Hello {@tag} World!'),
         );
@@ -58,8 +62,10 @@ final class DescriptionParserTest extends TestCase
     public function testDescriptionWithDescribedInlineTag(DescriptionParserInterface $parser): void
     {
         self::assertEquals(
-            expected: new Description('Hello {%1$s} World!', [
+            expected: new TaggedDescription([
+                new Description('Hello '),
                 new Tag('tag', 'description'),
+                new Description(' World!'),
             ]),
             actual: $parser->parse('Hello {@tag description} World!'),
         );
@@ -69,9 +75,12 @@ final class DescriptionParserTest extends TestCase
     public function testDescriptionWithMultipleInlineTags(DescriptionParserInterface $parser): void
     {
         self::assertEquals(
-            expected: new Description('Hello {%1$s} {%2$s} World!', [
+            expected: new TaggedDescription([
+                new Description('Hello '),
                 new Tag('tag1'),
+                new Description(' '),
                 new Tag('tag2', '#desc'),
+                new Description(' World!'),
             ]),
             actual: $parser->parse('Hello {@tag1} {@tag2#desc} World!'),
         );
@@ -81,7 +90,7 @@ final class DescriptionParserTest extends TestCase
     public function testDescriptionWithSprintfSyntax(DescriptionParserInterface $parser): void
     {
         self::assertEquals(
-            expected: new Description('Hello %%s World!'),
+            expected: new Description('Hello %s World!'),
             actual: $parser->parse('Hello %s World!'),
         );
     }
@@ -90,8 +99,10 @@ final class DescriptionParserTest extends TestCase
     public function testDescriptionWithSprintfSyntaxInsideInlineTag(DescriptionParserInterface $parser): void
     {
         self::assertEquals(
-            expected: new Description('Hello {%1$s} World!', [
-                new Tag('test-some', 'Desc %%s 42')
+            expected: new TaggedDescription([
+                new Description('Hello '),
+                new Tag('test-some', 'Desc %s 42'),
+                new Description(' World!'),
             ]),
             actual: $parser->parse('Hello {@test-some Desc %s 42} World!'),
         );
@@ -111,14 +122,15 @@ final class DescriptionParserTest extends TestCase
     {
         $description = $parser->parse('Hello {@@} World!');
 
-        self::assertCount(1, $description);
-        self::assertInstanceOf(InvalidTag::class, $description[0]);
+        self::assertInstanceOf(TaggedDescriptionInterface::class, $description);
+        self::assertCount(3, $description);
+        self::assertInstanceOf(InvalidTag::class, $description[1]);
 
-        $reason = $description[0]->getReason();
+        $reason = $description[1]->getReason();
 
         self::assertSame('Tag name cannot be empty', $reason->getMessage());
-        self::assertSame(InvalidTag::DEFAULT_UNKNOWN_TAG_NAME, $description[0]->getName());
-        self::assertEquals(new Description('{@}'), $description[0]->getDescription());
+        self::assertSame(InvalidTag::DEFAULT_UNKNOWN_TAG_NAME, $description[1]->getName());
+        self::assertEquals(new Description('{@}'), $description[1]->getDescription());
     }
 
     #[DataProvider('parserDataProvider')]
@@ -126,13 +138,14 @@ final class DescriptionParserTest extends TestCase
     {
         $description = $parser->parse('Hello {@error description} World!');
 
-        self::assertCount(1, $description);
-        self::assertInstanceOf(InvalidTag::class, $description[0]);
+        self::assertInstanceOf(TaggedDescriptionInterface::class, $description);
+        self::assertCount(3, $description);
+        self::assertInstanceOf(InvalidTag::class, $description[1]);
 
-        $reason = $description[0]->getReason();
+        $reason = $description[1]->getReason();
 
         self::assertSame('Error while parsing tag @error', $reason->getMessage());
-        self::assertSame('error', $description[0]->getName());
-        self::assertEquals(new Description('description'), $description[0]->getDescription());
+        self::assertSame('error', $description[1]->getName());
+        self::assertEquals(new Description('description'), $description[1]->getDescription());
     }
 }

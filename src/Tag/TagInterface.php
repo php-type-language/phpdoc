@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
+use TypeLang\PHPDoc\Tag\Description\OptionalDescriptionProviderInterface;
+
 interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
 {
     /**

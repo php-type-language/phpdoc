@@ -2,27 +2,15 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag;
+namespace TypeLang\PHPDoc\Tag\Description;
 
-/**
- * @template-implements \ArrayAccess<int<0, max>, TagInterface|null>
- */
-class Description implements DescriptionInterface, \ArrayAccess
+class Description implements DescriptionInterface
 {
-    use TagsProvider;
+    protected readonly string $value;
 
-    protected readonly string $template;
-
-    /**
-     * @param iterable<array-key, TagInterface> $tags
-     */
-    public function __construct(
-        string|\Stringable $template = '',
-        iterable $tags = [],
-    ) {
-        $this->template = (string) $template;
-
-        $this->bootTagProvider($tags);
+    public function __construct(string|\Stringable $value = '')
+    {
+        $this->value = (string) $value;
     }
 
     /**
@@ -49,19 +37,8 @@ class Description implements DescriptionInterface, \ArrayAccess
         return self::fromStringable($description);
     }
 
-    public function getTemplate(): string
-    {
-        return $this->template;
-    }
-
     public function __toString(): string
     {
-        $tags = [];
-
-        foreach ($this->tags as $tag) {
-            $tags[] = (string) $tag;
-        }
-
-        return \vsprintf($this->template, $tags);
+        return $this->value;
     }
 }

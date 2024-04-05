@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tag;
+namespace TypeLang\PHPDoc\Tag\Description;
 
-interface DescriptionInterface extends TagsProviderInterface, \Stringable
+/**
+ * Any class that implements this interface is a description object
+ * that can be represented as a raw string scalar value.
+ */
+interface DescriptionInterface extends \Stringable
 {
-    /**
-     * Returns the body template.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
-     */
-    public function getTemplate(): string;
-
     /**
      * Returns a plain string representation of this description.
      *

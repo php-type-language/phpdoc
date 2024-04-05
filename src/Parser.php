@@ -11,7 +11,7 @@ use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
 use TypeLang\PHPDoc\Parser\Comment\RegexCommentParser;
 use TypeLang\PHPDoc\Parser\Comment\Segment;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Parser\Description\SprintfDescriptionParser;
+use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
@@ -30,7 +30,7 @@ class Parser implements ParserInterface
         FactoryInterface $tags = new TagFactory(),
     ) {
         $this->tags = new RegexTagParser($tags);
-        $this->descriptions = new SprintfDescriptionParser($this->tags);
+        $this->descriptions = new RegexDescriptionParser($this->tags);
         $this->comments = new RegexCommentParser();
     }
 

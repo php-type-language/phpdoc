@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
+use TypeLang\PHPDoc\Tag\Description\Description;
+use TypeLang\PHPDoc\Tag\Description\DescriptionInterface;
+
 class Tag implements TagInterface
 {
     protected readonly ?DescriptionInterface $description;

@@ -11,11 +11,12 @@ use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PHPDoc\Tag\Content\IdentifierApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalIdentifierApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalTypeParserApplicator;
-use TypeLang\PHPDoc\Tag\Content\ValueApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalValueApplicator;
 use TypeLang\PHPDoc\Tag\Content\OptionalVariableNameApplicator;
 use TypeLang\PHPDoc\Tag\Content\TypeParserApplicator;
+use TypeLang\PHPDoc\Tag\Content\ValueApplicator;
 use TypeLang\PHPDoc\Tag\Content\VariableNameApplicator;
+use TypeLang\PHPDoc\Tag\Description\DescriptionInterface;
 
 class Content implements \Stringable
 {
