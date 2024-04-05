@@ -15,13 +15,11 @@ use TypeLang\PHPDoc\Tag\TagsProviderInterface;
  * This class represents structure containing a description and a set of tags
  * that describe an arbitrary DocBlock Comment in the code.
  *
- * @template-implements \IteratorAggregate<int<0, max>, TagInterface>
  * @template-implements \ArrayAccess<int<0, max>, TagInterface|null>
  */
 final class DocBlock implements
     OptionalDescriptionProviderInterface,
     TagsProviderInterface,
-    \IteratorAggregate,
     \ArrayAccess
 {
     use TagsProvider;

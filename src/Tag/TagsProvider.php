@@ -6,11 +6,9 @@ namespace TypeLang\PHPDoc\Tag;
 
 /**
  * @mixin TagsProviderInterface
- * @mixin \IteratorAggregate
  * @mixin \ArrayAccess
  *
  * @psalm-require-implements TagsProviderInterface
- * @psalm-require-implements \IteratorAggregate
  * @psalm-require-implements \ArrayAccess
  *
  * @internal This is an internal library trait, please do not use it in your code.
@@ -80,29 +78,5 @@ trait TagsProvider
         assert(\is_int($offset));
 
         throw new \BadMethodCallException(self::class . ' objects are immutable');
-    }
-
-    /**
-     * @return \Traversable<int<0, max>, TagInterface>
-     */
-    public function getIterator(): \Traversable
-    {
-        foreach ($this->tags as $tag) {
-            yield $tag;
-
-            $description = $tag->getDescription();
-
-            if ($description instanceof TagsProviderInterface) {
-                yield from $description;
-            }
-        }
-    }
-
-    /**
-     * @return int<0, max>
-     */
-    public function count(): int
-    {
-        return \count($this->tags);
     }
 }
