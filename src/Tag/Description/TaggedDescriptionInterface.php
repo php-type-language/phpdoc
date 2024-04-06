@@ -12,7 +12,7 @@ use TypeLang\PHPDoc\Tag\TagsProviderInterface;
  * containing an arbitrary set of nested tags ({@see TagInterface}) and,
  * like a parent {@see DescriptionInterface}, can be represented as a string.
  *
- * @template-implements \Traversable<int<0, max>, DescriptionInterface|TagInterface>
+ * @template-extends \Traversable<int<0, max>, DescriptionInterface|TagInterface>
  */
 interface TaggedDescriptionInterface extends
     TagsProviderInterface,

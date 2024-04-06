@@ -60,15 +60,11 @@ class TaggedDescription implements
 
     public function offsetExists(mixed $offset): bool
     {
-        assert(\is_int($offset));
-
         return isset($this->tags[$offset]);
     }
 
     public function offsetGet(mixed $offset): TagInterface|DescriptionInterface|null
     {
-        assert(\is_int($offset));
-
         return $this->components[$offset] ?? null;
     }
 

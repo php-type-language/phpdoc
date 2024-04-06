@@ -61,15 +61,11 @@ final class DocBlock implements
 
     public function offsetExists(mixed $offset): bool
     {
-        assert(\is_int($offset));
-
         return isset($this->tags[$offset]);
     }
 
     public function offsetGet(mixed $offset): ?TagInterface
     {
-        assert(\is_int($offset));
-
         return $this->tags[$offset] ?? null;
     }
 

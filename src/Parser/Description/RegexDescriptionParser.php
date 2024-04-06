@@ -43,7 +43,10 @@ class RegexDescriptionParser implements DescriptionParserInterface
 
         return match (\count($components)) {
             0 => new Description(),
-            1 => $components[0],
+            1 => match (true) {
+                $components[0] instanceof Description => $components[0],
+                default => new TaggedDescription($components),
+            },
             default => new TaggedDescription($components),
         };
     }
