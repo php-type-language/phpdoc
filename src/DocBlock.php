@@ -21,6 +21,7 @@ final class DocBlock implements
     OptionalDescriptionProviderInterface,
     TagsProviderInterface,
     \IteratorAggregate,
+    \JsonSerializable,
     \ArrayAccess,
     \Countable
 {
@@ -92,6 +93,14 @@ final class DocBlock implements
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->tags);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'description' => $this->description,
+            'tags' => $this->tags,
+        ];
     }
 
     /**

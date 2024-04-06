@@ -6,7 +6,10 @@ namespace TypeLang\PHPDoc\Tag;
 
 use TypeLang\PHPDoc\Tag\Description\OptionalDescriptionProviderInterface;
 
-interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
+interface TagInterface extends
+    OptionalDescriptionProviderInterface,
+    \JsonSerializable,
+    \Stringable
 {
     /**
      * Returns the non-empty tag name string without the '@' prefix.
