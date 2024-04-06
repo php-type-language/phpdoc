@@ -34,6 +34,7 @@ class Tag implements TagInterface
     public function jsonSerialize(): array
     {
         return \array_filter([
+            'kind' => static::class,
             'name' => $this->name,
             'description' => $this->description,
         ], static fn(mixed $value): bool => $value !== null);
