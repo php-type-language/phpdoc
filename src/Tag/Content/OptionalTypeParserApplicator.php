@@ -32,7 +32,7 @@ final class OptionalTypeParserApplicator extends Applicator
     {
         try {
             $type = $this->parser->parse($lexer->value);
-        } catch (ParserExceptionInterface $e) {
+        } catch (ParserExceptionInterface) {
             return null;
         }
 
