@@ -88,11 +88,6 @@ class TaggedDescription implements
         throw new \BadMethodCallException(static::class . ' objects are immutable');
     }
 
-    public function jsonSerialize(): array
-    {
-        return $this->components;
-    }
-
     public function __toString(): string
     {
         return \implode('', $this->components);

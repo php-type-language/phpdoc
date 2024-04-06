@@ -37,11 +37,6 @@ class Description implements DescriptionInterface
         return self::fromStringable($description);
     }
 
-    public function jsonSerialize(): string
-    {
-        return $this->value;
-    }
-
     public function __toString(): string
     {
         return $this->value;

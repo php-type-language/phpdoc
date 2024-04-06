@@ -8,7 +8,7 @@ namespace TypeLang\PHPDoc\Tag\Description;
  * Any class that implements this interface is a description object
  * that can be represented as a raw string scalar value.
  */
-interface DescriptionInterface extends \JsonSerializable, \Stringable
+interface DescriptionInterface extends \Stringable
 {
     /**
      * Returns a plain string representation of this description.
