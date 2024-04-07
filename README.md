@@ -16,7 +16,7 @@
 
 Reference implementation for TypeLang PHPDoc Parser.
 
-Read [documentation pages](https://phpdoc.io) for more information.
+Read [documentation pages](https://typelang.dev) for more information.
 
 ## Installation
 
