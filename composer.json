@@ -17,11 +17,11 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.42",
+        "friendsofphp/php-cs-fixer": "^3.53",
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^1.0",
         "type-lang/parser": "^1.0",
-        "vimeo/psalm": "^5.18"
+        "vimeo/psalm": "^5.23"
     },
     "autoload-dev": {
         "psr-4": {
