@@ -21,7 +21,7 @@ final class ValueApplicator extends Applicator
      */
     public function __construct(
         private readonly string $tag,
-        private readonly string $value
+        private readonly string $value,
     ) {
         $this->identifier = new OptionalValueApplicator($value);
     }
