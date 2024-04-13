@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Tag;
 
-final class InvalidTag extends Tag
+final class InvalidTag extends Tag implements InvalidTagInterface
 {
     /**
      * @var non-empty-string
