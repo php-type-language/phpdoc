@@ -7,8 +7,8 @@ namespace TypeLang\PHPDoc\Tag\Description;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 /**
- * @template-implements \ArrayAccess<int<0, max>, TagInterface|DescriptionInterface|null>
- * @template-implements \IteratorAggregate<int<0, max>, TagInterface|DescriptionInterface>
+ * @template-implements \ArrayAccess<array-key, TagInterface|DescriptionInterface|null>
+ * @template-implements \IteratorAggregate<array-key, TagInterface|DescriptionInterface>
  */
 class TaggedDescription implements
     TaggedDescriptionInterface,
@@ -60,7 +60,7 @@ class TaggedDescription implements
 
     public function offsetExists(mixed $offset): bool
     {
-        return isset($this->tags[$offset]);
+        return isset($this->components[$offset]);
     }
 
     public function offsetGet(mixed $offset): TagInterface|DescriptionInterface|null

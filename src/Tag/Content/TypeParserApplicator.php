@@ -32,7 +32,6 @@ final class TypeParserApplicator extends Applicator
     public function __invoke(Content $lexer): TypeStatement
     {
         try {
-            /** @var TypeStatement $type */
             $type = $this->parser->parse($lexer->value);
         } catch (ParserExceptionInterface $e) {
             /** @psalm-suppress InvalidArgument */
@@ -42,10 +41,7 @@ final class TypeParserApplicator extends Applicator
             );
         }
 
-        /**
-         * @psalm-suppress MixedArgument
-         * @psalm-suppress NoInterfaceProperties
-         */
+        // @phpstan-ignore-next-line : Property is defined
         $lexer->shift($this->parser->lastProcessedTokenOffset);
 
         return $type;

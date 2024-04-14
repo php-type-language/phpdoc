@@ -85,9 +85,9 @@ final class RegexTagParser implements TagParserInterface
         try {
             return $this->tags->create($name, new Content($trimmed), $parser);
         } catch (RuntimeExceptionInterface $e) {
-            /** @var int<0, max> */
             $offset += \strlen($content) - \strlen($trimmed);
 
+            /** @var int<0, max> $offset */
             throw $e->withSource($tag, $offset);
         }
     }

@@ -50,7 +50,7 @@ class Content implements \Stringable
             $this->value = \ltrim($this->value);
         }
 
-        /** @psalm-suppress InvalidPropertyAssignmentValue */
+        // @phpstan-ignore-next-line : Offset already greater than 0
         $this->offset += $size - \strlen($this->value);
     }
 
@@ -173,6 +173,15 @@ class Content implements \Stringable
     public function toDescription(DescriptionParserInterface $descriptions): DescriptionInterface
     {
         return $descriptions->parse($this->value);
+    }
+
+    public function toOptionalDescription(DescriptionParserInterface $descriptions): ?DescriptionInterface
+    {
+        if (\trim($this->value) === '') {
+            return null;
+        }
+
+        return $descriptions->parse(\rtrim($this->value));
     }
 
     public function __toString(): string

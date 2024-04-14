@@ -13,6 +13,9 @@ use TypeLang\PHPDoc\Tag\Content;
  */
 final class ValueApplicator extends Applicator
 {
+    /**
+     * @var OptionalValueApplicator<T>
+     */
     private readonly OptionalValueApplicator $identifier;
 
     /**

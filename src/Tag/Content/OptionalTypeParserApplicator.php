@@ -15,9 +15,6 @@ use TypeLang\PHPDoc\Tag\Content;
  */
 final class OptionalTypeParserApplicator extends Applicator
 {
-    /**
-     * @param non-empty-string $tag
-     */
     public function __construct(
         private readonly TypesParserInterface $parser,
     ) {}
@@ -36,10 +33,7 @@ final class OptionalTypeParserApplicator extends Applicator
             return null;
         }
 
-        /**
-         * @psalm-suppress MixedArgument
-         * @psalm-suppress NoInterfaceProperties
-         */
+        // @phpstan-ignore-next-line : Property is defined
         $lexer->shift($this->parser->lastProcessedTokenOffset);
 
         return $type;

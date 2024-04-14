@@ -14,8 +14,8 @@ use TypeLang\PHPDoc\Tag\TagsProviderInterface;
  * This class represents structure containing a description and a set of tags
  * that describe an arbitrary DocBlock Comment in the code.
  *
- * @template-implements \ArrayAccess<int<0, max>, TagInterface|null>
- * @template-implements \IteratorAggregate<int<0, max>, TagInterface>
+ * @template-implements \ArrayAccess<array-key, TagInterface|null>
+ * @template-implements \IteratorAggregate<array-key, TagInterface>
  */
 final class DocBlock implements
     OptionalDescriptionProviderInterface,
@@ -28,7 +28,6 @@ final class DocBlock implements
 
     /**
      * @var list<TagInterface>
-     * @psalm-suppress PropertyNotSetInConstructor
      */
     private readonly array $tags;
 
@@ -54,6 +53,9 @@ final class DocBlock implements
         return $this->description;
     }
 
+    /**
+     * @return list<TagInterface>
+     */
     public function getTags(): array
     {
         return $this->tags;
