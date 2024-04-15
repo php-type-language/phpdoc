@@ -91,7 +91,7 @@ class RegexDescriptionParser implements DescriptionParserInterface
         }
 
         /** @var list<non-empty-string> */
-        return \array_filter($result, static fn (string $chunk): bool => $chunk !== '');
+        return \array_filter($result, static fn(string $chunk): bool => $chunk !== '');
     }
 
     /**
