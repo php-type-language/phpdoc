@@ -16,7 +16,7 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
     final public function __construct(
         public readonly string $source,
         public readonly int $offset = 0,
-        string $message = "",
+        string $message = '',
         int $code = 0,
         ?\Throwable $previous = null,
     ) {

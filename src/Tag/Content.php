@@ -24,6 +24,7 @@ class Content implements \Stringable
 
     /**
      * @var int<0, max>
+     *
      * @psalm-readonly-allow-private-mutation
      */
     public int $offset = 0;
@@ -68,7 +69,7 @@ class Content implements \Stringable
         }
     }
 
-    public function getTagException(string $message, \Throwable $previous = null): InvalidTagException
+    public function getTagException(string $message, ?\Throwable $previous = null): InvalidTagException
     {
         return new InvalidTagException(
             source: $this->source,
@@ -79,8 +80,9 @@ class Content implements \Stringable
     }
 
     /**
-     * @api
      * @param non-empty-string $tag
+     *
+     * @api
      */
     public function nextType(string $tag, TypesParserInterface $parser): TypeStatement
     {
@@ -96,9 +98,10 @@ class Content implements \Stringable
     }
 
     /**
-     * @api
      * @param non-empty-string $tag
+     *
      * @return non-empty-string
+     * @api
      */
     public function nextIdentifier(string $tag): string
     {
@@ -106,8 +109,8 @@ class Content implements \Stringable
     }
 
     /**
-     * @api
      * @return non-empty-string|null
+     * @api
      */
     public function nextOptionalIdentifier(): ?string
     {
@@ -115,9 +118,10 @@ class Content implements \Stringable
     }
 
     /**
-     * @api
      * @param non-empty-string $tag
+     *
      * @return non-empty-string
+     * @api
      */
     public function nextVariable(string $tag): string
     {
@@ -125,8 +129,8 @@ class Content implements \Stringable
     }
 
     /**
-     * @api
      * @return non-empty-string|null
+     * @api
      */
     public function nextOptionalVariable(): ?string
     {
@@ -136,10 +140,11 @@ class Content implements \Stringable
     /**
      * @template T of non-empty-string
      *
-     * @api
      * @param non-empty-string $tag
      * @param T $value
+     *
      * @return T
+     * @api
      */
     public function nextValue(string $tag, string $value): string
     {
@@ -150,9 +155,10 @@ class Content implements \Stringable
     /**
      * @template T of non-empty-string
      *
-     * @api
      * @param T $value
+     *
      * @return T|null
+     * @api
      */
     public function nextOptionalValue(string $value): ?string
     {
@@ -162,7 +168,9 @@ class Content implements \Stringable
 
     /**
      * @template T of mixed
+     *
      * @param callable(Content):T $applicator
+     *
      * @return T
      */
     public function apply(callable $applicator): mixed

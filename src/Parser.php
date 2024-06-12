@@ -44,6 +44,7 @@ class Parser implements ParserInterface
         try {
             /**
              * @var Segment $segment
+             *
              * @psalm-suppress InvalidIterator
              */
             foreach ($result = $this->analyze($docblock) as $segment) {
@@ -67,7 +68,6 @@ class Parser implements ParserInterface
 
     /**
      * @return \Generator<array-key, Segment, void, DocBlock>
-     *
      * @throws RuntimeExceptionInterface
      */
     private function analyze(string $docblock): \Generator

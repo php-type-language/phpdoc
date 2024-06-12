@@ -16,8 +16,8 @@ interface FactoryInterface
      *
      * @param non-empty-string $name
      *
-     * @throws RuntimeExceptionInterface In case of parsing error occurs.
-     * @throws \Throwable In case of internal error occurs.
+     * @throws RuntimeExceptionInterface in case of parsing error occurs
+     * @throws \Throwable in case of internal error occurs
      */
     public function create(string $name, Content $content, DescriptionParserInterface $descriptions): TagInterface;
 }

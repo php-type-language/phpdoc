@@ -20,7 +20,7 @@ class InvalidTagException extends ParsingException
         string $tag,
         string $source,
         int $offset = 0,
-        \Throwable $prev = null,
+        ?\Throwable $prev = null,
     ): static {
         $message = \sprintf('Error while parsing tag @%s', $tag);
 

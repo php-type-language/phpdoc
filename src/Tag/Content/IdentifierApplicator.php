@@ -25,7 +25,6 @@ final class IdentifierApplicator extends Applicator
 
     /**
      * @return non-empty-string
-     *
      * @throws InvalidTagException
      */
     public function __invoke(Content $lexer): string

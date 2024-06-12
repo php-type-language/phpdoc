@@ -24,8 +24,6 @@ final class TypeParserApplicator extends Applicator
     ) {}
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \Throwable
      * @throws InvalidTagException
      */

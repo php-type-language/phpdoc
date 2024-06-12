@@ -31,7 +31,6 @@ final class ValueApplicator extends Applicator
 
     /**
      * @return T
-     *
      * @throws InvalidTagException
      */
     public function __invoke(Content $lexer): string

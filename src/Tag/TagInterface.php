@@ -28,9 +28,9 @@ interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
      *
      * @psalm-immutable Each call to the method must return the same value.
      *
-     * @return string Returns string representation of the object that
+     * @return string returns string representation of the object that
      *         implements this interface (and/or {@see __toString()} magic
-     *         method).
+     *         method)
      */
     public function __toString(): string;
 }

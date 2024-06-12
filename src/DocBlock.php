@@ -72,8 +72,6 @@ final class DocBlock implements
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \BadMethodCallException
      */
     public function offsetSet(mixed $offset, mixed $value): void
@@ -82,8 +80,6 @@ final class DocBlock implements
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \BadMethodCallException
      */
     public function offsetUnset(mixed $offset): void

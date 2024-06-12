@@ -7,9 +7,9 @@ namespace TypeLang\PHPDoc\Tag\Factory;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\InvalidTag;
 use TypeLang\PHPDoc\Tag\Tag;
-use TypeLang\PHPDoc\Tag\Content;
 use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class TagFactory implements MutableFactoryInterface

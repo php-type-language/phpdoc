@@ -7,8 +7,8 @@ namespace TypeLang\PHPDoc\Parser\Tag;
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Content;
+use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
 use TypeLang\PHPDoc\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\Tag\InvalidTag;
 use TypeLang\PHPDoc\Tag\TagInterface;
@@ -37,6 +37,7 @@ final class RegexTagParser implements TagParserInterface
      *   - etc...
      *
      * @phpstan-pure
+     *
      * @psalm-pure
      *
      * @throws InvalidTagNameException

@@ -69,8 +69,6 @@ class TaggedDescription implements
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \BadMethodCallException
      */
     public function offsetSet(mixed $offset, mixed $value): void
@@ -79,8 +77,6 @@ class TaggedDescription implements
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \BadMethodCallException
      */
     public function offsetUnset(mixed $offset): void

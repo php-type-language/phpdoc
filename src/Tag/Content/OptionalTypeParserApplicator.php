@@ -20,8 +20,6 @@ final class OptionalTypeParserApplicator extends Applicator
     ) {}
 
     /**
-     * {@inheritDoc}
-     *
      * @throws \Throwable
      * @throws InvalidTagException
      */

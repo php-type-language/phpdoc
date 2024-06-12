@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser;
 
 /**
- * @internal This is an internal library class, please do not use it in your code.
+ * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal TypeLang\PHPDoc
  */
 final class SourceMap
