@@ -80,9 +80,9 @@ class Content implements \Stringable
     }
 
     /**
-     * @param non-empty-string $tag
-     *
      * @api
+     *
+     * @param non-empty-string $tag
      */
     public function nextType(string $tag, TypesParserInterface $parser): TypeStatement
     {
@@ -98,10 +98,11 @@ class Content implements \Stringable
     }
 
     /**
+     * @api
+     *
      * @param non-empty-string $tag
      *
      * @return non-empty-string
-     * @api
      */
     public function nextIdentifier(string $tag): string
     {
@@ -109,8 +110,9 @@ class Content implements \Stringable
     }
 
     /**
-     * @return non-empty-string|null
      * @api
+     *
+     * @return non-empty-string|null
      */
     public function nextOptionalIdentifier(): ?string
     {
@@ -118,10 +120,11 @@ class Content implements \Stringable
     }
 
     /**
+     * @api
+     *
      * @param non-empty-string $tag
      *
      * @return non-empty-string
-     * @api
      */
     public function nextVariable(string $tag): string
     {
@@ -129,8 +132,9 @@ class Content implements \Stringable
     }
 
     /**
-     * @return non-empty-string|null
      * @api
+     *
+     * @return non-empty-string|null
      */
     public function nextOptionalVariable(): ?string
     {
@@ -138,13 +142,14 @@ class Content implements \Stringable
     }
 
     /**
+     * @api
+     *
      * @template T of non-empty-string
      *
      * @param non-empty-string $tag
      * @param T $value
      *
      * @return T
-     * @api
      */
     public function nextValue(string $tag, string $value): string
     {
@@ -153,12 +158,13 @@ class Content implements \Stringable
     }
 
     /**
+     * @api
+     *
      * @template T of non-empty-string
      *
      * @param T $value
      *
      * @return T|null
-     * @api
      */
     public function nextOptionalValue(string $value): ?string
     {
