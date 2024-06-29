@@ -36,10 +36,6 @@ final class RegexTagParser implements TagParserInterface
      *   - "@tag With\TypeName $andVariableName And description"
      *   - etc...
      *
-     * @phpstan-pure
-     *
-     * @psalm-pure
-     *
      * @throws InvalidTagNameException
      */
     private function getTagName(string $content): string
