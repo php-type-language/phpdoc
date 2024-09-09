@@ -13,7 +13,7 @@ interface DescriptionParserInterface
      *
      * ```php
      * $description = $parser->parse(<<<'DOC'
-     *      This is a description with {@link Example}.
+     *      This is a description with {@​link Example}.
      *      DOC);
      *
      * // $description MAY contains:

@@ -12,8 +12,8 @@ interface TagParserInterface
     /**
      * Returns concrete tag instance by the tag signature.
      *
-     * ```php
-     * $tag = $parser->parse('@param string $tag');
+     * ```
+     * $tag = $parser->parse('@​param string $tag');
      *
      * // $tag may contains:
      * // object(ParamTag) {
