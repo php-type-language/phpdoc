@@ -24,8 +24,6 @@ class Content implements \Stringable
 
     /**
      * @var int<0, max>
-     *
-     * @psalm-readonly-allow-private-mutation
      */
     public int $offset = 0;
 

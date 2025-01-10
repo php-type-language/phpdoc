@@ -15,8 +15,6 @@ interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
      * that is, can contain all the characters that can match the PHP FQN, as
      * well as the '-' character.
      *
-     * @psalm-immutable Each call to the method must return the same value.
-     *
      * @return non-empty-string
      */
     public function getName(): string;
@@ -25,8 +23,6 @@ interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
      * Magic method {@link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring}
      * allows a class to decide how it will react when it is treated like
      * a string.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
      *
      * @return string returns string representation of the object that
      *         implements this interface (and/or {@see __toString()} magic

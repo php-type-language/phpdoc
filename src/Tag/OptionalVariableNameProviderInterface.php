@@ -11,8 +11,6 @@ interface OptionalVariableNameProviderInterface
      * which this tag is attached or {@see null} in case of the tag does
      * not contain a name.
      *
-     * @psalm-immutable Each call to the method must return the same value.
-     *
      * @return non-empty-string|null
      */
     public function getVariableName(): ?string;

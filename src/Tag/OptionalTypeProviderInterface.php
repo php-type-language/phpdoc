@@ -17,8 +17,6 @@ interface OptionalTypeProviderInterface
     /**
      * Returns an AST object of the type or {@see null} in case the
      * type is not specified.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
      */
     public function getType(): ?TypeStatement;
 }

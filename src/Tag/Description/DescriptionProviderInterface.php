@@ -9,8 +9,6 @@ interface DescriptionProviderInterface extends OptionalDescriptionProviderInterf
     /**
      * Returns description object which can be represented as a string and
      * contains additional information.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
      */
     public function getDescription(): DescriptionInterface;
 }

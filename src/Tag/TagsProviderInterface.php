@@ -13,8 +13,6 @@ interface TagsProviderInterface
     /**
      * Returns the tags for this object.
      *
-     * @psalm-immutable Each call to the method must return the same value.
-     *
      * @return iterable<array-key, TagInterface>
      */
     public function getTags(): iterable;

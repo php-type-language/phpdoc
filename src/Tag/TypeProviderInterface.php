@@ -10,8 +10,6 @@ interface TypeProviderInterface extends OptionalTypeProviderInterface
 {
     /**
      * Returns an AST object of the type.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
      */
     public function getType(): TypeStatement;
 }

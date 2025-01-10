@@ -10,8 +10,6 @@ interface VariableNameProviderInterface extends OptionalVariableNameProviderInte
      * Returns the name of the variable (parameter, field, etc.) to
      * which this tag is attached.
      *
-     * @psalm-immutable Each call to the method must return the same value.
-     *
      * @return non-empty-string
      */
     public function getVariableName(): string;

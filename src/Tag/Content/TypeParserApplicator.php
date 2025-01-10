@@ -32,7 +32,6 @@ final class TypeParserApplicator extends Applicator
         try {
             $type = $this->parser->parse($lexer->value);
         } catch (ParserExceptionInterface $e) {
-            /** @psalm-suppress InvalidArgument */
             throw $lexer->getTagException(
                 message: \sprintf('Tag @%s contains an incorrect type', $this->tag),
                 previous: $e,

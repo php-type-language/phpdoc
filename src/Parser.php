@@ -42,11 +42,7 @@ class Parser implements ParserInterface
         $mapper = new SourceMap();
 
         try {
-            /**
-             * @var Segment $segment
-             *
-             * @psalm-suppress InvalidIterator
-             */
+            /** @var Segment $segment */
             foreach ($result = $this->analyze($docblock) as $segment) {
                 $mapper->add($segment->offset, $segment->text);
             }
@@ -72,7 +68,6 @@ class Parser implements ParserInterface
      */
     private function analyze(string $docblock): \Generator
     {
-        /** @psalm-suppress InvalidIterator */
         yield from $blocks = $this->groupByCommentSections($docblock);
 
         $description = null;

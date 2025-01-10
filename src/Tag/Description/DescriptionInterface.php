@@ -16,8 +16,6 @@ interface DescriptionInterface extends \Stringable
      * Magic method {@link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring}
      * allows a class to decide how it will react when it is treated like
      * a string.
-     *
-     * @psalm-immutable Each call to the method must return the same value.
      */
     public function __toString(): string;
 }
