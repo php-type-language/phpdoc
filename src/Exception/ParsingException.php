@@ -45,8 +45,8 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
         return new static(
             source: $source,
             offset: $offset,
-            message: $this->message,
-            code: $this->code,
+            message: $this->getMessage(),
+            code: $this->getCode(),
             previous: $this,
         );
     }

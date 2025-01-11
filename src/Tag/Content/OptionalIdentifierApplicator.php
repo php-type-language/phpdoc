@@ -16,13 +16,14 @@ final class OptionalIdentifierApplicator extends Applicator
      */
     public function __invoke(Content $lexer): ?string
     {
+        // @phpstan-ignore-next-line : PHPStan false positive
         if ($lexer->value === '') {
             return null;
         }
 
         \preg_match('/([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)\b/u', $lexer->value, $matches);
 
-        if (\count($matches) !== 2 || $matches[1] === '') {
+        if (\count($matches) !== 2) {
             return null;
         }
 
