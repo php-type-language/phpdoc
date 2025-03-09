@@ -4,7 +4,22 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc;
 
-use JetBrains\PhpStorm\Language;
+use TypeLang\PHPDoc\DocBlock\DocBlock;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\MethodTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\MutableTagFactoryInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\ParamTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\PropertyReadTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\PropertyTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\PropertyWriteTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\ReturnTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TemplateCovariantTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TemplateExtendsTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TemplateImplementsTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TemplateTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\ThrowsTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\VarTagFactory;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
@@ -15,8 +30,6 @@ use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
-use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
-use TypeLang\PHPDoc\Tag\Factory\TagFactory;
 
 class Parser implements ParserInterface
 {
@@ -26,18 +39,54 @@ class Parser implements ParserInterface
 
     private readonly TagParserInterface $tags;
 
-    public function __construct(
-        FactoryInterface $tags = new TagFactory(),
-    ) {
-        $this->tags = new RegexTagParser($tags);
+    private readonly MutableTagFactoryInterface $factories;
+
+    /**
+     * @param iterable<non-empty-string, TagFactoryInterface>|null $tags
+     */
+    public function __construct(?iterable $tags = null)
+    {
+        $this->factories = new TagFactory($tags ?? self::createDefaultTags());
+        $this->tags = new RegexTagParser($this->factories);
         $this->descriptions = new RegexDescriptionParser($this->tags);
         $this->comments = new RegexCommentParser();
     }
 
     /**
+     * @return iterable<non-empty-string, TagFactoryInterface>
+     */
+    private static function createDefaultTags(): iterable
+    {
+        yield 'method' => new MethodTagFactory();
+        yield 'param' => new ParamTagFactory();
+        yield 'property' => new PropertyTagFactory();
+        yield 'property-read' => new PropertyReadTagFactory();
+        yield 'property-write' => new PropertyWriteTagFactory();
+        yield 'return' => new ReturnTagFactory();
+        yield 'throws' => new ThrowsTagFactory();
+        yield 'var' => new VarTagFactory();
+        yield 'template' => new TemplateTagFactory();
+        yield 'template-implements' => $implements = new TemplateImplementsTagFactory();
+        yield 'implements' => $implements;
+        yield 'template-extends' => $extends = new TemplateExtendsTagFactory();
+        yield 'extends' => $extends;
+        yield 'template-covariant' => new TemplateCovariantTagFactory();
+    }
+
+    /**
+     * Facade method of {@see MutableTagFactoryInterface::register()}
+     *
+     * @param non-empty-string|list<non-empty-string> $tags
+     */
+    public function register(string|array $tags, TagFactoryInterface $delegate): void
+    {
+        $this->factories->register($tags, $delegate);
+    }
+
+    /**
      * @throws RuntimeExceptionInterface
      */
-    public function parse(#[Language('PHP')] string $docblock): DocBlock
+    public function parse(string $docblock): DocBlock
     {
         $mapper = new SourceMap();
 

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Parser\Tag;
 
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\InvalidTag;
+use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagNameException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Tag\Content;
-use TypeLang\PHPDoc\Tag\Factory\FactoryInterface;
-use TypeLang\PHPDoc\Tag\Factory\TagFactory;
-use TypeLang\PHPDoc\Tag\InvalidTag;
-use TypeLang\PHPDoc\Tag\TagInterface;
 
 final class RegexTagParser implements TagParserInterface
 {
@@ -21,7 +20,7 @@ final class RegexTagParser implements TagParserInterface
     private const PATTERN_TAG = '\G@[a-zA-Z_\x80-\xff\\\][\w\x80-\xff\-:\\\]*';
 
     public function __construct(
-        private readonly FactoryInterface $tags = new TagFactory(),
+        private readonly TagFactoryInterface $tags = new TagFactory(),
     ) {}
 
     /**
@@ -80,7 +79,7 @@ final class RegexTagParser implements TagParserInterface
         $trimmed = \ltrim($content);
 
         try {
-            return $this->tags->create($name, new Content($trimmed), $parser);
+            return $this->tags->create($name, $trimmed, $parser);
         } catch (RuntimeExceptionInterface $e) {
             $offset += \strlen($content) - \strlen($trimmed);
 
