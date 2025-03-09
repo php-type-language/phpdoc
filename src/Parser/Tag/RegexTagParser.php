@@ -67,9 +67,7 @@ final class RegexTagParser implements TagParserInterface
         try {
             $name = $this->getTagName($tag);
         } catch (InvalidTagNameException $e) {
-            return new InvalidTag($e, $parser->parse(
-                description: \substr($tag, 1),
-            ));
+            return new InvalidTag($e, description: $tag);
         }
 
         /** @var non-empty-string $name */

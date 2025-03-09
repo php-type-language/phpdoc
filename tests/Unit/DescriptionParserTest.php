@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Tests\Unit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use TypeLang\PHPDoc\DocBlock\Tag\Content\Stream;
-use TypeLang\PHPDoc\DocBlock\Tag\Description\Description;
-use TypeLang\PHPDoc\DocBlock\Tag\Description\TaggedDescription;
-use TypeLang\PHPDoc\DocBlock\Tag\Description\TaggedDescriptionInterface;
+use TypeLang\PHPDoc\DocBlock\Description\Description;
+use TypeLang\PHPDoc\DocBlock\Description\TaggedDescription;
+use TypeLang\PHPDoc\DocBlock\Description\TaggedDescriptionInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\InvalidTag;
@@ -24,9 +23,12 @@ final class DescriptionParserTest extends TestCase
     {
         $tags = new TagFactory([
             'error' => new class implements TagFactoryInterface {
-                public function create(Stream $tag, DescriptionParserInterface $descriptions): TagInterface
-                {
-                    throw new \LogicException('Error tag ' . $tag->getName());
+                public function create(
+                    string $tag,
+                    string $content,
+                    DescriptionParserInterface $descriptions
+                ): TagInterface {
+                    throw new \LogicException('Error tag ' . $tag);
                 }
             },
         ]);
@@ -123,14 +125,15 @@ final class DescriptionParserTest extends TestCase
         $description = $parser->parse('Hello {@@} World!');
 
         self::assertInstanceOf(TaggedDescriptionInterface::class, $description);
-        self::assertCount(3, $description);
-        self::assertInstanceOf(InvalidTag::class, $description[1]);
+        self::assertCount(3, $description->components);
+        self::assertCount(1, $description);
+        self::assertInstanceOf(InvalidTag::class, $description[0]);
 
-        $reason = $description[1]->reason;
+        $reason = $description[0]->reason;
 
         self::assertSame('Tag name cannot be empty', $reason->getMessage());
-        self::assertSame(InvalidTag::DEFAULT_UNKNOWN_TAG_NAME, $description[1]->getName());
-        self::assertEquals(new Description('{@}'), $description[1]->getDescription());
+        self::assertSame(InvalidTag::DEFAULT_UNKNOWN_TAG_NAME, $description[0]->name);
+        self::assertEquals(new Description('@@'), $description[0]->description);
     }
 
     #[DataProvider('parserDataProvider')]
@@ -139,13 +142,14 @@ final class DescriptionParserTest extends TestCase
         $description = $parser->parse('Hello {@error description} World!');
 
         self::assertInstanceOf(TaggedDescriptionInterface::class, $description);
-        self::assertCount(3, $description);
-        self::assertInstanceOf(InvalidTag::class, $description[1]);
+        self::assertCount(3, $description->components);
+        self::assertCount(1, $description);
+        self::assertInstanceOf(InvalidTag::class, $description[0]);
 
-        $reason = $description[1]->reason;
+        $reason = $description[0]->reason;
 
         self::assertSame('Error while parsing tag @error', $reason->getMessage());
-        self::assertSame('error', $description[1]->getName());
-        self::assertEquals(new Description('description'), $description[1]->getDescription());
+        self::assertSame('error', $description[0]->name);
+        self::assertEquals(new Description('description'), $description[0]->description);
     }
 }

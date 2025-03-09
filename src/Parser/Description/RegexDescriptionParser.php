@@ -54,7 +54,7 @@ class RegexDescriptionParser implements DescriptionParserInterface
     private function createFromChunk(string $chunk): DescriptionInterface|TagInterface
     {
         if ($chunk === '@') {
-            return new Description('{' . $chunk . '}');
+            return new Description('{@}');
         }
 
         if (\str_starts_with($chunk, '@')) {

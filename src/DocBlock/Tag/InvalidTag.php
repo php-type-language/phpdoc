@@ -9,7 +9,9 @@ final class InvalidTag extends Tag implements InvalidTagInterface
     /**
      * @var non-empty-string
      */
-    public const DEFAULT_UNKNOWN_TAG_NAME = '<unknown>';
+    public const DEFAULT_UNKNOWN_TAG_NAME = 'invalid';
+
+    private readonly bool $isUnknownName;
 
     /**
      * @param non-empty-string $name
@@ -17,21 +19,25 @@ final class InvalidTag extends Tag implements InvalidTagInterface
     public function __construct(
         public readonly \Throwable $reason,
         \Stringable|string|null $description = null,
-        string $name = self::DEFAULT_UNKNOWN_TAG_NAME,
+        ?string $name = null,
     ) {
-        parent::__construct($name, $description);
+        $this->isUnknownName = $name === null;
+
+        parent::__construct($name ?? self::DEFAULT_UNKNOWN_TAG_NAME, $description);
     }
 
     public function __toString(): string
     {
-        $name = $this->name === self::DEFAULT_UNKNOWN_TAG_NAME ? '' : $this->name;
+        if ($this->isUnknownName) {
+            return \sprintf('@%s', $this->description);
+        }
 
         if ($this->description === null) {
-            return \sprintf('@%s', $name);
+            return \sprintf('@%s', $this->name);
         }
 
         return \rtrim(\vsprintf('@%s %s', [
-            $name,
+            $this->name,
             (string) $this->description,
         ]));
     }

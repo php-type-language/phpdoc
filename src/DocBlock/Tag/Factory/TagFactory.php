@@ -65,7 +65,7 @@ final class TagFactory implements MutableTagFactoryInterface
 
         $description = null;
 
-        if ($content === '') {
+        if ($content !== '') {
             $description = $descriptions->parse($content);
         }
 
