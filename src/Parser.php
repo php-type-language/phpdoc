@@ -8,18 +8,6 @@ use TypeLang\PHPDoc\DocBlock\DocBlock;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\MutableTagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\ReturnTag\ReturnTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateExtendsTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateImplementsTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\ThrowsTag\ThrowsTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\VarTag\VarTagFactory;
 use TypeLang\PHPDoc\Exception\ParsingException;
 use TypeLang\PHPDoc\Exception\RuntimeExceptionInterface;
 use TypeLang\PHPDoc\Parser\Comment\CommentParserInterface;
@@ -30,6 +18,8 @@ use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
+use TypeLang\PHPDoc\Platform\PlatformInterface;
+use TypeLang\PHPDoc\Platform\StandardPlatform;
 
 class Parser implements ParserInterface
 {
@@ -41,36 +31,28 @@ class Parser implements ParserInterface
 
     private readonly MutableTagFactoryInterface $factories;
 
-    /**
-     * @param iterable<non-empty-string, TagFactoryInterface>|null $tags
-     */
-    public function __construct(?iterable $tags = null)
-    {
-        $this->factories = new TagFactory($tags ?? self::createDefaultTags());
-        $this->tags = new RegexTagParser($this->factories);
-        $this->descriptions = new RegexDescriptionParser($this->tags);
-        $this->comments = new RegexCommentParser();
+    public function __construct(
+        public readonly PlatformInterface $platform = new StandardPlatform(),
+    ) {
+        $this->factories = new TagFactory($platform->getTags());
+        $this->tags = $this->createTagParser($this->factories);
+        $this->descriptions = $this->createDescriptionParser($this->tags);
+        $this->comments = $this->createCommentParser();
     }
 
-    /**
-     * @return iterable<non-empty-string, TagFactoryInterface>
-     */
-    private static function createDefaultTags(): iterable
+    protected function createTagParser(TagFactoryInterface $factories): TagParserInterface
     {
-        yield 'method' => new MethodTagFactory();
-        yield 'param' => new ParamTagFactory();
-        yield 'property' => new PropertyTagFactory();
-        yield 'property-read' => new PropertyReadTagFactory();
-        yield 'property-write' => new PropertyWriteTagFactory();
-        yield 'return' => new ReturnTagFactory();
-        yield 'throws' => new ThrowsTagFactory();
-        yield 'var' => new VarTagFactory();
-        yield 'template' => new TemplateTagFactory();
-        yield 'template-implements' => $implements = new TemplateImplementsTagFactory();
-        yield 'implements' => $implements;
-        yield 'template-extends' => $extends = new TemplateExtendsTagFactory();
-        yield 'extends' => $extends;
-        yield 'template-covariant' => new TemplateCovariantTagFactory();
+        return new RegexTagParser($factories);
+    }
+
+    protected function createDescriptionParser(TagParserInterface $tags): DescriptionParserInterface
+    {
+        return new RegexDescriptionParser($tags);
+    }
+
+    protected function createCommentParser(): CommentParserInterface
+    {
+        return new RegexCommentParser();
     }
 
     /**
