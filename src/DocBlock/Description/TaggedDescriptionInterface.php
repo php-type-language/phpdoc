@@ -26,7 +26,7 @@ interface TaggedDescriptionInterface extends
      * {@see \TypeLang\PHPDoc\DocBlock\Polyfill\Description\TaggedDescriptionInterface} in the order in which these
      * elements are defined.
      *
-     * @var DescriptionInterface
+     * @var iterable<array-key, DescriptionInterface|TagInterface>
      *
      * @readonly
      */
