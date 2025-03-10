@@ -19,6 +19,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
  * ```
  * "@link" [URI] [<description>]
  * ```
+ *
  * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
  */
 final class LinkTag extends Tag
