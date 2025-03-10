@@ -11,7 +11,7 @@ use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 /**
  * This class is responsible for creating "`@abstract`" tags.
  *
- * See {@see IgnoreTag} for details about this tag.
+ * See {@see AbstractTag} for details about this tag.
  */
 final class AbstractTagFactory implements TagFactoryInterface
 {
