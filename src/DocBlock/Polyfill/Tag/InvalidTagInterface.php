@@ -13,4 +13,3 @@ use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
  */
 interface InvalidTagInterface extends
     TagInterface {}
-

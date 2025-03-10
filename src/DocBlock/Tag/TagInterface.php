@@ -21,6 +21,7 @@ interface TagInterface extends OptionalDescriptionProviderInterface, \Stringable
      * (Fully Qualified Name), as well as the '-' character.
      *
      * @var non-empty-string
+     *
      * @readonly
      */
     public string $name { get; }

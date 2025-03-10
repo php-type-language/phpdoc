@@ -16,4 +16,3 @@ interface InvalidTagInterface extends TagInterface
      */
     public \Throwable $reason { get; }
 }
-

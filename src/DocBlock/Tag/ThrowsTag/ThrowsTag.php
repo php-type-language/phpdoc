@@ -25,6 +25,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
  * detailed view is created and the consumer knows for which errors to check.
  *
  * ```
+ *
  * * @throws [<Type>] [<description>]
  * ```
  */

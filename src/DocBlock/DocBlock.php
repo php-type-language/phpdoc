@@ -66,6 +66,7 @@ final class DocBlock implements
 
     /**
      * @internal direct usage of {@see offsetSet()} is not recommended
+     *
      * @throws \BadMethodCallException
      */
     public function offsetSet(mixed $offset, mixed $value): void
@@ -75,6 +76,7 @@ final class DocBlock implements
 
     /**
      * @internal direct usage of {@see offsetUnset()} is not recommended
+     *
      * @throws \BadMethodCallException
      */
     public function offsetUnset(mixed $offset): void

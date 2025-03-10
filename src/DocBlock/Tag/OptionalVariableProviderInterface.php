@@ -15,6 +15,7 @@ interface OptionalVariableProviderInterface
      * entry does not contain a name.
      *
      * @var non-empty-string|null
+     *
      * @readonly
      */
     public ?string $variable { get; }

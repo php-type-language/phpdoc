@@ -14,6 +14,7 @@ interface VariableProviderInterface extends OptionalVariableProviderInterface
      * this interface is attached.
      *
      * @var non-empty-string
+     *
      * @readonly
      */
     public string $variable { get; }

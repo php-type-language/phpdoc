@@ -49,6 +49,7 @@ final class Stream implements \Stringable
 
     /**
      * @api
+     *
      * @param callable(self):bool $context
      */
     public function lookahead(callable $context): void

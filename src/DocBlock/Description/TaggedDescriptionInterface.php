@@ -27,6 +27,7 @@ interface TaggedDescriptionInterface extends
      * elements are defined.
      *
      * @var DescriptionInterface
+     *
      * @readonly
      */
     public iterable $components { get; }

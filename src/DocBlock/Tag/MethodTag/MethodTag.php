@@ -36,6 +36,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
  * with a class or interface.
  *
  * ```
+ *
  * * @method [static] <CallableType> [<description>]
  * * @method [static] <ReturnType> <CallableType> [<description>]
  * * @method [static] <CallableType>: <ReturnType> [<description>]

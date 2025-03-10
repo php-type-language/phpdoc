@@ -10,6 +10,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
  * ```
+ *
  * * @tempalte <name> ['of' <Type>] [<description>]
  * ```
  */

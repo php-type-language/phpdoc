@@ -13,6 +13,7 @@ interface TagsProviderInterface
      * Gets tags list for this object.
      *
      * @var iterable<array-key, TagInterface>
+     *
      * @readonly
      */
     public iterable $tags { get; }

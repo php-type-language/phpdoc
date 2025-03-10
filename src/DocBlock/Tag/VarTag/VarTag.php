@@ -26,6 +26,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
  * while several items are represented.
  *
  * ```
+ *
  * * @var [<Type>] $<variable> [<description>]
  * ```
  */
