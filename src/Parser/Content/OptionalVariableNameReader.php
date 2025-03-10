@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Content;
 
 /**
- * @template-extends Reader<non-empty-string|null>
+ * @template-implements OptionalReaderInterface<non-empty-string>
  */
-final class OptionalVariableNameReader extends Reader
+final class OptionalVariableNameReader implements OptionalReaderInterface
 {
-    /**
-     * @return non-empty-string|null
-     */
     public function __invoke(Stream $stream): ?string
     {
         if (!\str_starts_with($stream->value, '$')) {

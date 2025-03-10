@@ -6,20 +6,17 @@ namespace TypeLang\PHPDoc\Parser\Content;
 
 /**
  * @template T of non-empty-string
- * @template-extends Reader<T|null>
+ * @template-implements OptionalReaderInterface<T|null>
  */
-final class OptionalValueReader extends Reader
+final class OptionalValueReader implements OptionalReaderInterface
 {
-    /**
-     * @param T $value
-     */
     public function __construct(
+        /**
+         * @var T
+         */
         private readonly string $value,
     ) {}
 
-    /**
-     * @return T|null
-     */
     public function __invoke(Stream $stream): ?string
     {
         if (!\str_starts_with($stream->value, $this->value)) {

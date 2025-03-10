@@ -7,9 +7,9 @@ namespace TypeLang\PHPDoc\Parser\Content;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 
 /**
- * @template-extends Reader<non-empty-string>
+ * @template-implements ReaderInterface<non-empty-string>
  */
-final class VariableNameReader extends Reader
+final class VariableNameReader implements ReaderInterface
 {
     private readonly OptionalVariableNameReader $var;
 

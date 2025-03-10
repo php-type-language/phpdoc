@@ -8,26 +8,25 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
 
 /**
  * @template T of non-empty-string
- * @template-extends Reader<T>
+ * @template-implements ReaderInterface<T>
  */
-final class ValueReader extends Reader
+final class ValueReader implements ReaderInterface
 {
     /**
      * @var OptionalValueReader<T>
      */
     private readonly OptionalValueReader $identifier;
 
-    /**
-     * @param T $value
-     */
     public function __construct(
+        /**
+         * @var T
+         */
         private readonly string $value,
     ) {
         $this->identifier = new OptionalValueReader($value);
     }
 
     /**
-     * @return T
      * @throws InvalidTagException
      */
     public function __invoke(Stream $stream): string

@@ -10,6 +10,7 @@
     },
     "require": {
         "php": "^8.1",
+        "league/uri": "^7.5",
         "type-lang/parser": "^1.5"
     },
     "replace": {

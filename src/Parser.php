@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc;
 
-use JetBrains\PhpStorm\Language;
 use TypeLang\PHPDoc\DocBlock\DocBlock;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\MutableTagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
@@ -69,7 +68,7 @@ class Parser implements ParserInterface
     /**
      * @throws RuntimeExceptionInterface
      */
-    public function parse(#[Language('InjectablePHP')] string $docblock): DocBlock
+    public function parse(string $docblock): DocBlock
     {
         $mapper = new SourceMap();
 

@@ -10,9 +10,9 @@ use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 
 /**
- * @template-extends Reader<TypeStatement>
+ * @template-implements ReaderInterface<TypeStatement>
  */
-final class TypeReader extends Reader
+final class TypeReader implements ReaderInterface
 {
     public function __construct(
         private readonly TypesParserInterface $parser,

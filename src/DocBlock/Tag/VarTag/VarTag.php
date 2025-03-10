@@ -27,7 +27,11 @@ use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
  *
  * ```
  *
- * * @var [<Type>] $<variable> [<description>]
+ * * @var [<Type>] $<variable>      [<description>]
+ * * @var [<Type>] ...$<variable>   [<description>]
+ * * @var [<Type>] &$<variable>     [<description>]
+ * * @var [<Type>] ...&$<variable>  [<description>]
+ * * @var [<Type>] &...$<variable>  [<description>]
  * ```
  */
 class VarTag extends Tag implements
