@@ -12,8 +12,7 @@ use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**
- * This class is responsible for creating "`@extends`"
- * or "`@template-extends`" tags.
+ * This class is responsible for creating "`@extends`" tags.
  *
  * See {@see TemplateExtendsTag} for details about this tag.
  */

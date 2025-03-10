@@ -30,12 +30,11 @@ use TypeLang\PHPDoc\DocBlock\Tag\VariableProviderInterface;
  * The "`@property`", "`@property-read`" and "`@property-write`" tags can ONLY
  * be used in a PHPDoc that is associated with a class or trait.
  *
- * - Also @see PropertyRead for "`@property-read`" tag implementation.
- * - Also @see PropertyWrite for "`@property-write`" tag implementation.
+ * - Also {@see PropertyReadTag} for "`@property-read`" tag implementation.
+ * - Also {@see PropertyWriteTag} for "`@property-write`" tag implementation.
  *
  * ```
- *
- * * @property[<-read|-write>] [<Type>] $<name> [<description>]
+ * "@property" [<Type>] $<name> [<description>]
  * ```
  */
 class PropertyTag extends Tag implements

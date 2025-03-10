@@ -28,8 +28,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\VariableProviderInterface;
  * limited to structural elements of type method or function.
  *
  * ```
- *
- * * @param [<Type>] $<variable> [<description>]
+ * "@param" [<Type>] $<variable> [<description>]
  * ```
  */
 class ParamTag extends Tag implements

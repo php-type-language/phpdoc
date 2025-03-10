@@ -6,9 +6,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag;
 
 /**
  * ```
- *
- * * @template-implements <Type> [<description>]
- * * @implements <Type> [<description>]
+ * "@implements" <Type> [<description>]
  * ```
  */
 class TemplateImplementsTag extends TemplateInheritanceTag {}

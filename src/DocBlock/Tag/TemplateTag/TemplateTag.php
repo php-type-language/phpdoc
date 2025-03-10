@@ -10,8 +10,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
  * ```
- *
- * * @tempalte <name> ['of' <Type>] [<description>]
+ * "@template" <name> ['of' <Type>] [<description>]
  * ```
  */
 class TemplateTag extends Tag implements OptionalTypeProviderInterface

@@ -10,8 +10,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**
- * This class is responsible for creating "`@use`"
- * or "`@template-use`" tags.
+ * This class is responsible for creating "`@use`" tags.
  *
  * See {@see TemplateUseTag} for details about this tag.
  */

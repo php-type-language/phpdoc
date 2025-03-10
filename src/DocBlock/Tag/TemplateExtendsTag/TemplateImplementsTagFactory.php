@@ -10,8 +10,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**
- * This class is responsible for creating "`@implements`"
- * or "`@template-implements`" tags.
+ * This class is responsible for creating "`@implements`" tags.
  *
  * See {@see TemplateImplementsTag} for details about this tag.
  */

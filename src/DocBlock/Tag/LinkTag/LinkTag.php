@@ -17,8 +17,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
  * relation defined by this occurrence.
  *
  * ```
- *
- * * @link [URI] [<description>]
+ * "@link" [URI] [<description>]
  * ```
  * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
  */

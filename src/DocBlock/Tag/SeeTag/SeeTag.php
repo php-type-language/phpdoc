@@ -25,8 +25,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
  * The "`@see`" tag cannot refer to a namespace element.
  *
  * ```
- *
- * * @see [URI | FQN] [<description>]
+ * "@see" [URI | FQN] [<description>]
  * ```
  *
  * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
