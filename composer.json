@@ -10,7 +10,7 @@
     },
     "require": {
         "php": "^8.1",
-        "type-lang/parser": "^1.4"
+        "type-lang/parser": "^1.5"
     },
     "replace": {
         "type-lang/phpdoc-standard-tags": "*",

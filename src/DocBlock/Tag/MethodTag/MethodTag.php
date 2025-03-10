@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\DocBlock\Tag\MethodTag;
 
+use TypeLang\Parser\Node\Stmt\Callable\CallableParameterNode;
 use TypeLang\Parser\Node\Stmt\Callable\ParameterNode;
-use TypeLang\Parser\Node\Stmt\CallableTypeNode;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
+use TypeLang\PHPDoc\DocBlock\Tag\OptionalTypeProviderInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
-use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
 
 /**
  * The "`@method`" tag is used in situations where a class contains the
@@ -36,49 +36,40 @@ use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
  * with a class or interface.
  *
  * ```
- *
  * * @method [static] <CallableType> [<description>]
  * * @method [static] <ReturnType> <CallableType> [<description>]
  * * @method [static] <CallableType>: <ReturnType> [<description>]
  * ```
  */
-class MethodTag extends Tag implements TypeProviderInterface
+class MethodTag extends Tag implements OptionalTypeProviderInterface
 {
     /**
+     * @var list<ParameterNode|CallableParameterNode>
+     */
+    public readonly array $parameters;
+
+    /**
      * @param non-empty-string $name
+     * @param non-empty-string $method
+     * @param iterable<mixed, ParameterNode|CallableParameterNode> $parameters
      */
     public function __construct(
         string $name,
-        public readonly CallableTypeNode $type,
-        protected readonly bool $static = false,
+        /**
+         * @var non-empty-string
+         */
+        public readonly string $method,
+        public readonly ?TypeStatement $type = null,
+        iterable $parameters = [],
+        public readonly bool $isStatic = false,
         \Stringable|string|null $description = null,
     ) {
+        $this->parameters = match (true) {
+            $parameters instanceof \Traversable => \iterator_to_array($parameters, false),
+            \array_is_list($parameters) => $parameters,
+            default => \array_values($parameters),
+        };
+
         parent::__construct($name, $description);
-    }
-
-    public function isStatic(): bool
-    {
-        return $this->static;
-    }
-
-    public function getReturnType(): ?TypeStatement
-    {
-        return $this->type->type;
-    }
-
-    /**
-     * @return iterable<array-key, ParameterNode>
-     */
-    public function getParameters(): iterable
-    {
-        return $this->type->parameters;
-    }
-
-    /**
-     * @return non-empty-string
-     */
-    public function getMethodName(): string
-    {
-        return $this->type->name->toString();
     }
 }
