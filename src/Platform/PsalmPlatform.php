@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Platform;
 
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\ApiTag\ApiTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
@@ -27,6 +28,7 @@ final class PsalmPlatform extends Platform
 
     protected function load(TypesParserInterface $types): iterable
     {
+        yield 'psalm-api' => new ApiTagFactory();
         yield 'psalm-method' => new MethodTagFactory($types);
         yield 'psalm-param' => new ParamTagFactory($types);
         yield 'psalm-property' => new PropertyTagFactory($types);

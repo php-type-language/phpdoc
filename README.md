@@ -33,7 +33,7 @@ composer require type-lang/phpdoc
 ## Supported Tags
 
 - [x] `@abstract` - Declare any _Symbol_ as abstract
-- [ ] `@api` - TODO
+- [x] `@api` - Highlight _Symbol_ as being part of the public API
 - [ ] `@author` - TODO
 - [ ] `@category` - TODO
 - [ ] `@copyright` - TODO
@@ -103,7 +103,7 @@ composer require type-lang/phpdoc
 ### Psalm Tags
 
 - [ ] `@psalm-allow-private-mutation` - TODO
-- [ ] `@psalm-api` - TODO
+- [x] `@psalm-api` - Vendor-specific `@api` alias
 - [ ] `@psalm-assert` - TODO
 - [ ] `@psalm-assert-if-false` - TODO
 - [ ] `@psalm-assert-if-true` - TODO

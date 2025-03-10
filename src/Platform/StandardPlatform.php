@@ -6,6 +6,7 @@ namespace TypeLang\PHPDoc\Platform;
 
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\ApiTag\ApiTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\FinalTag\FinalTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\IgnoreTag\IgnoreTagFactory;
@@ -38,6 +39,7 @@ final class StandardPlatform extends Platform
     protected function load(TypesParserInterface $types): iterable
     {
         yield 'abstract' => new AbstractTagFactory();
+        yield 'api' => new ApiTagFactory();
         yield 'extends' => new TemplateExtendsTagFactory($types);
         yield 'final' => new FinalTagFactory();
         yield 'implements' => new TemplateImplementsTagFactory($types);
