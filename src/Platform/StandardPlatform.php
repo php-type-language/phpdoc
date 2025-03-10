@@ -9,6 +9,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\FinalTag\FinalTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\IgnoreTag\IgnoreTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\InheritDocTag\InheritDocTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\LinkTag\LinkTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagFactory;
@@ -39,6 +40,7 @@ final class StandardPlatform extends Platform
         yield 'extends' => new TemplateExtendsTagFactory($types);
         yield 'final' => new FinalTagFactory();
         yield 'implements' => new TemplateImplementsTagFactory($types);
+        yield 'inheritdoc' => new InheritDocTagFactory();
         yield 'ignore' => new IgnoreTagFactory();
         yield 'link' => new LinkTagFactory();
         yield 'method' => new MethodTagFactory($types);
