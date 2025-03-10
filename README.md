@@ -50,40 +50,42 @@ var_dump($result);
 **Expected Output:**
 
 ```php
-TypeLang\PHPDoc\DocBlock {
-  -description: TypeLang\PHPDoc\DocBlock\Description\Description {
-    -template: "Example description %1$s and blah-blah-blah."
-    -tags: array:1 [
-      0 => TypeLang\PHPDoc\DocBlock\Tag {
-        #description: TypeLang\PHPDoc\Tag\Description\Description {
-          -template: "some"
-          -tags: []
+TypeLang\PHPDoc\DocBlock\DocBlock {
+  +description: TypeLang\PHPDoc\DocBlock\Description\TaggedDescription {
+    +components: array:3 [
+      0 => TypeLang\PHPDoc\DocBlock\Description\Description {
+        #value: "Example description "
+      }
+      1 => TypeLang\PHPDoc\DocBlock\Tag\Tag {
+        +description: TypeLang\PHPDoc\DocBlock\Description\Description {
+          #value: "some"
         }
-        #name: "see"
+        +name: "see"
+      }
+      2 => TypeLang\PHPDoc\DocBlock\Description\Description {
+        #value: " and blah-blah-blah.\n"
       }
     ]
+    +tags: array:1 [
+      0 => TypeLang\PHPDoc\DocBlock\Tag\Tag {}
+    ]
   }
-  -tags: array:3 [
-    0 => TypeLang\PHPDoc\DocBlock\Tag {
-      #description: TypeLang\PHPDoc\Tag\Description\Description {
-        -template: "("foo")"
-        -tags: []
+  +tags: array:3 [
+    0 => TypeLang\PHPDoc\DocBlock\Tag\Tag {
+      +description: TypeLang\PHPDoc\DocBlock\Description\Description {
+        #value: "("foo")\n"
       }
-      #name: "Example\Annotation"
+      +name: "Example\Annotation"
     }
-    1 => TypeLang\PHPDoc\DocBlock\Tag {
-      #description: TypeLang\PHPDoc\Tag\Description\Description {
-        -template: "array<non-empty-string, TypeStatement>"
-        -tags: []
-      }
-      #name: "return"
+    1 => TypeLang\PHPDoc\DocBlock\Tag\ReturnTag\ReturnTag {
+      +description: null
+      +name: "return"
+      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { ... }
     }
-    2 => TypeLang\PHPDoc\DocBlock\Tag {
-      #description: TypeLang\PHPDoc\Tag\Description\Description {
-        -template: "\Throwable"
-        -tags: []
-      }
-      #name: "throws"
+    2 => TypeLang\PHPDoc\DocBlock\Tag\ThrowsTag\ThrowsTag {
+      +description: null
+      +name: "throws"
+      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { ... }
     }
   ]
 }
@@ -104,17 +106,21 @@ DocBlock is a representation of the comment object.
  */                                 |
 ```
 
-- `getDescription()` ― Provides a `Description` object.
-- `getTags()` ― Provides a list of `Tag` objects.
+- `$description` ― Provides a `Description` object.
+- `$tags` ― Provides a list of `Tag` objects.
 
 ```php
-/** @template-implements \Traversable<array-key, Tag> */
-class DocBlock implements \Traversable
+/**
+ * DocBlock structure pseudocode (real impl may differ)
+ * 
+ * @template-implements \Traversable<array-key, Tag>
+ * @template-implements \ArrayAccess<array-key, Tag>
+ */
+class DocBlock
 {
-    public function getDescription(): Description;
-    
-    /** @return list<Tag> */
-    public function getTags(): array;
+    public ?Description $description { get; }
+
+    public iterable<array-key, Tag> $tags { get; }
 }
 ```
 
@@ -131,17 +137,29 @@ other tags.
  */
 ```
 
-- `getTemplate()` ― Provides a sprintf-formatted template string of the description.
-- `getTags()` ― Provides a list of `Tag` objects.
+- `$tags` ― Provides a list of `Tag` objects.
+- `$components` ― Provides a list of `Tag|Description` objects.
 
 ```php
-/** @template-implements \Traversable<array-key, Tag> */
-class Description implements \Traversable, \Stringable
-{
-    public function getTemplate(): string;
+/**
+ * Simple description structure pseudocode (real impl may differ)
+ */
+class Description implements \Stringable {}
 
-    /** @return list<Tag> */
-    public function getTags(): array;
+/**
+ * Tagged (composite) description structure pseudocode (real impl may differ)
+ * 
+ * @template-implements \Traversable<array-key, Tag>
+ * @template-implements \ArrayAccess<array-key, Tag>
+ */
+class TaggedDescription extends Description implements 
+    \Traversable, 
+    \ArrayAccess,
+    \Countable
+{
+    public iterable<array-key, Tag> $tags { get; }
+    
+    public iterable<array-key, Tag|Description> $components { get; }
 }
 ```
 
@@ -157,14 +175,25 @@ A Tag represents a name (ID) and its contents.
  */
 ```
 
-- `getName()` ― Provides a tag's name (ID).
-- `getDescription()` ― Provides an optional description of the tag.
+- `$name` ― Provides a tag's name (ID).
+- `$description` ― Provides an optional description of the tag.
 
 ```php
+/**
+ * Common tag structure pseudocode (real impl may differ)
+ */
 class Tag implements \Stringable
 {
-    public function getName(): string;
+    public non-empty-string $name { get; }
 
-    public function getDescription(): ?Description;
+    public ?Description $description { get; }
+}
+
+/**
+ * Throws tag structure pseudocode (real impl may differ)
+ */
+class ThrowsTag extends Tag
+{
+    public TypeStatement $type;
 }
 ```
