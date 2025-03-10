@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Tests\Unit;
+namespace TypeLang\PHPDoc\Tests\Unit\Parser\Description;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use TypeLang\PHPDoc\DocBlock\Description\Description;
@@ -11,45 +11,51 @@ use TypeLang\PHPDoc\DocBlock\Description\TaggedDescriptionInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\InvalidTag;
+use TypeLang\PHPDoc\DocBlock\Tag\InvalidTagInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
-use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
+use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
+use TypeLang\PHPDoc\Tests\Unit\Parser\ParserTestCase;
 
-final class DescriptionParserTest extends TestCase
+abstract class DescriptionParserTestCase extends ParserTestCase
 {
-    public static function parserDataProvider(): iterable
+    abstract public static function getDescriptionParser(TagParserInterface $tags): DescriptionParserInterface;
+
+    protected static function getParser(): DescriptionParserInterface
     {
         $tags = new TagFactory([
             'error' => new class implements TagFactoryInterface {
                 public function create(
                     string $tag,
                     string $content,
-                    DescriptionParserInterface $descriptions
+                    DescriptionParserInterface $descriptions,
                 ): TagInterface {
                     throw new \LogicException('Error tag ' . $tag);
                 }
             },
         ]);
 
-        yield RegexDescriptionParser::class => [new RegexDescriptionParser(
+        return static::getDescriptionParser(
             tags: new RegexTagParser($tags),
-        )];
+        );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testSimpleDescription(DescriptionParserInterface $parser): void
+    public function testSimpleDescription(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new Description('Hello World!'),
             actual: $parser->parse('Hello World!'),
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithInlineTag(DescriptionParserInterface $parser): void
+    public function testDescriptionWithInlineTag(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new TaggedDescription([
                 new Description('Hello '),
@@ -60,9 +66,10 @@ final class DescriptionParserTest extends TestCase
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithDescribedInlineTag(DescriptionParserInterface $parser): void
+    public function testDescriptionWithDescribedInlineTag(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new TaggedDescription([
                 new Description('Hello '),
@@ -73,9 +80,10 @@ final class DescriptionParserTest extends TestCase
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithMultipleInlineTags(DescriptionParserInterface $parser): void
+    public function testDescriptionWithMultipleInlineTags(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new TaggedDescription([
                 new Description('Hello '),
@@ -88,18 +96,20 @@ final class DescriptionParserTest extends TestCase
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithSprintfSyntax(DescriptionParserInterface $parser): void
+    public function testDescriptionWithSprintfSyntax(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new Description('Hello %s World!'),
             actual: $parser->parse('Hello %s World!'),
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithSprintfSyntaxInsideInlineTag(DescriptionParserInterface $parser): void
+    public function testDescriptionWithSprintfSyntaxInsideInlineTag(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new TaggedDescription([
                 new Description('Hello '),
@@ -110,35 +120,38 @@ final class DescriptionParserTest extends TestCase
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithNonNamedTag(DescriptionParserInterface $parser): void
+    public function testDescriptionWithNonNamedTag(): void
     {
+        $parser = static::getParser();
+
         self::assertEquals(
             expected: new Description('Hello {@} World!'),
             actual: $parser->parse('Hello {@} World!'),
         );
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testDescriptionWithBadTagName(DescriptionParserInterface $parser): void
+    public function testDescriptionWithBadTagName(): void
     {
+        $parser = static::getParser();
+
         $description = $parser->parse('Hello {@@} World!');
 
         self::assertInstanceOf(TaggedDescriptionInterface::class, $description);
         self::assertCount(3, $description->components);
         self::assertCount(1, $description);
-        self::assertInstanceOf(InvalidTag::class, $description[0]);
+        self::assertInstanceOf(InvalidTagInterface::class, $description[0]);
 
         $reason = $description[0]->reason;
 
         self::assertSame('Tag name cannot be empty', $reason->getMessage());
-        self::assertSame(InvalidTag::DEFAULT_UNKNOWN_TAG_NAME, $description[0]->name);
+        self::assertSame('unknown', $description[0]->name);
         self::assertEquals(new Description('@@'), $description[0]->description);
     }
 
-    #[DataProvider('parserDataProvider')]
-    public function testErrorWhileParsingInline(DescriptionParserInterface $parser): void
+    public function testErrorWhileParsingInline(): void
     {
+        $parser = static::getParser();
+
         $description = $parser->parse('Hello {@error description} World!');
 
         self::assertInstanceOf(TaggedDescriptionInterface::class, $description);

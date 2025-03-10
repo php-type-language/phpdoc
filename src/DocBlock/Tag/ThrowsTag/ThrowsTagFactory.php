@@ -6,9 +6,9 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\ThrowsTag;
 
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
-use TypeLang\PHPDoc\DocBlock\Content\Stream;
-use TypeLang\PHPDoc\DocBlock\Content\TypeParserReader;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\Parser\Content\Stream;
+use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\Parser\Tag;
 
+use TypeLang\PHPDoc\DocBlock\Tag\UnknownTag;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\InvalidTag;
@@ -67,7 +68,7 @@ final class RegexTagParser implements TagParserInterface
         try {
             $name = $this->getTagName($tag);
         } catch (InvalidTagNameException $e) {
-            return new InvalidTag($e, description: $tag);
+            return new UnknownTag($e, description: $tag);
         }
 
         /** @var non-empty-string $name */

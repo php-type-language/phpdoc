@@ -55,11 +55,13 @@ final class TagFactory implements MutableTagFactoryInterface
                     );
                 }
             } catch (RuntimeExceptionInterface $e) {
-                return new InvalidTag(
-                    reason: $e,
-                    description: $descriptions->parse($content),
-                    name: $tag,
-                );
+                $description = null;
+
+                if ($content !== '') {
+                    $description = $descriptions->parse($content);
+                }
+
+                return new InvalidTag($tag, $e, $description);
             }
         }
 

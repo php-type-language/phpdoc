@@ -7,11 +7,11 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\MethodTag;
 use TypeLang\Parser\Node\Stmt\CallableTypeNode;
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
-use TypeLang\PHPDoc\DocBlock\Content\OptionalTypeParserReader;
-use TypeLang\PHPDoc\DocBlock\Content\OptionalValueReader;
-use TypeLang\PHPDoc\DocBlock\Content\Stream;
-use TypeLang\PHPDoc\DocBlock\Content\TypeParserReader;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\Parser\Content\OptionalTypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\OptionalValueReader;
+use TypeLang\PHPDoc\Parser\Content\Stream;
+use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**

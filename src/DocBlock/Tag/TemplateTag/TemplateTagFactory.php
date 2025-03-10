@@ -6,11 +6,11 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateTag;
 
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
-use TypeLang\PHPDoc\DocBlock\Content\IdentifierReader;
-use TypeLang\PHPDoc\DocBlock\Content\OptionalTypeParserReader;
-use TypeLang\PHPDoc\DocBlock\Content\OptionalValueReader;
-use TypeLang\PHPDoc\DocBlock\Content\Stream;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\Parser\Content\IdentifierReader;
+use TypeLang\PHPDoc\Parser\Content\OptionalTypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\OptionalValueReader;
+use TypeLang\PHPDoc\Parser\Content\Stream;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**

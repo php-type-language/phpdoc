@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Content;
+namespace TypeLang\PHPDoc\Parser\Content;
 
 use TypeLang\Parser\Exception\ParserExceptionInterface;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
@@ -10,15 +10,11 @@ use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 
 /**
- * @template-extends Reader<TypeStatement>
+ * @template-extends Reader<TypeStatement|null>
  */
-final class TypeParserReader extends Reader
+final class OptionalTypeParserReader extends Reader
 {
-    /**
-     * @param non-empty-string $tag
-     */
     public function __construct(
-        private readonly string $tag,
         private readonly TypesParserInterface $parser,
     ) {}
 
@@ -26,15 +22,12 @@ final class TypeParserReader extends Reader
      * @throws \Throwable
      * @throws InvalidTagException
      */
-    public function __invoke(Stream $stream): TypeStatement
+    public function __invoke(Stream $stream): ?TypeStatement
     {
         try {
             $type = $this->parser->parse($stream->value);
-        } catch (ParserExceptionInterface $e) {
-            throw $stream->toException(
-                message: \sprintf('Tag @%s contains an incorrect type', $this->tag),
-                previous: $e,
-            );
+        } catch (ParserExceptionInterface) {
+            return null;
         }
 
         // @phpstan-ignore-next-line : Property is defined

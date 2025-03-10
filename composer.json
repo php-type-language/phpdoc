@@ -12,6 +12,10 @@
         "php": "^8.1",
         "type-lang/parser": "^1.4"
     },
+    "replace": {
+        "type-lang/phpdoc-standard-tags": "*",
+        "type-lang/phpdoc-template-tags": "*"
+    },
     "autoload": {
         "psr-4": {
             "TypeLang\\PHPDoc\\": "src"
@@ -25,6 +29,7 @@
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^10.5|^11.0|^12.0",
+        "symfony/property-access": "^5.4|^6.0|^7.0",
         "symfony/var-dumper": "^5.4|^6.0|^7.0"
     },
     "autoload-dev": {
@@ -34,8 +39,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev",
-            "dev-main": "1.x-dev"
+            "dev-master": "2.x-dev",
+            "dev-main": "2.x-dev"
         }
     },
     "config": {
@@ -53,7 +58,7 @@
             "@test:functional"
         ],
         "test:unit": "phpunit --testdox --testsuite=unit",
-        "test:functional": "phpunit --testsuite=functional",
+        "test:functional": "phpunit --testdox --testsuite=functional",
         "linter": "@linter:check",
         "linter:check": "phpstan analyse --configuration phpstan.neon",
         "linter:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline",

@@ -6,16 +6,23 @@ namespace TypeLang\PHPDoc\DocBlock;
 
 use TypeLang\PHPDoc\DocBlock\Description\Description;
 use TypeLang\PHPDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PHPDoc\DocBlock\Description\OptionalDescriptionProviderInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\TagsProviderInterface;
 
 /**
+ * An implementation represents structure containing a description and a set
+ * of tags that describe an arbitrary DocBlock Comment in the code.
+ *
  * @template-implements \ArrayAccess<array-key, TagInterface|null>
  * @template-implements \IteratorAggregate<array-key, TagInterface>
  */
 final class DocBlock implements
-    DocBlockInterface,
+    OptionalDescriptionProviderInterface,
+    TagsProviderInterface,
     \IteratorAggregate,
-    \ArrayAccess
+    \ArrayAccess,
+    \Countable
 {
     public readonly ?DescriptionInterface $description;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Content;
+namespace TypeLang\PHPDoc\Parser\Content;
 
 /**
  * @template-extends Reader<non-empty-string|null>

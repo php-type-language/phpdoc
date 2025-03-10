@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Content;
+namespace TypeLang\PHPDoc\Parser\Content;
 
 use TypeLang\PHPDoc\Exception\InvalidTagException;
 
 /**
  * @template-extends Reader<non-empty-string>
  */
-final class IdentifierReader extends Reader
+final class VariableNameReader extends Reader
 {
-    private readonly OptionalIdentifierReader $id;
+    private readonly OptionalVariableNameReader $var;
 
     /**
      * @param non-empty-string $tag
@@ -19,7 +19,7 @@ final class IdentifierReader extends Reader
     public function __construct(
         private readonly string $tag,
     ) {
-        $this->id = new OptionalIdentifierReader();
+        $this->var = new OptionalVariableNameReader();
     }
 
     /**
@@ -28,9 +28,9 @@ final class IdentifierReader extends Reader
      */
     public function __invoke(Stream $stream): string
     {
-        return ($this->id)($stream)
+        return ($this->var)($stream)
             ?? throw $stream->toException(\sprintf(
-                'Tag @%s contains an incorrect identifier value',
+                'Tag @%s contains an incorrect variable name',
                 $this->tag,
             ));
     }
