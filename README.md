@@ -49,7 +49,7 @@ composer require type-lang/phpdoc
 - [ ] `@inheritdoc` - TODO
 - [x] `@inherits` - An alias of `@extends` tag
 - [ ] `@internal` - TODO
-- [ ] `@license` - TODO
+- [x] `@license` - Used to indicate which license is applicable
 - [x] `@link` - Indicates a custom relation between the associated _Symbol_ 
       and a website, which is identified by an absolute URI
 - [x] `@method` - Allows a class to know which "_magic_" methods are callable

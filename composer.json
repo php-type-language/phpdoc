@@ -26,6 +26,7 @@
         ]
     },
     "require-dev": {
+        "composer/spdx-licenses": "^1.5",
         "friendsofphp/php-cs-fixer": "^3.70",
         "jetbrains/phpstorm-attributes": "^1.0",
         "phpstan/phpstan": "^2.1",
@@ -38,6 +39,9 @@
         "psr-4": {
             "TypeLang\\PHPDoc\\Tests\\": "tests"
         }
+    },
+    "suggest": {
+        "composer/spdx-licenses": "Provides additional licenses (@license tag) support"
     },
     "extra": {
         "branch-alias": {
