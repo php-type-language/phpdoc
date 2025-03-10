@@ -32,7 +32,7 @@ composer require type-lang/phpdoc
 
 ## Supported Tags
 
-- [x] `@abstract` - Declare a class-like _Symbol_ or method as abstract
+- [x] `@abstract` - Declare any _Symbol_ as abstract
 - [ ] `@api` - TODO
 - [ ] `@author` - TODO
 - [ ] `@category` - TODO
@@ -41,7 +41,7 @@ composer require type-lang/phpdoc
 - [ ] `@example` - TODO
 - [x] `@extends` - Allows to extend templated classes and interfaces
 - [ ] `@filesource` - TODO
-- [ ] `@final` - TODO
+- [x] `@final` - Declare any _Symbol_ as final
 - [ ] `@global` - TODO
 - [ ] `@ignore` - TODO
 - [x] `@implements` - Allows to extend templated interfaces
