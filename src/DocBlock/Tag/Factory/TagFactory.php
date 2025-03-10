@@ -14,12 +14,12 @@ use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 final class TagFactory implements MutableTagFactoryInterface
 {
     /**
-     * @var array<non-empty-string, TagFactoryInterface>
+     * @var array<non-empty-lowercase-string, TagFactoryInterface>
      */
     private array $factories;
 
     /**
-     * @param iterable<non-empty-string, TagFactoryInterface> $factories
+     * @param iterable<non-empty-lowercase-string, TagFactoryInterface> $factories
      */
     public function __construct(iterable $factories = [])
     {
@@ -32,14 +32,18 @@ final class TagFactory implements MutableTagFactoryInterface
 
     public function register(array|string $tags, TagFactoryInterface $delegate): void
     {
-        foreach ((array) $tags as $tag) {
+        if (\is_string($tags)) {
+            $tags = [$tags];
+        }
+
+        foreach ($tags as $tag) {
             $this->factories[$tag] = $delegate;
         }
     }
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): TagInterface
     {
-        $delegate = $this->factories[$tag] ?? null;
+        $delegate = $this->factories[\strtolower($tag)] ?? null;
 
         if ($delegate !== null) {
             try {
