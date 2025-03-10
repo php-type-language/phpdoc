@@ -30,6 +30,216 @@ be installed using the following command in a root of your project:
 composer require type-lang/phpdoc
 ```
 
+## Supported Tags
+
+- [ ] `@abstract` - TODO
+- [ ] `@api` - TODO
+- [ ] `@author` - TODO
+- [ ] `@category` - TODO
+- [ ] `@copyright` - TODO
+- [ ] `@deprecated` - TODO
+- [ ] `@example` - TODO
+- [x] `@extends` - Allows to extend templated classes and interfaces
+- [ ] `@filesource` - TODO
+- [ ] `@final` - TODO
+- [ ] `@global` - TODO
+- [ ] `@ignore` - TODO
+- [x] `@implements` - Allows to extend templated interfaces
+- [ ] `@inheritdoc` - TODO
+- [x] `@inherits` - An alias of `@extends` tag
+- [ ] `@internal` - TODO
+- [ ] `@license` - TODO
+- [x] `@link` - Indicates a custom relation between the associated _Symbol_ and a website, which is identified by an absolute URI
+- [x] `@method` - Allows a class to know which "_magic_" methods are callable
+- [ ] `@mixin` - TODO
+- [ ] `@no-named-arguments` - TODO
+- [ ] `@package` - TODO
+- [ ] `@override` - TODO
+- [x] `@param` - Used to document a single argument of a function or method
+- [ ] `@param-closure-this` - TODO
+- [ ] `@param-immediately-invoked-callable` - TODO
+- [ ] `@param-later-invoked-callable` - TODO
+- [ ] `@param-out` - TODO
+- [x] `@property` - Used to declare which "_magic_" properties are supported
+- [x] `@property-read` - Used to declare which "_magic_" properties are supported for reading
+- [x] `@property-write` - Used to declare which "_magic_" properties are supported for writing
+- [ ] `@pure-unless-callable-is-impure` - TODO
+- [ ] `@readonly` - TODO
+- [ ] `@require-extends` - TODO
+- [ ] `@require-implements` - TODO
+- [x] `@return` - Used to document the return value of functions or methods
+- [x] `@returns` - An alias of `@return` tag
+- [ ] `@seal-methods` - TODO
+- [ ] `@seal-properties` - TODO
+- [x] `@see` - Indicates a reference from the associated _Symbol(s)_ to a website or other _Symbol(s)_
+- [ ] `@since` - TODO
+- [ ] `@source` - TODO
+- [ ] `@subpackage` - TODO
+- [ ] `@suppress` - TODO
+- [x] `@template` - Allows classes (and class-like entries), functions and methods to declare a generic type parameter
+- [x] `@template-contravariant` - Allows classes (and class-like entries), functions and methods to declare a generic contravariant type parameter
+- [x] `@template-covariant` - Allows classes (and class-like entries), functions and methods to declare a generic covariant type parameter
+- [x] `@template-extends` - An alias of `@extends` tag
+- [x] `@template-implements` - An alias of `@implements` tag
+- [x] `@template-use` - Allows to extend templated traits
+- [x] `@throw` - An alias of `@throws` tag
+- [x] `@throws` - Used to indicate whether _Symbol_ throw a specific type of `\Throwable` (exception or error)
+- [ ] `@todo` - TODO
+- [ ] `@unused-param` - TODO
+- [x] `@use` - An alias of `@template-use` tag
+- [ ] `@used-by` - TODO
+- [ ] `@uses` - TODO
+- [x] `@var` - Document the _Type_ of the following _Symbol_
+- [ ] `@version` - TODO
+
+### Psalm Tags
+
+- [ ] `@psalm-allow-private-mutation` - TODO
+- [ ] `@psalm-api` - TODO
+- [ ] `@psalm-assert` - TODO
+- [ ] `@psalm-assert-if-false` - TODO
+- [ ] `@psalm-assert-if-true` - TODO
+- [ ] `@psalm-assert-untainted` - TODO
+- [ ] `@psalm-check-type` - TODO
+- [ ] `@psalm-check-type-exact` - TODO
+- [ ] `@psalm-consistent-constructor` - TODO
+- [ ] `@psalm-consistent-templates` - TODO
+- [ ] `@psalm-external-mutation-free` - TODO
+- [x] `@psalm-extends` - Vendor-specific `@extends` alias
+- [ ] `@psalm-flow` - TODO
+- [ ] `@psalm-if-this-is` - TODO
+- [ ] `@psalm-ignore-falsable-return` - TODO
+- [ ] `@psalm-ignore-nullable-return` - TODO
+- [ ] `@psalm-ignore-var` - TODO
+- [ ] `@psalm-ignore-variable-method` - TODO
+- [ ] `@psalm-ignore-variable-property` - TODO
+- [ ] `@psalm-immutable` - TODO
+- [x] `@psalm-implements` - Vendor-specific `@implements` alias
+- [ ] `@psalm-import-type` - TODO
+- [ ] `@psalm-inheritors` - TODO
+- [ ] `@psalm-internal` - TODO
+- [x] `@psalm-method` - Vendor-specific `@method` alias
+- [ ] `@psalm-mutation-free` - TODO
+- [ ] `@psalm-no-seal-methods` - TODO
+- [ ] `@psalm-no-seal-properties` - TODO
+- [ ] `@psalm-override-method-visibility` - TODO
+- [ ] `@psalm-override-property-visibility` - TODO
+- [x] `@psalm-param` - Vendor-specific `@param` alias
+- [ ] `@psalm-param-out` - TODO
+- [x] `@psalm-property` - Vendor-specific `@property` alias
+- [x] `@psalm-property-read` - Vendor-specific `@property-read` alias
+- [x] `@psalm-property-write` - Vendor-specific `@property-write` alias
+- [ ] `@psalm-pure` - TODO
+- [ ] `@psalm-readonly` - TODO
+- [ ] `@psalm-readonly-allow-private-mutation` - TODO
+- [ ] `@psalm-require-extends` - TODO
+- [ ] `@psalm-require-implements` - TODO
+- [x] `@psalm-return` - Vendor-specific `@return` alias
+- [ ] `@psalm-scope-this` - TODO
+- [ ] `@psalm-seal-methods` - TODO
+- [ ] `@psalm-seal-properties` - TODO
+- [ ] `@psalm-self-out` - TODO
+- [ ] `@psalm-stub-override` - TODO
+- [ ] `@psalm-suppress` - TODO
+- [ ] `@psalm-taint-escape` - TODO
+- [ ] `@psalm-taint-sink` - TODO
+- [ ] `@psalm-taint-source` - TODO
+- [ ] `@psalm-taint-specialize` - TODO
+- [ ] `@psalm-taint-unescape` - TODO
+- [x] `@psalm-template` - Vendor-specific `@template` alias
+- [x] `@psalm-template-contravariant` - Vendor-specific `@template-contravariant` alias
+- [x] `@psalm-template-covariant` - Vendor-specific `@template-covariant` alias
+- [ ] `@psalm-this-out` - TODO
+- [ ] `@psalm-trace` - TODO
+- [ ] `@psalm-type` - TODO
+- [x] `@psalm-use` - Vendor-specific `@use` alias
+- [x] `@psalm-var` - Vendor-specific `@var` alias
+- [ ] `@psalm-variadic` - TODO
+- [ ] `@psalm-yield` - TODO
+
+### PHPStan Tags
+
+- [ ] `@phpstan-allow-private-mutation` - TODO
+- [ ] `@phpstan-assert` - TODO
+- [ ] `@phpstan-assert-if-false` - TODO
+- [ ] `@phpstan-assert-if-true` - TODO
+- [ ] `@phpstan-consistent-constructor` - TODO
+- [ ] `@phpstan-extends` - TODO
+- [ ] `@phpstan-ignore` - TODO
+- [ ] `@phpstan-ignore-line` - TODO
+- [ ] `@phpstan-ignore-next-line` - TODO
+- [ ] `@phpstan-immutable` - TODO
+- [ ] `@phpstan-implements` - TODO
+- [ ] `@phpstan-import-type` - TODO
+- [ ] `@phpstan-impure` - TODO
+- [x] `@phpstan-method` - Vendor-specific `@method` alias
+- [x] `@phpstan-param` - Vendor-specific `@param` alias
+- [ ] `@phpstan-param-closure-this` - TODO
+- [ ] `@phpstan-param-immediately-invoked-callable` - TODO
+- [ ] `@phpstan-param-later-invoked-callable` - TODO
+- [ ] `@phpstan-param-out` - TODO
+- [ ] `@phpstan-property` - Vendor-specific `@property` alias
+- [ ] `@phpstan-property-read` - Vendor-specific `@property-read` alias
+- [ ] `@phpstan-property-write` - Vendor-specific `@property-write` alias
+- [ ] `@phpstan-pure` - TODO
+- [ ] `@phpstan-pure-unless-callable-is-impure` - TODO
+- [ ] `@phpstan-readonly` - TODO
+- [ ] `@phpstan-readonly-allow-private-mutation` - TODO
+- [ ] `@phpstan-require-extends` - TODO
+- [ ] `@phpstan-require-implements` - TODO
+- [ ] `@phpstan-return` - Vendor-specific `@return` alias
+- [ ] `@phpstan-self-out` - TODO
+- [x] `@phpstan-template` - Vendor-specific `@template` alias
+- [x] `@phpstan-template-contravariant` - Vendor-specific `@template-contravariant` alias
+- [x] `@phpstan-template-covariant` - Vendor-specific `@template-covariant` alias
+- [ ] `@phpstan-this-out` - TODO
+- [x] `@phpstan-throws` - Vendor-specific `@throws` alias
+- [ ] `@phpstan-type` - TODO
+- [ ] `@phpstan-use` - TODO
+- [x] `@phpstan-var` - Vendor-specific `@var` alias
+
+### Phan Tags
+
+- [ ] `@phan-abstract` - TODO
+- [ ] `@phan-assert` - TODO
+- [ ] `@phan-assert-false-condition` - TODO
+- [ ] `@phan-assert-if-false` - TODO
+- [ ] `@phan-assert-if-true` - TODO
+- [ ] `@phan-assert-true-condition` - TODO
+- [ ] `@phan-closure-scope` - TODO
+- [ ] `@phan-constructor-used-for-side-effects` - TODO
+- [x] `@phan-extends` - Vendor-specific `@extends` alias
+- [ ] `@phan-file-suppress` - TODO
+- [ ] `@phan-forbid-undeclared-magic-methods` - TODO
+- [ ] `@phan-forbid-undeclared-magic-properties` - TODO
+- [ ] `@phan-hardcode-return-type` - TODO
+- [ ] `@phan-immutable` - TODO
+- [x] `@phan-inherits` - Vendor-specific `@extends` alias
+- [x] `@phan-method` - Vendor-specific `@method` alias
+- [ ] `@phan-mixin` - TODO
+- [ ] `@phan-output-reference` - TODO
+- [ ] `@phan-override` - TODO
+- [x] `@phan-param` - Vendor-specific `@param` alias
+- [x] `@phan-property` - Vendor-specific `@property` alias
+- [x] `@phan-property-read` - Vendor-specific `@property-read` alias
+- [x] `@phan-property-write` - Vendor-specific `@property-write` alias
+- [ ] `@phan-pure` - TODO
+- [ ] `@phan-read-only` - TODO
+- [ ] `@phan-real-return` - TODO
+- [x] `@phan-return` - Vendor-specific `@return` alias
+- [ ] `@phan-side-effect-free` - TODO
+- [ ] `@phan-suppress-current-line` - TODO
+- [ ] `@phan-suppress-next-line` - TODO
+- [ ] `@phan-suppress-next-next-line` - TODO
+- [ ] `@phan-suppress-previous-line` - TODO
+- [x] `@phan-template` - Vendor-specific `@template` alias
+- [ ] `@phan-transient` - TODO
+- [ ] `@phan-type` - TODO
+- [ ] `@phan-unused-param` - TODO
+- [x] `@phan-var` - Vendor-specific `@var` alias
+- [ ] `@phan-write-only` - TODO
+- [ ] `@phanclosurescope` - TODO
+
 ## Quick Start
 
 ```php
@@ -56,18 +266,16 @@ TypeLang\PHPDoc\DocBlock\DocBlock {
       0 => TypeLang\PHPDoc\DocBlock\Description\Description {
         #value: "Example description "
       }
-      1 => TypeLang\PHPDoc\DocBlock\Tag\Tag {
-        +description: TypeLang\PHPDoc\DocBlock\Description\Description {
-          #value: "some"
-        }
+      1 => TypeLang\PHPDoc\DocBlock\Tag\SeeTag\SeeTag {
+        +description: null
         +name: "see"
+        +ref: TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeSymbolReference {
+          +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { … }
+        }
       }
       2 => TypeLang\PHPDoc\DocBlock\Description\Description {
         #value: " and blah-blah-blah.\n"
       }
-    ]
-    +tags: array:1 [
-      0 => TypeLang\PHPDoc\DocBlock\Tag\Tag {}
     ]
   }
   +tags: array:3 [
@@ -80,12 +288,12 @@ TypeLang\PHPDoc\DocBlock\DocBlock {
     1 => TypeLang\PHPDoc\DocBlock\Tag\ReturnTag\ReturnTag {
       +description: null
       +name: "return"
-      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { ... }
+      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { … }
     }
     2 => TypeLang\PHPDoc\DocBlock\Tag\ThrowsTag\ThrowsTag {
       +description: null
       +name: "throws"
-      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { ... }
+      +type: TypeLang\Parser\Node\Stmt\NamedTypeNode { … }
     }
   ]
 }

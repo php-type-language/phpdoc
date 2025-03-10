@@ -18,7 +18,12 @@ use TypeLang\PHPDoc\Parser\Description\RegexDescriptionParser;
 use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
+use TypeLang\PHPDoc\Platform\CompoundPlatform;
+use TypeLang\PHPDoc\Platform\FallbacksPlatform;
+use TypeLang\PHPDoc\Platform\PhanPlatform;
+use TypeLang\PHPDoc\Platform\PHPStanPlatform;
 use TypeLang\PHPDoc\Platform\PlatformInterface;
+use TypeLang\PHPDoc\Platform\PsalmPlatform;
 use TypeLang\PHPDoc\Platform\StandardPlatform;
 
 class Parser implements ParserInterface
@@ -32,7 +37,13 @@ class Parser implements ParserInterface
     private readonly MutableTagFactoryInterface $factories;
 
     public function __construct(
-        public readonly PlatformInterface $platform = new StandardPlatform(),
+        public readonly PlatformInterface $platform = new CompoundPlatform([
+            new StandardPlatform(),
+            new PsalmPlatform(),
+            new PHPStanPlatform(),
+            new PhanPlatform(),
+            new FallbacksPlatform(),
+        ]),
     ) {
         $this->factories = new TagFactory($platform->getTags());
         $this->tags = $this->createTagParser($this->factories);

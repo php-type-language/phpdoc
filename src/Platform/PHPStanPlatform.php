@@ -21,30 +21,28 @@ use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ThrowsTag\ThrowsTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\VarTag\VarTagFactory;
 
-final class StandardPlatform extends Platform
+final class PHPStanPlatform extends Platform
 {
     public function getName(): string
     {
-        return 'Standard';
+        return 'PHPStan';
     }
 
     protected function load(TypesParserInterface $types): iterable
     {
-        yield 'link' => new LinkTagFactory();
-        yield 'method' => new MethodTagFactory($types);
-        yield 'param' => new ParamTagFactory($types);
-        yield 'property' => new PropertyTagFactory($types);
-        yield 'property-read' => new PropertyReadTagFactory($types);
-        yield 'property-write' => new PropertyWriteTagFactory($types);
-        yield 'return' => new ReturnTagFactory($types);
-        yield 'see' => new SeeTagFactory($types);
-        yield 'template' => new TemplateTagFactory($types);
-        yield 'implements' => new TemplateImplementsTagFactory($types);
-        yield 'extends' => new TemplateExtendsTagFactory($types);
-        yield 'use' => new TemplateExtendsTagFactory($types);
-        yield 'template-covariant' => new TemplateCovariantTagFactory($types);
-        yield 'template-contravariant' => new TemplateContravariantTagFactory($types);
-        yield 'throws' => new ThrowsTagFactory($types);
-        yield 'var' => new VarTagFactory($types);
+        yield 'phpstan-method' => new MethodTagFactory($types);
+        yield 'phpstan-param' => new ParamTagFactory($types);
+        yield 'phpstan-property' => new PropertyTagFactory($types);
+        yield 'phpstan-property-read' => new PropertyReadTagFactory($types);
+        yield 'phpstan-property-write' => new PropertyWriteTagFactory($types);
+        yield 'phpstan-return' => new ReturnTagFactory($types);
+        yield 'phpstan-template' => new TemplateTagFactory($types);
+        yield 'phpstan-implements' => new TemplateImplementsTagFactory($types);
+        yield 'phpstan-extends' => new TemplateExtendsTagFactory($types);
+        yield 'phpstan-use' => new TemplateExtendsTagFactory($types);
+        yield 'phpstan-template-covariant' => new TemplateCovariantTagFactory($types);
+        yield 'phpstan-template-contravariant' => new TemplateContravariantTagFactory($types);
+        yield 'phpstan-throws' => new ThrowsTagFactory($types);
+        yield 'phpstan-var' => new VarTagFactory($types);
     }
 }
