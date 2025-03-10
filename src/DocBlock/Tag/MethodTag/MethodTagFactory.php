@@ -11,7 +11,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Content\OptionalTypeReader;
 use TypeLang\PHPDoc\Parser\Content\OptionalValueReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
-use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**
@@ -30,7 +30,7 @@ final class MethodTagFactory implements TagFactoryInterface
         $stream = new Stream($tag, $content);
 
         $isStatic = $stream->apply(new OptionalValueReader('static')) !== null;
-        $returnType = $stream->apply(new TypeParserReader($this->parser));
+        $returnType = $stream->apply(new TypeReader($this->parser));
         $callableType = $stream->apply(new OptionalTypeReader($this->parser));
 
         // In case of return type has not been defined then we swap first

@@ -12,7 +12,7 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
 /**
  * @template-extends Reader<TypeStatement>
  */
-final class TypeParserReader extends Reader
+final class TypeReader extends Reader
 {
     public function __construct(
         private readonly TypesParserInterface $parser,
@@ -27,10 +27,19 @@ final class TypeParserReader extends Reader
         try {
             $type = $this->parser->parse($stream->value);
         } catch (ParserExceptionInterface $e) {
-            throw $stream->toException(
-                message: \sprintf('Tag @%s contains an incorrect type', $stream->tag),
-                previous: $e,
-            );
+            // @phpstan-ignore-next-line : Property is defined
+            if (\trim($stream->value) === '') {
+                throw $stream->toException(\sprintf(
+                    'Tag @%s expects the type to be defined',
+                    $stream->tag,
+                ), $e);
+            }
+
+            throw $stream->toException(\sprintf(
+                'Tag @%s contains an incorrect type "%s"',
+                $stream->tag,
+                \trim($stream->value),
+            ), $e);
         }
 
         // @phpstan-ignore-next-line : Property is defined

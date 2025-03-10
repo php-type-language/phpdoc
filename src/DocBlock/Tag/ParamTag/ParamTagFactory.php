@@ -8,7 +8,7 @@ use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Content\Stream;
-use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Content\VariableNameReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
@@ -39,7 +39,7 @@ final class ParamTagFactory implements TagFactoryInterface
         $output = $variadic = false;
 
         if (!$this->isVariable($stream->value)) {
-            $type = $stream->apply(new TypeParserReader($this->parser));
+            $type = $stream->apply(new TypeReader($this->parser));
         }
 
         if (\str_starts_with($stream->value, '&')) {

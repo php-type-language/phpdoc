@@ -8,7 +8,7 @@ use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Content\Stream;
-use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
 /**
@@ -27,7 +27,7 @@ final class TemplateExtendsTagFactory implements TagFactoryInterface
     {
         $stream = new Stream($tag, $content);
 
-        $type = $stream->apply(new TypeParserReader($this->parser));
+        $type = $stream->apply(new TypeReader($this->parser));
 
         return new TemplateExtendsTag(
             name: $tag,

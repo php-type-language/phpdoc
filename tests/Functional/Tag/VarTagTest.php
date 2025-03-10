@@ -15,7 +15,7 @@ final class VarTagTest extends TagTestCase
         $tag = $this->parseTag('@var');
 
         self::assertInstanceOf(InvalidTag::class, $tag);
-        self::assertSame('Tag @var contains an incorrect type', $tag->reason->getMessage());
+        self::assertSame('Tag @var expects the type to be defined', $tag->reason->getMessage());
         self::assertNull($tag->description);
     }
 
@@ -24,7 +24,7 @@ final class VarTagTest extends TagTestCase
         $tag = $this->parseTag('@var <example>');
 
         self::assertInstanceOf(InvalidTag::class, $tag);
-        self::assertSame('Tag @var contains an incorrect type', $tag->reason->getMessage());
+        self::assertSame('Tag @var contains an incorrect type "<example>"', $tag->reason->getMessage());
         self::assertEquals(new Description('<example>'), $tag->description);
     }
 

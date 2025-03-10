@@ -8,7 +8,7 @@ use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Content\Stream;
-use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Content\VariableNameReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
@@ -29,7 +29,7 @@ final class PropertyTagFactory implements TagFactoryInterface
         $type = null;
 
         if (!\str_starts_with($stream->value, '$')) {
-            $type = $stream->apply(new TypeParserReader($this->parser));
+            $type = $stream->apply(new TypeReader($this->parser));
         }
 
         $variable = $stream->apply(new VariableNameReader());
