@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.3' ]
+        php: [ '8.4' ]
         os: [ ubuntu-latest ]
     steps:
       - name: Set Git To Use LF
@@ -33,4 +33,4 @@ jobs:
           max_attempts: 5
           command: composer update --prefer-dist --no-interaction --no-progress
       - name: Check Code Style
-        run: composer phpcs:check
+        run: PHP_CS_FIXER_IGNORE_ENV=1 composer phpcs:check
