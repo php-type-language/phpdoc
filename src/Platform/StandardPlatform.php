@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Platform;
 
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\LinkTag\LinkTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
@@ -30,6 +32,9 @@ final class StandardPlatform extends Platform
 
     protected function load(TypesParserInterface $types): iterable
     {
+        yield 'abstract' => new AbstractTagFactory();
+        yield 'extends' => new TemplateExtendsTagFactory($types);
+        yield 'implements' => new TemplateImplementsTagFactory($types);
         yield 'link' => new LinkTagFactory();
         yield 'method' => new MethodTagFactory($types);
         yield 'param' => new ParamTagFactory($types);
@@ -39,12 +44,25 @@ final class StandardPlatform extends Platform
         yield 'return' => new ReturnTagFactory($types);
         yield 'see' => new SeeTagFactory($types);
         yield 'template' => new TemplateTagFactory($types);
-        yield 'implements' => new TemplateImplementsTagFactory($types);
-        yield 'extends' => new TemplateExtendsTagFactory($types);
-        yield 'use' => new TemplateExtendsTagFactory($types);
-        yield 'template-covariant' => new TemplateCovariantTagFactory($types);
         yield 'template-contravariant' => new TemplateContravariantTagFactory($types);
+        yield 'template-covariant' => new TemplateCovariantTagFactory($types);
+        yield 'use' => new TemplateExtendsTagFactory($types);
         yield 'throws' => new ThrowsTagFactory($types);
         yield 'var' => new VarTagFactory($types);
+
+        yield from $this->loadAliases($types);
+    }
+
+    /**
+     * @return iterable<non-empty-string|iterable<mixed, non-empty-string>, TagFactoryInterface>
+     */
+    protected function loadAliases(TypesParserInterface $types): iterable
+    {
+        yield 'inherits' => $extends = new TemplateExtendsTagFactory($types);
+        yield 'returns' => new ReturnTagFactory($types);
+        yield 'template-extends' => $extends;
+        yield 'template-implements' => new TemplateImplementsTagFactory($types);
+        yield 'template-use' => new TemplateExtendsTagFactory($types);
+        yield 'throw' => new ThrowsTagFactory($types);
     }
 }

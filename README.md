@@ -32,7 +32,7 @@ composer require type-lang/phpdoc
 
 ## Supported Tags
 
-- [ ] `@abstract` - TODO
+- [x] `@abstract` - Declare a class-like _Symbol_ or method as abstract
 - [ ] `@api` - TODO
 - [ ] `@author` - TODO
 - [ ] `@category` - TODO
@@ -49,7 +49,8 @@ composer require type-lang/phpdoc
 - [x] `@inherits` - An alias of `@extends` tag
 - [ ] `@internal` - TODO
 - [ ] `@license` - TODO
-- [x] `@link` - Indicates a custom relation between the associated _Symbol_ and a website, which is identified by an absolute URI
+- [x] `@link` - Indicates a custom relation between the associated _Symbol_ 
+      and a website, which is identified by an absolute URI
 - [x] `@method` - Allows a class to know which "_magic_" methods are callable
 - [ ] `@mixin` - TODO
 - [ ] `@no-named-arguments` - TODO
@@ -71,19 +72,24 @@ composer require type-lang/phpdoc
 - [x] `@returns` - An alias of `@return` tag
 - [ ] `@seal-methods` - TODO
 - [ ] `@seal-properties` - TODO
-- [x] `@see` - Indicates a reference from the associated _Symbol(s)_ to a website or other _Symbol(s)_
+- [x] `@see` - Indicates a reference from the associated _Symbol(s)_ to a 
+      website or other _Symbol(s)_
 - [ ] `@since` - TODO
 - [ ] `@source` - TODO
 - [ ] `@subpackage` - TODO
 - [ ] `@suppress` - TODO
-- [x] `@template` - Allows classes (and class-like entries), functions and methods to declare a generic type parameter
-- [x] `@template-contravariant` - Allows classes (and class-like entries), functions and methods to declare a generic contravariant type parameter
-- [x] `@template-covariant` - Allows classes (and class-like entries), functions and methods to declare a generic covariant type parameter
+- [x] `@template` - Allows classes (and class-like entries), functions and
+      methods to declare a generic type parameter
+- [x] `@template-contravariant` - Allows classes (and class-like entries),
+      functions and methods to declare a generic contravariant type parameter
+- [x] `@template-covariant` - Allows classes (and class-like entries), functions
+      and methods to declare a generic covariant type parameter
 - [x] `@template-extends` - An alias of `@extends` tag
 - [x] `@template-implements` - An alias of `@implements` tag
 - [x] `@template-use` - Allows to extend templated traits
 - [x] `@throw` - An alias of `@throws` tag
-- [x] `@throws` - Used to indicate whether _Symbol_ throw a specific type of `\Throwable` (exception or error)
+- [x] `@throws` - Used to indicate whether _Symbol_ throw a specific type 
+      of `\Throwable` (exception or error)
 - [ ] `@todo` - TODO
 - [ ] `@unused-param` - TODO
 - [x] `@use` - An alias of `@template-use` tag
@@ -200,7 +206,7 @@ composer require type-lang/phpdoc
 
 ### Phan Tags
 
-- [ ] `@phan-abstract` - TODO
+- [x] `@phan-abstract` - Vendor-specific `@abstract` alias
 - [ ] `@phan-assert` - TODO
 - [ ] `@phan-assert-false-condition` - TODO
 - [ ] `@phan-assert-if-false` - TODO

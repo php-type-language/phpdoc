@@ -19,7 +19,6 @@ use TypeLang\PHPDoc\Parser\SourceMap;
 use TypeLang\PHPDoc\Parser\Tag\RegexTagParser;
 use TypeLang\PHPDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PHPDoc\Platform\CompoundPlatform;
-use TypeLang\PHPDoc\Platform\FallbacksPlatform;
 use TypeLang\PHPDoc\Platform\PhanPlatform;
 use TypeLang\PHPDoc\Platform\PHPStanPlatform;
 use TypeLang\PHPDoc\Platform\PlatformInterface;
@@ -42,7 +41,6 @@ class Parser implements ParserInterface
             new PsalmPlatform(),
             new PHPStanPlatform(),
             new PhanPlatform(),
-            new FallbacksPlatform(),
         ]),
     ) {
         $this->factories = new TagFactory($platform->getTags());

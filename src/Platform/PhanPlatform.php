@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Platform;
 
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
@@ -24,6 +25,7 @@ final class PhanPlatform extends Platform
 
     protected function load(TypesParserInterface $types): iterable
     {
+        yield 'phan-abstract' => new AbstractTagFactory();
         yield 'phan-method' => new MethodTagFactory($types);
         yield 'phan-param' => new ParamTagFactory($types);
         yield 'phan-property' => new PropertyTagFactory($types);
