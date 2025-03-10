@@ -25,16 +25,14 @@ final class TemplateExtendsTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): TemplateExtendsTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
-        $type = $stream->apply(new TypeParserReader($tag, $this->parser));
+        $type = $stream->apply(new TypeParserReader($this->parser));
 
         return new TemplateExtendsTag(
             name: $tag,
             type: $type,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

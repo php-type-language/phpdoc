@@ -12,7 +12,7 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
 /**
  * @template-extends Reader<TypeStatement|null>
  */
-final class OptionalTypeParserReader extends Reader
+final class OptionalTypeReader extends Reader
 {
     public function __construct(
         private readonly TypesParserInterface $parser,

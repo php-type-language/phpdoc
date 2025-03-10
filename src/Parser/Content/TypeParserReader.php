@@ -14,11 +14,7 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
  */
 final class TypeParserReader extends Reader
 {
-    /**
-     * @param non-empty-string $tag
-     */
     public function __construct(
-        private readonly string $tag,
         private readonly TypesParserInterface $parser,
     ) {}
 
@@ -32,7 +28,7 @@ final class TypeParserReader extends Reader
             $type = $this->parser->parse($stream->value);
         } catch (ParserExceptionInterface $e) {
             throw $stream->toException(
-                message: \sprintf('Tag @%s contains an incorrect type', $this->tag),
+                message: \sprintf('Tag @%s contains an incorrect type', $stream->tag),
                 previous: $e,
             );
         }

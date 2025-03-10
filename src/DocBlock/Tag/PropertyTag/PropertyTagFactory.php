@@ -25,22 +25,20 @@ final class PropertyTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): PropertyTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
         $type = null;
 
         if (!\str_starts_with($stream->value, '$')) {
-            $type = $stream->apply(new TypeParserReader($tag, $this->parser));
+            $type = $stream->apply(new TypeParserReader($this->parser));
         }
 
-        $variable = $stream->apply(new VariableNameReader($tag));
+        $variable = $stream->apply(new VariableNameReader());
 
         return new PropertyTag(
             name: $tag,
             type: $type,
             variable: $variable,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

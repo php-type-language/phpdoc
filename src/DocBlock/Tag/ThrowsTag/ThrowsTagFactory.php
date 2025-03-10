@@ -24,14 +24,12 @@ final class ThrowsTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): ThrowsTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
         return new ThrowsTag(
             name: $tag,
-            type: $stream->apply(new TypeParserReader($tag, $this->parser)),
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            type: $stream->apply(new TypeParserReader($this->parser)),
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

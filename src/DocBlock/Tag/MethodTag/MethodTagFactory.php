@@ -8,7 +8,7 @@ use TypeLang\Parser\Node\Stmt\CallableTypeNode;
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
-use TypeLang\PHPDoc\Parser\Content\OptionalTypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\OptionalTypeReader;
 use TypeLang\PHPDoc\Parser\Content\OptionalValueReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
 use TypeLang\PHPDoc\Parser\Content\TypeParserReader;
@@ -27,11 +27,11 @@ final class MethodTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): MethodTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
         $isStatic = $stream->apply(new OptionalValueReader('static')) !== null;
-        $returnType = $stream->apply(new TypeParserReader($tag, $this->parser));
-        $callableType = $stream->apply(new OptionalTypeParserReader($this->parser));
+        $returnType = $stream->apply(new TypeParserReader($this->parser));
+        $callableType = $stream->apply(new OptionalTypeReader($this->parser));
 
         // In case of return type has not been defined then we swap first
         // defined type as method signature definition.
@@ -63,9 +63,7 @@ final class MethodTagFactory implements TagFactoryInterface
             name: $tag,
             type: $callableType,
             static: $isStatic,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

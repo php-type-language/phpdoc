@@ -13,12 +13,8 @@ final class IdentifierReader extends Reader
 {
     private readonly OptionalIdentifierReader $id;
 
-    /**
-     * @param non-empty-string $tag
-     */
-    public function __construct(
-        private readonly string $tag,
-    ) {
+    public function __construct()
+    {
         $this->id = new OptionalIdentifierReader();
     }
 
@@ -31,7 +27,7 @@ final class IdentifierReader extends Reader
         return ($this->id)($stream)
             ?? throw $stream->toException(\sprintf(
                 'Tag @%s contains an incorrect identifier value',
-                $this->tag,
+                $stream->tag,
             ));
     }
 }

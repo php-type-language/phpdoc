@@ -33,13 +33,13 @@ final class ParamTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): ParamTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
         $type = null;
         $output = $variadic = false;
 
         if (!$this->isVariable($stream->value)) {
-            $type = $stream->apply(new TypeParserReader($tag, $this->parser));
+            $type = $stream->apply(new TypeParserReader($this->parser));
         }
 
         if (\str_starts_with($stream->value, '&')) {
@@ -52,7 +52,7 @@ final class ParamTagFactory implements TagFactoryInterface
             $variadic = true;
         }
 
-        $variable = $stream->apply(new VariableNameReader($tag));
+        $variable = $stream->apply(new VariableNameReader());
 
         return new ParamTag(
             name: $tag,
@@ -60,9 +60,7 @@ final class ParamTagFactory implements TagFactoryInterface
             variable: $variable,
             isVariadic: $variadic,
             isOutput: $output,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

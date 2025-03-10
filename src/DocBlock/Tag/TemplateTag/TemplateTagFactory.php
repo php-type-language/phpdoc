@@ -8,7 +8,7 @@ use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\Parser\Content\IdentifierReader;
-use TypeLang\PHPDoc\Parser\Content\OptionalTypeParserReader;
+use TypeLang\PHPDoc\Parser\Content\OptionalTypeReader;
 use TypeLang\PHPDoc\Parser\Content\OptionalValueReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
@@ -26,15 +26,15 @@ final class TemplateTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): TemplateTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
-        $template = $stream->apply(new IdentifierReader($tag));
+        $template = $stream->apply(new IdentifierReader());
 
         $type = null;
 
         $stream->lookahead(function (Stream $stream) use (&$type): bool {
             if ($stream->apply(new OptionalValueReader('of')) !== null) {
-                $type = $stream->apply(new OptionalTypeParserReader($this->parser));
+                $type = $stream->apply(new OptionalTypeReader($this->parser));
             }
 
             return $type !== null;
@@ -44,9 +44,7 @@ final class TemplateTagFactory implements TagFactoryInterface
             name: $tag,
             template: $template,
             type: $type,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }

@@ -18,11 +18,9 @@ final class ValueReader extends Reader
     private readonly OptionalValueReader $identifier;
 
     /**
-     * @param non-empty-string $tag
      * @param T $value
      */
     public function __construct(
-        private readonly string $tag,
         private readonly string $value,
     ) {
         $this->identifier = new OptionalValueReader($value);
@@ -38,7 +36,7 @@ final class ValueReader extends Reader
         return ($this->identifier)($stream)
             ?? throw $stream->toException(\sprintf(
                 'Tag @%s contains an incorrect identifier value "%s"',
-                $this->tag,
+                $stream->tag,
                 $this->value,
             ));
     }

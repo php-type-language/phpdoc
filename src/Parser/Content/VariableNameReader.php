@@ -13,12 +13,8 @@ final class VariableNameReader extends Reader
 {
     private readonly OptionalVariableNameReader $var;
 
-    /**
-     * @param non-empty-string $tag
-     */
-    public function __construct(
-        private readonly string $tag,
-    ) {
+    public function __construct()
+    {
         $this->var = new OptionalVariableNameReader();
     }
 
@@ -31,7 +27,7 @@ final class VariableNameReader extends Reader
         return ($this->var)($stream)
             ?? throw $stream->toException(\sprintf(
                 'Tag @%s contains an incorrect variable name',
-                $this->tag,
+                $stream->tag,
             ));
     }
 }

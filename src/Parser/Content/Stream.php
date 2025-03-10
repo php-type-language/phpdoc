@@ -17,8 +17,13 @@ final class Stream implements \Stringable
      */
     public int $offset = 0;
 
-    public function __construct(public string $value)
-    {
+    public function __construct(
+        /**
+         * @var non-empty-string
+         */
+        public readonly string $tag,
+        public string $value,
+    ) {
         $this->source = $this->value;
     }
 

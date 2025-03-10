@@ -25,18 +25,16 @@ final class VarTagFactory implements TagFactoryInterface
 
     public function create(string $tag, string $content, DescriptionParserInterface $descriptions): VarTag
     {
-        $stream = new Stream($content);
+        $stream = new Stream($tag, $content);
 
-        $type = $stream->apply(new TypeParserReader($tag, $this->parser));
+        $type = $stream->apply(new TypeParserReader($this->parser));
         $variable = $stream->apply(new OptionalVariableNameReader());
 
         return new VarTag(
             name: $tag,
             type: $type,
             variable: $variable,
-            description: \trim($stream->value) !== ''
-                ? $descriptions->parse(\rtrim($stream->value))
-                : null,
+            description: $stream->toOptionalDescription($descriptions),
         );
     }
 }
