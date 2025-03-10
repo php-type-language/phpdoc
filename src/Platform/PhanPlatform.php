@@ -12,9 +12,6 @@ use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ReturnTag\ReturnTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateExtendsTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateImplementsTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\VarTag\VarTagFactory;
 

@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Platform;
 
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\LinkTag\LinkTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ReturnTag\ReturnTagFactory;
-use TypeLang\PHPDoc\DocBlock\Tag\SeeTag\SeeTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateExtendsTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag\TemplateImplementsTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTagFactory;
