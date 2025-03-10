@@ -43,7 +43,7 @@ composer require type-lang/phpdoc
 - [ ] `@filesource` - TODO
 - [x] `@final` - Declare any _Symbol_ as final
 - [ ] `@global` - TODO
-- [ ] `@ignore` - TODO
+- [x] `@ignore` - Used to tell documentation systems that _Symbol_ are not to be processed.
 - [x] `@implements` - Allows to extend templated interfaces
 - [ ] `@inheritdoc` - TODO
 - [x] `@inherits` - An alias of `@extends` tag
