@@ -54,7 +54,8 @@ composer require type-lang/phpdoc
       and a website, which is identified by an absolute URI
 - [x] `@method` - Allows a class to know which "_magic_" methods are callable
 - [ ] `@mixin` - TODO
-- [ ] `@no-named-arguments` - TODO
+- [x] `@no-named-arguments` - Indicates that argument names may be 
+      changed in the future.
 - [ ] `@package` - TODO
 - [ ] `@override` - TODO
 - [x] `@param` - Used to document a single argument of a function or method

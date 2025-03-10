@@ -11,6 +11,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\FinalTag\FinalTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\IgnoreTag\IgnoreTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\LinkTag\LinkTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
@@ -41,6 +42,7 @@ final class StandardPlatform extends Platform
         yield 'ignore' => new IgnoreTagFactory();
         yield 'link' => new LinkTagFactory();
         yield 'method' => new MethodTagFactory($types);
+        yield 'no-named-arguments' => new NoNamedArgumentsTagFactory();
         yield 'param' => new ParamTagFactory($types);
         yield 'property' => new PropertyTagFactory($types);
         yield 'property-read' => new PropertyReadTagFactory($types);
