@@ -56,7 +56,7 @@ composer require type-lang/phpdoc
 - [ ] `@mixin` - TODO
 - [x] `@no-named-arguments` - Indicates that argument names may be 
       changed in the future.
-- [ ] `@package` - TODO
+- [x] `@package` - Used to categorize _Element(s)_ into logical subdivisions
 - [x] `@override` - Mention to see if the method is actually overriding a definition
 - [x] `@param` - Used to document a single argument of a function or method
 - [ ] `@param-closure-this` - TODO
@@ -78,7 +78,7 @@ composer require type-lang/phpdoc
       website or other _Symbol(s)_
 - [ ] `@since` - TODO
 - [ ] `@source` - TODO
-- [ ] `@subpackage` - TODO
+- [x] `@subpackage` - Used to categorize _Element(s)_ into logical subdivisions
 - [ ] `@suppress` - TODO
 - [x] `@template` - Allows classes (and class-like entries), functions and
       methods to declare a generic type parameter

@@ -6,7 +6,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\PropertyTag;
 
 /**
  * ```
- * "@property-write" [<Type>] $<name> [<description>]
+ * "@property-write" [<type>] $<name> [<description>]
  * ```
  */
 class PropertyWriteTag extends PropertyTag {}

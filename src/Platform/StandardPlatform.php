@@ -18,6 +18,8 @@ use TypeLang\PHPDoc\DocBlock\Tag\LinkTag\LinkTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\OverrideTag\OverrideTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\PackageTag\PackageTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\PackageTag\SubPackageTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
@@ -54,6 +56,7 @@ final class StandardPlatform extends Platform
         yield 'link' => new LinkTagFactory();
         yield 'method' => new MethodTagFactory($types);
         yield 'no-named-arguments' => new NoNamedArgumentsTagFactory();
+        yield 'package' => new PackageTagFactory($types);
         yield 'override' => new OverrideTagFactory();
         yield 'param' => new ParamTagFactory($types);
         yield 'property' => new PropertyTagFactory($types);
@@ -61,6 +64,7 @@ final class StandardPlatform extends Platform
         yield 'property-write' => new PropertyWriteTagFactory($types);
         yield 'return' => new ReturnTagFactory($types);
         yield 'see' => new SeeTagFactory($types);
+        yield 'subpackage' => new SubPackageTagFactory($types);
         yield 'template' => new TemplateTagFactory($types);
         yield 'template-contravariant' => new TemplateContravariantTagFactory($types);
         yield 'template-covariant' => new TemplateCovariantTagFactory($types);

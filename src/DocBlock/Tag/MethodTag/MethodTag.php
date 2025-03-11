@@ -36,9 +36,9 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
  * with a class or interface.
  *
  * ```
- * "@method" [static] <CallableType> [<description>]
- * "@method" [static] <ReturnType> <CallableType> [<description>]
- * "@method" [static] <CallableType>: <ReturnType> [<description>]
+ * "@method" [static] <callable-type> [<description>]
+ * "@method" [static] <return-type> <callable-type> [<description>]
+ * "@method" [static] <callable-type>: <return-type> [<description>]
  * ```
  */
 class MethodTag extends Tag implements OptionalTypeProviderInterface

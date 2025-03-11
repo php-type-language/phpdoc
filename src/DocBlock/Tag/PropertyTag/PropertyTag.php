@@ -34,7 +34,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\VariableProviderInterface;
  * - Also {@see PropertyWriteTag} for "`@property-write`" tag implementation.
  *
  * ```
- * "@property" [<Type>] $<name> [<description>]
+ * "@property" [<type>] $<name> [<description>]
  * ```
  */
 class PropertyTag extends Tag implements

@@ -6,7 +6,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateExtendsTag;
 
 /**
  * ```
- * "@use" <Type> [<description>]
+ * "@use" <type> [<description>]
  * ```
  */
 class TemplateUseTag extends TemplateInheritanceTag {}

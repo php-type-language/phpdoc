@@ -6,7 +6,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\PropertyTag;
 
 /**
  * ```
- * "@property-read" [<Type>] $<name> [<description>]
+ * "@property-read" [<type>] $<name> [<description>]
  * ```
  */
 class PropertyReadTag extends PropertyTag {}

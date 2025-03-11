@@ -6,7 +6,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateTag;
 
 /**
  * ```
- * "@template-contravariant" <name> ['of' <Type>] [<description>]
+ * "@template-contravariant" <name> ['of' <type>] [<description>]
  * ```
  */
 final class TemplateContravariantTag extends TemplateTag {}
