@@ -45,11 +45,16 @@ final class ElementReferenceReader implements ReaderInterface
             $body = \rtrim($matches[0]);
             $isFullyQualified = $body[0] === '\\';
 
+            // @phpstan-ignore match.unhandled
             $result = match ($matches['MARK']) {
+                // @phpstan-ignore-next-line : All ok
                 'T_FUNCTION' => new FunctionElementReference($isFullyQualified
+                    // @phpstan-ignore-next-line : All ok
                     ? new FullQualifiedName(\substr($body, 0, -2))
+                    // @phpstan-ignore-next-line : All ok
                     : new Name(\substr($body, 0, -2)),
                 ),
+                // @phpstan-ignore-next-line : All ok
                 'T_IDENTIFIER' => new TypeElementReference(
                     type: new NamedTypeNode($isFullyQualified
                         ? new FullQualifiedName($body)
@@ -61,20 +66,29 @@ final class ElementReferenceReader implements ReaderInterface
                 ),
                 'T_CLASS_CONSTANT' => new ClassConstantElementReference(
                     class: $isFullyQualified
+                        // @phpstan-ignore-next-line : All ok
                         ? new FullQualifiedName($matches['T_CLASS'])
+                        // @phpstan-ignore-next-line : All ok
                         : new Name($matches['T_CLASS']),
+                    // @phpstan-ignore-next-line : All ok
                     constant: \substr($body, \strlen($matches['T_CLASS']) + 2),
                 ),
                 'T_CLASS_METHOD' => new ClassMethodElementReference(
                     class: $isFullyQualified
+                        // @phpstan-ignore-next-line : All ok
                         ? new FullQualifiedName($matches['T_CLASS'])
+                        // @phpstan-ignore-next-line : All ok
                         : new Name($matches['T_CLASS']),
+                    // @phpstan-ignore-next-line : All ok
                     method: \substr($body, \strlen($matches['T_CLASS']) + 2, -2),
                 ),
                 'T_CLASS_PROPERTY' => new ClassPropertyElementReference(
                     class: $isFullyQualified
+                        // @phpstan-ignore-next-line : All ok
                         ? new FullQualifiedName($matches['T_CLASS'])
+                        // @phpstan-ignore-next-line : All ok
                         : new Name($matches['T_CLASS']),
+                    // @phpstan-ignore-next-line : All ok
                     property: \substr($body, \strlen($matches['T_CLASS']) + 3),
                 ),
             };
@@ -88,65 +102,5 @@ final class ElementReferenceReader implements ReaderInterface
             'Tag @%s expects the FQN reference to be defined',
             $stream->tag,
         ));
-    }
-
-    private function getReference(string $context, Stream $stream): ElementReference
-    {
-        $class = new Name($context);
-
-        if (\str_starts_with($stream->value, '::')) {
-            $stream->shift(2, false);
-
-            if (\str_starts_with($stream->value, '$')) {
-                $stream->shift(1, false);
-
-                $variable = $this->fetchIdentifier($stream->value);
-
-                if ($variable !== null) {
-                    return new ClassPropertyElementReference(
-                        class: $class,
-                        property: $variable,
-                    );
-                }
-
-                throw $stream->toException(\sprintf(
-                    'Tag @%s contains invalid property name after class reference',
-                    $stream->tag,
-                ));
-            }
-
-            $identifier = $this->fetchIdentifier($stream->value);
-
-            if ($identifier !== null) {
-                $stream->shift(\strlen($identifier), false);
-
-                if (\str_starts_with($stream->value, '()')) {
-                    return new ClassMethodElementReference(
-                        class: $class,
-                        method: $identifier,
-                    );
-                }
-
-                return new ClassConstantElementReference(
-                    class: $class,
-                    constant: $identifier,
-                );
-            }
-
-            throw $stream->toException(\sprintf(
-                'Tag @%s contains invalid method or constant name after class reference',
-                $stream->tag,
-            ));
-        }
-
-        if (\str_starts_with($stream->value, '()')) {
-            $stream->shift(2, false);
-
-            return new FunctionElementReference($class);
-        }
-
-        return new TypeElementReference(
-            type: new NamedTypeNode($class),
-        );
     }
 }

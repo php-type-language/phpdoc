@@ -17,8 +17,6 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
  */
 final class OptionalTypeReader implements OptionalReaderInterface
 {
-    private const IS_SIMPLE_TYPE_PCRE = '/^[a-zA-Z_\\x80-\\xff][a-zA-Z0-9\\-_\\x80-\\xff]*+(?:\s|$)/Ssu';
-
     public function __construct(
         private readonly TypesParserInterface $parser,
     ) {}

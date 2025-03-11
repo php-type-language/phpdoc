@@ -31,7 +31,7 @@ final class LinkTagFactory implements TagFactoryInterface
 
         return new LinkTag(
             name: $tag,
-            uri: $reference,
+            reference: $reference,
             description: $stream->toOptionalDescription($descriptions),
         );
     }
