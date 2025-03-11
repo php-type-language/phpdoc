@@ -7,6 +7,7 @@ namespace TypeLang\PHPDoc\Platform;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\MethodTag\MethodTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\OverrideTag\OverrideTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ParamTag\ParamTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyReadTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\PropertyTag\PropertyTagFactory;
@@ -27,6 +28,7 @@ final class PhanPlatform extends Platform
     {
         yield 'phan-abstract' => new AbstractTagFactory();
         yield 'phan-method' => new MethodTagFactory($types);
+        yield 'phan-override' => new OverrideTagFactory();
         yield 'phan-param' => new ParamTagFactory($types);
         yield 'phan-property' => new PropertyTagFactory($types);
         yield 'phan-property-read' => new PropertyReadTagFactory($types);

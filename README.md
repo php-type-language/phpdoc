@@ -57,7 +57,7 @@ composer require type-lang/phpdoc
 - [x] `@no-named-arguments` - Indicates that argument names may be 
       changed in the future.
 - [ ] `@package` - TODO
-- [ ] `@override` - TODO
+- [x] `@override` - Mention to see if the method is actually overriding a definition
 - [x] `@param` - Used to document a single argument of a function or method
 - [ ] `@param-closure-this` - TODO
 - [ ] `@param-immediately-invoked-callable` - TODO
@@ -226,7 +226,7 @@ composer require type-lang/phpdoc
 - [x] `@phan-method` - Vendor-specific `@method` alias
 - [ ] `@phan-mixin` - TODO
 - [ ] `@phan-output-reference` - TODO
-- [ ] `@phan-override` - TODO
+- [x] `@phan-override` - Vendor-specific `@override` alias
 - [x] `@phan-param` - Vendor-specific `@param` alias
 - [x] `@phan-property` - Vendor-specific `@property` alias
 - [x] `@phan-property-read` - Vendor-specific `@property-read` alias
