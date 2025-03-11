@@ -8,7 +8,6 @@ use TypeLang\Parser\Node\FullQualifiedName;
 use TypeLang\Parser\Node\Literal\VariableLiteralNode;
 use TypeLang\Parser\Node\Name;
 use TypeLang\Parser\Node\Stmt\NamedTypeNode;
-use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassConstantElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassMethodElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassPropertyElementReference;
@@ -26,15 +25,15 @@ final class ElementReferenceReader implements ReaderInterface
     private const T_IDENTIFIER = '[a-zA-Z_\\x80-\\xff][a-zA-Z0-9\\-_\\x80-\\xff]*+';
 
     private const SIMPLE_TOKENIZER_PCRE = '/^(?'
-        . '|(?:(?P<T_CLASS>'. self::T_FQN . ')::(?:'
-            . '(?:\\$[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+)(*MARK:T_CLASS_PROPERTY)'
-            . '|(?:[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+\(\))(*MARK:T_CLASS_METHOD)'
-            . '|(?:[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+)(*MARK:T_CLASS_CONSTANT)'
+        . '|(?:(?P<T_CLASS>' . self::T_FQN . ')::(?:'
+        . '(?:\\$[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+)(*MARK:T_CLASS_PROPERTY)'
+        . '|(?:[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+\(\))(*MARK:T_CLASS_METHOD)'
+        . '|(?:[a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*+)(*MARK:T_CLASS_CONSTANT)'
         . '))'
-        . '|(?:(?:\\$'. self::T_IDENTIFIER . ')(*MARK:T_VARIABLE))'
-        . '|(?:(?:'. self::T_FQN . '\(\))(*MARK:T_FUNCTION))'
-        . '|(?:(?:'. self::T_FQN . ')(*MARK:T_IDENTIFIER))'
-    . ')(?:\s|$)/Ssum';
+        . '|(?:(?:\\$' . self::T_IDENTIFIER . ')(*MARK:T_VARIABLE))'
+        . '|(?:(?:' . self::T_FQN . '\(\))(*MARK:T_FUNCTION))'
+        . '|(?:(?:' . self::T_FQN . ')(*MARK:T_IDENTIFIER))'
+        . ')(?:\s|$)/Ssum';
 
     public function __invoke(Stream $stream): ElementReference
     {
@@ -48,17 +47,19 @@ final class ElementReferenceReader implements ReaderInterface
             // @phpstan-ignore match.unhandled
             $result = match ($matches['MARK']) {
                 // @phpstan-ignore-next-line : All ok
-                'T_FUNCTION' => new FunctionElementReference($isFullyQualified
-                    // @phpstan-ignore-next-line : All ok
-                    ? new FullQualifiedName(\substr($body, 0, -2))
-                    // @phpstan-ignore-next-line : All ok
-                    : new Name(\substr($body, 0, -2)),
+                'T_FUNCTION' => new FunctionElementReference(
+                    function: $isFullyQualified
+                        // @phpstan-ignore-next-line : All ok
+                        ? new FullQualifiedName(\substr($body, 0, -2))
+                        // @phpstan-ignore-next-line : All ok
+                        : new Name(\substr($body, 0, -2)),
                 ),
                 // @phpstan-ignore-next-line : All ok
                 'T_IDENTIFIER' => new TypeElementReference(
-                    type: new NamedTypeNode($isFullyQualified
-                        ? new FullQualifiedName($body)
-                        : new Name($body)
+                    type: new NamedTypeNode(
+                        name: $isFullyQualified
+                            ? new FullQualifiedName($body)
+                            : new Name($body)
                     ),
                 ),
                 'T_VARIABLE' => new VariableReference(

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\DocBlock\Tag\LinkTag;
 
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeElementReference;
 use TypeLang\PHPDoc\Parser\Content\ElementReferenceReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
-use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Content\UriReferenceReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
