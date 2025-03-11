@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\Parser\Content;
 
 use TypeLang\Parser\Exception\ParserExceptionInterface;
+use TypeLang\Parser\Node\FullQualifiedName;
+use TypeLang\Parser\Node\Name;
+use TypeLang\Parser\Node\Stmt\NamedTypeNode;
 use TypeLang\Parser\Node\Stmt\TypeStatement;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\Exception\InvalidTagException;
@@ -14,6 +17,8 @@ use TypeLang\PHPDoc\Exception\InvalidTagException;
  */
 final class OptionalTypeReader implements OptionalReaderInterface
 {
+    private const IS_SIMPLE_TYPE_PCRE = '/^[a-zA-Z_\\x80-\\xff][a-zA-Z0-9\\-_\\x80-\\xff]*+(?:\s|$)/Ssu';
+
     public function __construct(
         private readonly TypesParserInterface $parser,
     ) {}

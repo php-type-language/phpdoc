@@ -32,7 +32,7 @@ abstract class Platform implements PlatformInterface
     }
 
     /**
-     * @return iterable<non-empty-string|iterable<mixed, non-empty-string>, TagFactoryInterface>
+     * @return iterable<non-empty-lowercase-string|iterable<mixed, non-empty-lowercase-string>, TagFactoryInterface>
      */
     abstract protected function load(TypesParserInterface $types): iterable;
 }

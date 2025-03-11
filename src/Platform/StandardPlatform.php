@@ -76,7 +76,7 @@ final class StandardPlatform extends Platform
     }
 
     /**
-     * @return iterable<non-empty-string|iterable<mixed, non-empty-string>, TagFactoryInterface>
+     * @return iterable<non-empty-lowercase-string|iterable<mixed, non-empty-lowercase-string>, TagFactoryInterface>
      */
     protected function loadAliases(TypesParserInterface $types): iterable
     {

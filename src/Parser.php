@@ -67,7 +67,7 @@ class Parser implements ParserInterface
     /**
      * Facade method of {@see MutableTagFactoryInterface::register()}
      *
-     * @param non-empty-string|list<non-empty-string> $tags
+     * @param non-empty-lowercase-string|list<non-empty-lowercase-string> $tags
      */
     public function register(string|array $tags, TagFactoryInterface $delegate): void
     {

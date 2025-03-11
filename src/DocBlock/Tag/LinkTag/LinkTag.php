@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\DocBlock\Tag\LinkTag;
 
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ReferenceInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\UriReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
@@ -17,7 +18,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
  * relation defined by this occurrence.
  *
  * ```
- * "@link" [URI] [<description>]
+ * "@link" [<URI> | <reference>] [<description>]
  * ```
  *
  * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
@@ -26,7 +27,7 @@ final class LinkTag extends Tag
 {
     public function __construct(
         string $name,
-        public readonly UriReference $uri,
+        public readonly ReferenceInterface $reference,
         \Stringable|string|null $description = null,
     ) {
         parent::__construct($name, $description);

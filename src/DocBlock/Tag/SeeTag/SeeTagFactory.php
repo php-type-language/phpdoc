@@ -7,8 +7,10 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\SeeTag;
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeElementReference;
 use TypeLang\PHPDoc\Parser\Content\ElementReferenceReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Content\UriReferenceReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
@@ -30,7 +32,13 @@ final class SeeTagFactory implements TagFactoryInterface
         try {
             $reference = $stream->apply(new UriReferenceReader());
         } catch (\Throwable) {
-            $reference = $stream->apply(new ElementReferenceReader($this->parser));
+            try {
+                $reference = $stream->apply(new ElementReferenceReader());
+            } catch (\Throwable) {
+                $reference = new TypeElementReference(
+                    type: $stream->apply(new TypeReader($this->parser))
+                );
+            }
         }
 
         return new SeeTag(

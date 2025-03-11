@@ -32,10 +32,6 @@ final class Stream implements \Stringable
      */
     public function shift(int $offset, bool $ltrim = true): void
     {
-        if ($offset <= 0) {
-            return;
-        }
-
         $size = \strlen($this->value);
         $this->value = \substr($this->value, $offset);
 
@@ -49,18 +45,23 @@ final class Stream implements \Stringable
 
     /**
      * @api
-     *
-     * @param callable(self):bool $context
+     * @template TArgResult of mixed
+     * @param callable(self):TArgResult $context
+     * @return TArgResult
      */
-    public function lookahead(callable $context): void
+    public function lookahead(callable $context): mixed
     {
         $offset = $this->offset;
         $value = $this->value;
 
-        if ($context($this) === false) {
+        $result = $context($this);
+
+        if ($result === null) {
             $this->offset = $offset;
             $this->value = $value;
         }
+
+        return $result;
     }
 
     /**

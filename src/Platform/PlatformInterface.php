@@ -18,7 +18,7 @@ interface PlatformInterface
     /**
      * Returns a list of registered tags for the specified platform.
      *
-     * @return iterable<non-empty-string, TagFactoryInterface>
+     * @return iterable<non-empty-lowercase-string, TagFactoryInterface>
      */
     public function getTags(): iterable;
 }

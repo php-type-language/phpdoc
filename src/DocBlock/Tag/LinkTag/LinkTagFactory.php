@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\DocBlock\Tag\LinkTag;
 
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeElementReference;
+use TypeLang\PHPDoc\Parser\Content\ElementReferenceReader;
 use TypeLang\PHPDoc\Parser\Content\Stream;
+use TypeLang\PHPDoc\Parser\Content\TypeReader;
 use TypeLang\PHPDoc\Parser\Content\UriReferenceReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 
@@ -20,9 +23,15 @@ final class LinkTagFactory implements TagFactoryInterface
     {
         $stream = new Stream($tag, $content);
 
+        try {
+            $reference = $stream->apply(new UriReferenceReader());
+        } catch (\Throwable) {
+            $reference = $stream->apply(new ElementReferenceReader());
+        }
+
         return new LinkTag(
             name: $tag,
-            uri: $stream->apply(new UriReferenceReader()),
+            uri: $reference,
             description: $stream->toOptionalDescription($descriptions),
         );
     }
