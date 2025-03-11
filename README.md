@@ -36,7 +36,7 @@ composer require type-lang/phpdoc
 - [x] `@api` - Highlight _Symbol_ as being part of the public API
 - [ ] `@author` - TODO
 - [ ] `@category` - TODO
-- [ ] `@copyright` - TODO
+- [x] `@copyright` - Used to document the copyright information of any _Symbol_.
 - [ ] `@deprecated` - TODO
 - [ ] `@example` - TODO
 - [x] `@extends` - Allows to extend templated classes and interfaces
