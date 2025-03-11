@@ -7,10 +7,10 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\CopyrightTag;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
- * Used to document the copyright information of any _Symbol_.
+ * Used to document the copyright information of any _Element_.
  *
- * The "`@copyright`" tag defines who holds the copyright over the _Symbol_.
- * The copyright indicated with this tag applies to the _Symbol_ with which
+ * The "`@copyright`" tag defines who holds the copyright over the _Element_.
+ * The copyright indicated with this tag applies to the _Element_ with which
  * it is associated and all child elements unless otherwise noted.
  *
  * The format of the description is governed by the coding standard of each

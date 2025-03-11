@@ -32,25 +32,25 @@ composer require type-lang/phpdoc
 
 ## Supported Tags
 
-- [x] `@abstract` - Declare any _Symbol_ as abstract
-- [x] `@api` - Highlight _Symbol_ as being part of the public API
+- [x] `@abstract` - Declare any _Element_ as abstract
+- [x] `@api` - Highlight _Element_ as being part of the public API
 - [ ] `@author` - TODO
 - [ ] `@category` - TODO
-- [x] `@copyright` - Used to document the copyright information of any _Symbol_.
+- [x] `@copyright` - Used to document the copyright information of any _Element_.
 - [ ] `@deprecated` - TODO
 - [ ] `@example` - TODO
 - [x] `@extends` - Allows to extend templated classes and interfaces
 - [ ] `@filesource` - TODO
-- [x] `@final` - Declare any _Symbol_ as final
+- [x] `@final` - Declare any _Element_ as final
 - [ ] `@global` - TODO
-- [x] `@ignore` - Used to tell documentation systems that _Symbol_ are 
+- [x] `@ignore` - Used to tell documentation systems that _Element_ are 
       not to be processed.
 - [x] `@implements` - Allows to extend templated interfaces
 - [ ] `@inheritdoc` - TODO
 - [x] `@inherits` - An alias of `@extends` tag
 - [ ] `@internal` - TODO
 - [x] `@license` - Used to indicate which license is applicable
-- [x] `@link` - Indicates a custom relation between the associated _Symbol_ 
+- [x] `@link` - Indicates a custom relation between the associated _Element_ 
       and a website, which is identified by an absolute URI
 - [x] `@method` - Allows a class to know which "_magic_" methods are callable
 - [ ] `@mixin` - TODO
@@ -90,14 +90,14 @@ composer require type-lang/phpdoc
 - [x] `@template-implements` - An alias of `@implements` tag
 - [x] `@template-use` - Allows to extend templated traits
 - [x] `@throw` - An alias of `@throws` tag
-- [x] `@throws` - Used to indicate whether _Symbol_ throw a specific type 
+- [x] `@throws` - Used to indicate whether _Element_ throw a specific type 
       of `\Throwable` (exception or error)
 - [ ] `@todo` - TODO
 - [ ] `@unused-param` - TODO
 - [x] `@use` - An alias of `@template-use` tag
 - [ ] `@used-by` - TODO
 - [ ] `@uses` - TODO
-- [x] `@var` - Document the _Type_ of the following _Symbol_
+- [x] `@var` - Document the _Type_ of the following _Element_
 - [ ] `@version` - TODO
 
 ### Psalm Tags

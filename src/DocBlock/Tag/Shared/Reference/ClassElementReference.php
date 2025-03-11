@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Name;
 /**
  * Related to any internal class reference
  */
-abstract class ClassSymbolReference extends SymbolReference
+abstract class ClassElementReference extends ElementReference
 {
     public function __construct(
         public readonly Name $class,

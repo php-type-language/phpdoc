@@ -9,18 +9,18 @@ use TypeLang\Parser\Node\Stmt\CallableTypeNode;
 use TypeLang\Parser\Node\Stmt\ClassConstNode;
 use TypeLang\Parser\Node\Stmt\NamedTypeNode;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassConstantSymbolReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassMethodSymbolReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassPropertySymbolReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassConstantElementReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassMethodElementReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassPropertyElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\FunctionReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\SymbolReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeSymbolReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ElementReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\VariableReference;
 
 /**
- * @template-implements ReaderInterface<SymbolReference>
+ * @template-implements ReaderInterface<ElementReference>
  */
-final class SymbolReferenceReader implements ReaderInterface
+final class ElementReferenceReader implements ReaderInterface
 {
     private OptionalTypeReader $types;
 
@@ -29,7 +29,7 @@ final class SymbolReferenceReader implements ReaderInterface
         $this->types = new OptionalTypeReader($parser);
     }
 
-    public function __invoke(Stream $stream): SymbolReference
+    public function __invoke(Stream $stream): ElementReference
     {
         $type = ($this->types)($stream);
 
@@ -56,10 +56,10 @@ final class SymbolReferenceReader implements ReaderInterface
             $identifier = $type->constant->toString();
 
             if (\str_starts_with($stream->value, '()')) {
-                return new ClassMethodSymbolReference($type->class, $identifier);
+                return new ClassMethodElementReference($type->class, $identifier);
             }
 
-            return new ClassConstantSymbolReference($type->class, $identifier);
+            return new ClassConstantElementReference($type->class, $identifier);
         }
 
         throw $stream->toException(\sprintf(
@@ -68,16 +68,16 @@ final class SymbolReferenceReader implements ReaderInterface
         ));
     }
 
-    private function createFromFunction(CallableTypeNode $type): SymbolReference
+    private function createFromFunction(CallableTypeNode $type): ElementReference
     {
         if ($type->type !== null || $type->parameters->items !== []) {
-            return new TypeSymbolReference($type);
+            return new TypeElementReference($type);
         }
 
         return new FunctionReference($type->name);
     }
 
-    private function createFromNamedType(NamedTypeNode $type, Stream $stream): SymbolReference
+    private function createFromNamedType(NamedTypeNode $type, Stream $stream): ElementReference
     {
         if (\str_starts_with($stream->value, '::')) {
             if ($type->arguments === null && $type->fields === null) {
@@ -87,7 +87,7 @@ final class SymbolReferenceReader implements ReaderInterface
                 $variable = $stream->apply(new OptionalVariableNameReader());
 
                 if ($variable !== null) {
-                    return new ClassPropertySymbolReference(
+                    return new ClassPropertyElementReference(
                         class: $type->name,
                         property: $variable,
                     );
@@ -100,6 +100,6 @@ final class SymbolReferenceReader implements ReaderInterface
             ));
         }
 
-        return new TypeSymbolReference($type);
+        return new TypeElementReference($type);
     }
 }

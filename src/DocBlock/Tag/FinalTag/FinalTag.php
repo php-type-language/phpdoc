@@ -7,8 +7,8 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\FinalTag;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
- * Used to denote that the associated _Symbol_ is final, are not allowed to
- * extend or override the _Symbol_ in a child element.
+ * Used to denote that the associated _Element_ is final, are not allowed to
+ * extend or override the _Element_ in a child element.
  *
  * In some situations the language construct final cannot be used by the
  * implementing library where the functionality of the library prevents

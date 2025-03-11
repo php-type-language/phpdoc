@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace TypeLang\PHPDoc\DocBlock\Tag\SeeTag;
 
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ReferenceInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\SymbolReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\UriReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
- * The "`@see`" tag can be used to define a {@see SymbolReference symbol} or
+ * The "`@see`" tag can be used to define a {@see ElementReference element} or
  * to an {@see UriReference external URI}.
  *
- * When defining a reference to other symbols, you can refer to a specific
+ * When defining a reference to other elements, you can refer to a specific
  * element by appending a double colon and providing the name of that element
  * (also called the 'Fully Qualified Name' or _FQN_).
  *

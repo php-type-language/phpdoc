@@ -7,7 +7,7 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\IgnoreTag;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
- * Used to tell documentation systems that _Symbol_ are not to be processed.
+ * Used to tell documentation systems that _Element_ are not to be processed.
  *
  * ```
  * "@ignore" [<description>]

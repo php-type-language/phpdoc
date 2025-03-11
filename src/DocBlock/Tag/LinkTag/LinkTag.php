@@ -9,7 +9,7 @@ use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
  * The "`@link`" tag can be used to define a relation, or link, between
- * the symbol, or part of the long description when used inline, to a URI.
+ * the element, or part of the long description when used inline, to a URI.
  *
  * The URI MUST be complete and well-formed as specified in RFC2396.
  *

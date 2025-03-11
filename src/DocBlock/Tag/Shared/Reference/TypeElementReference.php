@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Stmt\TypeStatement;
 /**
  * Related to internal type reference
  */
-final class TypeSymbolReference extends SymbolReference
+final class TypeElementReference extends ElementReference
 {
     public function __construct(
         public readonly TypeStatement $type,

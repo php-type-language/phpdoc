@@ -9,14 +9,14 @@ use TypeLang\Parser\Node\Name;
 /**
  * Related to any internal class property reference
  */
-final class ClassMethodSymbolReference extends ClassSymbolReference
+final class ClassPropertyElementReference extends ClassElementReference
 {
     public function __construct(
         Name $class,
         /**
          * @var non-empty-string
          */
-        public readonly string $method,
+        public readonly string $property,
     ) {
         parent::__construct($class);
     }

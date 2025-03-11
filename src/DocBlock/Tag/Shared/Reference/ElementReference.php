@@ -7,4 +7,4 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference;
 /**
  * Related to any internal reference
  */
-abstract class SymbolReference implements ReferenceInterface {}
+abstract class ElementReference implements ReferenceInterface {}

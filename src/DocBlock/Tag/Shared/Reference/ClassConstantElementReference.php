@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Name;
 /**
  * Related to any internal class property reference
  */
-final class ClassConstantSymbolReference extends ClassSymbolReference
+final class ClassConstantElementReference extends ClassElementReference
 {
     public function __construct(
         Name $class,

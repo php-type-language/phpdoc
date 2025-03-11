@@ -9,7 +9,7 @@ use TypeLang\Parser\Node\Literal\VariableLiteralNode;
 /**
  * Related to local variable reference
  */
-final class VariableReference extends SymbolReference
+final class VariableReference extends ElementReference
 {
     public function __construct(
         public readonly VariableLiteralNode $variable,

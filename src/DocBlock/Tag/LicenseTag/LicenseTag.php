@@ -8,10 +8,10 @@ use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\UriReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 
 /**
- * Used to indicate which license is applicable for the associated _Symbol_.
+ * Used to indicate which license is applicable for the associated _Element_.
  *
  * The `"@license"` tag provides the user with the name and URL of the license
- * that is applicable to a _Symbol_ and any of its child elements.
+ * that is applicable to a _Element_ and any of its child elements.
  *
  * Whenever multiple licenses apply, there MUST be one "`@license"` tag per
  * applicable license.
