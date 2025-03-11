@@ -35,7 +35,7 @@ composer require type-lang/phpdoc
 - [x] `@abstract` - Declare any _Element_ as abstract
 - [x] `@api` - Highlight _Element_ as being part of the public API
 - [ ] `@author` - TODO
-- [ ] `@category` - TODO
+- [x] `@category` - Used to organize groups of packages together
 - [x] `@copyright` - Used to document the copyright information of any _Element_.
 - [ ] `@deprecated` - TODO
 - [ ] `@example` - TODO

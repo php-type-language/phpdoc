@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace TypeLang\PHPDoc\DocBlock\Tag\SeeTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ReferenceInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ElementReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ReferenceInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\UriReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Tag;
 

@@ -7,6 +7,7 @@ namespace TypeLang\PHPDoc\Platform;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\AbstractTag\AbstractTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\ApiTag\ApiTagFactory;
+use TypeLang\PHPDoc\DocBlock\Tag\CategoryTag\CategoryTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\CopyrightTag\CopyrightTagFactory;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\FinalTag\FinalTagFactory;
@@ -42,6 +43,7 @@ final class StandardPlatform extends Platform
     {
         yield 'abstract' => new AbstractTagFactory();
         yield 'api' => new ApiTagFactory();
+        yield 'category' => new CategoryTagFactory();
         yield 'copyright' => new CopyrightTagFactory();
         yield 'extends' => new TemplateExtendsTagFactory($types);
         yield 'final' => new FinalTagFactory();

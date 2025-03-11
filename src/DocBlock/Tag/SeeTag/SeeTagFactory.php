@@ -7,8 +7,8 @@ namespace TypeLang\PHPDoc\DocBlock\Tag\SeeTag;
 use TypeLang\Parser\Parser as TypesParser;
 use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Factory\TagFactoryInterface;
-use TypeLang\PHPDoc\Parser\Content\Stream;
 use TypeLang\PHPDoc\Parser\Content\ElementReferenceReader;
+use TypeLang\PHPDoc\Parser\Content\Stream;
 use TypeLang\PHPDoc\Parser\Content\UriReferenceReader;
 use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
 

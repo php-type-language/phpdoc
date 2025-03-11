@@ -12,8 +12,8 @@ use TypeLang\Parser\ParserInterface as TypesParserInterface;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassConstantElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassMethodElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ClassPropertyElementReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\FunctionReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\ElementReference;
+use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\FunctionReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\TypeElementReference;
 use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\VariableReference;
 
