@@ -216,6 +216,8 @@ its description.
 
 - [x] `@abstract` — Declare any _Element_ as abstract
   > `"@abstract" [ <Description> ]`
+- [x] `@access` — Documents the visibility (access level) of an _Element_
+  > `"@access" ( "public" | "protected" | "private" ) [ <Description> ]`
 - [x] `@api` — Highlight _Element_ as being part of the public API
   > `"@api" [ <Description> ]`
 - [x] `@author` — Documents the author of an _Element_, together with an optional email address
@@ -236,6 +238,8 @@ its description.
   > `"@final" [ <Description> ]`
 - [x] `@global` — Documents a global variable that a function relies on
   > `"@global" <Type> <Variable> [ <Description> ]`
+- [ ] `@id` — Assigns a unique identifier to a tutorial section for use in `@tutorial` links
+  > `"@id" <Description>`
 - [x] `@ignore` — Tells documentation systems that an _Element_ is not to be processed
   > `"@ignore" [ <Description> ]`
 - [x] `@implements` — Allows to extend templated interfaces
@@ -254,6 +258,8 @@ its description.
   > `"@method" [ "static" ] <Type> <Name> "(" [ <Type> <Variable> { "," <Type> <Variable> } ] ")" [ <Description> ]`
 - [x] `@mixin` — Declares that the members of the referenced _Type_ are magically available on the described class
   > `"@mixin" <Type> [ <Description> ]`
+- [x] `@name` — Assigns an alias to a procedural page or global variable
+  > `"@name" <Name> [ <Description> ]`
 - [x] `@no-named-arguments` — Indicates that argument names may change in the future
   > `"@no-named-arguments" [ <Description> ]`
 - [x] `@package` — Categorizes _Element(s)_ into logical subdivisions
@@ -298,6 +304,10 @@ its description.
   > `"@since" [ <Version> ] [ <Description> ]`
 - [x] `@source` — Points at a range of lines of the documented _Element_'s source
   > `"@source" <Start> [ <Count> ] [ <Description> ]`
+- [x] `@static` — Declares a method or property as static
+  > `"@static" [ <Description> ]`
+- [x] `@staticvar` — Documents the _Type_ of a static variable declared within a function or method
+  > `"@staticvar" <Type> [ <Variable> ] [ <Description> ]`
 - [x] `@subpackage` — Categorizes _Element(s)_ into logical subdivisions
   > `"@subpackage" [ <Description> ]`
 - [x] `@suppress` — Silences the diagnostics that would otherwise be reported for an _Element_
@@ -320,8 +330,12 @@ its description.
   > `"@throw" <Type> [ <Description> ]`
 - [x] `@throws` — Indicates the type of `\Throwable` an _Element_ may throw
   > `"@throws" <Type> [ <Description> ]`
+- [ ] `@toc` — Generates a table of contents for a tutorial
+  > `"@toc" [ <Description> ]`
 - [x] `@todo` — Records a task that still needs to be done for an _Element_
   > `"@todo" [ <Description> ]`
+- [ ] `@tutorial` — Associates a tutorial or extended documentation resource with an _Element_
+  > `"@tutorial" <URI> [ <Description> ]`
 - [x] `@unused-param` — Marks an argument that is intentionally left unused
   > `"@unused-param" <Variable> [ <Description> ]`
 - [x] `@use` — An alias of the `@template-use` tag

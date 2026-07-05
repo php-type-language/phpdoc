@@ -6,6 +6,7 @@ namespace TypeLang\PhpDoc;
 
 use JetBrains\PhpStorm\Language;
 use TypeLang\Parser\TypeParser;
+use TypeLang\PhpDoc\DocBlock\Combinator\AccessCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\AuthorNameCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
@@ -21,6 +22,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\DocBlock;
 use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\CategoryTag\CategoryTagDefinition;
@@ -40,6 +42,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PackageTag\PackageTagDefinition;
@@ -61,6 +64,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SubpackageTag\SubpackageTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
@@ -130,6 +135,7 @@ final readonly class DocBlockParser implements DocBlockParserInterface
         $types = new TypeCombinator($typeParser);
 
         return [
+            AccessCombinator::NAME => new AccessCombinator(),
             UriCombinator::NAME => new UriCombinator(),
             UrlCombinator::NAME => new UrlCombinator(),
             ReferenceCombinator::NAME => new ReferenceCombinator(),
@@ -224,6 +230,10 @@ final readonly class DocBlockParser implements DocBlockParserInterface
             SourceTagDefinition::NAME => new SourceTagDefinition(),
             MethodTagDefinition::NAME => new MethodTagDefinition(),
             ExampleTagDefinition::NAME => new ExampleTagDefinition(),
+            AccessTagDefinition::NAME => new AccessTagDefinition(),
+            NameTagDefinition::NAME => new NameTagDefinition(),
+            StaticTagDefinition::NAME => new StaticTagDefinition(),
+            StaticVarTagDefinition::NAME => new StaticVarTagDefinition(),
         ];
     }
 
