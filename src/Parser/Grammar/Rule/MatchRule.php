@@ -28,6 +28,10 @@ final readonly class MatchRule implements TerminalInterface
          * @var non-empty-string|null
          */
         public ?string $alias = null,
+        /**
+         * @var non-empty-string|null
+         */
+        public ?string $renderAs = null,
     ) {}
 
     public function match(Context $context): void
@@ -43,6 +47,6 @@ final readonly class MatchRule implements TerminalInterface
 
     public function __toString(): string
     {
-        return \sprintf('<%s>', $this->rule);
+        return \sprintf('<%s>', $this->renderAs ?? $this->rule);
     }
 }

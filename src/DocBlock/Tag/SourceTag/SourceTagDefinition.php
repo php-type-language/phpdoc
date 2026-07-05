@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
  * source.
  *
  * ```
- * "@source" <Start> [ <Count> ] [ <Description> ]
+ * "@source" <StartLine> [ <LinesCount> ] [ <Description> ]
  * ```
  */
 final class SourceTagDefinition extends TagDefinition
@@ -28,9 +28,9 @@ final class SourceTagDefinition extends TagDefinition
         parent::__construct(
             name: self::NAME,
             spec: Spec::sequence(
-                Spec::rule(IntegerCombinator::NAME, 'start'),
+                Spec::rule(IntegerCombinator::NAME, 'start', 'StartLine'),
                 Spec::maybe(
-                    Spec::rule(IntegerCombinator::NAME, 'count'),
+                    Spec::rule(IntegerCombinator::NAME, 'count', 'LinesCount'),
                 ),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),

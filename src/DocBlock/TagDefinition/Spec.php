@@ -26,10 +26,11 @@ final readonly class Spec
     /**
      * @param non-empty-string $name
      * @param non-empty-string|null $alias
+     * @param non-empty-string|null $renderAs
      */
-    public static function rule(string $name, ?string $alias = null): MatchRule
+    public static function rule(string $name, ?string $alias = null, ?string $renderAs = null): MatchRule
     {
-        return new MatchRule($name, $alias);
+        return new MatchRule($name, $alias, $renderAs);
     }
 
     public static function sequence(RuleInterface $rule, RuleInterface ...$other): SequencingRule

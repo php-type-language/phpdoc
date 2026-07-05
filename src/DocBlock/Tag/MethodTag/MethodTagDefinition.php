@@ -22,7 +22,7 @@ use TypeLang\Type\CallableTypeNode;
  * having it spelled out in front of the signature.
  *
  * ```
- * "@method" [ "static" ] [ <ReturnType> ] <Callable> [ <Description> ]
+ * "@method" [ "static" ] [ <ReturnType> ] <CallableType> [ <Description> ]
  * ```
  */
 final class MethodTagDefinition extends TagDefinition

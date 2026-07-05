@@ -19,7 +19,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
  * documented element, or describes such an example inline.
  *
  * ```
- * "@example" (<URL> | <URI>) [ <Start> [ <Count> ] ] [ <Description> ]
+ * "@example" (<URL> | <URI>) [ <StartLine> [ <LinesCount> ] ] [ <Description> ]
  * ```
  */
 final class ExampleTagDefinition extends TagDefinition
@@ -37,9 +37,9 @@ final class ExampleTagDefinition extends TagDefinition
                 ),
                 Spec::maybe(
                     Spec::sequence(
-                        Spec::rule(IntegerCombinator::NAME, 'start'),
+                        Spec::rule(IntegerCombinator::NAME, 'start', 'StartLine'),
                         Spec::maybe(
-                            Spec::rule(IntegerCombinator::NAME, 'count'),
+                            Spec::rule(IntegerCombinator::NAME, 'count', 'LinesCount'),
                         ),
                     ),
                 ),

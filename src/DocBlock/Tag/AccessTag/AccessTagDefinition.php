@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
  * The "`@access`" tag documents the visibility (access level) of an element.
  *
  * ```
- * "@access" ( "public" | "protected" | "private" ) [ <Description> ]
+ * "@access" ( <AccessVisibility> ) [ <Description> ]
  * ```
  */
 final class AccessTagDefinition extends TagDefinition
@@ -27,7 +27,7 @@ final class AccessTagDefinition extends TagDefinition
         parent::__construct(
             name: self::NAME,
             spec: Spec::sequence(
-                Spec::rule(AccessCombinator::NAME, 'access'),
+                Spec::rule(AccessCombinator::NAME, 'access', 'AccessVisibility'),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),

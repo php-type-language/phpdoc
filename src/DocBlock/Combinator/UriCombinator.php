@@ -8,6 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
+use Uri\Rfc3986\Uri;
 
 /**
  * Reads a URI, that is a well-formed word as defined by RFC 3986.
@@ -29,10 +30,19 @@ final readonly class UriCombinator implements CombinatorInterface
         return new UriReference($uri);
     }
 
+    private static function isUriEmpty(?Uri $uri): bool
+    {
+        if ($uri === null) {
+            return true;
+        }
+
+        return \trim($uri->toRawString(), '/?#') === '';
+    }
+
     private static function isUri(string $word): bool
     {
         if (\PHP_VERSION_ID >= 80500) {
-            return \Uri\Rfc3986\Uri::parse($word) !== null;
+            return !self::isUriEmpty(Uri::parse($word));
         }
 
         return \parse_url($word) !== false;

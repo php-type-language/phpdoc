@@ -42,23 +42,6 @@
             "*": "dist"
         }
     },
-    "scripts": {
-        "test": [
-            "@test:unit",
-            "@test:functional"
-        ],
-        "test:unit": "phpunit --testdox --testsuite=unit",
-        "test:functional": "phpunit --testdox --testsuite=functional",
-        "linter": "@linter:check",
-        "linter:check": "phpstan analyse --configuration phpstan.neon",
-        "linter:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline",
-        "phpcs": "@phpcs:check",
-        "phpcs:check": "php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes --dry-run --verbose --diff",
-        "phpcs:fix": "php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes --verbose --diff",
-        "bench": [
-            "phpbench run --report=default --tag=current --progress=none --filter=benchDocBlockParsing"
-        ]
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
