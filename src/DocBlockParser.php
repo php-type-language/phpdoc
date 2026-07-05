@@ -12,6 +12,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\EmailCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
@@ -145,6 +146,7 @@ final readonly class DocBlockParser implements DocBlockParserInterface
             AuthorNameCombinator::NAME => new AuthorNameCombinator(),
             EmailCombinator::NAME => new EmailCombinator(),
             IntegerCombinator::NAME => new IntegerCombinator(),
+            IssueNameCombinator::NAME => new IssueNameCombinator(),
             VersionCombinator::NAME => new VersionCombinator(),
             NameCombinator::NAME => new NameCombinator(),
             DescriptionCombinator::NAME => new \ReflectionClass(DescriptionCombinator::class)
