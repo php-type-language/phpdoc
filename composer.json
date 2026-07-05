@@ -9,42 +9,23 @@
         "issues": "https://github.com/php-type-language/phpdoc/issues"
     },
     "require": {
-        "php": "^8.1",
-        "league/uri": "^7.5",
-        "type-lang/parser": "^1.5"
-    },
-    "replace": {
-        "type-lang/phpdoc-standard-tags": "*",
-        "type-lang/phpdoc-template-tags": "*"
+        "php": "^8.4",
+        "type-lang/parser": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "TypeLang\\PHPDoc\\": "src"
-        },
-        "files": [
-            "src/polyfill.php"
-        ]
+            "TypeLang\\PhpDoc\\": "src"
+        }
     },
     "require-dev": {
-        "composer/spdx-licenses": "^1.5",
-        "friendsofphp/php-cs-fixer": "^3.70",
-        "jetbrains/phpstorm-attributes": "^1.0",
-        "phpbench/phpbench": "^1.4",
-        "phpdocumentor/reflection-docblock": "^5.6",
-        "phpstan/phpdoc-parser": "^2.1",
-        "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^10.5|^11.0|^12.0",
-        "symfony/property-access": "^5.4|^6.0|^7.0",
-        "symfony/var-dumper": "^5.4|^6.0|^7.0"
+        "phpstan/phpdoc-parser": "^2.3",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^12.0|^13.0"
     },
     "autoload-dev": {
         "psr-4": {
-            "TypeLang\\PHPDoc\\Tests\\": "tests"
+            "TypeLang\\PhpDoc\\Tests\\": "tests"
         }
-    },
-    "suggest": {
-        "composer/spdx-licenses": "Provides additional licenses (@license tag) support"
     },
     "extra": {
         "branch-alias": {

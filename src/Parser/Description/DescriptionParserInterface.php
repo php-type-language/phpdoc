@@ -2,28 +2,20 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Parser\Description;
+namespace TypeLang\PhpDoc\Parser\Description;
 
-use TypeLang\PHPDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\Exception\ParsingExceptionInterface;
 
 interface DescriptionParserInterface
 {
     /**
-     * Returns a parsed description for the given description string.
-     *
-     * ```php
-     * $description = $parser->parse(<<<'DOC'
-     *      This is a description with {@​link Example}.
-     *      DOC);
-     *
-     * // $description MAY contains:
-     * // object(Description) {
-     * //    template: "This is a description with {%s}.",
-     * //    tags: [
-     * //        object(LinkTag) { name: "link", ... },
-     * //    ]
-     * // }
-     * ```
+     * @throws ParsingExceptionInterface
+     */
+    public function tryParse(string $description): ?DescriptionInterface;
+
+    /**
+     * @throws ParsingExceptionInterface
      */
     public function parse(string $description): DescriptionInterface;
 }

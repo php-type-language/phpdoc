@@ -2,24 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\InheritDocTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\InheritDocTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * Used to directly inherit the long description from the parent
- * class in child classes.
- *
- * ```
- * "@inheritDoc" [<description>]
- * ```
+ * The "@inheritdoc" tag reuses the documentation of the parent element.
  */
-final class InheritDocTag extends Tag
-{
-    public function __construct(
-        string $name,
-        \Stringable|string|null $description = null,
-    ) {
-        parent::__construct($name, $description);
-    }
-}
+final class InheritDocTag extends FlagTag {}

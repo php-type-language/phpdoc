@@ -2,24 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\AbstractTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\AbstractTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * Declare a class-like or method as abstract, as well as for declaring
- * what methods must be redefined in a child class.
- *
- * ```
- * "@abstract" [<description>]
- * ```
+ * The "@abstract" tag declares an element as abstract.
  */
-final class AbstractTag extends Tag
-{
-    public function __construct(
-        string $name,
-        \Stringable|string|null $description = null,
-    ) {
-        parent::__construct($name, $description);
-    }
-}
+final class AbstractTag extends FlagTag {}

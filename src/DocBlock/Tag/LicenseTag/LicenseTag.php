@@ -2,35 +2,38 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\LicenseTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\LicenseTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Shared\Reference\UriReference;
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Reference\UrlReference;
+use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * Used to indicate which license is applicable for the associated _Element_.
- *
- * The `"@license"` tag provides the user with the name and URL of the license
- * that is applicable to a _Element_ and any of its child elements.
- *
- * Whenever multiple licenses apply, there MUST be one "`@license"` tag per
- * applicable license.
- *
- * ```
- * "@license" [<url>] [name]
- * ```
+ * The "@license" tag pointing to the license text by a URL.
  */
 final class LicenseTag extends Tag
 {
     public function __construct(
         string $name,
-        public readonly ?UriReference $uri = null,
-        /**
-         * @var non-empty-string|null
-         */
-        public readonly ?string $license = null,
-        \Stringable|string|null $description = null,
+        public ?UrlReference $url = null,
+        ?DescriptionInterface $description = null,
     ) {
         parent::__construct($name, $description);
+    }
+
+    #[\Override]
+    public function __toString(): string
+    {
+        $result = \sprintf('@%s', $this->name);
+
+        if ($this->url !== null) {
+            $result .= ' ' . $this->url;
+        }
+
+        if ($this->description !== null) {
+            $result .= ' ' . $this->description;
+        }
+
+        return $result;
     }
 }

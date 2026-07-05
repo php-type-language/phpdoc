@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\TemplateTag;
 
 /**
- * ```
- * "@template-contravariant" <name> ['of' <type>] [<description>]
- * ```
+ * The "@template-contravariant" tag declares a contravariant generic type
+ * parameter.
  */
-final class TemplateContravariantTag extends TemplateTag {}
+final class TemplateContravariantTag extends TypeParameterTag {}

@@ -2,51 +2,62 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Description;
+namespace TypeLang\PhpDoc\DocBlock\Description;
 
-use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\DocBlock\ComponentInterface;
+use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
 
 /**
- * @template-implements \ArrayAccess<array-key, TagInterface|null>
- * @template-implements \IteratorAggregate<array-key, TagInterface>
+ * Any class that implements this interface is a description object
+ * containing an arbitrary set of nested tags ({@see TagInterface}).
+ *
+ * @template-implements \ArrayAccess<array-key, ComponentInterface>
+ * @template-implements \IteratorAggregate<array-key, ComponentInterface>
  */
-class TaggedDescription implements
-    TaggedDescriptionInterface,
+final class TaggedDescription implements
+    DescriptionInterface,
     \IteratorAggregate,
-    \ArrayAccess
+    \ArrayAccess,
+    \Countable
 {
     /**
-     * @var list<TagInterface|DescriptionInterface>
+     * Gets a list of {@see ComponentInterface} components that make up the
+     * {@see TaggedDescriptionInterface} in the order in which these
+     * elements are defined.
+     *
+     * @var list<ComponentInterface>
      */
     public readonly array $components;
 
     /**
+     * Gets a list of all tags within a description
+     *
      * @var list<TagInterface>
      */
-    public readonly array $tags;
-
-    /**
-     * @param iterable<array-key, TagInterface|DescriptionInterface> $components
-     */
-    public function __construct(iterable $components = [])
-    {
-        $this->components = \array_values([...$components]);
-
-        $this->tags = $this->getTagsFromComponents($this->components);
+    public array $tags {
+        get => $this->tags ??= $this->only(TagInterface::class);
     }
 
     /**
-     * @param iterable<mixed, object> $components
-     *
-     * @return list<TagInterface>
+     * @param iterable<mixed, ComponentInterface> $components
      */
-    private function getTagsFromComponents(iterable $components): array
+    public function __construct(iterable $components = [])
+    {
+        $this->components = \iterator_to_array($components, false);
+    }
+
+    /**
+     * @template TArgComponent of ComponentInterface
+     * @param class-string<TArgComponent> $component
+     * @return list<TArgComponent>
+     */
+    public function only(string $component): array
     {
         $result = [];
 
-        foreach ($components as $component) {
-            if ($component instanceof TagInterface) {
-                $result[] = $component;
+        foreach ($this->components as $actual) {
+            if ($actual instanceof $component) {
+                $result[] = $actual;
             }
         }
 
@@ -55,33 +66,33 @@ class TaggedDescription implements
 
     public function offsetExists(mixed $offset): bool
     {
-        return isset($this->tags[$offset]);
+        return isset($this->components[$offset]);
     }
 
-    public function offsetGet(mixed $offset): ?TagInterface
+    public function offsetGet(mixed $offset): ?ComponentInterface
     {
-        return $this->tags[$offset] ?? null;
-    }
-
-    /**
-     * @throws \BadMethodCallException
-     */
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        throw new \BadMethodCallException(static::class . ' objects are immutable');
+        return $this->components[$offset] ?? null;
     }
 
     /**
      * @throws \BadMethodCallException
      */
-    public function offsetUnset(mixed $offset): void
+    public function offsetSet(mixed $offset, mixed $value): never
     {
-        throw new \BadMethodCallException(static::class . ' objects are immutable');
+        throw new \BadMethodCallException(self::class . ' objects are immutable');
+    }
+
+    /**
+     * @throws \BadMethodCallException
+     */
+    public function offsetUnset(mixed $offset): never
+    {
+        throw new \BadMethodCallException(self::class . ' objects are immutable');
     }
 
     public function getIterator(): \Traversable
     {
-        return new \ArrayIterator($this->tags);
+        return new \ArrayIterator($this->components);
     }
 
     /**
@@ -89,17 +100,18 @@ class TaggedDescription implements
      */
     public function count(): int
     {
-        return \count($this->tags);
+        return \count($this->components);
     }
 
     public function __toString(): string
     {
         $result = [];
 
-        foreach ($this->components as $component) {
-            $result[] = $component instanceof TagInterface
-                ? \sprintf('{%s}', $component)
-                : $component;
+        foreach ($this->components as $actual) {
+            $result[] = match (true) {
+                $actual instanceof TagInterface => \sprintf('{%s}', $actual),
+                default => $actual,
+            };
         }
 
         return \implode('', $result);

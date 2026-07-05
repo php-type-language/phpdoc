@@ -2,19 +2,15 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Exception;
+namespace TypeLang\PhpDoc\Exception;
 
-class ParsingException extends \RuntimeException implements RuntimeExceptionInterface
+abstract class ParsingException extends \RuntimeException implements ParsingExceptionInterface
 {
-    final public const ERROR_CODE_INTERNAL = 0x01;
-
-    protected const CODE_LAST = self::ERROR_CODE_INTERNAL;
-
-    /**
-     * @param int<0, max> $offset
-     */
     final public function __construct(
         public readonly string $source,
+        /**
+         * @var int<0, max>
+         */
         public readonly int $offset = 0,
         string $message = '',
         int $code = 0,
@@ -24,40 +20,18 @@ class ParsingException extends \RuntimeException implements RuntimeExceptionInte
     }
 
     /**
-     * @param int<0, max> $offset
+     * Returns a copy of this exception rebased onto the full docblock.
+     *
+     * @param int<0, max> $offset byte offset of the fragment inside $source
      */
-    public static function fromInternalError(string $source, int $offset, \Throwable $e): self
-    {
-        return new static(
-            source: $source,
-            offset: $offset,
-            message: $e->getMessage(),
-            code: self::ERROR_CODE_INTERNAL,
-            previous: $e,
-        );
-    }
-
-    /**
-     * @param int<0, max> $offset
-     */
-    public function withSource(string $source, int $offset): self
+    final public function withSource(string $source, int $offset = 0): static
     {
         return new static(
             source: $source,
             offset: $offset,
             message: $this->getMessage(),
             code: $this->getCode(),
-            previous: $this,
+            previous: $this->getPrevious(),
         );
-    }
-
-    public function getSource(): string
-    {
-        return $this->source;
-    }
-
-    public function getOffset(): int
-    {
-        return $this->offset;
     }
 }

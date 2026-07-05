@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\PropertyTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\PropertyTag;
 
 /**
- * ```
- * "@property-read" [<type>] $<name> [<description>]
- * ```
+ * The "@property-read" tag declares a magic property that can only be read.
  */
-class PropertyReadTag extends PropertyTag {}
+final class PropertyReadTag extends MagicPropertyTag {}

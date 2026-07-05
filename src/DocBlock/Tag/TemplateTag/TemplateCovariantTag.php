@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\TemplateTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\TemplateTag;
 
 /**
- * ```
- * "@template-covariant" <name> ['of' <type>] [<description>]
- * ```
+ * The "@template-covariant" tag declares a covariant generic type parameter.
  */
-final class TemplateCovariantTag extends TemplateTag {}
+final class TemplateCovariantTag extends TypeParameterTag {}

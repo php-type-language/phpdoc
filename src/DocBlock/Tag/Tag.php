@@ -2,34 +2,29 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag;
+namespace TypeLang\PhpDoc\DocBlock\Tag;
 
-use TypeLang\PHPDoc\DocBlock\Description\Description;
-use TypeLang\PHPDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 
 class Tag implements TagInterface
 {
-    public readonly ?DescriptionInterface $description;
-
-    /**
-     * @param non-empty-string $name
-     */
     public function __construct(
-        public readonly string $name,
-        \Stringable|string|null $description = null,
-    ) {
-        $this->description = Description::fromStringableOrNull($description);
-    }
+        public readonly string $name = '',
+        public readonly ?DescriptionInterface $description = null,
+    ) {}
 
     public function __toString(): string
     {
-        if ($this->description === null) {
-            return \sprintf('@%s', $this->name);
+        $result = \sprintf('@%s', $this->name);
+
+        if ($this->description !== null) {
+            if ($this->name !== '') {
+                $result .= ' ';
+            }
+
+            $result .= $this->description;
         }
 
-        return \rtrim(\vsprintf('@%s %s', [
-            $this->name,
-            (string) $this->description,
-        ]));
+        return $result;
     }
 }

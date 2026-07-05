@@ -2,51 +2,46 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\VarTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\VarTag;
 
-use TypeLang\Parser\Node\Stmt\TypeStatement;
-use TypeLang\PHPDoc\DocBlock\Tag\OptionalVariableProviderInterface;
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
-use TypeLang\PHPDoc\DocBlock\Tag\TypeProviderInterface;
+use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
+use TypeLang\PhpDoc\DocBlock\Tag\TypedTag;
 
 /**
- * The "`@var`" tag defines which type of data is represented by the value of a
- * constant, property or variable.
- *
- * Each constant or property definition or variable where the type is ambiguous
- * or unknown SHOULD be preceded by a DocBlock containing the "`@var`" tag. Any
- * other variable MAY be preceded with a DocBlock containing the "`@var`" tag.
- *
- * The "`@var`" tag MUST contain the name of the element it documents. An
- * exception to this is when a declaration only refers to a single property or
- * constant. In that case, the name of the property or constant MAY be omitted.
- *
- * The name is used when compound statements are used to define a series of
- * constants or properties. Such a compound statement can only have one DocBlock
- * while several items are represented.
- *
- * ```
- * "@var" [<type>] $<variable>      [<description>]
- * "@var" [<type>] ...$<variable>   [<description>]
- * "@var" [<type>] &$<variable>     [<description>]
- * "@var" [<type>] ...&$<variable>  [<description>]
- * "@var" [<type>] &...$<variable>  [<description>]
- * ```
+ * The "@var" tag documents the type of a property, constant or inline
+ * variable, optionally naming the variable it applies to.
  */
-class VarTag extends Tag implements
-    TypeProviderInterface,
-    OptionalVariableProviderInterface
+final class VarTag extends TypedTag
 {
-    /**
-     * @param non-empty-string $name
-     * @param non-empty-string|null $variable
-     */
     public function __construct(
         string $name,
-        public readonly TypeStatement $type,
+        TypeReference $statement,
+        /**
+         * Name of the documented variable, without the leading "$", or
+         * {@see null} when the tag does not name one.
+         *
+         * @var non-empty-string|null
+         */
         public readonly ?string $variable = null,
-        \Stringable|string|null $description = null,
+        ?DescriptionInterface $description = null,
     ) {
-        parent::__construct($name, $description);
+        parent::__construct($name, $statement, $description);
+    }
+
+    #[\Override]
+    public function __toString(): string
+    {
+        $result = \sprintf('@%s %s', $this->name, $this->statement);
+
+        if ($this->variable !== null) {
+            $result .= ' $' . $this->variable;
+        }
+
+        if ($this->description !== null) {
+            $result .= ' ' . $this->description;
+        }
+
+        return $result;
     }
 }

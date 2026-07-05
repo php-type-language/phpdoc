@@ -2,13 +2,13 @@
 <meta-storm xmlns="meta-storm">
     <definitions>
 
-        <classMethod class="\TypeLang\PHPDoc\ParserInterface"
+        <classMethod class="\TypeLang\PhpDoc\ParserInterface"
                           method="parse"
                           argument="0">
             <languageInjection language="InjectablePHP" />
         </classMethod>
 
-        <classMethod class="\TypeLang\PHPDoc\Parser"
+        <classMethod class="\TypeLang\PhpDoc\Parser"
                      method="parse"
                      argument="0">
             <languageInjection language="InjectablePHP" />

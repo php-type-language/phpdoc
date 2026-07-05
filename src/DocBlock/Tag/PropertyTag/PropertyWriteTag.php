@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\PropertyTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\PropertyTag;
 
 /**
- * ```
- * "@property-write" [<type>] $<name> [<description>]
- * ```
+ * The "@property-write" tag declares a magic property that can only be written.
  */
-class PropertyWriteTag extends PropertyTag {}
+final class PropertyWriteTag extends MagicPropertyTag {}

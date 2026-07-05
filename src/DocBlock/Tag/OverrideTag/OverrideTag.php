@@ -2,25 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\OverrideTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\OverrideTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * Used is mention to see if the method is actually overriding a definition
- * or implementing an abstract method (Or a phpdoc "`@method`")
- * in an ancestor class/trait/interface.
- *
- * ```
- * "@override" [<description>]
- * ```
+ * The "@override" tag marks a method as overriding an inherited definition.
  */
-final class OverrideTag extends Tag
-{
-    public function __construct(
-        string $name,
-        \Stringable|string|null $description = null,
-    ) {
-        parent::__construct($name, $description);
-    }
-}
+final class OverrideTag extends FlagTag {}

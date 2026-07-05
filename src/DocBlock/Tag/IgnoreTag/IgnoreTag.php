@@ -2,23 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\DocBlock\Tag\IgnoreTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag\IgnoreTag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * Used to tell documentation systems that _Element_ are not to be processed.
- *
- * ```
- * "@ignore" [<description>]
- * ```
+ * The "@ignore" tag tells documentation tooling to skip the element it is
+ * attached to.
  */
-final class IgnoreTag extends Tag
-{
-    public function __construct(
-        string $name,
-        \Stringable|string|null $description = null,
-    ) {
-        parent::__construct($name, $description);
-    }
-}
+final class IgnoreTag extends FlagTag {}

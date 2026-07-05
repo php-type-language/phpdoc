@@ -2,27 +2,26 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PHPDoc\Parser\Tag;
+namespace TypeLang\PhpDoc\Parser\Tag;
 
-use TypeLang\PHPDoc\DocBlock\Tag\TagInterface;
-use TypeLang\PHPDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Exception\ParsingExceptionInterface;
 
 interface TagParserInterface
 {
     /**
-     * Returns concrete tag instance by the tag signature.
+     * Parses and creates a tag instance from passed content.
      *
-     * ```
-     * $tag = $parser->parse('@​param string $tag');
+     * Expected `$tag` argument should be looks like:
+     *  - "@tag"
+     *  - "@tag with description"
+     *  - "@tag With\TypeName"
+     *  - "@tag With\TypeName And description"
+     *  - "@tag With\TypeName $andVariableName"
+     *  - "@tag With\TypeName $andVariableName And description"
+     *  - etc...
      *
-     * // $tag may contains:
-     * // object(ParamTag) {
-     * //    name: "param",
-     * //    variable: "$tag",
-     * //    type: object(NamedType<string>),
-     * //    description: object(Description) { ... },
-     * // }
-     * ```
+     * @throws ParsingExceptionInterface
      */
-    public function parse(string $tag, DescriptionParserInterface $parser): TagInterface;
+    public function parse(string $definition): TagInterface;
 }
