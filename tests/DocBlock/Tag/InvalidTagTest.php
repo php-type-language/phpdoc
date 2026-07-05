@@ -16,7 +16,7 @@ final class InvalidTagTest extends TestCase
     {
         $tag = new InvalidTag(new \RuntimeException(), 'param');
 
-        $this->assertSame('param', $tag->name);
+        self::assertSame('param', $tag->name);
     }
 
     #[Test]
@@ -25,13 +25,13 @@ final class InvalidTagTest extends TestCase
         $reason = new \RuntimeException('broken');
         $tag = new InvalidTag($reason, 'param');
 
-        $this->assertSame($reason, $tag->reason);
+        self::assertSame($reason, $tag->reason);
     }
 
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        $this->assertNull(new InvalidTag(new \RuntimeException(), 'param')->description);
+        self::assertNull(new InvalidTag(new \RuntimeException(), 'param')->description);
     }
 
     #[Test]
@@ -39,6 +39,6 @@ final class InvalidTagTest extends TestCase
     {
         $tag = new InvalidTag(new \RuntimeException(), 'param');
 
-        $this->assertInstanceOf(Tag::class, $tag);
+        self::assertInstanceOf(Tag::class, $tag);
     }
 }

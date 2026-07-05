@@ -19,13 +19,13 @@ final class TagTest extends TestCase
     #[Test]
     public function constructorStoresName(): void
     {
-        $this->assertSame('param', new Tag('param')->name);
+        self::assertSame('param', new Tag('param')->name);
     }
 
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        $this->assertNull(new Tag('param')->description);
+        self::assertNull(new Tag('param')->description);
     }
 
     #[Test]
@@ -33,12 +33,12 @@ final class TagTest extends TestCase
     {
         $description = new Description('int $a');
 
-        $this->assertSame($description, new Tag('param', $description)->description);
+        self::assertSame($description, new Tag('param', $description)->description);
     }
 
     #[Test]
     public function implementsTagInterface(): void
     {
-        $this->assertInstanceOf(TagInterface::class, new Tag('param'));
+        self::assertInstanceOf(TagInterface::class, new Tag('param'));
     }
 }

@@ -16,18 +16,18 @@ final class DescriptionTest extends TestCase
     {
         $description = new Description('Some text');
 
-        $this->assertSame('Some text', $description->value);
+        self::assertSame('Some text', $description->value);
     }
 
     #[Test]
     public function valueDefaultsToEmptyString(): void
     {
-        $this->assertSame('', new Description()->value);
+        self::assertSame('', new Description()->value);
     }
 
     #[Test]
     public function implementsDescriptionInterface(): void
     {
-        $this->assertInstanceOf(DescriptionInterface::class, new Description());
+        self::assertInstanceOf(DescriptionInterface::class, new Description());
     }
 }

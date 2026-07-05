@@ -15,7 +15,7 @@ final class DocBlockTest extends TestCase
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        $this->assertNull(new DocBlock()->description);
+        self::assertNull(new DocBlock()->description);
     }
 
     #[Test]
@@ -23,13 +23,13 @@ final class DocBlockTest extends TestCase
     {
         $description = new Description('Summary');
 
-        $this->assertSame($description, new DocBlock($description)->description);
+        self::assertSame($description, new DocBlock($description)->description);
     }
 
     #[Test]
     public function tagsDefaultToEmptyList(): void
     {
-        $this->assertSame([], new DocBlock()->tags);
+        self::assertSame([], new DocBlock()->tags);
     }
 
     #[Test]
@@ -40,7 +40,7 @@ final class DocBlockTest extends TestCase
 
         $docblock = new DocBlock(null, [3 => $first, 7 => $second]);
 
-        $this->assertSame([$first, $second], $docblock->tags);
+        self::assertSame([$first, $second], $docblock->tags);
     }
 
     #[Test]
@@ -50,7 +50,7 @@ final class DocBlockTest extends TestCase
 
         $docblock = new DocBlock(null, new \ArrayIterator([$tag]));
 
-        $this->assertSame([$tag], $docblock->tags);
+        self::assertSame([$tag], $docblock->tags);
     }
 
     #[Test]
@@ -58,7 +58,7 @@ final class DocBlockTest extends TestCase
     {
         $docblock = new DocBlock(null, [new Tag('param'), new Tag('return')]);
 
-        $this->assertCount(2, $docblock);
+        self::assertCount(2, $docblock);
     }
 
     #[Test]
@@ -66,8 +66,8 @@ final class DocBlockTest extends TestCase
     {
         $docblock = new DocBlock(null, [new Tag('param')]);
 
-        $this->assertTrue(isset($docblock[0]));
-        $this->assertFalse(isset($docblock[1]));
+        self::assertTrue(isset($docblock[0]));
+        self::assertFalse(isset($docblock[1]));
     }
 
     #[Test]
@@ -76,13 +76,13 @@ final class DocBlockTest extends TestCase
         $tag = new Tag('param');
         $docblock = new DocBlock(null, [$tag]);
 
-        $this->assertSame($tag, $docblock[0]);
+        self::assertSame($tag, $docblock[0]);
     }
 
     #[Test]
     public function offsetGetReturnsNullForMissingOffset(): void
     {
-        $this->assertNull(new DocBlock()[42]);
+        self::assertNull(new DocBlock()[42]);
     }
 
     #[Test]
@@ -111,6 +111,6 @@ final class DocBlockTest extends TestCase
         $tags = [new Tag('param'), new Tag('return')];
         $docblock = new DocBlock(null, $tags);
 
-        $this->assertSame($tags, \iterator_to_array($docblock, false));
+        self::assertSame($tags, \iterator_to_array($docblock, false));
     }
 }

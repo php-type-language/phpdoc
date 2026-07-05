@@ -21,13 +21,13 @@ final class TaggedDescriptionTest extends TestCase
 
         $description = new TaggedDescription([5 => $first, 9 => $second]);
 
-        $this->assertSame([$first, $second], $description->components);
+        self::assertSame([$first, $second], $description->components);
     }
 
     #[Test]
     public function componentsDefaultToEmptyList(): void
     {
-        $this->assertSame([], new TaggedDescription()->components);
+        self::assertSame([], new TaggedDescription()->components);
     }
 
     #[Test]
@@ -37,7 +37,7 @@ final class TaggedDescriptionTest extends TestCase
 
         $description = new TaggedDescription(new \ArrayIterator([$tag]));
 
-        $this->assertSame([$tag], $description->components);
+        self::assertSame([$tag], $description->components);
     }
 
     #[Test]
@@ -51,7 +51,7 @@ final class TaggedDescriptionTest extends TestCase
             new Description(' more'),
         ]);
 
-        $this->assertSame([$tag], $description->tags);
+        self::assertSame([$tag], $description->tags);
     }
 
     #[Test]
@@ -59,7 +59,7 @@ final class TaggedDescriptionTest extends TestCase
     {
         $description = new TaggedDescription([new Description('only text')]);
 
-        $this->assertSame([], $description->tags);
+        self::assertSame([], $description->tags);
     }
 
     #[Test]
@@ -71,7 +71,7 @@ final class TaggedDescriptionTest extends TestCase
             new Description('b'),
         ]);
 
-        $this->assertCount(3, $description);
+        self::assertCount(3, $description);
     }
 
     #[Test]
@@ -79,8 +79,8 @@ final class TaggedDescriptionTest extends TestCase
     {
         $description = new TaggedDescription([new Description('a')]);
 
-        $this->assertTrue(isset($description[0]));
-        $this->assertFalse(isset($description[1]));
+        self::assertTrue(isset($description[0]));
+        self::assertFalse(isset($description[1]));
     }
 
     #[Test]
@@ -89,13 +89,13 @@ final class TaggedDescriptionTest extends TestCase
         $component = new Description('a');
         $description = new TaggedDescription([$component]);
 
-        $this->assertSame($component, $description[0]);
+        self::assertSame($component, $description[0]);
     }
 
     #[Test]
     public function offsetGetReturnsNullForMissingOffset(): void
     {
-        $this->assertNull(new TaggedDescription()[42]);
+        self::assertNull(new TaggedDescription()[42]);
     }
 
     #[Test]
@@ -124,7 +124,7 @@ final class TaggedDescriptionTest extends TestCase
         $components = [new Description('a'), new Tag('see'), new Description('b')];
         $description = new TaggedDescription($components);
 
-        $this->assertSame($components, \iterator_to_array($description, false));
+        self::assertSame($components, \iterator_to_array($description, false));
     }
 
     #[Test]
@@ -132,6 +132,6 @@ final class TaggedDescriptionTest extends TestCase
     {
         $description = new TaggedDescription([new Tag('see')]);
 
-        $this->assertContainsOnlyInstancesOf(TagInterface::class, $description->tags);
+        self::assertContainsOnlyInstancesOf(TagInterface::class, $description->tags);
     }
 }
