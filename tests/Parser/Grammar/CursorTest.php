@@ -140,10 +140,6 @@ final class CursorTest extends TestCase
         self::assertSame(0, $cursor->position);
     }
 
-    /**
-     * Rewinding the position keeps the furthest reached point for failure
-     * reporting.
-     */
     #[Test]
     public function remembersTheFurthestOffset(): void
     {

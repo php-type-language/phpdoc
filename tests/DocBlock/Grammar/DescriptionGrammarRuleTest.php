@@ -48,10 +48,6 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame('Some description text', (string) $description);
     }
 
-    /**
-     * The description delegate resolves inline tags, so a `{@...}` becomes a
-     * {@see TaggedDescription}.
-     */
     #[Test]
     public function keepsInlineTags(): void
     {
@@ -61,9 +57,6 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame('see {@link X}', (string) $description);
     }
 
-    /**
-     * The whole remainder is consumed regardless of the whitespace it contains.
-     */
     #[Test]
     public function consumesTheEntireRemainder(): void
     {

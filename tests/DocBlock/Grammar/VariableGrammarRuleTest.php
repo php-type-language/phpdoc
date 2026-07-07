@@ -36,9 +36,6 @@ final class VariableGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame($expected, $name);
     }
 
-    /**
-     * Only the variable is consumed, the rest stays for the next rule.
-     */
     #[Test]
     public function stopsAtTheFirstWhitespace(): void
     {

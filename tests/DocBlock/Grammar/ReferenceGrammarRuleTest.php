@@ -25,9 +25,6 @@ final class ReferenceGrammarRuleTest extends GrammarRuleTestCase
     }
 
     /**
-     * Each reference, mapped to the expected reference class and the string it
-     * stringifies back to.
-     *
      * @return iterable<string, array{string, class-string<ReferenceInterface>, string}>
      */
     public static function referenceDataProvider(): iterable
@@ -64,9 +61,6 @@ final class ReferenceGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame('foo', $reference->name);
     }
 
-    /**
-     * Only the reference is consumed, the rest stays for the next rule.
-     */
     #[Test]
     public function stopsAtTheFirstWhitespace(): void
     {
@@ -78,10 +72,6 @@ final class ReferenceGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame(4, $cursor->offset);
     }
 
-    /**
-     * A multi-part reference is consumed up to its last token, leaving the
-     * trailing text untouched.
-     */
     #[Test]
     public function stopsAfterTheReference(): void
     {

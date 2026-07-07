@@ -10,10 +10,6 @@ use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDoc\Tests\TestCase;
 
-/**
- * Tests the behaviour shared by every tag through the abstract {@see Tag} base
- * class, exercised here via a minimal concrete subclass.
- */
 final class TagTest extends TestCase
 {
     #[Test]

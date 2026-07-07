@@ -45,10 +45,6 @@ final class ReferenceTagTest extends TestCase
         self::assertSame('used-by', $block->tags[0]->name);
     }
 
-    /**
-     * Unlike "@see", the "@uses" tag references a code element only, so a URI
-     * is not a valid target.
-     */
     #[Test]
     public function uriIsNotAccepted(): void
     {

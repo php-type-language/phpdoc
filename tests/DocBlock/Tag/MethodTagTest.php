@@ -47,9 +47,6 @@ final class MethodTagTest extends TestCase
         self::assertSame('@method static ReturnType bar(U $u) An optional description.', (string) $tag);
     }
 
-    /**
-     * A signature that is not a callable is malformed.
-     */
     #[Test]
     public function rejectsNonCallableSignature(): void
     {

@@ -54,10 +54,6 @@ final class TypedTagTest extends TestCase
         self::assertSame('@throws \RuntimeException', (string) $tag);
     }
 
-    /**
-     * The type text is preserved verbatim, including the inner whitespace of
-     * generics and shapes.
-     */
     #[Test]
     public function preservesComplexTypeSpelling(): void
     {
@@ -76,10 +72,6 @@ final class TypedTagTest extends TestCase
         self::assertInstanceOf(MalformedTagException::class, $tag->reason);
     }
 
-    /**
-     * The produced tag carries the name it was actually invoked with, so an
-     * alias keeps the name it was written with.
-     */
     #[Test]
     public function nameComesFromTheParsedName(): void
     {
@@ -92,10 +84,6 @@ final class TypedTagTest extends TestCase
         self::assertSame('returns', $tag->name);
     }
 
-    /**
-     * The inheritance tags share a meaning, so they are grouped under a common
-     * base while remaining distinct types.
-     */
     #[Test]
     public function inheritanceTagsShareACommonBase(): void
     {

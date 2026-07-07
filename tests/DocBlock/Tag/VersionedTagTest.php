@@ -34,10 +34,6 @@ final class VersionedTagTest extends TestCase
         self::assertSame('@since 8.0.0 Available on modern runtimes.', (string) $tag);
     }
 
-    /**
-     * A body that does not begin with a digit carries no version; it is all
-     * description.
-     */
     #[Test]
     public function bodyWithoutVersionIsAllDescription(): void
     {

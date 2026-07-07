@@ -54,10 +54,6 @@ final class DefinitionTest extends TestCase
         self::assertNull($tag->description);
     }
 
-    /**
-     * The description delegate resolves nested inline tags, so a `{@...}` in the
-     * description becomes a {@see TaggedDescription}.
-     */
     #[Test]
     public function descriptionKeepsInlineTags(): void
     {
@@ -84,9 +80,6 @@ final class DefinitionTest extends TestCase
         );
     }
 
-    /**
-     * The reported offset points at where the tag body failed to match.
-     */
     #[Test]
     public function malformedTagReportsFailureOffset(): void
     {
@@ -98,10 +91,6 @@ final class DefinitionTest extends TestCase
         self::assertSame('     ', $tag->reason->source);
     }
 
-    /**
-     * A tag with no registered definition falls back to a plain tag whose whole
-     * suffix becomes the description.
-     */
     #[Test]
     public function unregisteredTagFallsBackToPlainTag(): void
     {
@@ -112,9 +101,6 @@ final class DefinitionTest extends TestCase
         self::assertSame('free text', (string) $tag->description);
     }
 
-    /**
-     * A suffix with no URI produces a malformed tag rather than an error.
-     */
     #[Test]
     public function uriReaderSoftFailurePropagatesAsMalformedTag(): void
     {
@@ -131,11 +117,6 @@ final class DefinitionTest extends TestCase
         return new TagFactory($registry, self::grammar());
     }
 
-    /**
-     * A grammar with the two terminals a `@link` tag references: `URI`, which
-     * reads a single whitespace-delimited word, and `description`, which
-     * consumes the trailing text.
-     */
     private static function grammar(): Grammar
     {
         $grammar = new Grammar();

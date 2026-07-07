@@ -28,9 +28,6 @@ final class LicenseTagTest extends TestCase
         self::assertSame('@license https://opensource.org/licenses/MIT MIT License', (string) $tag);
     }
 
-    /**
-     * A word without a scheme is not a URL, so it is parsed as a named license.
-     */
     #[Test]
     public function parsesNameForm(): void
     {

@@ -31,9 +31,6 @@ final class TypeGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame('array', (string) $statement->type->name);
     }
 
-    /**
-     * The parsed type keeps the exact text it was read from.
-     */
     #[Test]
     public function preservesTheSourceText(): void
     {
@@ -60,10 +57,6 @@ final class TypeGrammarRuleTest extends GrammarRuleTestCase
         self::assertInstanceOf(UnionTypeNode::class, $statement->type);
     }
 
-    /**
-     * Only the type is consumed, the trailing description stays for the next
-     * rule.
-     */
     #[Test]
     public function stopsAfterTheType(): void
     {
@@ -75,10 +68,6 @@ final class TypeGrammarRuleTest extends GrammarRuleTestCase
         self::assertSame(11, $cursor->offset);
     }
 
-    /**
-     * The consumed offset is rebased onto the source when the cursor does not
-     * start at zero.
-     */
     #[Test]
     public function respectsTheCursorBase(): void
     {

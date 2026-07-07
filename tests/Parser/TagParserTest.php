@@ -33,10 +33,6 @@ final class TagParserTest extends TestCase
     }
 
     /**
-     * Well-formed definitions, each mapped to the tag name and the string value
-     * of the description the parser is expected to produce (or `null` when the
-     * definition carries no description).
-     *
      * @return iterable<string, array{TagParserInterface, string, string, string|null}>
      */
     public static function validTagDataProvider(): iterable
@@ -62,10 +58,6 @@ final class TagParserTest extends TestCase
     }
 
     /**
-     * Malformed definitions, each mapped to the exact failure reason class, the
-     * (always empty) tag name and the string value of the description that is
-     * salvaged from the input (or `null` when nothing is left to salvage).
-     *
      * @return iterable<string, array{TagParserInterface, string, class-string<\Throwable>, string, string|null}>
      */
     public static function invalidTagDataProvider(): iterable
@@ -83,9 +75,6 @@ final class TagParserTest extends TestCase
     }
 
     /**
-     * The malformed definitions of {@see invalidTagDataProvider()}, reduced to
-     * just the input string.
-     *
      * @return iterable<string, array{TagParserInterface, string}>
      */
     public static function malformedDefinitionDataProvider(): iterable
@@ -102,9 +91,6 @@ final class TagParserTest extends TestCase
     }
 
     /**
-     * Definitions that survive a full round trip: stringifying the produced tag
-     * reproduces the original definition byte for byte.
-     *
      * @return iterable<string, array{TagParserInterface, string}>
      */
     public static function roundTripDataProvider(): iterable
@@ -156,10 +142,6 @@ final class TagParserTest extends TestCase
         self::assertTagDescription($expectedDescription, $tag);
     }
 
-    /**
-     * Every failure reason belongs to the {@see InvalidTagNameException} branch
-     * of the {@see ParsingExceptionInterface} hierarchy.
-     */
     #[Test]
     #[DataProvider('malformedDefinitionDataProvider')]
     public function invalidTagReasonIsAnInvalidTagNameException(
@@ -173,11 +155,6 @@ final class TagParserTest extends TestCase
         self::assertInstanceOf(ParsingExceptionInterface::class, $tag->reason);
     }
 
-    /**
-     * The parser reports malformed input by returning an {@see InvalidTag}
-     * rather than throwing, even though the interface permits a
-     * {@see ParsingExceptionInterface}.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function parseReportsFailuresWithoutThrowing(TagParserInterface $parser): void
@@ -194,10 +171,6 @@ final class TagParserTest extends TestCase
         self::assertSame($definition, (string) $parser->parse($definition, self::descriptions()));
     }
 
-    /**
-     * The suffix is handed to the injected description parser, so an inline
-     * `{@...}` tag inside it is parsed into a nested {@see TaggedDescription}.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function suffixIsParsedByTheInjectedDescriptionParser(TagParserInterface $parser): void
@@ -211,10 +184,6 @@ final class TagParserTest extends TestCase
         self::assertSame('{@link X}', (string) $tag->description);
     }
 
-    /**
-     * A definition without the leading "@" is not a tag at all: its whole text
-     * is preserved as the {@see InvalidTag} description.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function definitionWithoutPrefixKeepsWholeTextAsDescription(TagParserInterface $parser): void
@@ -226,10 +195,6 @@ final class TagParserTest extends TestCase
         self::assertTagDescription('just some text', $tag);
     }
 
-    /**
-     * A name is matched by `\w` under the `/u` (UTF-8) modifier, so it accepts
-     * Unicode letters beyond ASCII, e.g. a Cyrillic tag name.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function unicodeTagNameIsSupported(TagParserInterface $parser): void
@@ -241,19 +206,12 @@ final class TagParserTest extends TestCase
         self::assertTagDescription('значение', $tag);
     }
 
-    /**
-     * A shared description parser used as the delegate for suffix parsing,
-     * wired exactly as in production.
-     */
     private static function descriptions(): DescriptionParserInterface
     {
         return self::createDescriptionParser();
     }
 
     /**
-     * Binds every case to each parser from {@see parserDataProvider()},
-     * prefixing the case name with the parser name.
-     *
      * @param iterable<string, list<mixed>> $cases
      * @return iterable<string, list<mixed>>
      */
@@ -266,11 +224,6 @@ final class TagParserTest extends TestCase
         }
     }
 
-    /**
-     * Asserts that the tag carries either no description
-     * ($expected === null) or a {@see DescriptionInterface} whose string value
-     * equals $expected.
-     */
     private static function assertTagDescription(?string $expected, TagInterface $tag): void
     {
         if ($expected === null) {

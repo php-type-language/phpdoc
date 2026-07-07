@@ -49,10 +49,6 @@ final class VariableTagTest extends TestCase
         self::assertSame('@unused-param $context', (string) $tag);
     }
 
-    /**
-     * The invoked-callable tags share a meaning and a common base, differing
-     * only by the moment the callable runs.
-     */
     #[Test]
     public function invokedCallableTagsShareACommonBase(): void
     {

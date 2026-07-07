@@ -271,11 +271,6 @@ final class SplitterTest extends TestCase
         );
     }
 
-    /**
-     * A line without a leading "*" prefix still has its indentation stripped,
-     * so the segment text never begins with whitespace and its offset points
-     * at the first significant character.
-     */
     #[Test]
     #[DataProvider('splitterDataProvider')]
     public function leadingWhitespaceIsStrippedWhenLineHasNoStarPrefix(SplitterInterface $parser): void
@@ -296,10 +291,6 @@ final class SplitterTest extends TestCase
         );
     }
 
-    /**
-     * Whether or not a line carries a "*" prefix, the resulting segment text is
-     * the same; only the offset differs (by the width of the skipped prefix).
-     */
     #[Test]
     #[DataProvider('splitterDataProvider')]
     public function starlessLineYieldsSameTextAsStarPrefixedLine(SplitterInterface $parser): void
@@ -316,10 +307,6 @@ final class SplitterTest extends TestCase
     }
 
     /**
-     * The text of every segment retains its own trailing line terminator
-     * verbatim (`\n` or `\r\n`), and offsets are byte offsets, so a `\r\n`
-     * line shifts subsequent offsets by the extra carriage return byte.
-     *
      * @param list<array{string, int<0, max>}> $expected
      */
     #[Test]
@@ -347,18 +334,12 @@ final class SplitterTest extends TestCase
         yield 'StringSplitter' => new StringSplitter();
     }
 
-    /**
-     * Builds a comment source from the given lines using `\n` separators.
-     */
     private static function comment(string ...$lines): string
     {
         return \implode("\n", $lines);
     }
 
     /**
-     * Normalizes the {@see SplitterInterface::split()} result (which may be
-     * any iterable) into a positionally indexed list of segments.
-     *
      * @param iterable<Segment> $result
      * @return list<Segment>
      */

@@ -61,10 +61,6 @@ final class TemplateTagTest extends TestCase
         self::assertNull($tag->default);
     }
 
-    /**
-     * A word that merely starts with "of" is not the "of" keyword, so it stays
-     * part of the description.
-     */
     #[Test]
     public function keywordRespectsWordBoundary(): void
     {

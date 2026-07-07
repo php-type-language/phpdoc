@@ -61,10 +61,6 @@ final class ExampleTagTest extends TestCase
         self::assertSame('@example demo.php', (string) $tag);
     }
 
-    /**
-     * Any ordinary word is a valid relative URI, so a leading word is captured
-     * as the location and the remainder becomes the description.
-     */
     #[Test]
     public function treatsLeadingWordAsLocation(): void
     {
@@ -77,10 +73,6 @@ final class ExampleTagTest extends TestCase
         self::assertSame('@example demo.php the bundled snippet below.', (string) $tag);
     }
 
-    /**
-     * A location is mandatory, so an input whose first word cannot be a URI is
-     * malformed.
-     */
     #[Test]
     public function rejectsMissingLocation(): void
     {

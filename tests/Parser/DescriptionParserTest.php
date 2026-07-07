@@ -26,10 +26,6 @@ final class DescriptionParserTest extends TestCase
     }
 
     /**
-     * Inputs that contain no recognizable inline `{@...}` tag and therefore
-     * must be returned verbatim as a single plain {@see Description}, without
-     * losing a single byte.
-     *
      * @return iterable<string, array{DescriptionParserInterface, string}>
      */
     public static function plainDescriptionDataProvider(): iterable
@@ -53,9 +49,6 @@ final class DescriptionParserTest extends TestCase
     }
 
     /**
-     * Inputs for which stringifying the parsed result reproduces the original
-     * source byte for byte: `(string) parse($input) === $input`.
-     *
      * @return iterable<string, array{DescriptionParserInterface, string}>
      */
     public static function roundTripInputsDataProvider(): iterable
@@ -169,11 +162,6 @@ final class DescriptionParserTest extends TestCase
         self::assertSame('{@see A}{@link B}', (string) $result);
     }
 
-    /**
-     * The defining feature of this parser: curly braces nested inside an
-     * inline tag (PHP array shapes, generics, ...) are counted, not treated
-     * as the tag terminator.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function nestedBracesInsideInlineTagAreRecognized(DescriptionParserInterface $parser): void
@@ -192,10 +180,6 @@ final class DescriptionParserTest extends TestCase
         self::assertSame('Hello {@see array{int} example} world', (string) $result);
     }
 
-    /**
-     * A bare "@" not wrapped in braces is plain description text; only the
-     * inline `{@...}` form is treated as a tag.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function bareAtSignWithoutBracesIsPlainText(DescriptionParserInterface $parser): void
@@ -237,15 +221,6 @@ final class DescriptionParserTest extends TestCase
         self::assertSame('{@see {@link X}}', (string) $result);
     }
 
-    /**
-     * A balanced "{@...}" whose name the tag parser rejects with an
-     * {@see \TypeLang\PhpDoc\Exception\InvalidTagNameException} is preserved
-     * verbatim (with its braces) as a part of the description.
-     *
-     * A name is limited to word characters (including Unicode letters) and a
-     * few name punctuation characters, so "{@!bad}" — whose "!" is none of
-     * these — has no readable name and stays raw text.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function inlineTagWithUnreadableNameBecomesPlainDescription(DescriptionParserInterface $parser): void
@@ -253,10 +228,6 @@ final class DescriptionParserTest extends TestCase
         self::assertPlainDescription('Hello {@!bad} world', $parser->parse('Hello {@!bad} world'));
     }
 
-    /**
-     * An unclosed inline tag that follows already parsed valid tags consumes
-     * only the tail as raw text; the earlier tags are preserved.
-     */
     #[Test]
     #[DataProvider('parserDataProvider')]
     public function unclosedInlineTagAfterValidTagKeepsEarlierTags(DescriptionParserInterface $parser): void
@@ -286,10 +257,6 @@ final class DescriptionParserTest extends TestCase
         }
     }
 
-    /**
-     * Asserts that the given component is a plain {@see Description} carrying
-     * exactly the expected value, both as a property and when stringified.
-     */
     private static function assertPlainDescription(string $expected, mixed $actual): void
     {
         self::assertInstanceOf(Description::class, $actual);
@@ -297,11 +264,6 @@ final class DescriptionParserTest extends TestCase
         self::assertSame($expected, (string) $actual);
     }
 
-    /**
-     * Asserts that the given component is a {@see TagInterface} with the
-     * expected name and either no description ($expectedDescription === null)
-     * or a plain {@see Description} whose value equals $expectedDescription.
-     */
     private static function assertTagComponent(
         string $expectedName,
         ?string $expectedDescription,
