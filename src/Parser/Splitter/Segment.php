@@ -13,7 +13,10 @@ namespace TypeLang\PhpDoc\Parser\Splitter;
 final class Segment
 {
     public function __construct(
-        public string $text = '',
+        /**
+         * @var non-empty-string
+         */
+        public string $text,
         /**
          * @var int<0, max>
          */

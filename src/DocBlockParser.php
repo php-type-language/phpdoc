@@ -281,8 +281,12 @@ final readonly class DocBlockParser implements DocBlockParserInterface
     /**
      * @throws PhpDocExceptionInterface
      */
-    private function tryCreateDescription(Segment $segment, string $docblock): ?DescriptionInterface
+    private function tryCreateDescription(?Segment $segment, string $docblock): ?DescriptionInterface
     {
+        if ($segment === null) {
+            return null;
+        }
+
         try {
             return $this->descriptionParser->tryParse($segment->text);
         } catch (\Throwable $e) {

@@ -28,9 +28,24 @@ final class SplitterTest extends TestCase
     {
         $inputs = [
             'plain text' => 'Just some text',
+            'opening not at start' => 'abc /** x */',
+        ];
+
+        foreach (self::splitterDataProvider() as $splitterName => [$splitter]) {
+            foreach ($inputs as $inputName => $input) {
+                yield $splitterName . ': ' . $inputName => [$splitter, $input];
+            }
+        }
+    }
+
+    /**
+     * @return iterable<string, array{SplitterInterface, string}>
+     */
+    public static function blankInputsDataProvider(): iterable
+    {
+        $inputs = [
             'empty string' => '',
             'whitespace only' => '    ',
-            'opening not at start' => 'abc /** x */',
         ];
 
         foreach (self::splitterDataProvider() as $splitterName => [$splitter]) {
@@ -149,12 +164,23 @@ final class SplitterTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('blankInputsDataProvider')]
+    public function blankInputYieldsNoSegments(SplitterInterface $parser, string $input): void
+    {
+        self::assertCount(0, self::segments($parser->split($input)));
+    }
+
+    #[Test]
     #[DataProvider('wrappedInputsDataProvider')]
     public function segmentOffsetPointsToItsTextInSource(SplitterInterface $parser, string $input): void
     {
+        // Offsets index the normalized docblock (leading and trailing blanks
+        // stripped), so the invariant is checked against the same string.
+        $source = \trim($input, " \t\n\r\0\x0B");
+
         foreach (self::segments($parser->split($input)) as $segment) {
             self::assertSame(
-                \substr($input, $segment->offset, \strlen($segment->text)),
+                \substr($source, $segment->offset, \strlen($segment->text)),
                 $segment->text,
                 'A segment text must be a verbatim slice of the source at its offset',
             );

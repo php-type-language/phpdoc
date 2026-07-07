@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Parser\Splitter;
 
-/**
- * Comment splitter implementation with plain string functions.
- */
 final readonly class StringSplitter implements SplitterInterface
 {
     /**
      * @var non-empty-string
      */
-    private const string OPENING = '/**';
+    private const string SEQUENCE_OPENING = '/*';
 
     /**
      * @var non-empty-string
      */
-    private const string CLOSING = '*/';
+    private const string SEQUENCE_OPENING_DOCBLOCK = '/**';
 
     /**
      * @var non-empty-string
      */
-    private const string HORIZONTAL_WHITESPACE = " \t";
+    private const string SEQUENCE_CLOSING = '*/';
+
+    /**
+     * @var non-empty-string
+     */
+    private const string SEQUENCE_BODY = '*';
 
     /**
      * @var non-empty-string
@@ -30,202 +32,112 @@ final readonly class StringSplitter implements SplitterInterface
     private const string LINE_TERMINATORS = "\r\n";
 
     /**
-     * Characters stripped by {@see \trim()}; a line made up solely of these is
-     * blank and therefore not significant.
+     * Characters trimmed from the head of a line before its content begins.
      *
      * @var non-empty-string
      */
     private const string BLANK = " \t\n\r\0\x0B";
 
     /**
-     * @return iterable<array-key, Segment>
+     * Trailing whitespace trimmed from a line: {@see BLANK} without the line
+     * terminators, which delimit lines rather than pad them.
+     *
+     * @var non-empty-string
      */
-    public function split(string $docblock): iterable
-    {
-        if ($this->isWrappedComment($docblock)) {
-            return $this->readWrappedComment($docblock);
-        }
-
-        return [new Segment($docblock)];
-    }
-
-    private function isWrappedComment(string $docblock): bool
-    {
-        if ($docblock === '') {
-            return false;
-        }
-
-        $offset = \strpos($docblock, self::OPENING);
-
-        // In case of DocBlock:
-        return match ($offset) {
-            // - Starts with "/**".
-            0 => true,
-            // - Does not contain "/**" sequence.
-            false => false,
-            // - Starts with whitespace chars before "/**" sequence.
-            default => \ltrim(\substr($docblock, 0, $offset)) === '',
-        };
-    }
+    private const string TRAILING_WHITESPACE = " \t\0\x0B";
 
     /**
      * @return list<Segment>
      */
-    private function readWrappedComment(string $docblock): array
+    public function split(string $docblock): array
     {
-        $prototype = new Segment();
+        $docblock = \trim($docblock, self::BLANK);
+
+        return match (true) {
+            $docblock === '' => [],
+            \str_starts_with($docblock, self::SEQUENCE_OPENING_DOCBLOCK)
+                => self::readComment($docblock, \strlen(self::SEQUENCE_OPENING_DOCBLOCK)),
+            \str_starts_with($docblock, self::SEQUENCE_OPENING)
+                => self::readComment($docblock, \strlen(self::SEQUENCE_OPENING)),
+            default => [new Segment($docblock)],
+        };
+    }
+
+    /**
+     * Reads a wrapped comment line by line, starting past its opening
+     * sequence at {@see $offset}.
+     *
+     * @param int<0, max> $offset
+     * @return list<Segment>
+     */
+    private static function readComment(string $docblock, int $offset): array
+    {
+        /** @phpstan-ignore-next-line : Pre-allocate (invalid) segment in order to use it as a
+         *                              template in the future (speeding up object instantiation) */
+        $prototype = new Segment('');
 
         $length = \strlen($docblock);
-        $offset = 0;
-        $atLineStart = true;
 
-        // Position of the next closing sequence, advanced forward only. Keeping
-        // it out of the per-line scan turns the whole pass linear instead of
-        // rescanning the rest of the string on every content line.
-        $closing = \strpos($docblock, self::CLOSING);
+        // Content ends at the closing "*/"; nothing from there on counts.
+        $closing = \strpos($docblock, self::SEQUENCE_CLOSING, $offset);
+        $end = $closing === false ? $length : $closing;
 
         $segments = [];
 
-        // The structural sequences are matched by direct byte comparison rather
-        // than substr_compare(): this runs for every line, so avoiding the call
-        // overhead matters on large docblocks.
-        while ($offset < $length) {
-            // Leading indentation only exists at the start of a line; mid-line
-            // the cursor already sits on the content.
-            $content = $atLineStart
-                ? $offset + \strspn($docblock, self::HORIZONTAL_WHITESPACE, $offset)
-                : $offset;
+        while ($offset < $end) {
+            $break = $offset + \strcspn($docblock, self::LINE_TERMINATORS, $offset);
+            $lineEnd = \min($break, $end);
 
-            // Comment opening: "/**".
-            if ($atLineStart
-                && ($content + 2) < $length
-                && $docblock[$content] === '/'
-                && $docblock[$content + 1] === '*'
-                && $docblock[$content + 2] === '*'
-            ) {
-                $offset = $content + 3;
-                $offset += \strspn($docblock, self::HORIZONTAL_WHITESPACE, $offset);
-                $atLineStart = false;
+            $from = self::lineStartsAt($docblock, $offset, $lineEnd);
+            $content = \rtrim(\substr($docblock, $from, $lineEnd - $from), self::TRAILING_WHITESPACE);
 
-                continue;
+            // Move past the terminator ("\n", "\r" or "\r\n") ending the line.
+            $offset = $break;
+
+            if ($break < $length) {
+                $offset += $docblock[$break] === "\r" && ($docblock[$break + 1] ?? '') === "\n" ? 2 : 1;
             }
 
-            // Comment closing: "*/".
-            if (($content + 1) < $length
-                && $docblock[$content] === '*'
-                && $docblock[$content + 1] === '/'
-            ) {
-                $offset = $content + 2;
-                $atLineStart = false;
+            // Blank lines are dropped; a significant one keeps its terminator.
+            if ($content !== '') {
+                $terminator = $break < $end ? \substr($docblock, $break, $offset - $break) : '';
 
-                continue;
-            }
-
-            // Line asterisk prefix: "*".
-            if ($atLineStart && $content < $length && $docblock[$content] === '*') {
-                $offset = $content + 1;
-                $offset += \strspn($docblock, self::HORIZONTAL_WHITESPACE, $offset);
-                $atLineStart = false;
-
-                continue;
-            }
-
-            // Line terminator.
-            $char = $docblock[$offset];
-
-            if ($char === "\n") {
-                ++$offset;
-                $atLineStart = true;
-
-                continue;
-            }
-
-            if ($char === "\r" && ($offset + 1) < $length && $docblock[$offset + 1] === "\n") {
-                $offset += 2;
-                $atLineStart = true;
-
-                continue;
-            }
-
-            // Significant line of content. It starts at $content, past any
-            // leading indentation, so the segment text never begins with
-            // whitespace even when the line has no "*" prefix; $content also
-            // carries the offset forward over the skipped whitespace.
-            if ($closing !== false && $closing < $content) {
-                $closing = \strpos($docblock, self::CLOSING, $content);
-            }
-
-            $end = self::readTextEnd($docblock, $content, $length, $closing);
-            $span = $end - $content;
-
-            // Skip blank lines without allocating a trimmed copy of the text.
-            if (\strspn($docblock, self::BLANK, $content, $span) !== $span) {
-                /** @phpstan-ignore-next-line : Allow readonly mutation */
-                $prototype->text = \substr($docblock, $content, $span);
-                /** @phpstan-ignore-next-line : Allow readonly mutation */
-                $prototype->offset = $content;
+                /** @phpstan-ignore-next-line : Allow external mutation */
+                $prototype->text = $content . $terminator;
+                /** @phpstan-ignore-next-line : Allow external mutation */
+                $prototype->offset = $from;
 
                 $segments[] = clone $prototype;
             }
-
-            $atLineStart = $docblock[$end - 1] === "\n";
-            $offset = $end;
         }
 
         return $segments;
     }
 
     /**
-     * Finds the end offset of a content line starting at {@see $offset}.
-     *
-     * A line ends at the comment closing sequence, at the next line terminator
-     * (which it includes), or at the end of the string.
-     *
-     * TODO Should be inlined (?)
+     * Returns offset of the comment's line start
      *
      * @param int<0, max> $offset
-     * @param int<0, max> $length
-     * @param int<0, max>|false $closing offset of the next closing sequence at
-     *        or after `$offset`, or {@see false} when there is none
+     * @param int<0, max> $lineEnd
      * @return int<0, max>
      */
-    private static function readTextEnd(string $docblock, int $offset, int $length, int|false $closing): int
+    private static function lineStartsAt(string $docblock, int $offset, int $lineEnd): int
     {
-        // At least the first character always belongs to the line, so the
-        // closing sequence only counts beyond it; widen it left across the
-        // full "*" run so the line ends where that run begins.
-        $from = $offset + 1;
+        // Skip starting whitespaces (e.g. " * @tag" -> "* @tag")
+        $offset += \strspn($docblock, self::BLANK, $offset, $lineEnd - $offset);
 
-        if ($closing !== false && $closing >= $from) {
-            while ($closing > $from && $docblock[$closing - 1] === '*') {
-                --$closing;
-            }
-        } else {
-            $closing = false;
+        // Skip "star" char (e.g. "* @tag" -> " @tag")
+        if ($offset < $lineEnd && $docblock[$offset] === self::SEQUENCE_BODY) {
+            ++$offset;
+
+            // Skip other whitespaces (e.g. " @tag" -> "@tag")
+            //
+            // TBD This behavior seems to make it impossible to use indents for
+            // markdown, and only the leading space needs to be removed.
+            // However, this behavior makes description parsing more... predictable (?)
+            $offset += \strspn($docblock, self::BLANK, $offset, $lineEnd - $offset);
         }
 
-        // A lone "\r" is part of the content, so only "\n" and "\r\n" end the
-        // line. It ends before the closing sequence when that comes first.
-        $cursor = $offset;
-
-        while ($cursor < $length) {
-            $cursor += \strcspn($docblock, self::LINE_TERMINATORS, $cursor);
-
-            if ($cursor >= $length) {
-                break;
-            }
-
-            if ($docblock[$cursor] === "\n") {
-                return $closing !== false && $closing < $cursor ? $closing : $cursor + 1;
-            }
-
-            if (($cursor + 1) < $length && $docblock[$cursor + 1] === "\n") {
-                return $closing !== false && $closing < $cursor ? $closing : $cursor + 2;
-            }
-
-            ++$cursor;
-        }
-
-        return $closing !== false ? $closing : $length;
+        return $offset;
     }
 }

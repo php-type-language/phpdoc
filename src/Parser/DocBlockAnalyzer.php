@@ -8,11 +8,11 @@ use TypeLang\PhpDoc\Parser\Splitter\Segment;
 use TypeLang\PhpDoc\Parser\Splitter\SplitterInterface;
 
 /**
- * Groups the significant segments of a DocBlock comment into sections (a
- * description followed by tags) and builds the {@see SourceMap} for them.
+ * Groups the significant segments of a DocBlock comment into a leading
+ * description followed by tags, joining each tag with its continuation lines.
  *
- * It only slices and maps the comment: parsing the description and tag
- * contents is left to the caller.
+ * A line opening with "@" starts a new tag; any line before the first tag
+ * belongs to the description, and any non-tag line after a tag continues it.
  */
 final readonly class DocBlockAnalyzer
 {
@@ -22,35 +22,51 @@ final readonly class DocBlockAnalyzer
 
     public function analyze(string $docblock): RawDocBlock
     {
-        $buffer = '';
-        $currentOffset = 0;
-        $hasOffset = false;
+        /** @phpstan-ignore-next-line : Pre-allocate (invalid) segment in order to use it as a
+         *                              template in the future (speeding up object instantiation) */
+        $prototype = new Segment('');
 
-        /** @var list<Segment> $computedSegments */
-        $computedSegments = [];
+        /** @var list<Segment> $groups */
+        $groups = [];
+
+        $buffer = '';
+        $offset = 0;
 
         foreach ($this->splitter->split($docblock) as $segment) {
-            $segmentText = $segment->text;
+            // A tag opens a new group; the previous one is finished first.
+            if ($buffer !== '' && $segment->text[0] === '@') {
+                /** @phpstan-ignore-next-line : Allow external mutation */
+                $prototype->text = $buffer;
+                /** @phpstan-ignore-next-line : Allow external mutation */
+                $prototype->offset = $offset;
 
-            if ($segmentText[0] === '@') {
-                $computedSegments[] = new Segment($buffer, $currentOffset);
+                $groups[] = clone $prototype;
                 $buffer = '';
-                $currentOffset = $segment->offset;
-                $hasOffset = true;
-            } elseif (!$hasOffset) {
-                // Anchor the leading description at its first significant line.
-                $currentOffset = $segment->offset;
-                $hasOffset = true;
+            }
+
+            if ($buffer === '') {
+                $offset = $segment->offset;
             }
 
             $buffer .= $segment->text;
         }
 
-        $computedSegments[] = new Segment($buffer, $currentOffset);
+        if ($buffer !== '') {
+            /** @phpstan-ignore-next-line : Allow external mutation */
+            $prototype->text = $buffer;
+            /** @phpstan-ignore-next-line : Allow external mutation */
+            $prototype->offset = $offset;
 
-        return new RawDocBlock(
-            description: \array_shift($computedSegments),
-            tags: $computedSegments,
-        );
+            $groups[] = clone $prototype;
+        }
+
+        // The leading group is the description unless it already is a tag.
+        $description = null;
+
+        if ($groups !== [] && $groups[0]->text[0] !== '@') {
+            $description = \array_shift($groups);
+        }
+
+        return new RawDocBlock($description, $groups);
     }
 }

@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\Parser\Splitter\Segment;
 final readonly class RawDocBlock
 {
     public function __construct(
-        public Segment $description,
+        public ?Segment $description,
         /**
          * @var list<Segment>
          */
