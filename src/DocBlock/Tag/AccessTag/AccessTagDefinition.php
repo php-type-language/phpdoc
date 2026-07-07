@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Tag\AccessTag;
 
-use TypeLang\PhpDoc\DocBlock\Combinator\AccessCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
@@ -28,7 +29,7 @@ final class AccessTagDefinition extends TagDefinition
         parent::__construct(
             name: self::NAME,
             spec: Spec::sequence(
-                Spec::rule(AccessCombinator::NAME, 'access', 'AccessVisibility'),
+                Spec::rule(VisibilityCombinator::NAME, 'access', 'AccessVisibility'),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),

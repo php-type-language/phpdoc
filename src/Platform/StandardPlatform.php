@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\Platform;
 
 use TypeLang\Parser\TypeParser;
 use TypeLang\Parser\TypeParserInterface;
-use TypeLang\PhpDoc\DocBlock\Combinator\AccessCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\AuthorNameCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\EmailCombinator;
@@ -19,6 +18,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition;
@@ -183,7 +183,7 @@ final class StandardPlatform implements PlatformInterface
      */
     public iterable $combinators {
         get => [
-            AccessCombinator::NAME => new AccessCombinator(),
+            VisibilityCombinator::NAME => new VisibilityCombinator(),
             UriCombinator::NAME => new UriCombinator(),
             UrlCombinator::NAME => new UrlCombinator(),
             ReferenceCombinator::NAME => new ReferenceCombinator(),

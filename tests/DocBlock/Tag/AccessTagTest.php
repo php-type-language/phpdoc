@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\AccessCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTag;
 use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition;
-use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\Visibility;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
+use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistry;
@@ -66,7 +66,7 @@ final class AccessTagTest extends TestCase
         return new TagFactory(
             $registry,
             [
-                AccessCombinator::NAME => new AccessCombinator(),
+                VisibilityCombinator::NAME => new VisibilityCombinator(),
                 DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
             ],
         );

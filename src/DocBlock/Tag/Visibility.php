@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TypeLang\PhpDoc\DocBlock\Tag\AccessTag;
+namespace TypeLang\PhpDoc\DocBlock\Tag;
 
 /**
- * The access level (visibility) an "@access" tag may declare.
+ * The access level (visibility) tag may declare.
  */
 enum Visibility: string
 {

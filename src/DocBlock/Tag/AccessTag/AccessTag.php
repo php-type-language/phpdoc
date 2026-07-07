@@ -6,6 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\AccessTag;
 
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 
 /**
  * The "@access" tag documents the visibility of an element.

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
-use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\Visibility;
+use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
@@ -15,16 +15,16 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<Visibility>
  */
-final readonly class AccessCombinator implements CombinatorInterface
+final readonly class VisibilityCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Access';
+    public const string NAME = 'Visibility';
 
     public function __invoke(Cursor $cursor): Visibility
     {
         $access = Visibility::tryFrom($cursor->readWord());
 
         if ($access === null) {
-            throw new NoMatchException('Expected an access level');
+            throw new NoMatchException('Expected an access (one of "public", "protected" or "private") level');
         }
 
         return $access;
