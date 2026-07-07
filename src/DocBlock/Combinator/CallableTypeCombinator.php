@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
+use TypeLang\Parser\TypeParserInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
@@ -20,9 +21,12 @@ final readonly class CallableTypeCombinator implements CombinatorInterface
 {
     public const string NAME = 'CallableType';
 
-    public function __construct(
-        private TypeCombinator $types,
-    ) {}
+    private TypeCombinator $types;
+
+    public function __construct(TypeParserInterface $types)
+    {
+        $this->types = new TypeCombinator($types);
+    }
 
     public function __invoke(Cursor $cursor): TypeReference
     {

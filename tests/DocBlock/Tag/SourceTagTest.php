@@ -10,7 +10,8 @@ use TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class SourceTagTest extends TestCase
@@ -51,14 +52,13 @@ final class SourceTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                SourceTagDefinition::NAME => new SourceTagDefinition(),
-            ],
-            combinators: [
-                IntegerCombinator::NAME => new IntegerCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            SourceTagDefinition::NAME => new SourceTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            IntegerCombinator::NAME => new IntegerCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

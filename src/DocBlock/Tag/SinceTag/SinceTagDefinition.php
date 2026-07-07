@@ -10,6 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The "`@since`" tag documents the version at which an element became
@@ -31,7 +32,7 @@ final class SinceTagDefinition extends TagDefinition
                 Spec::maybe(Spec::rule(VersionCombinator::NAME, 'version')),
                 Spec::maybe(Spec::rule(DescriptionCombinator::NAME, 'description')),
             ),
-            isInline: false,
+            placement: TagPlacement::Block,
         );
     }
 

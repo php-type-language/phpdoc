@@ -11,6 +11,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The "`@link`" tag can be used to define a relation, or link, between
@@ -41,7 +42,7 @@ final class LinkTagDefinition extends TagDefinition
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
-            isInline: true,
+            placement: TagPlacement::Any,
         );
     }
 

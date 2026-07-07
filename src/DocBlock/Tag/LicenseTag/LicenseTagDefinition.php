@@ -11,6 +11,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UrlReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The "`@license`" tag documents the license that applies to an element, given
@@ -36,7 +37,7 @@ final class LicenseTagDefinition extends TagDefinition
                 ),
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
-            isInline: false,
+            placement: TagPlacement::Block,
         );
     }
 

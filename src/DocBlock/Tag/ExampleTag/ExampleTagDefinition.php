@@ -13,6 +13,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The "`@example`" tag points at an external source illustrating the use of the
@@ -47,7 +48,7 @@ final class ExampleTagDefinition extends TagDefinition
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
-            isInline: false,
+            placement: TagPlacement::Any,
         );
     }
 

@@ -12,7 +12,8 @@ use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTag;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
@@ -55,15 +56,14 @@ final class StaticVarTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                StaticVarTagDefinition::NAME => new StaticVarTagDefinition(),
-            ],
-            combinators: [
-                TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-                VariableCombinator::NAME => new VariableCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            StaticVarTagDefinition::NAME => new StaticVarTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
+            VariableCombinator::NAME => new VariableCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

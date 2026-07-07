@@ -15,7 +15,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\VersionedTagInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTag;
 use TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class VersionedTagTest extends TestCase
@@ -71,16 +72,15 @@ final class VersionedTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                VersionTagDefinition::NAME => new VersionTagDefinition(),
-                SinceTagDefinition::NAME => new SinceTagDefinition(),
-                DeprecatedTagDefinition::NAME => new DeprecatedTagDefinition(),
-            ],
-            combinators: [
-                VersionCombinator::NAME => new VersionCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            VersionTagDefinition::NAME => new VersionTagDefinition(),
+            SinceTagDefinition::NAME => new SinceTagDefinition(),
+            DeprecatedTagDefinition::NAME => new DeprecatedTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            VersionCombinator::NAME => new VersionCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

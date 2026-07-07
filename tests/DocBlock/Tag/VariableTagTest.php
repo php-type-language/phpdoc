@@ -19,7 +19,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VariableTagInterface;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class VariableTagTest extends TestCase
@@ -105,16 +106,15 @@ final class VariableTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                ParamImmediatelyInvokedCallableTagDefinition::NAME => new ParamImmediatelyInvokedCallableTagDefinition(),
-                ParamLaterInvokedCallableTagDefinition::NAME => new ParamLaterInvokedCallableTagDefinition(),
-                UnusedParamTagDefinition::NAME => new UnusedParamTagDefinition(),
-            ],
-            combinators: [
-                VariableCombinator::NAME => new VariableCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            ParamImmediatelyInvokedCallableTagDefinition::NAME => new ParamImmediatelyInvokedCallableTagDefinition(),
+            ParamLaterInvokedCallableTagDefinition::NAME => new ParamLaterInvokedCallableTagDefinition(),
+            UnusedParamTagDefinition::NAME => new UnusedParamTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            VariableCombinator::NAME => new VariableCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

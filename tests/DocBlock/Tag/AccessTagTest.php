@@ -12,7 +12,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\Visibility;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class AccessTagTest extends TestCase
@@ -58,11 +59,13 @@ final class AccessTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
+        $registry = new TagRegistry([
+            AccessTagDefinition::NAME => new AccessTagDefinition(),
+        ]);
+
         return new TagFactory(
-            definitions: [
-                AccessTagDefinition::NAME => new AccessTagDefinition(),
-            ],
-            combinators: [
+            $registry,
+            [
                 AccessCombinator::NAME => new AccessCombinator(),
                 DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
             ],

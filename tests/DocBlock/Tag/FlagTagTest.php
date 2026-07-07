@@ -14,8 +14,10 @@ use TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class FlagTagTest extends TestCase
@@ -42,10 +44,10 @@ final class FlagTagTest extends TestCase
     }
 
     #[Test]
-    public function inlineFlagIsRecognized(): void
+    public function placementIsRecognized(): void
     {
-        self::assertTrue(new InternalTagDefinition()->isInline);
-        self::assertFalse(new AbstractTagDefinition()->isInline);
+        self::assertSame(TagPlacement::Any, new InternalTagDefinition()->placement);
+        self::assertSame(TagPlacement::Block, new AbstractTagDefinition()->placement);
     }
 
     /**
@@ -74,15 +76,14 @@ final class FlagTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                AbstractTagDefinition::NAME => new AbstractTagDefinition(),
-                InternalTagDefinition::NAME => new InternalTagDefinition(),
-                TodoTagDefinition::NAME => new TodoTagDefinition(),
-            ],
-            combinators: [
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            AbstractTagDefinition::NAME => new AbstractTagDefinition(),
+            InternalTagDefinition::NAME => new InternalTagDefinition(),
+            TodoTagDefinition::NAME => new TodoTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

@@ -9,7 +9,8 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTag;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class StaticTagTest extends TestCase
@@ -44,13 +45,12 @@ final class StaticTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                StaticTagDefinition::NAME => new StaticTagDefinition(),
-            ],
-            combinators: [
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            StaticTagDefinition::NAME => new StaticTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

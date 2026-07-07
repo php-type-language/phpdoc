@@ -16,7 +16,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTag;
 use TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class ReferenceTagTest extends TestCase
@@ -59,15 +60,14 @@ final class ReferenceTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                UsesTagDefinition::NAME => new UsesTagDefinition(),
-                UsedByTagDefinition::NAME => new UsedByTagDefinition(),
-            ],
-            combinators: [
-                ReferenceCombinator::NAME => new ReferenceCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            UsesTagDefinition::NAME => new UsesTagDefinition(),
+            UsedByTagDefinition::NAME => new UsedByTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            ReferenceCombinator::NAME => new ReferenceCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

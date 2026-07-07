@@ -21,7 +21,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag;
 use TypeLang\PhpDoc\DocBlock\Tag\VariableTagInterface;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
@@ -89,16 +90,15 @@ final class TypedVariableTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                ParamTagDefinition::NAME => new ParamTagDefinition(),
-                PropertyReadTagDefinition::NAME => new PropertyReadTagDefinition(),
-            ],
-            combinators: [
-                TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-                VariableCombinator::NAME => new VariableCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            ParamTagDefinition::NAME => new ParamTagDefinition(),
+            PropertyReadTagDefinition::NAME => new PropertyReadTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
+            VariableCombinator::NAME => new VariableCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

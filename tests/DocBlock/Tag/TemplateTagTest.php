@@ -15,7 +15,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TypeParameterTag;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class TemplateTagTest extends TestCase
@@ -93,15 +94,14 @@ final class TemplateTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                TemplateTagDefinition::NAME => new TemplateTagDefinition(),
-            ],
-            combinators: [
-                NameCombinator::NAME => new NameCombinator(),
-                TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            TemplateTagDefinition::NAME => new TemplateTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            NameCombinator::NAME => new NameCombinator(),
+            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

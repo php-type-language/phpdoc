@@ -12,7 +12,8 @@ use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTag;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class VarTagTest extends TestCase
@@ -61,15 +62,14 @@ final class VarTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                VarTagDefinition::NAME => new VarTagDefinition(),
-            ],
-            combinators: [
-                TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-                VariableCombinator::NAME => new VariableCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            VarTagDefinition::NAME => new VarTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
+            VariableCombinator::NAME => new VariableCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

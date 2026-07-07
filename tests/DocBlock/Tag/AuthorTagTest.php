@@ -13,7 +13,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class AuthorTagTest extends TestCase
@@ -55,20 +56,19 @@ final class AuthorTagTest extends TestCase
     {
         $factory = new \ReflectionClass(TagFactory::class)
             ->newLazyProxy(function () use (&$factory) {
-                return new TagFactory(
-                    definitions: [
-                        AuthorTagDefinition::NAME => new AuthorTagDefinition(),
-                    ],
-                    combinators: [
-                        AuthorNameCombinator::NAME => new AuthorNameCombinator(),
-                        EmailCombinator::NAME => new EmailCombinator(),
-                        DescriptionCombinator::NAME => new DescriptionCombinator(
-                            new BalancedBraceAwareParser(
-                                new StringTagParser($factory)
-                            ),
+                $registry = new TagRegistry([
+                    AuthorTagDefinition::NAME => new AuthorTagDefinition(),
+                ]);
+
+                return new TagFactory($registry, [
+                    AuthorNameCombinator::NAME => new AuthorNameCombinator(),
+                    EmailCombinator::NAME => new EmailCombinator(),
+                    DescriptionCombinator::NAME => new DescriptionCombinator(
+                        new BalancedBraceAwareParser(
+                            new StringTagParser($factory)
                         ),
-                    ],
-                );
+                    ),
+                ]);
             });
 
         return $factory;

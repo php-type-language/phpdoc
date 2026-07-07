@@ -11,7 +11,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTag;
 use TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class NameTagTest extends TestCase
@@ -57,14 +58,13 @@ final class NameTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                NameTagDefinition::NAME => new NameTagDefinition(),
-            ],
-            combinators: [
-                NameCombinator::NAME => new NameCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            NameTagDefinition::NAME => new NameTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            NameCombinator::NAME => new NameCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

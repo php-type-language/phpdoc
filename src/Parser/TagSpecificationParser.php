@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\Parser;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
+use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Context;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\InvalidCombinatorException;
@@ -15,7 +16,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\PhpDoc\Parser\Grammar\Grammar;
 
 /**
- * @phpstan-import-type CombinatorType from Grammar
+ * @phpstan-import-type CombinatorType from CombinatorInterface
  */
 final readonly class TagSpecificationParser
 {

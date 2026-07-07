@@ -16,7 +16,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\TagFactoryInterface;
 
 #[Group('type-lang/phpdoc')]
@@ -54,7 +55,7 @@ abstract class TestCase extends BaseTestCase
                                 TypeCombinator::NAME => new TypeCombinator(typeParser: new TypeParser()),
                                 VariableCombinator::NAME => new VariableCombinator(),
                             ],
-                            genericTagDefinition: new GenericTagDefinition(isInline: true),
+                            genericTagDefinition: new GenericTagDefinition(),
                         )),
                     ));
                 }
@@ -64,10 +65,7 @@ abstract class TestCase extends BaseTestCase
                 );
             });
 
-        $tagFactory = new TagFactory(
-            combinators: $baseRules,
-            genericTagDefinition: new GenericTagDefinition(isInline: true),
-        );
+        $tagFactory = new TagFactory(new TagRegistry(), $baseRules);
 
         return $tagFactory;
     }

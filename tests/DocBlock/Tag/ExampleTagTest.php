@@ -13,7 +13,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\ExampleTag\ExampleTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ExampleTag\ExampleTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class ExampleTagTest extends TestCase
@@ -101,16 +102,15 @@ final class ExampleTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                ExampleTagDefinition::NAME => new ExampleTagDefinition(),
-            ],
-            combinators: [
-                UrlCombinator::NAME => new UrlCombinator(),
-                UriCombinator::NAME => new UriCombinator(),
-                IntegerCombinator::NAME => new IntegerCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            ExampleTagDefinition::NAME => new ExampleTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            UrlCombinator::NAME => new UrlCombinator(),
+            UriCombinator::NAME => new UriCombinator(),
+            IntegerCombinator::NAME => new IntegerCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

@@ -14,7 +14,7 @@ abstract class TagDefinition implements TagDefinitionInterface
          */
         public readonly string $name,
         public readonly RuleInterface $spec,
-        public readonly bool $isInline = false,
+        public readonly TagPlacement $placement = TagPlacement::DEFAULT,
     ) {}
 
     public function __toString(): string

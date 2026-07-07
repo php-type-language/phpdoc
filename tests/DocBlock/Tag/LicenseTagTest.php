@@ -10,7 +10,8 @@ use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTag;
 use TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class LicenseTagTest extends TestCase
@@ -52,14 +53,13 @@ final class LicenseTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                LicenseTagDefinition::NAME => new LicenseTagDefinition(),
-            ],
-            combinators: [
-                UrlCombinator::NAME => new UrlCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            LicenseTagDefinition::NAME => new LicenseTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            UrlCombinator::NAME => new UrlCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

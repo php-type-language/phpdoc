@@ -11,7 +11,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class SuppressTagTest extends TestCase
@@ -60,14 +61,13 @@ final class SuppressTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                SuppressTagDefinition::NAME => new SuppressTagDefinition(),
-            ],
-            combinators: [
-                IssueNameCombinator::NAME => new IssueNameCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            SuppressTagDefinition::NAME => new SuppressTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            IssueNameCombinator::NAME => new IssueNameCombinator(),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

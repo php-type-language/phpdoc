@@ -17,7 +17,8 @@ use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Grammar;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 
 final class DefinitionTest extends TestCase
@@ -125,10 +126,9 @@ final class DefinitionTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: ['link' => new LinkTagDefinition()],
-            combinators: self::grammar(),
-        );
+        $registry = new TagRegistry(['link' => new LinkTagDefinition()]);
+
+        return new TagFactory($registry, self::grammar());
     }
 
     /**

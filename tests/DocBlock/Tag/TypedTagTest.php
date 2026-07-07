@@ -23,7 +23,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTagInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
@@ -142,17 +143,16 @@ final class TypedTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        return new TagFactory(
-            definitions: [
-                ReturnTagDefinition::NAME => new ReturnTagDefinition(),
-                ThrowsTagDefinition::NAME => new ThrowsTagDefinition(),
-                MixinTagDefinition::NAME => new MixinTagDefinition(),
-                ExtendsTagDefinition::NAME => new ExtendsTagDefinition(),
-            ],
-            combinators: [
-                TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            ReturnTagDefinition::NAME => new ReturnTagDefinition(),
+            ThrowsTagDefinition::NAME => new ThrowsTagDefinition(),
+            MixinTagDefinition::NAME => new MixinTagDefinition(),
+            ExtendsTagDefinition::NAME => new ExtendsTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }

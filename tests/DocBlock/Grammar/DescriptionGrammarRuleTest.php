@@ -14,7 +14,8 @@ use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 
 final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
 {
@@ -22,15 +23,16 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
     {
         return new \ReflectionClass(DescriptionCombinator::class)
             ->newLazyProxy(function (DescriptionCombinator $proxy) {
+                $registry = new TagRegistry(
+                    genericTagDefinition: new GenericTagDefinition(),
+                );
+
                 return new DescriptionCombinator(
                     descriptionParser: new BalancedBraceAwareParser(
                         tagParser: new StringTagParser(
-                            tagFactory: new TagFactory(
-                                combinators: [
-                                    DescriptionCombinator::NAME => $proxy,
-                                ],
-                                genericTagDefinition: new GenericTagDefinition(isInline: true),
-                            ),
+                            tagFactory: new TagFactory($registry, [
+                                DescriptionCombinator::NAME => $proxy,
+                            ]),
                         ),
                     ),
                 );

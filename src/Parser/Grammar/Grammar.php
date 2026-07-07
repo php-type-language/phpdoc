@@ -26,7 +26,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Rule\MatchRule;
  * });
  * ```
  *
- * @phpstan-type CombinatorType callable(Cursor): mixed
+ * @phpstan-import-type CombinatorType from CombinatorInterface
  *
  * @template-implements \IteratorAggregate<non-empty-string, CombinatorType>
  */

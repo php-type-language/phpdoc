@@ -13,7 +13,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag;
 use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\TagFactory;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
 use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
@@ -70,15 +71,14 @@ final class MethodTagTest extends TestCase
     {
         $types = new TypeCombinator(new TypeParser());
 
-        return new TagFactory(
-            definitions: [
-                MethodTagDefinition::NAME => new MethodTagDefinition(),
-            ],
-            combinators: [
-                TypeCombinator::NAME => $types,
-                CallableTypeCombinator::NAME => new CallableTypeCombinator($types),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        $registry = new TagRegistry([
+            MethodTagDefinition::NAME => new MethodTagDefinition(),
+        ]);
+
+        return new TagFactory($registry, [
+            TypeCombinator::NAME => $types,
+            CallableTypeCombinator::NAME => new CallableTypeCombinator($types),
+            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
+        ]);
     }
 }
