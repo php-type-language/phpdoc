@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Reads an author name, that is everything up to an optional "<email>".
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class AuthorNameCombinator implements CombinatorInterface
 {

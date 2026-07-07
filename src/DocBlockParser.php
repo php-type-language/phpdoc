@@ -40,28 +40,35 @@ final readonly class DocBlockParser implements DocBlockParserInterface
     private DescriptionParserInterface $descriptionParser;
 
     /**
-     * @param iterable<PlatformInterface> $platforms additional platforms that
-     *        extend the always-present {@see StandardPlatform}
+     * @param iterable<PlatformInterface> $platforms additional tag platforms
      */
     public function __construct(iterable $platforms = [])
     {
-        // The standard platform is always loaded first; the caller's platforms
-        // extend it, overriding an entry when they reuse its name.
-        $all = [new StandardPlatform()];
+        $platforms = $this->loadPlatforms($platforms);
 
-        foreach ($platforms as $platform) {
-            $all[] = $platform;
-        }
+        $this->tags = $this->createTagRegistry($platforms);
+        $this->factory = $this->createTagFactory($this->tags, $this->createCombinators($platforms));
 
-        $this->docBlockAnalyzer = $this->createAnalyzer(
-            splitter: $this->createDocBlockSplitter(),
-        );
-
-        $this->tags = $this->createTagRegistry($all);
-        $this->factory = $this->createTagFactory($this->tags, $this->createCombinators($all));
-
+        $this->docBlockAnalyzer = $this->createAnalyzer($this->createDocBlockSplitter());
         $this->tagParser = $this->createTagParser($this->factory);
         $this->descriptionParser = $this->createDescriptionParser($this->tagParser);
+    }
+
+    /**
+     * @param iterable<mixed, PlatformInterface> $platforms
+     * @return non-empty-list<PlatformInterface>
+     */
+    private function loadPlatforms(iterable $platforms): array
+    {
+        // The standard platform is always loaded first; the caller's platforms
+        // extend it, overriding an entry when they reuse its name.
+        $result = [new StandardPlatform()];
+
+        foreach ($platforms as $platform) {
+            $result[] = $platform;
+        }
+
+        return $result;
     }
 
     private function createAnalyzer(SplitterInterface $splitter): DocBlockAnalyzer

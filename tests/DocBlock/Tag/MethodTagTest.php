@@ -69,14 +69,14 @@ final class MethodTagTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        $types = new TypeCombinator(new TypeParser());
+        $types = new TypeParser();
 
         $registry = new TagRegistry([
             MethodTagDefinition::NAME => new MethodTagDefinition(),
         ]);
 
         return new TagFactory($registry, [
-            TypeCombinator::NAME => $types,
+            TypeCombinator::NAME => new TypeCombinator($types),
             CallableTypeCombinator::NAME => new CallableTypeCombinator($types),
             DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
         ]);

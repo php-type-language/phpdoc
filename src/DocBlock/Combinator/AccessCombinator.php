@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * Reads an access level, that is one of the "public", "protected" or
  * "private" keywords.
  *
- * @implements CombinatorInterface<Visibility>
+ * @template-implements CombinatorInterface<Visibility>
  */
 final readonly class AccessCombinator implements CombinatorInterface
 {

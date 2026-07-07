@@ -13,7 +13,7 @@ use Uri\Rfc3986\Uri;
 /**
  * Reads a URI, that is a well-formed word as defined by RFC 3986.
  *
- * @implements CombinatorInterface<UriReference>
+ * @template-implements CombinatorInterface<UriReference>
  */
 final readonly class UriCombinator implements CombinatorInterface
 {

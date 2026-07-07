@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Reads a variable ("$name") and returns its name without the leading "$".
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class VariableCombinator implements CombinatorInterface
 {

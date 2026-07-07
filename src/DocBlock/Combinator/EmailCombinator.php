@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Reads an email address up to its closing ">".
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class EmailCombinator implements CombinatorInterface
 {

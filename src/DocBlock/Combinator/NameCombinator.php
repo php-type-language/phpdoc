@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Reads a template parameter name, that is a single identifier.
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class NameCombinator implements CombinatorInterface
 {

@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * Reads a version number, that is a word beginning with a digit. Anything that
  * does not begin with a digit is left for the following description.
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class VersionCombinator implements CombinatorInterface
 {

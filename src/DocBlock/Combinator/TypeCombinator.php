@@ -16,9 +16,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * The result pairs the parsed type with the source text it was read from.
  *
- * @implements CombinatorInterface<TypeReference>
+ * @template-implements CombinatorInterface<TypeReference>
  */
-final readonly class TypeCombinator implements CombinatorInterface
+readonly class TypeCombinator implements CombinatorInterface
 {
     public const string NAME = 'Type';
 

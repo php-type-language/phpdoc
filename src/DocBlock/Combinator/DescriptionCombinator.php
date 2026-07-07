@@ -17,7 +17,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * There is nothing to read when only whitespace is left, so wrap it in
  * {@see OptionalityRule} to make the description optional.
  *
- * @implements CombinatorInterface<DescriptionInterface>
+ * @template-implements CombinatorInterface<DescriptionInterface>
  */
 final readonly class DescriptionCombinator implements CombinatorInterface
 {

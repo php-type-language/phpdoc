@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Reads a non-negative integer.
  *
- * @implements CombinatorInterface<int<0, max>>
+ * @template-implements CombinatorInterface<int<0, max>>
  */
 final readonly class IntegerCombinator implements CombinatorInterface
 {

@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * A word without a scheme is not a URL and is left for the following
  * combinators.
  *
- * @implements CombinatorInterface<UrlReference>
+ * @template-implements CombinatorInterface<UrlReference>
  */
 final readonly class UrlCombinator implements CombinatorInterface
 {

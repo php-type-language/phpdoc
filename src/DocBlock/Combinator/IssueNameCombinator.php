@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * Reads an issue identifier, that is a run of letters, digits, underscores,
  * dashes and dots.
  *
- * @implements CombinatorInterface<non-empty-string>
+ * @template-implements CombinatorInterface<non-empty-string>
  */
 final readonly class IssueNameCombinator implements CombinatorInterface
 {
