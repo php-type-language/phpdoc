@@ -23,6 +23,7 @@ use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
 use TypeLang\PhpDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistry;
+use TypeLang\PhpDoc\Platform\PhpDocumentorPlatform;
 use TypeLang\PhpDoc\Platform\PlatformInterface;
 use TypeLang\PhpDoc\Platform\StandardPlatform;
 
@@ -42,7 +43,9 @@ final readonly class DocBlockParser implements DocBlockParserInterface
     /**
      * @param iterable<PlatformInterface> $platforms additional tag platforms
      */
-    public function __construct(iterable $platforms = [])
+    public function __construct(iterable $platforms = [
+        new PhpDocumentorPlatform(),
+    ])
     {
         $platforms = $this->loadPlatforms($platforms);
 
