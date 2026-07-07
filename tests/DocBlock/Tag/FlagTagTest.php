@@ -10,8 +10,12 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTag;
 use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FlagTagInterface;
+use TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTag;
+use TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTag;
+use TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
@@ -58,6 +62,8 @@ final class FlagTagTest extends TestCase
         yield '@abstract' => ['abstract', AbstractTag::class];
         yield '@internal' => ['internal', InternalTag::class];
         yield '@todo' => ['todo', TodoTag::class];
+        yield '@immutable' => ['immutable', ImmutableTag::class];
+        yield '@not-deprecated' => ['not-deprecated', NotDeprecatedTag::class];
     }
 
     /**
@@ -80,6 +86,8 @@ final class FlagTagTest extends TestCase
             AbstractTagDefinition::NAME => new AbstractTagDefinition(),
             InternalTagDefinition::NAME => new InternalTagDefinition(),
             TodoTagDefinition::NAME => new TodoTagDefinition(),
+            ImmutableTagDefinition::NAME => new ImmutableTagDefinition(),
+            NotDeprecatedTagDefinition::NAME => new NotDeprecatedTagDefinition(),
         ]);
 
         return new TagFactory($registry, [

@@ -20,6 +20,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTagDefinition;
@@ -28,6 +29,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamClosureThisTag\ParamClosureThisTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTagDefinition;
@@ -106,15 +108,15 @@ final class StandardPlatform implements PlatformInterface
             NoNamedArgumentsTagDefinition::NAME => new NoNamedArgumentsTagDefinition(),
             OverrideTagDefinition::NAME => new OverrideTagDefinition(),
             ReadonlyTagDefinition::NAME => new ReadonlyTagDefinition(),
+            ImmutableTagDefinition::NAME => new ImmutableTagDefinition(),
             SealMethodsTagDefinition::NAME => new SealMethodsTagDefinition(),
             SealPropertiesTagDefinition::NAME => new SealPropertiesTagDefinition(),
             PureUnlessCallableIsImpureTagDefinition::NAME => new PureUnlessCallableIsImpureTagDefinition(),
-            TodoTagDefinition::NAME => new TodoTagDefinition(),
-            VersionTagDefinition::NAME => new VersionTagDefinition(),
             TemplateTagDefinition::NAME => new TemplateTagDefinition(),
             TemplateCovariantTagDefinition::NAME => new TemplateCovariantTagDefinition(),
             TemplateContravariantTagDefinition::NAME => new TemplateContravariantTagDefinition(),
             DeprecatedTagDefinition::NAME => new DeprecatedTagDefinition(),
+            NotDeprecatedTagDefinition::NAME => new NotDeprecatedTagDefinition(),
             VarTagDefinition::NAME => new VarTagDefinition(),
             SuppressTagDefinition::NAME => new SuppressTagDefinition(),
             MethodTagDefinition::NAME => new MethodTagDefinition(),

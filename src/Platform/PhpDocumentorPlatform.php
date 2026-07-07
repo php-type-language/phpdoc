@@ -24,8 +24,10 @@ use TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SubpackageTag\SubpackageTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\UsedByTag\UsedByTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 
@@ -69,8 +71,10 @@ final class PhpDocumentorPlatform extends Platform
             StaticTagDefinition::NAME => new StaticTagDefinition(),
             StaticVarTagDefinition::NAME => new StaticVarTagDefinition(),
             SubpackageTagDefinition::NAME => new SubpackageTagDefinition(),
+            TodoTagDefinition::NAME => new TodoTagDefinition(),
             UsedByTagDefinition::NAME => new UsedByTagDefinition(),
             UsesTagDefinition::NAME => new UsesTagDefinition(),
+            VersionTagDefinition::NAME => new VersionTagDefinition(),
         ];
     }
 
