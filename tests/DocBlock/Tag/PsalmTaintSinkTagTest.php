@@ -5,23 +5,33 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
+use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSinkTag\PsalmTaintSinkTag;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class PsalmTaintSinkTagTest extends TestCase
+final class PsalmTaintSinkTagTest extends TagTestCase
 {
     #[Test]
-    public function parsesNameAndVariable(): void
+    public function parsesTaintTypeAndVariable(): void
     {
-        $block = new DocBlockParser()->parse('/** @psalm-taint-sink html $output */');
+        $tag = self::parseTag('@psalm-taint-sink html $output');
 
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf(PsalmTaintSinkTag::class, $block->tags[0]);
-        self::assertSame('psalm-taint-sink', $block->tags[0]->name);
-        self::assertSame('html', $block->tags[0]->taint);
-        self::assertSame('output', $block->tags[0]->variable);
-        self::assertNull($block->tags[0]->description);
-        self::assertSame('@psalm-taint-sink html $output', (string) $block->tags[0]);
+        self::assertInstanceOf(PsalmTaintSinkTag::class, $tag);
+        self::assertSame('psalm-taint-sink', $tag->name);
+        self::assertSame('html', $tag->taint);
+        self::assertSame('output', $tag->variable);
+        self::assertNull($tag->description);
+        self::assertSame('@psalm-taint-sink html $output', (string) $tag);
+    }
+
+    #[Test]
+    public function rejectsMissingVariable(): void
+    {
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@psalm-taint-sink html'));
+    }
+
+    #[Test]
+    public function rejectsEmptyBody(): void
+    {
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@psalm-taint-sink'));
     }
 }

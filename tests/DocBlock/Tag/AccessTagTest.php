@@ -5,25 +5,19 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTag;
-use TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class AccessTagTest extends TestCase
+final class AccessTagTest extends TagTestCase
 {
     #[Test]
     public function parsesVisibilityAndDescription(): void
     {
-        $tag = self::factory()->create('access', 'protected Internal API.');
+        $tag = self::parseTag('@access protected Internal API.');
 
         self::assertInstanceOf(AccessTag::class, $tag);
+        self::assertSame('access', $tag->name);
         self::assertSame(Visibility::Protected, $tag->access);
         self::assertSame('Internal API.', (string) $tag->description);
         self::assertSame('@access protected Internal API.', (string) $tag);
@@ -32,7 +26,7 @@ final class AccessTagTest extends TestCase
     #[Test]
     public function parsesVisibilityOnly(): void
     {
-        $tag = self::factory()->create('access', 'private');
+        $tag = self::parseTag('@access private');
 
         self::assertInstanceOf(AccessTag::class, $tag);
         self::assertSame(Visibility::Private, $tag->access);
@@ -41,34 +35,23 @@ final class AccessTagTest extends TestCase
     }
 
     #[Test]
-    public function rejectsUnknownVisibility(): void
+    public function parsesPublicVisibility(): void
     {
-        $tag = self::factory()->create('access', 'package');
+        $tag = self::parseTag('@access public');
 
-        self::assertInstanceOf(InvalidTag::class, $tag);
+        self::assertInstanceOf(AccessTag::class, $tag);
+        self::assertSame(Visibility::Public, $tag->access);
     }
 
     #[Test]
-    public function resolvesThroughTheRealParser(): void
+    public function rejectsUnknownVisibility(): void
     {
-        $block = new DocBlockParser()->parse('/** @access public */');
-
-        self::assertInstanceOf(AccessTag::class, $block->tags[0]);
-        self::assertSame(Visibility::Public, $block->tags[0]->access);
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@access package'));
     }
 
-    private static function factory(): TagFactory
+    #[Test]
+    public function rejectsMissingVisibility(): void
     {
-        $registry = new TagRegistry([
-            AccessTagDefinition::NAME => new AccessTagDefinition(),
-        ]);
-
-        return new TagFactory(
-            $registry,
-            [
-                VisibilityCombinator::NAME => new VisibilityCombinator(),
-                DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-            ],
-        );
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@access'));
     }
 }

@@ -6,31 +6,22 @@ namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTag;
-use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamInvokedCallableTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTag;
-use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmAssertUntaintedTag\PsalmAssertUntaintedTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTag;
 use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTag;
-use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VariableTagInterface;
-use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class VariableTagTest extends TestCase
+final class VariableTagTest extends TagTestCase
 {
     #[Test]
     public function parsesVariableWithDescription(): void
     {
-        $tag = self::factory()->create('param-immediately-invoked-callable', '$callback Runs during the call.');
+        $tag = self::parseTag('@param-immediately-invoked-callable $callback Runs during the call.');
 
         self::assertInstanceOf(ParamImmediatelyInvokedCallableTag::class, $tag);
         self::assertInstanceOf(VariableTagInterface::class, $tag);
@@ -43,7 +34,7 @@ final class VariableTagTest extends TestCase
     #[Test]
     public function parsesVariableWithoutDescription(): void
     {
-        $tag = self::factory()->create('unused-param', '$context');
+        $tag = self::parseTag('@unused-param $context');
 
         self::assertInstanceOf(UnusedParamTag::class, $tag);
         self::assertSame('context', $tag->variable);
@@ -54,8 +45,8 @@ final class VariableTagTest extends TestCase
     #[Test]
     public function invokedCallableTagsShareACommonBase(): void
     {
-        $immediately = self::factory()->create('param-immediately-invoked-callable', '$a');
-        $later = self::factory()->create('param-later-invoked-callable', '$b');
+        $immediately = self::parseTag('@param-immediately-invoked-callable $a');
+        $later = self::parseTag('@param-later-invoked-callable $b');
 
         self::assertInstanceOf(ParamInvokedCallableTag::class, $immediately);
         self::assertInstanceOf(ParamInvokedCallableTag::class, $later);
@@ -63,18 +54,33 @@ final class VariableTagTest extends TestCase
     }
 
     #[Test]
-    public function missingRequiredVariableProducesInvalidTag(): void
+    public function rejectsMissingVariable(): void
     {
-        $tag = self::factory()->create('unused-param', '');
+        $tag = self::parseTag('@unused-param');
 
         self::assertInstanceOf(InvalidTag::class, $tag);
         self::assertInstanceOf(MalformedTagException::class, $tag->reason);
     }
 
     /**
-     * @return iterable<string, array{string, class-string<VariableTagInterface>}>
+     * @param class-string<VariableTagInterface> $expected
      */
-    public static function tagProvider(): iterable
+    #[Test]
+    #[DataProvider('variableTagProvider')]
+    public function variableTagIsRecognized(string $name, string $expected): void
+    {
+        $tag = self::parseTag(\sprintf('@%s $x', $name));
+
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(VariableTagInterface::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame('x', $tag->variable);
+    }
+
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<VariableTagInterface>}>
+     */
+    public static function variableTagProvider(): iterable
     {
         yield '@param-immediately-invoked-callable' => [
             'param-immediately-invoked-callable',
@@ -87,34 +93,5 @@ final class VariableTagTest extends TestCase
         yield '@unused-param' => ['unused-param', UnusedParamTag::class];
         yield '@psalm-assert-untainted' => ['psalm-assert-untainted', PsalmAssertUntaintedTag::class];
         yield '@psalm-trace' => ['psalm-trace', PsalmTraceTag::class];
-    }
-
-    /**
-     * @param class-string<VariableTagInterface> $expected
-     */
-    #[Test]
-    #[DataProvider('tagProvider')]
-    public function tagResolvesThroughTheRealParser(string $name, string $expected): void
-    {
-        $block = new DocBlockParser()->parse(\sprintf('/** @%s $x */', $name));
-
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf($expected, $block->tags[0]);
-        self::assertSame($name, $block->tags[0]->name);
-        self::assertSame('x', $block->tags[0]->variable);
-    }
-
-    private static function factory(): TagFactory
-    {
-        $registry = new TagRegistry([
-            ParamImmediatelyInvokedCallableTagDefinition::NAME => new ParamImmediatelyInvokedCallableTagDefinition(),
-            ParamLaterInvokedCallableTagDefinition::NAME => new ParamLaterInvokedCallableTagDefinition(),
-            UnusedParamTagDefinition::NAME => new UnusedParamTagDefinition(),
-        ]);
-
-        return new TagFactory($registry, [
-            VariableCombinator::NAME => new VariableCombinator(),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
     }
 }

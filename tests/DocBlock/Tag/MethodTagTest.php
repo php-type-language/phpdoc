@@ -5,27 +5,19 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\Parser\TypeParser;
-use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag;
-use TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
-final class MethodTagTest extends TestCase
+final class MethodTagTest extends TagTestCase
 {
     #[Test]
     public function parsesCallableCarryingItsOwnReturnType(): void
     {
-        $tag = self::factory()->create('method', 'foo(T $t): void An optional description.');
+        $tag = self::parseTag('@method foo(T $t): void An optional description.');
 
         self::assertInstanceOf(MethodTag::class, $tag);
+        self::assertSame('method', $tag->name);
         self::assertSame('foo', (string) $tag->method->name);
         self::assertFalse($tag->isStatic);
         self::assertNotNull($tag->method->type);
@@ -36,7 +28,7 @@ final class MethodTagTest extends TestCase
     #[Test]
     public function parsesLeadingReturnTypeAndStatic(): void
     {
-        $tag = self::factory()->create('method', 'static ReturnType bar(U $u) An optional description.');
+        $tag = self::parseTag('@method static ReturnType bar(U $u) An optional description.');
 
         self::assertInstanceOf(MethodTag::class, $tag);
         self::assertSame('bar', (string) $tag->method->name);
@@ -48,34 +40,19 @@ final class MethodTagTest extends TestCase
     }
 
     #[Test]
-    public function rejectsNonCallableSignature(): void
+    public function parsesInstanceMethodWithoutDescription(): void
     {
-        $tag = self::factory()->create('method', 'JustAType');
+        $tag = self::parseTag('@method self withValue(mixed $value)');
 
-        self::assertInstanceOf(InvalidTag::class, $tag);
+        self::assertInstanceOf(MethodTag::class, $tag);
+        self::assertSame('withValue', (string) $tag->method->name);
+        self::assertFalse($tag->isStatic);
+        self::assertNull($tag->description);
     }
 
     #[Test]
-    public function resolvesThroughTheRealParser(): void
+    public function rejectsNonCallableSignature(): void
     {
-        $block = new DocBlockParser()->parse('/** @method self withValue(mixed $value) */');
-
-        self::assertInstanceOf(MethodTag::class, $block->tags[0]);
-        self::assertSame('withValue', (string) $block->tags[0]->method->name);
-    }
-
-    private static function factory(): TagFactory
-    {
-        $types = new TypeParser();
-
-        $registry = new TagRegistry([
-            MethodTagDefinition::NAME => new MethodTagDefinition(),
-        ]);
-
-        return new TagFactory($registry, [
-            TypeCombinator::NAME => new TypeCombinator($types),
-            CallableTypeCombinator::NAME => new CallableTypeCombinator($types),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@method JustAType'));
     }
 }

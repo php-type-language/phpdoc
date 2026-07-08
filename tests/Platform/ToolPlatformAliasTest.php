@@ -20,7 +20,7 @@ final class ToolPlatformAliasTest extends TestCase
     #[DataProvider('phanProvider')]
     public function aliasResolvesToCanonicalTag(string $alias, string $canonical): void
     {
-        $registry = new DocBlockParser()->tags;
+        $registry = DocBlockParser::createDefault()->tags;
 
         self::assertSame(
             $canonical,
@@ -32,7 +32,7 @@ final class ToolPlatformAliasTest extends TestCase
     #[Test]
     public function typedAliasKeepsItsWrittenName(): void
     {
-        $block = new DocBlockParser()->parse('/** @psalm-param int $value */');
+        $block = DocBlockParser::createDefault()->parse('/** @psalm-param int $value */');
 
         self::assertInstanceOf(ParamTag::class, $block->tags[0]);
         self::assertSame('psalm-param', $block->tags[0]->name);
@@ -41,7 +41,7 @@ final class ToolPlatformAliasTest extends TestCase
     #[Test]
     public function flagAliasKeepsItsWrittenName(): void
     {
-        $block = new DocBlockParser()->parse('/** @phan-abstract */');
+        $block = DocBlockParser::createDefault()->parse('/** @phan-abstract */');
 
         self::assertInstanceOf(AbstractTag::class, $block->tags[0]);
         self::assertSame('phan-abstract', $block->tags[0]->name);
@@ -50,7 +50,7 @@ final class ToolPlatformAliasTest extends TestCase
     #[Test]
     public function typedAliasWithoutPrefixCollisionResolves(): void
     {
-        $block = new DocBlockParser()->parse('/** @phpstan-throws \RuntimeException */');
+        $block = DocBlockParser::createDefault()->parse('/** @phpstan-throws \RuntimeException */');
 
         self::assertInstanceOf(ThrowsTag::class, $block->tags[0]);
         self::assertSame('phpstan-throws', $block->tags[0]->name);

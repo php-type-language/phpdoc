@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\Parser\TypeParser;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag;
-use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TypeParameterTag;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class TemplateTagTest extends TestCase
+final class TemplateTagTest extends TagTestCase
 {
     #[Test]
     public function parsesNameBoundDefaultAndDescription(): void
     {
-        $tag = self::factory()->create('template', 'T of \Countable = array The item type.');
+        $tag = self::parseTag('@template T of \Countable = array The item type.');
 
         self::assertInstanceOf(TemplateTag::class, $tag);
         self::assertInstanceOf(TypeParameterTag::class, $tag);
@@ -41,7 +33,7 @@ final class TemplateTagTest extends TestCase
     #[Test]
     public function parsesBareName(): void
     {
-        $tag = self::factory()->create('template', 'TValue');
+        $tag = self::parseTag('@template TValue');
 
         self::assertInstanceOf(TemplateTag::class, $tag);
         self::assertSame('TValue', $tag->parameter);
@@ -54,7 +46,7 @@ final class TemplateTagTest extends TestCase
     #[Test]
     public function parsesBoundWithoutDefault(): void
     {
-        $tag = self::factory()->create('template', 'T of string');
+        $tag = self::parseTag('@template T of string');
 
         self::assertSame('T', $tag->parameter);
         self::assertSame('string', (string) $tag->bound);
@@ -64,7 +56,7 @@ final class TemplateTagTest extends TestCase
     #[Test]
     public function keywordRespectsWordBoundary(): void
     {
-        $tag = self::factory()->create('template', 'T offset from the base');
+        $tag = self::parseTag('@template T offset from the base');
 
         self::assertSame('T', $tag->parameter);
         self::assertNull($tag->bound);
@@ -72,32 +64,48 @@ final class TemplateTagTest extends TestCase
     }
 
     #[Test]
-    public function varianceTagsResolveThroughTheRealParser(): void
+    public function parsesVarianceTags(): void
     {
-        $block = new DocBlockParser()->parse(<<<'PHPDOC'
+        $tags = self::parseTags(<<<'PHPDOC'
             /**
              * @template-covariant T
              * @template-contravariant U of \Throwable
              */
             PHPDOC);
 
-        self::assertInstanceOf(TemplateCovariantTag::class, $block->tags[0]);
-        self::assertSame('template-covariant', $block->tags[0]->name);
-        self::assertInstanceOf(TemplateContravariantTag::class, $block->tags[1]);
-        self::assertSame('U', $block->tags[1]->parameter);
-        self::assertSame('\Throwable', (string) $block->tags[1]->bound);
+        self::assertInstanceOf(TemplateCovariantTag::class, $tags[0]);
+        self::assertSame('template-covariant', $tags[0]->name);
+        self::assertSame('T', $tags[0]->parameter);
+
+        self::assertInstanceOf(TemplateContravariantTag::class, $tags[1]);
+        self::assertSame('template-contravariant', $tags[1]->name);
+        self::assertSame('U', $tags[1]->parameter);
+        self::assertSame('\Throwable', (string) $tags[1]->bound);
     }
 
-    private static function factory(): TagFactory
+    /**
+     * @param class-string<TypeParameterTag> $expected
+     */
+    #[Test]
+    #[DataProvider('templateTagProvider')]
+    public function templateTagIsRecognized(string $name, string $expected): void
     {
-        $registry = new TagRegistry([
-            TemplateTagDefinition::NAME => new TemplateTagDefinition(),
-        ]);
+        $tag = self::parseTag(\sprintf('@%s T', $name));
 
-        return new TagFactory($registry, [
-            NameCombinator::NAME => new NameCombinator(),
-            TypeCombinator::NAME => new TypeCombinator(new TypeParser()),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(TypeParameterTag::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame('T', $tag->parameter);
+    }
+
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<TypeParameterTag>}>
+     */
+    public static function templateTagProvider(): iterable
+    {
+        yield '@template' => ['template', TemplateTag::class];
+        yield '@template-covariant' => ['template-covariant', TemplateCovariantTag::class];
+        yield '@template-contravariant' => ['template-contravariant', TemplateContravariantTag::class];
+        yield '@template-invariant is an alias of @template' => ['template-invariant', TemplateTag::class];
     }
 }

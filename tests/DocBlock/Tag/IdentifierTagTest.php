@@ -14,59 +14,58 @@ use TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTag;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class IdentifierTagTest extends TestCase
+final class IdentifierTagTest extends TagTestCase
 {
     #[Test]
     public function parsesIdentifierWithoutDescription(): void
     {
-        $block = new DocBlockParser()->parse('/** @language SQL */');
+        $tag = self::parseTag('@language SQL');
 
-        self::assertInstanceOf(LanguageTag::class, $block->tags[0]);
-        self::assertSame('SQL', $block->tags[0]->identifier);
-        self::assertNull($block->tags[0]->description);
-        self::assertSame('@language SQL', (string) $block->tags[0]);
+        self::assertInstanceOf(LanguageTag::class, $tag);
+        self::assertSame('language', $tag->name);
+        self::assertSame('SQL', $tag->identifier);
+        self::assertNull($tag->description);
+        self::assertSame('@language SQL', (string) $tag);
     }
 
     #[Test]
     public function parsesIdentifierWithDescription(): void
     {
-        $block = new DocBlockParser()->parse('/** @noinspection PhpUnusedParameterInspection kept for the interface */');
+        $tag = self::parseTag('@noinspection PhpUnusedParameterInspection kept for the interface');
 
-        self::assertInstanceOf(NoinspectionTag::class, $block->tags[0]);
-        self::assertSame('PhpUnusedParameterInspection', $block->tags[0]->identifier);
-        self::assertSame('kept for the interface', (string) $block->tags[0]->description);
-    }
-
-    /**
-     * @return iterable<string, array{string, class-string<IdentifierTag>}>
-     */
-    public static function tagProvider(): iterable
-    {
-        yield '@psalm-taint-escape' => ['psalm-taint-escape', PsalmTaintEscapeTag::class];
-        yield '@psalm-taint-source' => ['psalm-taint-source', PsalmTaintSourceTag::class];
-        yield '@psalm-taint-unescape' => ['psalm-taint-unescape', PsalmTaintUnescapeTag::class];
-        yield '@language' => ['language', LanguageTag::class];
-        yield '@noinspection' => ['noinspection', NoinspectionTag::class];
-        yield '@phpcsSuppress' => ['phpcsSuppress', PhpcsSuppressTag::class];
-        yield '@codingStandards' => ['codingStandards', CodingStandardsTag::class];
+        self::assertInstanceOf(NoinspectionTag::class, $tag);
+        self::assertSame('PhpUnusedParameterInspection', $tag->identifier);
+        self::assertSame('kept for the interface', (string) $tag->description);
+        self::assertSame('@noinspection PhpUnusedParameterInspection kept for the interface', (string) $tag);
     }
 
     /**
      * @param class-string<IdentifierTag> $expected
      */
     #[Test]
-    #[DataProvider('tagProvider')]
-    public function tagResolvesThroughTheRealParser(string $name, string $expected): void
+    #[DataProvider('identifierTagProvider')]
+    public function identifierTagIsRecognized(string $name, string $expected): void
     {
-        $block = new DocBlockParser()->parse(\sprintf('/** @%s Foo */', $name));
+        $tag = self::parseTag(\sprintf('@%s Foo', $name));
 
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf($expected, $block->tags[0]);
-        self::assertInstanceOf(IdentifierTag::class, $block->tags[0]);
-        self::assertSame($name, $block->tags[0]->name);
-        self::assertSame('Foo', $block->tags[0]->identifier);
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(IdentifierTag::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame('Foo', $tag->identifier);
+    }
+
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<IdentifierTag>}>
+     */
+    public static function identifierTagProvider(): iterable
+    {
+        yield '@language' => ['language', LanguageTag::class];
+        yield '@noinspection' => ['noinspection', NoinspectionTag::class];
+        yield '@phpcsSuppress' => ['phpcsSuppress', PhpcsSuppressTag::class];
+        yield '@codingStandards' => ['codingStandards', CodingStandardsTag::class];
+        yield '@psalm-taint-escape' => ['psalm-taint-escape', PsalmTaintEscapeTag::class];
+        yield '@psalm-taint-source' => ['psalm-taint-source', PsalmTaintSourceTag::class];
+        yield '@psalm-taint-unescape' => ['psalm-taint-unescape', PsalmTaintUnescapeTag::class];
     }
 }

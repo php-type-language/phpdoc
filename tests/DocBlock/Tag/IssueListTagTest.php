@@ -6,8 +6,6 @@ namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\IssueListTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTag;
@@ -17,20 +15,16 @@ use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNex
 use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTag;
 use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreTag\PhpStanIgnoreTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag;
-use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class SuppressTagTest extends TestCase
+final class IssueListTagTest extends TagTestCase
 {
     #[Test]
     public function parsesSingleIssue(): void
     {
-        $tag = self::factory()->create('suppress', 'PhanUnreferencedClass');
+        $tag = self::parseTag('@suppress PhanUnreferencedClass');
 
         self::assertInstanceOf(SuppressTag::class, $tag);
+        self::assertSame('suppress', $tag->name);
         self::assertSame(['PhanUnreferencedClass'], $tag->issues);
         self::assertNull($tag->description);
         self::assertSame('@suppress PhanUnreferencedClass', (string) $tag);
@@ -39,7 +33,7 @@ final class SuppressTagTest extends TestCase
     #[Test]
     public function parsesIssueListAndDescription(): void
     {
-        $tag = self::factory()->create('suppress', 'PHPStan.method.notFound, psalm-var, a.b-c_d Explanation goes here.');
+        $tag = self::parseTag('@suppress PHPStan.method.notFound, psalm-var, a.b-c_d Explanation goes here.');
 
         self::assertInstanceOf(SuppressTag::class, $tag);
         self::assertSame(['PHPStan.method.notFound', 'psalm-var', 'a.b-c_d'], $tag->issues);
@@ -53,24 +47,28 @@ final class SuppressTagTest extends TestCase
     #[Test]
     public function rejectsMissingIssue(): void
     {
-        $tag = self::factory()->create('suppress', '');
-
-        self::assertInstanceOf(InvalidTag::class, $tag);
-    }
-
-    #[Test]
-    public function resolvesThroughTheRealParser(): void
-    {
-        $block = new DocBlockParser()->parse('/** @suppress PhanTypeMismatch, PhanUnusedVariable */');
-
-        self::assertInstanceOf(SuppressTag::class, $block->tags[0]);
-        self::assertSame(['PhanTypeMismatch', 'PhanUnusedVariable'], $block->tags[0]->issues);
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@suppress'));
     }
 
     /**
-     * @return iterable<string, array{string, class-string<IssueListTag>}>
+     * @param class-string<IssueListTag> $expected
      */
-    public static function tagProvider(): iterable
+    #[Test]
+    #[DataProvider('issueListTagProvider')]
+    public function issueListTagIsRecognized(string $name, string $expected): void
+    {
+        $tag = self::parseTag(\sprintf('@%s Foo.Bar, Baz', $name));
+
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(IssueListTag::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame(['Foo.Bar', 'Baz'], $tag->issues);
+    }
+
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<IssueListTag>}>
+     */
+    public static function issueListTagProvider(): iterable
     {
         yield '@suppress' => ['suppress', SuppressTag::class];
         yield '@phpstan-ignore' => ['phpstan-ignore', PhpStanIgnoreTag::class];
@@ -79,33 +77,5 @@ final class SuppressTagTest extends TestCase
         yield '@phan-suppress-next-line' => ['phan-suppress-next-line', PhanSuppressNextLineTag::class];
         yield '@phan-suppress-next-next-line' => ['phan-suppress-next-next-line', PhanSuppressNextNextLineTag::class];
         yield '@phan-suppress-previous-line' => ['phan-suppress-previous-line', PhanSuppressPreviousLineTag::class];
-    }
-
-    /**
-     * @param class-string<IssueListTag> $expected
-     */
-    #[Test]
-    #[DataProvider('tagProvider')]
-    public function issueListTagResolvesThroughTheRealParser(string $name, string $expected): void
-    {
-        $block = new DocBlockParser()->parse(\sprintf('/** @%s Foo.Bar, Baz */', $name));
-
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf($expected, $block->tags[0]);
-        self::assertInstanceOf(IssueListTag::class, $block->tags[0]);
-        self::assertSame($name, $block->tags[0]->name);
-        self::assertSame(['Foo.Bar', 'Baz'], $block->tags[0]->issues);
-    }
-
-    private static function factory(): TagFactory
-    {
-        $registry = new TagRegistry([
-            SuppressTagDefinition::NAME => new SuppressTagDefinition(),
-        ]);
-
-        return new TagFactory($registry, [
-            IssueNameCombinator::NAME => new IssueNameCombinator(),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
     }
 }

@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTag;
-use TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTag;
-use TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VersionedTagInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTag;
-use TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTagDefinition;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class VersionedTagTest extends TestCase
+final class VersionedTagTest extends TagTestCase
 {
     #[Test]
     public function parsesVersionAndDescription(): void
     {
-        $tag = self::factory()->create('since', '8.0.0 Available on modern runtimes.');
+        $tag = self::parseTag('@since 8.0.0 Available on modern runtimes.');
 
         self::assertInstanceOf(SinceTag::class, $tag);
         self::assertInstanceOf(VersionedTagInterface::class, $tag);
@@ -37,7 +29,7 @@ final class VersionedTagTest extends TestCase
     #[Test]
     public function bodyWithoutVersionIsAllDescription(): void
     {
-        $tag = self::factory()->create('deprecated', 'Use the new API instead.');
+        $tag = self::parseTag('@deprecated Use the new API instead.');
 
         self::assertInstanceOf(DeprecatedTag::class, $tag);
         self::assertNull($tag->version);
@@ -46,9 +38,20 @@ final class VersionedTagTest extends TestCase
     }
 
     #[Test]
+    public function parsesVersionWithoutDescription(): void
+    {
+        $tag = self::parseTag('@deprecated 1.0.0');
+
+        self::assertInstanceOf(DeprecatedTag::class, $tag);
+        self::assertSame('1.0.0', $tag->version);
+        self::assertNull($tag->description);
+        self::assertSame('@deprecated 1.0.0', (string) $tag);
+    }
+
+    #[Test]
     public function emptyBodyHasNeitherVersionNorDescription(): void
     {
-        $tag = self::factory()->create('version', '');
+        $tag = self::parseTag('@version');
 
         self::assertInstanceOf(VersionTag::class, $tag);
         self::assertNull($tag->version);
@@ -56,27 +59,28 @@ final class VersionedTagTest extends TestCase
         self::assertSame('@version', (string) $tag);
     }
 
+    /**
+     * @param class-string<VersionedTagInterface> $expected
+     */
     #[Test]
-    public function resolvesThroughTheRealParser(): void
+    #[DataProvider('versionedTagProvider')]
+    public function versionedTagIsRecognized(string $name, string $expected): void
     {
-        $block = new DocBlockParser()->parse('/** @version 1.2.3 */');
+        $tag = self::parseTag(\sprintf('@%s 1.2.3', $name));
 
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf(VersionTag::class, $block->tags[0]);
-        self::assertSame('1.2.3', $block->tags[0]->version);
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(VersionedTagInterface::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame('1.2.3', $tag->version);
     }
 
-    private static function factory(): TagFactory
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<VersionedTagInterface>}>
+     */
+    public static function versionedTagProvider(): iterable
     {
-        $registry = new TagRegistry([
-            VersionTagDefinition::NAME => new VersionTagDefinition(),
-            SinceTagDefinition::NAME => new SinceTagDefinition(),
-            DeprecatedTagDefinition::NAME => new DeprecatedTagDefinition(),
-        ]);
-
-        return new TagFactory($registry, [
-            VersionCombinator::NAME => new VersionCombinator(),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
+        yield '@version' => ['version', VersionTag::class];
+        yield '@since' => ['since', SinceTag::class];
+        yield '@deprecated' => ['deprecated', DeprecatedTag::class];
     }
 }

@@ -5,24 +5,15 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\AuthorNameCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\EmailCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTag;
-use TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTagDefinition;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
-use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
+use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 
-final class AuthorTagTest extends TestCase
+final class AuthorTagTest extends TagTestCase
 {
     #[Test]
     public function parsesNameAndEmail(): void
     {
-        $tag = self::factory()->create('author', 'John Doe <john@example.com>');
+        $tag = self::parseTag('@author John Doe <john@example.com>');
 
         self::assertInstanceOf(AuthorTag::class, $tag);
         self::assertSame('author', $tag->name);
@@ -34,7 +25,7 @@ final class AuthorTagTest extends TestCase
     #[Test]
     public function parsesNameWithoutEmail(): void
     {
-        $tag = self::factory()->create('author', 'Jane Roe');
+        $tag = self::parseTag('@author Jane Roe');
 
         self::assertInstanceOf(AuthorTag::class, $tag);
         self::assertSame('Jane Roe', $tag->author);
@@ -43,34 +34,14 @@ final class AuthorTagTest extends TestCase
     }
 
     #[Test]
-    public function resolvesThroughTheRealParser(): void
+    public function rejectsEmailWithoutName(): void
     {
-        $block = new DocBlockParser()->parse('/** @author Kirill <k@example.com> */');
-
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf(AuthorTag::class, $block->tags[0]);
-        self::assertSame('k@example.com', $block->tags[0]->email);
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@author <john@example.com>'));
     }
 
-    private static function factory(): TagFactory
+    #[Test]
+    public function rejectsEmptyBody(): void
     {
-        $factory = new \ReflectionClass(TagFactory::class)
-            ->newLazyProxy(function () use (&$factory) {
-                $registry = new TagRegistry([
-                    AuthorTagDefinition::NAME => new AuthorTagDefinition(),
-                ]);
-
-                return new TagFactory($registry, [
-                    AuthorNameCombinator::NAME => new AuthorNameCombinator(),
-                    EmailCombinator::NAME => new EmailCombinator(),
-                    DescriptionCombinator::NAME => new DescriptionCombinator(
-                        new BalancedBraceAwareParser(
-                            new StringTagParser($factory)
-                        ),
-                    ),
-                ]);
-            });
-
-        return $factory;
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@author'));
     }
 }

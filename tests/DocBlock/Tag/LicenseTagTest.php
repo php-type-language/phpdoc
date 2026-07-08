@@ -5,21 +5,14 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use PHPUnit\Framework\Attributes\Test;
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTag;
-use TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTagDefinition;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
-use TypeLang\PhpDoc\Tests\TestCase;
 
-final class LicenseTagTest extends TestCase
+final class LicenseTagTest extends TagTestCase
 {
     #[Test]
-    public function parsesUrlForm(): void
+    public function parsesUrlAndDescription(): void
     {
-        $tag = self::factory()->create('license', 'https://opensource.org/licenses/MIT MIT License');
+        $tag = self::parseTag('@license https://opensource.org/licenses/MIT MIT License');
 
         self::assertInstanceOf(LicenseTag::class, $tag);
         self::assertSame('license', $tag->name);
@@ -29,34 +22,23 @@ final class LicenseTagTest extends TestCase
     }
 
     #[Test]
-    public function parsesNameForm(): void
+    public function parsesUrlOnly(): void
     {
-        $tag = self::factory()->create('license', 'MIT Permissive license.');
+        $tag = self::parseTag('@license https://example.com/license');
 
         self::assertInstanceOf(LicenseTag::class, $tag);
-        self::assertSame('MIT Permissive license.', (string) $tag->description);
-        self::assertSame('@license MIT Permissive license.', (string) $tag);
+        self::assertSame('https://example.com/license', (string) $tag->url);
+        self::assertNull($tag->description);
     }
 
     #[Test]
-    public function resolvesThroughTheRealParser(): void
+    public function parsesBareNameAsDescription(): void
     {
-        $block = new DocBlockParser()->parse('/** @license https://example.com/license */');
+        $tag = self::parseTag('@license MIT Permissive license.');
 
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf(LicenseTag::class, $block->tags[0]);
-        self::assertSame('https://example.com/license', (string) $block->tags[0]->url);
-    }
-
-    private static function factory(): TagFactory
-    {
-        $registry = new TagRegistry([
-            LicenseTagDefinition::NAME => new LicenseTagDefinition(),
-        ]);
-
-        return new TagFactory($registry, [
-            UrlCombinator::NAME => new UrlCombinator(),
-            DescriptionCombinator::NAME => new DescriptionCombinator(self::createDescriptionParser()),
-        ]);
+        self::assertInstanceOf(LicenseTag::class, $tag);
+        self::assertNull($tag->url);
+        self::assertSame('MIT Permissive license.', (string) $tag->description);
+        self::assertSame('@license MIT Permissive license.', (string) $tag);
     }
 }

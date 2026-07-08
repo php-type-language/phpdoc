@@ -9,56 +9,53 @@ use PHPUnit\Framework\Attributes\Test;
 use TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\CheckTypeTag;
 use TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeExactTag;
 use TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeTag;
-use TypeLang\PhpDoc\DocBlockParser;
-use TypeLang\PhpDoc\Tests\TestCase;
 use TypeLang\Type\NamedTypeNode;
 
-final class CheckTypeTagTest extends TestCase
+final class CheckTypeTagTest extends TagTestCase
 {
     #[Test]
     public function parsesVariableAndType(): void
     {
-        $block = new DocBlockParser()->parse('/** @psalm-check-type $foo = int */');
+        $tag = self::parseTag('@psalm-check-type $foo = int');
 
-        self::assertInstanceOf(PsalmCheckTypeTag::class, $block->tags[0]);
-        self::assertSame('psalm-check-type', $block->tags[0]->name);
-        self::assertSame('foo', $block->tags[0]->variable);
-        self::assertInstanceOf(NamedTypeNode::class, $block->tags[0]->type);
-        self::assertSame('@psalm-check-type $foo = int', (string) $block->tags[0]);
+        self::assertInstanceOf(PsalmCheckTypeTag::class, $tag);
+        self::assertSame('psalm-check-type', $tag->name);
+        self::assertSame('foo', $tag->variable);
+        self::assertInstanceOf(NamedTypeNode::class, $tag->type);
+        self::assertSame('@psalm-check-type $foo = int', (string) $tag);
     }
 
     #[Test]
     public function exactVariantIsADistinctClass(): void
     {
-        $block = new DocBlockParser()->parse('/** @psalm-check-type-exact $bar = int */');
+        $tag = self::parseTag('@psalm-check-type-exact $bar = int');
 
-        self::assertInstanceOf(PsalmCheckTypeExactTag::class, $block->tags[0]);
-        self::assertSame('@psalm-check-type-exact $bar = int', (string) $block->tags[0]);
-    }
-
-    /**
-     * @return iterable<string, array{string, class-string<CheckTypeTag>}>
-     */
-    public static function tagProvider(): iterable
-    {
-        yield '@psalm-check-type' => ['psalm-check-type', PsalmCheckTypeTag::class];
-        yield '@psalm-check-type-exact' => ['psalm-check-type-exact', PsalmCheckTypeExactTag::class];
+        self::assertInstanceOf(PsalmCheckTypeExactTag::class, $tag);
+        self::assertSame('@psalm-check-type-exact $bar = int', (string) $tag);
     }
 
     /**
      * @param class-string<CheckTypeTag> $expected
      */
     #[Test]
-    #[DataProvider('tagProvider')]
-    public function tagResolvesThroughTheRealParser(string $name, string $expected): void
+    #[DataProvider('checkTypeTagProvider')]
+    public function checkTypeTagIsRecognized(string $name, string $expected): void
     {
-        $block = new DocBlockParser()->parse(\sprintf('/** @%s $x = int */', $name));
+        $tag = self::parseTag(\sprintf('@%s $x = int', $name));
 
-        self::assertCount(1, $block->tags);
-        self::assertInstanceOf($expected, $block->tags[0]);
-        self::assertInstanceOf(CheckTypeTag::class, $block->tags[0]);
-        self::assertSame($name, $block->tags[0]->name);
-        self::assertSame('x', $block->tags[0]->variable);
-        self::assertInstanceOf(NamedTypeNode::class, $block->tags[0]->type);
+        self::assertInstanceOf($expected, $tag);
+        self::assertInstanceOf(CheckTypeTag::class, $tag);
+        self::assertSame($name, $tag->name);
+        self::assertSame('x', $tag->variable);
+        self::assertInstanceOf(NamedTypeNode::class, $tag->type);
+    }
+
+    /**
+     * @return iterable<string, array{non-empty-string, class-string<CheckTypeTag>}>
+     */
+    public static function checkTypeTagProvider(): iterable
+    {
+        yield '@psalm-check-type' => ['psalm-check-type', PsalmCheckTypeTag::class];
+        yield '@psalm-check-type-exact' => ['psalm-check-type-exact', PsalmCheckTypeExactTag::class];
     }
 }

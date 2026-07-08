@@ -48,16 +48,8 @@ final readonly class DocBlockParser implements DocBlockParserInterface
     /**
      * @param iterable<PlatformInterface> $platforms additional tag platforms
      */
-    public function __construct(
-        iterable $platforms = [
-            new PhpDocumentorPlatform(),
-            new PhpStanPlatform(),
-            new PsalmPlatform(),
-            new PhanPlatform(),
-            new PhpStormPlatform(),
-            new PhpCodeSnifferPlatform(),
-        ]
-    ) {
+    public function __construct(iterable $platforms = [])
+    {
         $platforms = $this->loadPlatforms($platforms);
 
         $this->tags = $this->createTagRegistry($platforms);
@@ -66,6 +58,18 @@ final readonly class DocBlockParser implements DocBlockParserInterface
         $this->docBlockAnalyzer = $this->createAnalyzer($this->createDocBlockSplitter());
         $this->tagParser = $this->createTagParser($this->factory);
         $this->descriptionParser = $this->createDescriptionParser($this->tagParser);
+    }
+
+    public static function createDefault(): self
+    {
+        return new self([
+            new PhpDocumentorPlatform(),
+            new PhpStanPlatform(),
+            new PsalmPlatform(),
+            new PhanPlatform(),
+            new PhpStormPlatform(),
+            new PhpCodeSnifferPlatform(),
+        ]);
     }
 
     /**
