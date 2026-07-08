@@ -82,6 +82,7 @@ final class ToolPlatformAliasTest extends TestCase
         yield '@psalm-template' => ['psalm-template', 'template'];
         yield '@psalm-template-contravariant' => ['psalm-template-contravariant', 'template-contravariant'];
         yield '@psalm-template-covariant' => ['psalm-template-covariant', 'template-covariant'];
+        yield '@psalm-this-out' => ['psalm-this-out', 'self-out'];
         yield '@psalm-use' => ['psalm-use', 'use'];
         yield '@psalm-var' => ['psalm-var', 'var'];
     }
@@ -111,6 +112,7 @@ final class ToolPlatformAliasTest extends TestCase
         yield '@phpstan-template' => ['phpstan-template', 'template'];
         yield '@phpstan-template-contravariant' => ['phpstan-template-contravariant', 'template-contravariant'];
         yield '@phpstan-template-covariant' => ['phpstan-template-covariant', 'template-covariant'];
+        yield '@phpstan-this-out' => ['phpstan-this-out', 'self-out'];
         yield '@phpstan-throws' => ['phpstan-throws', 'throws'];
         yield '@phpstan-use' => ['phpstan-use', 'use'];
         yield '@phpstan-var' => ['phpstan-var', 'var'];
@@ -122,6 +124,7 @@ final class ToolPlatformAliasTest extends TestCase
     public static function phanProvider(): iterable
     {
         yield '@phan-abstract' => ['phan-abstract', 'abstract'];
+        yield '@phanclosurescope' => ['phanclosurescope', 'phan-closure-scope'];
         yield '@phan-extends' => ['phan-extends', 'extends'];
         yield '@phan-immutable' => ['phan-immutable', 'immutable'];
         yield '@phan-inherits' => ['phan-inherits', 'extends'];

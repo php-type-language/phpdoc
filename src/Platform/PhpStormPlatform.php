@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Platform;
 
+use TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
@@ -21,10 +22,11 @@ final class PhpStormPlatform extends Platform
     public private(set) string $name = self::NAME;
 
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {
         get => [
+            ExpectedExceptionTagDefinition::NAME => new ExpectedExceptionTagDefinition(),
             FormatterOffTagDefinition::NAME => new FormatterOffTagDefinition(),
             FormatterOnTagDefinition::NAME => new FormatterOnTagDefinition(),
         ];

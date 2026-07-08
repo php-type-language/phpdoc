@@ -10,6 +10,9 @@ use TypeLang\Parser\TypeParser;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
+use TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTag;
+use TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTag;
+use TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition;
@@ -71,6 +74,18 @@ final class TypedVariableTagTest extends TestCase
     {
         yield '@param' => ['param', ParamTag::class];
         yield '@property-read' => ['property-read', PropertyReadTag::class];
+
+        // The assert family is shared across Psalm, PHPStan and Phan, each
+        // contributing it under its own vendor-prefixed name.
+        yield '@psalm-assert' => ['psalm-assert', AssertTag::class];
+        yield '@phpstan-assert' => ['phpstan-assert', AssertTag::class];
+        yield '@phan-assert' => ['phan-assert', AssertTag::class];
+        yield '@psalm-assert-if-true' => ['psalm-assert-if-true', AssertIfTrueTag::class];
+        yield '@phpstan-assert-if-true' => ['phpstan-assert-if-true', AssertIfTrueTag::class];
+        yield '@phan-assert-if-true' => ['phan-assert-if-true', AssertIfTrueTag::class];
+        yield '@psalm-assert-if-false' => ['psalm-assert-if-false', AssertIfFalseTag::class];
+        yield '@phpstan-assert-if-false' => ['phpstan-assert-if-false', AssertIfFalseTag::class];
+        yield '@phan-assert-if-false' => ['phan-assert-if-false', AssertIfFalseTag::class];
     }
 
     /**

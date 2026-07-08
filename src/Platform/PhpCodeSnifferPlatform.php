@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreStartTag\CodingStandardsIg
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
- * The PHP CodeSniffer platform: the "@phpcs:*" tag family understood by PHP
+ * The PHP CodeSniffer platform: the `@phpcs:*` tag family understood by PHP
  * CodeSniffer.
  */
 final class PhpCodeSnifferPlatform extends Platform

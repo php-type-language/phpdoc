@@ -14,6 +14,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvoked
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamInvokedCallableTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmAssertUntaintedTag\PsalmAssertUntaintedTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTag;
 use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTag;
 use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VariableTagInterface;
@@ -83,6 +85,8 @@ final class VariableTagTest extends TestCase
             ParamLaterInvokedCallableTag::class,
         ];
         yield '@unused-param' => ['unused-param', UnusedParamTag::class];
+        yield '@psalm-assert-untainted' => ['psalm-assert-untainted', PsalmAssertUntaintedTag::class];
+        yield '@psalm-trace' => ['psalm-trace', PsalmTraceTag::class];
     }
 
     /**

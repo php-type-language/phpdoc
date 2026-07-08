@@ -10,17 +10,26 @@ use TypeLang\Parser\TypeParser;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
+use TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\InheritanceTag;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTag;
 use TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanClosureScopeTag\PhanClosureScopeTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanHardcodeReturnTypeTag\PhanHardcodeReturnTypeTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanRealReturnTag\PhanRealReturnTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIfThisIsTag\PsalmIfThisIsTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmInheritorsTag\PsalmInheritorsTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\SelfOutTag\SelfOutTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTagInterface;
+use TypeLang\PhpDoc\DocBlock\Tag\YieldTag\YieldTag;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
 use TypeLang\PhpDoc\Parser\TagFactory;
@@ -105,6 +114,21 @@ final class TypedTagTest extends TestCase
         yield '@throws' => ['throws', ThrowsTag::class];
         yield '@mixin' => ['mixin', MixinTag::class];
         yield '@extends' => ['extends', ExtendsTag::class];
+
+        yield '@psalm-if-this-is' => ['psalm-if-this-is', PsalmIfThisIsTag::class];
+        yield '@psalm-inheritors' => ['psalm-inheritors', PsalmInheritorsTag::class];
+        yield '@psalm-scope-this' => ['psalm-scope-this', PsalmScopeThisTag::class];
+        yield '@phan-closure-scope' => ['phan-closure-scope', PhanClosureScopeTag::class];
+        yield '@phan-hardcode-return-type' => ['phan-hardcode-return-type', PhanHardcodeReturnTypeTag::class];
+        yield '@phan-real-return' => ['phan-real-return', PhanRealReturnTag::class];
+        yield '@expectedException' => ['expectedException', ExpectedExceptionTag::class];
+
+        // Shared type tags contributed by several tool platforms under their
+        // own vendor-prefixed names, each producing the same underlying tag.
+        yield '@psalm-self-out' => ['psalm-self-out', SelfOutTag::class];
+        yield '@phpstan-self-out' => ['phpstan-self-out', SelfOutTag::class];
+        yield '@psalm-yield' => ['psalm-yield', YieldTag::class];
+        yield '@phpstan-yield' => ['phpstan-yield', YieldTag::class];
 
         // Documented aliases resolve to the same tag class, keeping the name
         // they were written with.

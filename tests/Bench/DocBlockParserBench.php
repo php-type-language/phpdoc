@@ -8,7 +8,7 @@ abstract readonly class DocBlockParserBench
 {
     protected const string DOC_BLOCK_SAMPLE = <<<'DOC'
         /**
-         * The "`@link`" tag can be used to define a relation, or link, between
+         * The `@link` tag can be used to define a relation, or link, between
          * the element, or part of the long description when used inline, to a URI.
          *
          * ```
