@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@psalm-taint-source`" tag marks the return value as a taint source
+ * The `@psalm-taint-source` tag marks the return value as a taint source
  * of the given type.
  *
  * ```

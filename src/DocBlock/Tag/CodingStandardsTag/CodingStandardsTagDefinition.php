@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@codingStandards`" tag names a coding standard for reference.
+ * The `@codingStandards` tag names a coding standard for reference.
  *
  * ```
  * "@codingStandards" <Name> [ <Description> ]

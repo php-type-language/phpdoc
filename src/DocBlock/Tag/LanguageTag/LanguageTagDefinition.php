@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@language`" tag injects a foreign-language grammar — such as
+ * The `@language` tag injects a foreign-language grammar — such as
  * SQL, HTML or a regular expression — into a string literal, so an IDE
  * can apply the right highlighting and completion inside it.
  *

@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@noinspection`" tag suppresses the named IDE inspection for the
+ * The `@noinspection` tag suppresses the named IDE inspection for the
  * element that follows it.
  *
  * ```

@@ -36,6 +36,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
@@ -64,6 +65,7 @@ final class PhanPlatform extends Platform
             'phan-assert-if-true' => new AssertIfTrueTagDefinition(),
             'phan-assert-if-false' => new AssertIfFalseTagDefinition(),
             'phan-pure' => new PureTagDefinition(),
+            'phan-type' => new TypeAliasTagDefinition(),
             PhanClosureScopeTagDefinition::NAME => new PhanClosureScopeTagDefinition(),
             PhanConstructorUsedForSideEffectsTagDefinition::NAME => new PhanConstructorUsedForSideEffectsTagDefinition(),
             PhanFileSuppressTagDefinition::NAME => new PhanFileSuppressTagDefinition(),

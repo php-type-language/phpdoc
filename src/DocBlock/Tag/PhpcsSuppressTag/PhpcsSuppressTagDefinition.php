@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@phpcsSuppress`" tag suppresses the named coding-standard check
+ * The `@phpcsSuppress` tag suppresses the named coding-standard check
  * for the element it decorates.
  *
  * ```

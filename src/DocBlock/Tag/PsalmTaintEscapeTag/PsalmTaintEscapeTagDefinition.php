@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@psalm-taint-escape`" tag marks a value as no longer tainted after
+ * The `@psalm-taint-escape` tag marks a value as no longer tainted after
  * passing through the described element.
  *
  * ```
