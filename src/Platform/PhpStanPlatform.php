@@ -21,6 +21,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreLineTag\PhpStanIgnoreLineTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreNextLineTag\PhpStanIgnoreNextLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreTag\PhpStanIgnoreTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhpStanImpureTag\PhpStanImpureTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition;
@@ -71,6 +72,7 @@ final class PhpStanPlatform extends Platform
             'phpstan-self-out' => new SelfOutTagDefinition(),
             'phpstan-yield' => new YieldTagDefinition(),
             PhpStanImpureTagDefinition::NAME => new PhpStanImpureTagDefinition(),
+            PhpStanIgnoreTagDefinition::NAME => new PhpStanIgnoreTagDefinition(),
             PhpStanIgnoreLineTagDefinition::NAME => new PhpStanIgnoreLineTagDefinition(),
             PhpStanIgnoreNextLineTagDefinition::NAME => new PhpStanIgnoreNextLineTagDefinition(),
         ];

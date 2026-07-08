@@ -7,6 +7,8 @@ namespace TypeLang\PhpDoc\Platform;
 use TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\LanguageTag\LanguageTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\NoinspectionTag\NoinspectionTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
@@ -29,6 +31,8 @@ final class PhpStormPlatform extends Platform
             ExpectedExceptionTagDefinition::NAME => new ExpectedExceptionTagDefinition(),
             FormatterOffTagDefinition::NAME => new FormatterOffTagDefinition(),
             FormatterOnTagDefinition::NAME => new FormatterOnTagDefinition(),
+            LanguageTagDefinition::NAME => new LanguageTagDefinition(),
+            NoinspectionTagDefinition::NAME => new NoinspectionTagDefinition(),
         ];
     }
 }

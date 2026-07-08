@@ -16,12 +16,17 @@ use TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanClosureScopeTag\PhanClosureScopeTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanConstructorUsedForSideEffectsTag\PhanConstructorUsedForSideEffectsTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicMethodsTag\PhanForbidUndeclaredMagicMethodsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicPropertiesTag\PhanForbidUndeclaredMagicPropertiesTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanHardcodeReturnTypeTag\PhanHardcodeReturnTypeTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanOutputReferenceTag\PhanOutputReferenceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanRealReturnTag\PhanRealReturnTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanSideEffectFreeTag\PhanSideEffectFreeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag\PhanSuppressCurrentLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextLineTag\PhanSuppressNextLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNextLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanTransientTag\PhanTransientTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PhanWriteOnlyTag\PhanWriteOnlyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition;
@@ -61,6 +66,11 @@ final class PhanPlatform extends Platform
             'phan-pure' => new PureTagDefinition(),
             PhanClosureScopeTagDefinition::NAME => new PhanClosureScopeTagDefinition(),
             PhanConstructorUsedForSideEffectsTagDefinition::NAME => new PhanConstructorUsedForSideEffectsTagDefinition(),
+            PhanFileSuppressTagDefinition::NAME => new PhanFileSuppressTagDefinition(),
+            PhanSuppressCurrentLineTagDefinition::NAME => new PhanSuppressCurrentLineTagDefinition(),
+            PhanSuppressNextLineTagDefinition::NAME => new PhanSuppressNextLineTagDefinition(),
+            PhanSuppressNextNextLineTagDefinition::NAME => new PhanSuppressNextNextLineTagDefinition(),
+            PhanSuppressPreviousLineTagDefinition::NAME => new PhanSuppressPreviousLineTagDefinition(),
             PhanHardcodeReturnTypeTagDefinition::NAME => new PhanHardcodeReturnTypeTagDefinition(),
             PhanRealReturnTagDefinition::NAME => new PhanRealReturnTagDefinition(),
             PhanForbidUndeclaredMagicMethodsTagDefinition::NAME => new PhanForbidUndeclaredMagicMethodsTagDefinition(),

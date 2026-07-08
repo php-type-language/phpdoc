@@ -8,6 +8,8 @@ use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreEndTag\CodingStandardsIgno
 use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreFileTag\CodingStandardsIgnoreFileTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreLineTag\CodingStandardsIgnoreLineTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreStartTag\CodingStandardsIgnoreStartTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsTag\CodingStandardsTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
@@ -32,6 +34,8 @@ final class PhpCodeSnifferPlatform extends Platform
             CodingStandardsIgnoreEndTagDefinition::NAME => new CodingStandardsIgnoreEndTagDefinition(),
             CodingStandardsIgnoreLineTagDefinition::NAME => new CodingStandardsIgnoreLineTagDefinition(),
             CodingStandardsIgnoreFileTagDefinition::NAME => new CodingStandardsIgnoreFileTagDefinition(),
+            CodingStandardsTagDefinition::NAME => new CodingStandardsTagDefinition(),
+            PhpcsSuppressTagDefinition::NAME => new PhpcsSuppressTagDefinition(),
         ];
     }
 }

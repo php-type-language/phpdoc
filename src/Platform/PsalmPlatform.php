@@ -38,7 +38,10 @@ use TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideM
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PsalmVariadicTag\PsalmVariadicTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition;
@@ -104,7 +107,10 @@ final class PsalmPlatform extends Platform
             PsalmOverrideMethodVisibilityTagDefinition::NAME => new PsalmOverrideMethodVisibilityTagDefinition(),
             PsalmOverridePropertyVisibilityTagDefinition::NAME => new PsalmOverridePropertyVisibilityTagDefinition(),
             PsalmStubOverrideTagDefinition::NAME => new PsalmStubOverrideTagDefinition(),
+            PsalmTaintEscapeTagDefinition::NAME => new PsalmTaintEscapeTagDefinition(),
+            PsalmTaintSourceTagDefinition::NAME => new PsalmTaintSourceTagDefinition(),
             PsalmTaintSpecializeTagDefinition::NAME => new PsalmTaintSpecializeTagDefinition(),
+            PsalmTaintUnescapeTagDefinition::NAME => new PsalmTaintUnescapeTagDefinition(),
             PsalmTraceTagDefinition::NAME => new PsalmTraceTagDefinition(),
             PsalmVariadicTagDefinition::NAME => new PsalmVariadicTagDefinition(),
         ];

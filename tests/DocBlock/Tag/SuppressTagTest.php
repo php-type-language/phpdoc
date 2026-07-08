@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
+use TypeLang\PhpDoc\DocBlock\Tag\IssueListTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag\PhanSuppressCurrentLineTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextLineTag\PhanSuppressNextLineTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNextLineTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTag;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreTag\PhpStanIgnoreTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag;
 use TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlockParser;
@@ -57,6 +65,36 @@ final class SuppressTagTest extends TestCase
 
         self::assertInstanceOf(SuppressTag::class, $block->tags[0]);
         self::assertSame(['PhanTypeMismatch', 'PhanUnusedVariable'], $block->tags[0]->issues);
+    }
+
+    /**
+     * @return iterable<string, array{string, class-string<IssueListTag>}>
+     */
+    public static function tagProvider(): iterable
+    {
+        yield '@suppress' => ['suppress', SuppressTag::class];
+        yield '@phpstan-ignore' => ['phpstan-ignore', PhpStanIgnoreTag::class];
+        yield '@phan-file-suppress' => ['phan-file-suppress', PhanFileSuppressTag::class];
+        yield '@phan-suppress-current-line' => ['phan-suppress-current-line', PhanSuppressCurrentLineTag::class];
+        yield '@phan-suppress-next-line' => ['phan-suppress-next-line', PhanSuppressNextLineTag::class];
+        yield '@phan-suppress-next-next-line' => ['phan-suppress-next-next-line', PhanSuppressNextNextLineTag::class];
+        yield '@phan-suppress-previous-line' => ['phan-suppress-previous-line', PhanSuppressPreviousLineTag::class];
+    }
+
+    /**
+     * @param class-string<IssueListTag> $expected
+     */
+    #[Test]
+    #[DataProvider('tagProvider')]
+    public function issueListTagResolvesThroughTheRealParser(string $name, string $expected): void
+    {
+        $block = new DocBlockParser()->parse(\sprintf('/** @%s Foo.Bar, Baz */', $name));
+
+        self::assertCount(1, $block->tags);
+        self::assertInstanceOf($expected, $block->tags[0]);
+        self::assertInstanceOf(IssueListTag::class, $block->tags[0]);
+        self::assertSame($name, $block->tags[0]->name);
+        self::assertSame(['Foo.Bar', 'Baz'], $block->tags[0]->issues);
     }
 
     private static function factory(): TagFactory
