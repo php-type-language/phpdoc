@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\CodeReference;
 use TypeLang\PhpDoc\DocBlock\Tag\ReferenceTag;
 
 /**
- * The "@uses" tag indicates that the described element uses the referenced one.
+ * The `@uses` tag indicates that the described element uses the referenced one.
  *
  * @template-extends ReferenceTag<CodeReference>
  */

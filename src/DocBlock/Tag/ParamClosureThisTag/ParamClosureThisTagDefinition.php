@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@param-closure-this`" tag documents the bound "$this" type of closure
+ * The `@param-closure-this` tag documents the bound "$this" type of closure
  * passed as an argument.
  *
  * ```

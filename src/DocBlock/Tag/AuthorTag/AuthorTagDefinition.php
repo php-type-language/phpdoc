@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@author`" tag documents the author of an element, together with an
+ * The `@author` tag documents the author of an element, together with an
  * optional email address.
  *
  * ```

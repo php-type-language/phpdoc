@@ -7,6 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag;
 use TypeLang\PhpDoc\DocBlock\Tag\VariableTag;
 
 /**
- * The "@unused-param" tag marks an argument that is intentionally left unused.
+ * The `@unused-param` tag marks an argument that is intentionally left unused.
  */
 final class UnusedParamTag extends VariableTag {}

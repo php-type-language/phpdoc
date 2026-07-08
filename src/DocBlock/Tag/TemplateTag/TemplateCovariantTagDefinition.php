@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@template-covariant`" tag declares a covariant generic type parameter.
+ * The `@template-covariant` tag declares a covariant generic type parameter.
  *
  * ```
  * "@template-covariant" <Name> [ "of" <Type> ] [ "=" <Type> ] [ <Description> ]

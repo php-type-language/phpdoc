@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@readonly`" tag declares that a property may only be written once,
+ * The `@readonly` tag declares that a property may only be written once,
  * during initialization.
  *
  * ```

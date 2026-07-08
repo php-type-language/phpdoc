@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@version`" tag documents the current version of an element.
+ * The `@version` tag documents the current version of an element.
  *
  * ```
  * "@version" [ <Version> ] [ <Description> ]

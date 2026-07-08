@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@require-implements`" tag constrains a trait so that it may only be
+ * The `@require-implements` tag constrains a trait so that it may only be
  * used within a class that implements the given interface.
  *
  * ```

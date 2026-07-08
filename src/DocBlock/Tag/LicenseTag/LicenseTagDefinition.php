@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@license`" tag documents the license that applies to an element, given
+ * The `@license` tag documents the license that applies to an element, given
  * either as a URL to the license text or by its name.
  *
  * ```

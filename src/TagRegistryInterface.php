@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
- * @template-extends \Traversable<non-empty-string, TagDefinitionInterface>
+ * @template-extends \Traversable<non-empty-lowercase-string, TagDefinitionInterface>
  */
 interface TagRegistryInterface extends \Traversable, \Countable
 {

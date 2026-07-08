@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@source`" tag points at a range of lines of the documented element's
+ * The `@source` tag points at a range of lines of the documented element's
  * source.
  *
  * ```

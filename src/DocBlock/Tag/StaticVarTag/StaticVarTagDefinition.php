@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@staticvar`" tag documents the type of static variable declared
+ * The `@staticvar` tag documents the type of static variable declared
  * within a function or method.
  *
  * ```

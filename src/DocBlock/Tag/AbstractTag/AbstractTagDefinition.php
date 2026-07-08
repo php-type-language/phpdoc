@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@abstract`" tag declares an element as abstract.
+ * The `@abstract` tag declares an element as abstract.
  *
  * ```
  * "@abstract" [ <Description> ]

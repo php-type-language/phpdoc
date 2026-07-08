@@ -7,6 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\CopyrightTag;
 use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * The "@copyright" tag documents the copyright information of an element.
+ * The `@copyright` tag documents the copyright information of an element.
  */
 final class CopyrightTag extends FlagTag {}

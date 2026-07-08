@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@name" tag assigns an alias to a procedural page or global variable so
+ * The `@name` tag assigns an alias to a procedural page or global variable so
  * that it can be referred to by that alias in the generated documentation.
  */
 final class NameTag extends Tag

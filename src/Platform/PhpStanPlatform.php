@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Platform;
 
+use TypeLang\PhpDoc\DocBlock\Tag\AllowPrivateMutationTag\AllowPrivateMutationTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\ConsistentConstructorTag\ConsistentConstructorTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTagDefinition;
@@ -14,10 +16,15 @@ use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvoked
 use TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreLineTag\PhpStanIgnoreLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreNextLineTag\PhpStanIgnoreNextLineTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PhpStanImpureTag\PhpStanImpureTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PureUnlessCallableIsImpureTag\PureUnlessCallableIsImpureTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\ReadonlyAllowPrivateMutationTag\ReadonlyAllowPrivateMutationTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTagDefinition;
@@ -27,12 +34,13 @@ use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
  * The PHPStan platform: the "@phpstan-*" tag family understood by PHPStan.
  *
- * Only those tags that restate an existing tag are wired up, as aliases onto it;
- * PHPStan's own analysis-specific tags carry no meaning here.
+ * Tags that restate an existing one are wired as aliases onto it; PHPStan's own
+ * marker tags are contributed as their own flag definitions.
  */
 final class PhpStanPlatform extends Platform
 {
@@ -42,6 +50,21 @@ final class PhpStanPlatform extends Platform
     public const string NAME = 'PHPStan';
 
     public private(set) string $name = self::NAME;
+
+    /**
+     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     */
+    public iterable $tags {
+        get => [
+            'phpstan-allow-private-mutation' => new AllowPrivateMutationTagDefinition(),
+            'phpstan-consistent-constructor' => new ConsistentConstructorTagDefinition(),
+            'phpstan-pure' => new PureTagDefinition(),
+            'phpstan-readonly-allow-private-mutation' => new ReadonlyAllowPrivateMutationTagDefinition(),
+            PhpStanImpureTagDefinition::NAME => new PhpStanImpureTagDefinition(),
+            PhpStanIgnoreLineTagDefinition::NAME => new PhpStanIgnoreLineTagDefinition(),
+            PhpStanIgnoreNextLineTagDefinition::NAME => new PhpStanIgnoreNextLineTagDefinition(),
+        ];
+    }
 
     /**
      * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>

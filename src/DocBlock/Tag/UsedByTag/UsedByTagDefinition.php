@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@used-by`" tag indicates that the described element is used by the
+ * The `@used-by` tag indicates that the described element is used by the
  * referenced one.
  *
  * ```

@@ -14,10 +14,10 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@return`" tag documents the value that a function or method returns to
+ * The `@return` tag documents the value that a function or method returns to
  * its caller.
  *
- * The "`@return`" tag MAY be followed by a description that clarifies the
+ * The `@return` tag MAY be followed by a description that clarifies the
  * meaning of the returned value.
  *
  * ```

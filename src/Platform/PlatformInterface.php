@@ -30,7 +30,7 @@ interface PlatformInterface
     /**
      * Tag definitions keyed by their canonical (lower-case) name.
      *
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {
         get;
@@ -39,7 +39,7 @@ interface PlatformInterface
     /**
      * Alias-to-canonical name pairs, both lower-case.
      *
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @var iterable<non-empty-string, non-empty-string>
      */
     public iterable $aliases {
         get;

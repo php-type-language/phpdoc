@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@source" tag points at a range of lines of the documented element's
+ * The `@source` tag points at a range of lines of the documented element's
  * source, starting at a line and optionally spanning a number of lines.
  */
 final class SourceTag extends Tag

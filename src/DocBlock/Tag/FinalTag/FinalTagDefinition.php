@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@final`" tag declares that an element must not be overridden or
+ * The `@final` tag declares that an element must not be overridden or
  * extended.
  *
  * ```

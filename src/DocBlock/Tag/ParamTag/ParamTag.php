@@ -7,6 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\ParamTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag;
 
 /**
- * The "@param" tag documents a single argument of a function or method.
+ * The `@param` tag documents a single argument of a function or method.
  */
 final class ParamTag extends TypedVariableTag {}

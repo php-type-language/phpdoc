@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@copyright`" tag documents the copyright information of an element.
+ * The `@copyright` tag documents the copyright information of an element.
  *
  * ```
  * "@copyright" [ <Description> ]

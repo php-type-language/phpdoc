@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@unused-param`" tag marks an argument that is intentionally left
+ * The `@unused-param` tag marks an argument that is intentionally left
  * unused.
  *
  * ```

@@ -25,12 +25,12 @@ use TypeLang\PhpDoc\TagRegistryInterface;
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface
  *
- * @template-implements \IteratorAggregate<non-empty-string, TagDefinitionInterface>
+ * @template-implements \IteratorAggregate<non-empty-lowercase-string, TagDefinitionInterface>
  */
 final readonly class TagRegistry implements TagRegistryInterface, \IteratorAggregate
 {
     /**
-     * @var array<non-empty-string, TagDefinitionInterface>
+     * @var array<non-empty-lowercase-string, TagDefinitionInterface>
      */
     private array $definitions;
 
@@ -40,16 +40,48 @@ final readonly class TagRegistry implements TagRegistryInterface, \IteratorAggre
     private array $aliases;
 
     /**
-     * @param iterable<non-empty-lowercase-string, TagDefinitionInterface> $definitions
-     * @param iterable<non-empty-lowercase-string, non-empty-lowercase-string> $aliases
+     * @param iterable<non-empty-string, TagDefinitionInterface> $definitions
+     * @param iterable<non-empty-string, non-empty-string> $aliases
      */
     public function __construct(
         iterable $definitions = [],
         iterable $aliases = [],
         private TagDefinitionInterface $genericTagDefinition = new GenericTagDefinition(),
     ) {
-        $this->definitions = \iterator_to_array($definitions);
-        $this->aliases = \iterator_to_array($aliases);
+        $this->definitions = $this->formatDefinitions($definitions);
+        $this->aliases = $this->formatAliases($aliases);
+    }
+
+    /**
+     * @param iterable<non-empty-string, TagDefinitionInterface> $definitions
+     * @return array<non-empty-lowercase-string, TagDefinitionInterface>
+     */
+    private function formatDefinitions(iterable $definitions): array
+    {
+        $result = [];
+
+        foreach ($definitions as $name => $definition) {
+            $result[\strtolower($name)] = $definition;
+        }
+
+        \ksort($result);
+
+        return $result;
+    }
+
+    /**
+     * @param iterable<non-empty-string, non-empty-string> $aliases
+     * @return array<non-empty-lowercase-string, non-empty-lowercase-string>
+     */
+    private function formatAliases(iterable $aliases): array
+    {
+        $result = [];
+
+        foreach ($aliases as $alias => $name) {
+            $result[\strtolower($alias)] = \strtolower($name);
+        }
+
+        return $result;
     }
 
     public function get(string $name): TagDefinitionInterface
@@ -65,7 +97,7 @@ final readonly class TagRegistry implements TagRegistryInterface, \IteratorAggre
 
     public function getIterator(): \Traversable
     {
-        /** @var \ArrayIterator<non-empty-string, TagDefinitionInterface> */
+        /** @var \ArrayIterator<non-empty-lowercase-string, TagDefinitionInterface> */
         return new \ArrayIterator($this->definitions);
     }
 

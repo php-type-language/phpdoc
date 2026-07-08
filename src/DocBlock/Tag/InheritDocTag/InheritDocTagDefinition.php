@@ -12,15 +12,15 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@inheritdoc`" tag reuses the documentation of the parent element.
+ * The `@inheritDoc` tag reuses the documentation of the parent element.
  *
  * ```
- * "@inheritdoc" [ <Description> ]
+ * "@inheritDoc" [ <Description> ]
  * ```
  */
 final class InheritDocTagDefinition extends TagDefinition
 {
-    public const string NAME = 'inheritdoc';
+    public const string NAME = 'inheritDoc';
 
     public function __construct()
     {

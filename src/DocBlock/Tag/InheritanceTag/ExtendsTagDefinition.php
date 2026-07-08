@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@extends`" tag makes a generic parent class or interface concrete by
+ * The `@extends` tag makes a generic parent class or interface concrete by
  * providing the type arguments for its template parameters.
  *
  * ```

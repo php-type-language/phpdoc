@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@immutable`" tag declares a class as immutable, meaning none of its
+ * The `@immutable` tag declares a class as immutable, meaning none of its
  * state can change after construction.
  *
  * ```

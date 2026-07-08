@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@seal-methods`" tag forbids declaring magic methods beyond those
+ * The `@seal-methods` tag forbids declaring magic methods beyond those
  * already documented.
  *
  * ```

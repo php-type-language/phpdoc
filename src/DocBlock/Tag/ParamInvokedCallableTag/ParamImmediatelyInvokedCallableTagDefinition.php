@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 
 /**
- * The "`@param-immediately-invoked-callable`" tag marks a callable argument
+ * The `@param-immediately-invoked-callable` tag marks a callable argument
  * that is invoked before the function or method returns.
  *
  * ```

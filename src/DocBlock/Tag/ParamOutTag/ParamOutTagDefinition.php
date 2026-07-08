@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@param-out`" tag documents the type that a by-reference argument holds
+ * The `@param-out` tag documents the type that a by-reference argument holds
  * after the function or method returns.
  *
  * ```

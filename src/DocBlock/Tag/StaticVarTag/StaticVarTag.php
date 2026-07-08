@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTag;
 
 /**
- * The "@staticvar" tag documents the type of static variable declared within
+ * The `@staticvar` tag documents the type of static variable declared within
  * a function or method, optionally naming the variable it applies to.
  */
 final class StaticVarTag extends TypedTag

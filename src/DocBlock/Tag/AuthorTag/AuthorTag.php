@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@author" tag documents the author of an element.
+ * The `@author` tag documents the author of an element.
  */
 final class AuthorTag extends Tag
 {

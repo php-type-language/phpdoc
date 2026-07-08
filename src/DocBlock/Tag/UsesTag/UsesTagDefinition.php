@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@uses`" tag indicates that the described element uses the referenced
+ * The `@uses` tag indicates that the described element uses the referenced
  * one.
  *
  * ```

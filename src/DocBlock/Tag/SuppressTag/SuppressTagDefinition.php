@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@suppress`" tag silences the listed diagnostics that would otherwise be
+ * The `@suppress` tag silences the listed diagnostics that would otherwise be
  * reported for an element.
  *
  * ```

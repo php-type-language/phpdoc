@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@category`" tag organizes groups of packages together.
+ * The `@category` tag organizes groups of packages together.
  *
  * ```
  * "@category" [ <Description> ]

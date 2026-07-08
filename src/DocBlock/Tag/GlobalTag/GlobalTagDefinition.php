@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@global`" tag documents a global variable that a function relies on.
+ * The `@global` tag documents a global variable that a function relies on.
  *
  * ```
  * "@global" <Type> <Variable> [ <Description> ]

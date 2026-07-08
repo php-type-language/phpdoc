@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@property-read`" tag declares a magic property that can only be read.
+ * The `@property-read` tag declares a magic property that can only be read.
  *
  * ```
  * "@property-read" <Type> <Variable> [ <Description> ]

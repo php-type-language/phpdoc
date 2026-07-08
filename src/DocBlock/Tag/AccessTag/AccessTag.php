@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 
 /**
- * The "@access" tag documents the visibility of an element.
+ * The `@access` tag documents the visibility of an element.
  */
 final class AccessTag extends Tag
 {

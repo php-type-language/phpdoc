@@ -7,6 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\ReturnTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTag;
 
 /**
- * The "@return" tag documents the return value of a function or method.
+ * The `@return` tag documents the return value of a function or method.
  */
 final class ReturnTag extends TypedTag {}

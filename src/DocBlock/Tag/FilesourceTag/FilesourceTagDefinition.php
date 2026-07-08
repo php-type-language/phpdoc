@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@filesource`" tag tells documentation tooling to include the source of
+ * The `@filesource` tag tells documentation tooling to include the source of
  * the current file in its output.
  *
  * ```

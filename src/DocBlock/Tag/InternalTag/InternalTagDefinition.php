@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@internal`" tag marks an element as internal to its package, or, when
+ * The `@internal` tag marks an element as internal to its package, or, when
  * used inline, documents information meant only for that package's maintainers.
  *
  * ```

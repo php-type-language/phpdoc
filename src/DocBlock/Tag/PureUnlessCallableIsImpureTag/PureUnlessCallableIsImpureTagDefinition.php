@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@pure-unless-callable-is-impure`" tag declares a function pure unless a
+ * The `@pure-unless-callable-is-impure` tag declares a function pure unless a
  * callable it receives is itself impure.
  *
  * ```

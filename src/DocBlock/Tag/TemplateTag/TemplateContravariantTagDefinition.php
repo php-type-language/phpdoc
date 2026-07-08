@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@template-contravariant`" tag declares a contravariant generic type
+ * The `@template-contravariant` tag declares a contravariant generic type
  * parameter.
  *
  * ```

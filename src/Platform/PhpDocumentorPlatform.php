@@ -50,7 +50,7 @@ final class PhpDocumentorPlatform extends Platform
     public private(set) string $name = self::NAME;
 
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {
         get => [

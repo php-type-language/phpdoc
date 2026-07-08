@@ -13,14 +13,14 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 abstract class Platform implements PlatformInterface
 {
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {
         get => [];
     }
 
     /**
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @var iterable<non-empty-string, non-empty-string>
      */
     public iterable $aliases {
         get => [];

@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@package`" tag categorizes elements into a logical subdivision.
+ * The `@package` tag categorizes elements into a logical subdivision.
  *
  * ```
  * "@package" [ <Description> ]

@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UrlReference;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@license" tag pointing to the license text by a URL.
+ * The `@license` tag pointing to the license text by a URL.
  */
 final class LicenseTag extends Tag
 {

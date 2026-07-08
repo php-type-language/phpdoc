@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\Type\CallableTypeNode;
 
 /**
- * The "@method" tag declares a "magic" method that can be called on the
+ * The `@method` tag declares a "magic" method that can be called on the
  * described class, described as a callable carrying its name, parameters and
  * return type.
  */

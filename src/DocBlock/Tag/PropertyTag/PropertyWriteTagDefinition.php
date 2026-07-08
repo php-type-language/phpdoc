@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@property-write`" tag declares a magic property that can only be
+ * The `@property-write` tag declares a magic property that can only be
  * written.
  *
  * ```

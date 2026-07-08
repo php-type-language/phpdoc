@@ -7,6 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\PackageTag;
 use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
- * The "@package" tag categorizes elements into a logical subdivision.
+ * The `@package` tag categorizes elements into a logical subdivision.
  */
 final class PackageTag extends FlagTag {}

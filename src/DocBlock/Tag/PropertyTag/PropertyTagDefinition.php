@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@property`" tag declares a magic property that can be both read and
+ * The `@property` tag declares a magic property that can be both read and
  * written.
  *
  * ```

@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@mixin`" tag declares that the members of the referenced type are
+ * The `@mixin` tag declares that the members of the referenced type are
  * magically available on the described class.
  *
  * ```

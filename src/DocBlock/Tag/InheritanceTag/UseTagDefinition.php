@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@use`" tag makes a generic trait concrete by providing the type
+ * The `@use` tag makes a generic trait concrete by providing the type
  * arguments for its template parameters.
  *
  * ```

@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@implements`" tag makes a generic interface concrete by providing the
+ * The `@implements` tag makes a generic interface concrete by providing the
  * type arguments for its template parameters.
  *
  * ```

@@ -14,7 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@access`" tag documents the visibility (access level) of an element.
+ * The `@access` tag documents the visibility (access level) of an element.
  *
  * ```
  * "@access" ( <AccessVisibility> ) [ <Description> ]

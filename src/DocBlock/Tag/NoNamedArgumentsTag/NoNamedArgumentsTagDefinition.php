@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@no-named-arguments`" tag indicates that the argument names may change
+ * The `@no-named-arguments` tag indicates that the argument names may change
  * and must not be relied upon by callers.
  *
  * ```

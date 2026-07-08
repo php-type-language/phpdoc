@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTag;
 
 /**
- * The "@var" tag documents the type of a property, constant or inline
+ * The `@var` tag documents the type of a property, constant or inline
  * variable, optionally naming the variable it applies to.
  */
 final class VarTag extends TypedTag

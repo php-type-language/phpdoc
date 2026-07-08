@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@see`" tag can be used to define a {@see CodeReference element}.
+ * The `@see` tag can be used to define a {@see CodeReference element}.
  *
  * When defining a reference to other elements, you can refer to a specific
  * element by appending a double colon and providing the name of that element
@@ -27,7 +27,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * The "`@see"` tag SHOULD have a description to provide additional information
  * regarding the relationship between the element and its target.
  *
- * The "`@see`" tag cannot refer to a namespace element.
+ * The `@see` tag cannot refer to a namespace element.
  *
  * ```
  * "@see" ( <Reference> | <URI> ) [ <Description> ]

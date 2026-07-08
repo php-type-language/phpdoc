@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@static`" tag declares a method or property as static.
+ * The `@static` tag declares a method or property as static.
  *
  * ```
  * "@static" [ <Description> ]

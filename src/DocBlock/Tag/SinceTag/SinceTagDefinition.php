@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@since`" tag documents the version at which an element became
+ * The `@since` tag documents the version at which an element became
  * available.
  *
  * ```

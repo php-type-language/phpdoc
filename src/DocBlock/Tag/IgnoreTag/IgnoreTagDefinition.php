@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@ignore`" tag tells documentation tooling to skip the element it is
+ * The `@ignore` tag tells documentation tooling to skip the element it is
  * attached to.
  *
  * ```

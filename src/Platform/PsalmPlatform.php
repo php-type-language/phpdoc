@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Platform;
 
+use TypeLang\PhpDoc\DocBlock\Tag\AllowPrivateMutationTag\AllowPrivateMutationTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\ConsistentConstructorTag\ConsistentConstructorTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTagDefinition;
@@ -16,6 +18,23 @@ use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmConsistentTemplatesTag\PsalmConsistentTemplatesTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmExternalMutationFreeTag\PsalmExternalMutationFreeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreFalsableReturnTag\PsalmIgnoreFalsableReturnTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreNullableReturnTag\PsalmIgnoreNullableReturnTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariableMethodTag\PsalmIgnoreVariableMethodTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariablePropertyTag\PsalmIgnoreVariablePropertyTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVarTag\PsalmIgnoreVarTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmMutationFreeTag\PsalmMutationFreeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealMethodsTag\PsalmNoSealMethodsTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealPropertiesTag\PsalmNoSealPropertiesTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideMethodVisibilityTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PsalmVariadicTag\PsalmVariadicTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\ReadonlyAllowPrivateMutationTag\ReadonlyAllowPrivateMutationTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTagDefinition;
@@ -27,12 +46,13 @@ use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
  * The Psalm platform: the "@psalm-*" tag family understood by Psalm.
  *
- * Only those tags that restate an existing tag are wired up, as aliases onto it;
- * Psalm's own analysis-specific tags carry no meaning here.
+ * Tags that restate an existing one are wired as aliases onto it; Psalm's own
+ * marker tags are contributed as their own flag definitions.
  */
 final class PsalmPlatform extends Platform
 {
@@ -42,6 +62,33 @@ final class PsalmPlatform extends Platform
     public const string NAME = 'Psalm';
 
     public private(set) string $name = self::NAME;
+
+    /**
+     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     */
+    public iterable $tags {
+        get => [
+            'psalm-allow-private-mutation' => new AllowPrivateMutationTagDefinition(),
+            'psalm-consistent-constructor' => new ConsistentConstructorTagDefinition(),
+            'psalm-pure' => new PureTagDefinition(),
+            'psalm-readonly-allow-private-mutation' => new ReadonlyAllowPrivateMutationTagDefinition(),
+            PsalmConsistentTemplatesTagDefinition::NAME => new PsalmConsistentTemplatesTagDefinition(),
+            PsalmExternalMutationFreeTagDefinition::NAME => new PsalmExternalMutationFreeTagDefinition(),
+            PsalmMutationFreeTagDefinition::NAME => new PsalmMutationFreeTagDefinition(),
+            PsalmIgnoreFalsableReturnTagDefinition::NAME => new PsalmIgnoreFalsableReturnTagDefinition(),
+            PsalmIgnoreNullableReturnTagDefinition::NAME => new PsalmIgnoreNullableReturnTagDefinition(),
+            PsalmIgnoreVarTagDefinition::NAME => new PsalmIgnoreVarTagDefinition(),
+            PsalmIgnoreVariableMethodTagDefinition::NAME => new PsalmIgnoreVariableMethodTagDefinition(),
+            PsalmIgnoreVariablePropertyTagDefinition::NAME => new PsalmIgnoreVariablePropertyTagDefinition(),
+            PsalmNoSealMethodsTagDefinition::NAME => new PsalmNoSealMethodsTagDefinition(),
+            PsalmNoSealPropertiesTagDefinition::NAME => new PsalmNoSealPropertiesTagDefinition(),
+            PsalmOverrideMethodVisibilityTagDefinition::NAME => new PsalmOverrideMethodVisibilityTagDefinition(),
+            PsalmOverridePropertyVisibilityTagDefinition::NAME => new PsalmOverridePropertyVisibilityTagDefinition(),
+            PsalmStubOverrideTagDefinition::NAME => new PsalmStubOverrideTagDefinition(),
+            PsalmTaintSpecializeTagDefinition::NAME => new PsalmTaintSpecializeTagDefinition(),
+            PsalmVariadicTagDefinition::NAME => new PsalmVariadicTagDefinition(),
+        ];
+    }
 
     /**
      * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>

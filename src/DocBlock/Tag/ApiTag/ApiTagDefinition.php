@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@api`" tag marks an element as part of the public, supported API of its
+ * The `@api` tag marks an element as part of the public, supported API of its
  * package.
  *
  * ```

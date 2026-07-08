@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@todo`" tag records a task that still needs to be done for an element.
+ * The `@todo` tag records a task that still needs to be done for an element.
  *
  * ```
  * "@todo" [ <Description> ]

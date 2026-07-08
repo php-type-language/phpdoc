@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@seal-properties`" tag forbids declaring magic properties beyond those
+ * The `@seal-properties` tag forbids declaring magic properties beyond those
  * already documented.
  *
  * ```

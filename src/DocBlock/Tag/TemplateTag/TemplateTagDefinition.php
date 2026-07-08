@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 
 /**
- * The "`@template`" tag declares an invariant generic type parameter.
+ * The `@template` tag declares an invariant generic type parameter.
  *
  * ```
  * "@template" <Name> [ "of" <Type> ] [ "=" <Type> ] [ <Description> ]

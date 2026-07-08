@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@override`" tag marks a method as overriding an inherited definition.
+ * The `@override` tag marks a method as overriding an inherited definition.
  *
  * ```
  * "@override" [ <Description> ]

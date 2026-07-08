@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@suppress" tag silences the listed diagnostics that would otherwise be
+ * The `@suppress` tag silences the listed diagnostics that would otherwise be
  * reported for an element.
  */
 final class SuppressTag extends Tag

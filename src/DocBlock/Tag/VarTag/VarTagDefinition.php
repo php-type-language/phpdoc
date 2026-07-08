@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@var`" tag documents the type of a property, constant or inline
+ * The `@var` tag documents the type of a property, constant or inline
  * variable.
  *
  * ```

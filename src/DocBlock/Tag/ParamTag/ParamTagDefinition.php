@@ -15,9 +15,9 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@param`" tag documents a single argument of a function or method.
+ * The `@param` tag documents a single argument of a function or method.
  *
- * The "`@param`" tag MAY be followed by a description that clarifies the
+ * The `@param` tag MAY be followed by a description that clarifies the
  * meaning of the argument.
  *
  * ```

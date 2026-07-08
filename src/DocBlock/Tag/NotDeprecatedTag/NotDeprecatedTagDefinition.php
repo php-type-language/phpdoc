@@ -12,8 +12,8 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@not-deprecated`" tag marks an element as explicitly not deprecated,
- * overriding a "`@deprecated`" tag it would otherwise inherit from a parent.
+ * The `@not-deprecated` tag marks an element as explicitly not deprecated,
+ * overriding a `@deprecated` tag it would otherwise inherit from a parent.
  *
  * ```
  * "@not-deprecated" [ <Description> ]

@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@name`" tag assigns an alias to a procedural page or global variable.
+ * The `@name` tag assigns an alias to a procedural page or global variable.
  *
  * ```
  * "@name" <Name> [ <Description> ]

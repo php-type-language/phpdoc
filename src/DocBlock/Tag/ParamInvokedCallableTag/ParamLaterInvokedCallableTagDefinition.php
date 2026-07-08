@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 
 /**
- * The "`@param-later-invoked-callable`" tag marks a callable argument that is
+ * The `@param-later-invoked-callable` tag marks a callable argument that is
  * invoked after the function or method returns.
  *
  * ```

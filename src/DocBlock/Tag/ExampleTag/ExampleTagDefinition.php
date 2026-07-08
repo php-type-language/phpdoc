@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`@example`" tag points at an external source illustrating the use of the
+ * The `@example` tag points at an external source illustrating the use of the
  * documented element, or describes such an example inline.
  *
  * ```

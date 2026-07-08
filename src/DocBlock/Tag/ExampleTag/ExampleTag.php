@@ -9,7 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@example" tag points at an external source that illustrates the use of
+ * The `@example` tag points at an external source that illustrates the use of
  * the documented element, optionally narrowing it to a range of lines starting
  * at a line and spanning a number of lines.
  */
