@@ -14,22 +14,26 @@
 
 ---
 
-The reference implementation of the [TypeLang](https://typelang.dev) PHPDoc
-parser. It turns a raw `/** ... */` comment into an immutable, iterable object
-graph of its description and tags.
+The reference PHPDoc parser for **TypeLang**. It turns a raw `/** ... */`
+comment into an immutable, iterable object graph of its description and tags.
 
-> Full documentation is available at [typelang.dev](https://typelang.dev).
+Full documentation is available at [typelang.dev](https://typelang.dev).
 
 ## Installation
 
-TypeLang PhpDoc Parser is available as a Composer package and can be installed
-using the following command in the root of your project:
+Install the package via [Composer](https://getcomposer.org):
 
 ```sh
 composer require type-lang/phpdoc
 ```
 
-## Quick Start
+**Requirements:** 
+- PHP 8.4+
+
+## Usage
+
+`DocBlockParser::parse()` returns a `DocBlock` — an immutable collection of the
+comment's description and tags:
 
 ```php
 use TypeLang\PhpDoc\DocBlockParser;
@@ -62,145 +66,16 @@ $see = $block[0]; // SeeTag
 echo $see->reference; // "Mailer::send()"
 ```
 
-## Structural Elements
+### Structure
 
-### DocBlock
+A `DocBlock` is composed of three kinds of elements:
 
-A `DocBlock` is the representation of a whole comment: its description and its
-tags.
+- **DocBlock** — the whole comment; behaves as a `Countable`, `IteratorAggregate`
+  and `ArrayAccess` collection of its tags.
+- **Description** — the leading text. A plain `Description` is just a string;
+  a `TaggedDescription` also holds inline tags like `{@see ...}`.
+- **Tag** — a name (without the leading `@`) and an optional description. Known
+  tags (`@see`, `@link`, ...) extend the base `Tag` with their own parsed parts;
+  an unregistered tag keeps its whole suffix as the description.
 
-```
-/**                                 |
- * Hello world                      | ← DocBlock's description.
- *                                  |
- * @param int $example              | ← DocBlock's tag #1.
- * @throws \Throwable Description   | ← DocBlock's tag #2.
- */                                 |
-```
-
-The object is immutable and additionally behaves as a collection of its tags,
-so it can be counted, iterated and accessed by offset:
-
-```php
-/**
- * DocBlock structure pseudocode (real impl may differ)
- *
- * @template-implements IteratorAggregate<array-key, TagInterface>
- * @template-implements ArrayAccess<array-key, TagInterface>
- */
-final readonly class DocBlock implements
-    IteratorAggregate,
-    ArrayAccess,
-    Countable
-{
-    public ?DescriptionInterface $description;
-
-    /** @var list<TagInterface> */
-    public array $tags;
-}
-```
-
-### Description
-
-A description is a `DescriptionInterface` implemented by one of two objects:
-
-```
-   DescriptionInterface
-             │
-     ┌───────┴───────┐
-     │               │
-Description   TaggedDescription
-```
-
-A plain `Description` is just text:
-
-```
-/**                  |
- * Hello world       | ← This is a simple description
-   ↑↑↑↑↑↑↑↑↑↑↑       |
- */
-```
-
-```php
-/**
- * Simple description structure pseudocode (real impl may differ)
- */
-final readonly class Description implements DescriptionInterface
-{
-    public string $value;
-}
-```
-
-A description may also contain **inline tags**. It is then represented as a
-`TaggedDescription`, a composite of text fragments and nested tags:
-
-```
-/**
-               ↓↓↓↓↓↓↓↓↓↓↓                         | ← This is a nested tag of the description.
- * Hello world {@see some} and blah-blah-blah.     |
-   ↑↑↑↑↑↑↑↑↑↑↑             ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑     | ← These are plain text fragments.
- */
-```
-
-```php
-/**
- * Tagged (composite) description structure pseudocode (real impl may differ)
- *
- * @template-implements IteratorAggregate<array-key, ComponentInterface>
- * @template-implements ArrayAccess<array-key, ComponentInterface>
- */
-final class TaggedDescription implements
-    DescriptionInterface,
-    IteratorAggregate,
-    ArrayAccess,
-    Countable
-{
-    /** @var list<ComponentInterface> */
-    public array $components;
-
-    /** @var list<TagInterface> */
-    public array $tags;
-}
-```
-
-### Tag
-
-A `Tag` is a name (without the leading `@`) and its optional description.
-
-```
-/**
-    ↓↓↓↓↓↓                                 | ← This is a tag name.
- * @throws \Throwable An error occurred.   |
-           ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑   | ← This is the tag suffix.
- */
-```
-
-```php
-/**
- * Common tag structure pseudocode (real impl may differ)
- */
-abstract class Tag implements TagInterface
-{
-    public string $name;
-
-    public ?DescriptionInterface $description;
-}
-```
-
-Known tags extend `Tag` with their own parsed parts. For example, `@see` exposes
-the referenced symbol or URI, while `@link` exposes its URI:
-
-```php
-final class SeeTag extends Tag
-{
-    public UriReference|CodeReference $reference;
-}
-
-final class LinkTag extends Tag
-{
-    public UriReference $uri;
-}
-```
-
-An unregistered tag is returned as a generic `Tag` whose whole suffix becomes
-its description.
+See the [documentation](https://typelang.dev) for the full list of supported tags.
