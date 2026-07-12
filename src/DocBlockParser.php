@@ -46,7 +46,7 @@ final readonly class DocBlockParser implements DocBlockParserInterface
     private DescriptionParserInterface $descriptionParser;
 
     /**
-     * @param iterable<PlatformInterface> $platforms additional tag platforms
+     * @param iterable<mixed, PlatformInterface> $platforms additional tag platforms
      */
     public function __construct(iterable $platforms = [])
     {
@@ -60,7 +60,10 @@ final readonly class DocBlockParser implements DocBlockParserInterface
         $this->descriptionParser = $this->createDescriptionParser($this->tagParser);
     }
 
-    public static function createDefault(): self
+    /**
+     * @param iterable<mixed, PlatformInterface> $additionalPlatforms
+     */
+    public static function createDefault(iterable $additionalPlatforms = []): self
     {
         return new self([
             new PhpDocumentorPlatform(),
@@ -69,6 +72,7 @@ final readonly class DocBlockParser implements DocBlockParserInterface
             new PhanPlatform(),
             new PhpStormPlatform(),
             new PhpCodeSnifferPlatform(),
+            ...\iterator_to_array($additionalPlatforms, false),
         ]);
     }
 
