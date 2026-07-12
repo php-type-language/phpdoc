@@ -19,8 +19,8 @@
     },
     "require-dev": {
         "phpstan/phpdoc-parser": "^2.3",
-        "phpstan/phpstan": "^2.2",
-        "phpunit/phpunit": "^13.2"
+        "phpstan/phpstan": "^2.2.5",
+        "phpunit/phpunit": "^13.2.4"
     },
     "autoload-dev": {
         "psr-4": {
