@@ -82,7 +82,7 @@ abstract class TagTestCase extends TestCase
         array $combinators = [],
         array $aliases = [],
     ): PlatformInterface {
-        return new readonly class('testing', $tags, $aliases, $combinators) implements PlatformInterface {
+        return new readonly class ('testing', $tags, $aliases, $combinators) implements PlatformInterface {
             public function __construct(
                 /** @var non-empty-string */
                 public string $name,
