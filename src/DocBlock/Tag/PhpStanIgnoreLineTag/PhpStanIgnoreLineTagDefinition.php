@@ -12,11 +12,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The "`phpstan-ignore-line`" tag silences any error reported on the
+ * The `@​phpstan-ignore-line` tag silences any error reported on the
  * current line.
  *
  * ```
- * "phpstan-ignore-line" [ <Description> ]
+ * "@​phpstan-ignore-line" [ <Description> ]
  * ```
  */
 final class PhpStanIgnoreLineTagDefinition extends TagDefinition

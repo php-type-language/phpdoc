@@ -80,13 +80,6 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class PsalmPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'Psalm';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
     public iterable $tags {

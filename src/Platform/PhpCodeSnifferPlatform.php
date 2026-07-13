@@ -19,13 +19,6 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpCodeSnifferPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'PHP CodeSniffer';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {

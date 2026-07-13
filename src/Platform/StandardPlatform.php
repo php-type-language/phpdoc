@@ -69,13 +69,6 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class StandardPlatform implements PlatformInterface
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'standard';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
     public iterable $tags {

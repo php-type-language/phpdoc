@@ -43,13 +43,6 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class PhpDocumentorPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'phpDocumentor';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {

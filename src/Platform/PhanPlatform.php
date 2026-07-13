@@ -50,13 +50,6 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhanPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'Phan';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
     public iterable $tags {

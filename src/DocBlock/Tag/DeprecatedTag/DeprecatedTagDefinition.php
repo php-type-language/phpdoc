@@ -13,11 +13,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@deprecated` tag marks an element as deprecated, optionally since
+ * The `@​deprecated` tag marks an element as deprecated, optionally since
  * a given version.
  *
  * ```
- * "@deprecated" [ <Version> ] [ <Description> ]
+ * "@​deprecated" [ <Version> ] [ <Description> ]
  * ```
  */
 final class DeprecatedTagDefinition extends TagDefinition

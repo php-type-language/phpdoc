@@ -53,13 +53,6 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpStanPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'PHPStan';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
     public iterable $tags {

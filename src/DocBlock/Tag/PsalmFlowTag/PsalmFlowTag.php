@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlowType;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 
 /**
- * The "@psalm-flow" tag describes how tainted data flows through a function,
+ * The `@psalm-flow` tag describes how tainted data flows through a function,
  * optionally naming the parameter the flow applies to.
  */
 final class PsalmFlowTag extends Tag

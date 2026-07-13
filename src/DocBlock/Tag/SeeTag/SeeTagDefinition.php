@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  *
  * A URI MUST be complete and well-formed as specified in RFC 2396.
  *
- * The "`@see"` tag SHOULD have a description to provide additional information
+ * The `@see` tag SHOULD have a description to provide additional information
  * regarding the relationship between the element and its target.
  *
  * The `@see` tag cannot refer to a namespace element.

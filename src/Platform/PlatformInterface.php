@@ -19,15 +19,6 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 interface PlatformInterface
 {
     /**
-     * Human-readable platform name.
-     *
-     * @var non-empty-string
-     */
-    public string $name {
-        get;
-    }
-
-    /**
      * Tag definitions keyed by their canonical (lower-case) name.
      *
      * @var iterable<non-empty-string, TagDefinitionInterface>

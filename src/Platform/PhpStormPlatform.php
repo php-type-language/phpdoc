@@ -17,13 +17,6 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpStormPlatform extends Platform
 {
     /**
-     * @var non-empty-string
-     */
-    public const string NAME = 'PhpStorm';
-
-    public private(set) string $name = self::NAME;
-
-    /**
      * @var iterable<non-empty-string, TagDefinitionInterface>
      */
     public iterable $tags {

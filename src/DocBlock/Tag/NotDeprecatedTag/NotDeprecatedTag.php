@@ -8,6 +8,6 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
  * The `@not-deprecated` tag marks an element as explicitly not deprecated,
- * overriding a `@deprecated` tag it would otherwise inherit from a parent.
+ * overriding a `@​deprecated` tag it would otherwise inherit from a parent.
  */
 final class NotDeprecatedTag extends FlagTag {}
