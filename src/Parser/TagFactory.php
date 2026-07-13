@@ -36,7 +36,7 @@ final readonly class TagFactory implements TagFactoryInterface
      * @param iterable<non-empty-string, CombinatorType> $combinators
      */
     public function __construct(
-        private TagRegistryInterface $registry = new TagRegistry(),
+        private TagRegistryInterface $registry,
         iterable $combinators = [],
     ) {
         $this->parser = new TagSpecificationParser($combinators);

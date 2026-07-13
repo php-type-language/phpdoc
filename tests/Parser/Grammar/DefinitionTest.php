@@ -9,6 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Description\TaggedDescription;
+use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTag;
 use TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTagDefinition;
@@ -112,7 +113,10 @@ final class DefinitionTest extends TestCase
 
     private static function factory(): TagFactory
     {
-        $registry = new TagRegistry(['link' => new LinkTagDefinition()]);
+        $registry = new TagRegistry(
+            definitions: ['link' => new LinkTagDefinition()],
+            genericTagDefinition: new GenericTagDefinition(),
+        );
 
         return new TagFactory($registry, self::grammar());
     }

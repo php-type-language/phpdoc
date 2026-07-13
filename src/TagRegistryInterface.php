@@ -17,6 +17,11 @@ interface TagRegistryInterface extends \Traversable, \Countable
     public function get(string $name): TagDefinitionInterface;
 
     /**
+     * @param non-empty-string $name
+     */
+    public function has(string $name): bool;
+
+    /**
      * @return int<0, max>
      */
     public function count(): int;

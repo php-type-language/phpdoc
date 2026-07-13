@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\Parser\Splitter\StringSplitter;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
 use TypeLang\PhpDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
+use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
 use TypeLang\PhpDoc\Platform\PhanPlatform;
 use TypeLang\PhpDoc\Platform\PhpCodeSnifferPlatform;
 use TypeLang\PhpDoc\Platform\PhpDocumentorPlatform;
@@ -121,7 +121,8 @@ final readonly class DocBlockParser implements DocBlockParserInterface
             }
         }
 
-        return new TagRegistry($definitions, $aliases);
+        return new TagRegistryBuilder($definitions, $aliases)
+            ->build();
     }
 
     /**

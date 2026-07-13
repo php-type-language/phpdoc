@@ -12,12 +12,11 @@ use TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
-use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
 use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
+use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
 use TypeLang\PhpDoc\TagFactoryInterface;
 
 #[Group('type-lang/phpdoc')]
@@ -49,13 +48,14 @@ abstract class TestCase extends BaseTestCase
                 if ($tagFactory === null) {
                     return new DescriptionCombinator(new BalancedBraceAwareParser(
                         new StringTagParser(new TagFactory(
+                            registry: new TagRegistryBuilder()
+                                ->build(),
                             combinators: [
                                 UriCombinator::NAME => new UriCombinator(),
                                 ReferenceCombinator::NAME => new ReferenceCombinator(),
                                 TypeCombinator::NAME => new TypeCombinator(typeParser: new TypeParser()),
                                 VariableCombinator::NAME => new VariableCombinator(),
                             ],
-                            genericTagDefinition: new GenericTagDefinition(),
                         )),
                     ));
                 }
@@ -65,7 +65,7 @@ abstract class TestCase extends BaseTestCase
                 );
             });
 
-        $tagFactory = new TagFactory(new TagRegistry(), $baseRules);
+        $tagFactory = new TagFactory(new TagRegistryBuilder()->build(), $baseRules);
 
         return $tagFactory;
     }

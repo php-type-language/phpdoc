@@ -24,6 +24,7 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
         return new \ReflectionClass(DescriptionCombinator::class)
             ->newLazyProxy(function (DescriptionCombinator $proxy) {
                 $registry = new TagRegistry(
+                    definitions: [],
                     genericTagDefinition: new GenericTagDefinition(),
                 );
 
