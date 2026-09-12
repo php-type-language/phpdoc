@@ -13,9 +13,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<non-empty-string>
  */
-final readonly class VariableCombinator implements CombinatorInterface
+final class VariableCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Variable';
+    public const NAME = 'Variable';
 
     /**
      * @return non-empty-string

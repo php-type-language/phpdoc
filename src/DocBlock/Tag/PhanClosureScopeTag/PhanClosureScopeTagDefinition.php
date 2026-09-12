@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanClosureScopeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-closure-scope';
+    public const NAME = 'phan-closure-scope';
 
     public function __construct()
     {

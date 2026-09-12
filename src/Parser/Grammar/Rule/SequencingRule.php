@@ -10,12 +10,12 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Matches an ordered sequence of rules, one after another.
  */
-final readonly class SequencingRule implements ProductionInterface
+final class SequencingRule implements ProductionInterface
 {
     /**
      * @var non-empty-list<RuleInterface>
      */
-    private array $rules;
+    private readonly array $rules;
 
     public function __construct(RuleInterface $rule, RuleInterface ...$other)
     {

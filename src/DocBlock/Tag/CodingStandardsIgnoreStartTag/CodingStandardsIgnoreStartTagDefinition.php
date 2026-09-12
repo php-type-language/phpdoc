@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class CodingStandardsIgnoreStartTagDefinition extends TagDefinition
 {
-    public const string NAME = 'codingStandardsIgnoreStart';
+    public const NAME = 'codingStandardsIgnoreStart';
 
     public function __construct()
     {

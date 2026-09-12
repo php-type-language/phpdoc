@@ -28,15 +28,15 @@ use TypeLang\PhpDoc\TagRegistryInterface;
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface
  */
-final readonly class TagFactory implements TagFactoryInterface
+final class TagFactory implements TagFactoryInterface
 {
-    private TagSpecificationParser $parser;
+    private readonly TagSpecificationParser $parser;
 
     /**
      * @param iterable<non-empty-string, CombinatorType> $combinators
      */
     public function __construct(
-        private TagRegistryInterface $registry,
+        private readonly TagRegistryInterface $registry,
         iterable $combinators = [],
     ) {
         $this->parser = new TagSpecificationParser($combinators);

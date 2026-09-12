@@ -10,17 +10,17 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Matches an exact literal at the current position.
  */
-final readonly class LiteralRule implements TerminalInterface
+final class LiteralRule implements TerminalInterface
 {
     public function __construct(
         /**
          * @var non-empty-string
          */
-        private string $value,
+        private readonly string $value,
         /**
          * @var non-empty-string|null
          */
-        public ?string $alias = null,
+        public readonly ?string $alias = null,
     ) {}
 
     public function match(Context $context): void

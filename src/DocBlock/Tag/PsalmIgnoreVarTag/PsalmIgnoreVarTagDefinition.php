@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmIgnoreVarTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-ignore-var';
+    public const NAME = 'psalm-ignore-var';
 
     public function __construct()
     {

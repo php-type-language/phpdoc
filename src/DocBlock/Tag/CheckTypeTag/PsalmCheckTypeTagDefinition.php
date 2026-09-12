@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class PsalmCheckTypeTagDefinition extends CheckTypeTagDefinition
 {
-    public const string NAME = 'psalm-check-type';
+    public const NAME = 'psalm-check-type';
 
     public function __construct()
     {

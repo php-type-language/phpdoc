@@ -15,7 +15,7 @@ final class DocBlockTest extends TestCase
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        self::assertNull(new DocBlock()->description);
+        self::assertNull((new DocBlock())->description);
     }
 
     #[Test]
@@ -23,13 +23,13 @@ final class DocBlockTest extends TestCase
     {
         $description = new Description('Summary');
 
-        self::assertSame($description, new DocBlock($description)->description);
+        self::assertSame($description, (new DocBlock($description))->description);
     }
 
     #[Test]
     public function tagsDefaultToEmptyList(): void
     {
-        self::assertSame([], new DocBlock()->tags);
+        self::assertSame([], (new DocBlock())->tags);
     }
 
     #[Test]
@@ -82,7 +82,7 @@ final class DocBlockTest extends TestCase
     #[Test]
     public function offsetGetReturnsNullForMissingOffset(): void
     {
-        self::assertNull(new DocBlock()[42]);
+        self::assertNull((new DocBlock())[42]);
     }
 
     #[Test]
@@ -111,6 +111,6 @@ final class DocBlockTest extends TestCase
         $tags = [new Tag('param'), new Tag('return')];
         $docblock = new DocBlock(null, $tags);
 
-        self::assertSame($tags, \iterator_to_array($docblock, false));
+        self::assertSame($tags, \iterator_to_array($docblock->getIterator(), false));
     }
 }

@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ParamClosureThisTagDefinition extends TagDefinition
 {
-    public const string NAME = 'param-closure-this';
+    public const NAME = 'param-closure-this';
 
     public function __construct()
     {

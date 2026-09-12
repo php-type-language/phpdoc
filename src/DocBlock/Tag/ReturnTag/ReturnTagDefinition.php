@@ -26,7 +26,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ReturnTagDefinition extends TagDefinition
 {
-    public const string NAME = 'return';
+    public const NAME = 'return';
 
     public function __construct()
     {

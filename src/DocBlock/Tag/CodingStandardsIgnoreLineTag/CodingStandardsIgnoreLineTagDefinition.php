@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class CodingStandardsIgnoreLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'codingStandardsIgnoreLine';
+    public const NAME = 'codingStandardsIgnoreLine';
 
     public function __construct()
     {

@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTaintSinkTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-taint-sink';
+    public const NAME = 'psalm-taint-sink';
 
     public function __construct()
     {

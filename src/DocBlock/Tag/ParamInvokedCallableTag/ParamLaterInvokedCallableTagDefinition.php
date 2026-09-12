@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
  */
 final class ParamLaterInvokedCallableTagDefinition extends ParamInvokedCallableTagDefinition
 {
-    public const string NAME = 'param-later-invoked-callable';
+    public const NAME = 'param-later-invoked-callable';
 
     public function __construct()
     {

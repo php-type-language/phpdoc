@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanTransientTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-transient';
+    public const NAME = 'phan-transient';
 
     public function __construct()
     {

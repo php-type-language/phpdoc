@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SuppressTagDefinition extends TagDefinition
 {
-    public const string NAME = 'suppress';
+    public const NAME = 'suppress';
 
     public function __construct()
     {

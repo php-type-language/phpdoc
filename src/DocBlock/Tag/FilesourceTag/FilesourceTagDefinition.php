@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class FilesourceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'filesource';
+    public const NAME = 'filesource';
 
     public function __construct()
     {

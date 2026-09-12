@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class TemplateTagDefinition extends TypeParameterTagDefinition
 {
-    public const string NAME = 'template';
+    public const NAME = 'template';
 
     public function __construct()
     {

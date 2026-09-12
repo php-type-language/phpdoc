@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class CopyrightTagDefinition extends TagDefinition
 {
-    public const string NAME = 'copyright';
+    public const NAME = 'copyright';
 
     public function __construct()
     {

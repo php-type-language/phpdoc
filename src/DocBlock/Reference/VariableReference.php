@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
 /**
  * A reference to a variable.
  */
-final readonly class VariableReference extends CodeReference
+final class VariableReference extends CodeReference
 {
     public function __construct(
         /**
@@ -15,7 +15,7 @@ final readonly class VariableReference extends CodeReference
          *
          * @var non-empty-string
          */
-        public string $name,
+        public readonly string $name,
     ) {
         parent::__construct();
     }

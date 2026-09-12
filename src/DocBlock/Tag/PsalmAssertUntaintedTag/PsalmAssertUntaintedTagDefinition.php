@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmAssertUntaintedTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-assert-untainted';
+    public const NAME = 'psalm-assert-untainted';
 
     public function __construct()
     {

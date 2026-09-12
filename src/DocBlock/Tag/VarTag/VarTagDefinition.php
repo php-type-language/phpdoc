@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class VarTagDefinition extends TagDefinition
 {
-    public const string NAME = 'var';
+    public const NAME = 'var';
 
     public function __construct()
     {

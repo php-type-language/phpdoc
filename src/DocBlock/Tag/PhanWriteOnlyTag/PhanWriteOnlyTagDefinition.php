@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanWriteOnlyTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-write-only';
+    public const NAME = 'phan-write-only';
 
     public function __construct()
     {

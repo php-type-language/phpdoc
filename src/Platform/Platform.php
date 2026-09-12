@@ -13,23 +13,26 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 abstract class Platform implements PlatformInterface
 {
     /**
-     * @var iterable<non-empty-string, TagDefinitionInterface>
+     * @return iterable<non-empty-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [];
+    public function getTags(): iterable
+    {
+        return [];
     }
 
     /**
-     * @var iterable<non-empty-string, non-empty-string>
+     * @return iterable<non-empty-string, non-empty-string>
      */
-    public iterable $aliases {
-        get => [];
+    public function getAliases(): iterable
+    {
+        return [];
     }
 
     /**
-     * @var iterable<non-empty-string, CombinatorType>
+     * @return iterable<non-empty-string, CombinatorType>
      */
-    public iterable $combinators {
-        get => [];
+    public function getCombinators(): iterable
+    {
+        return [];
     }
 }

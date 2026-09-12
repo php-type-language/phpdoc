@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
 /**
  * A reference to a constant of a class.
  */
-final readonly class ClassConstantReference extends CodeReference
+final class ClassConstantReference extends CodeReference
 {
     public function __construct(
         /**
@@ -15,13 +15,13 @@ final readonly class ClassConstantReference extends CodeReference
          *
          * @var non-empty-string
          */
-        public string $class,
+        public readonly string $class,
         /**
          * The name of the referenced constant.
          *
          * @var non-empty-string
          */
-        public string $name,
+        public readonly string $name,
     ) {
         parent::__construct();
     }

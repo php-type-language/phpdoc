@@ -4,54 +4,36 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Tag\AssertTag;
 
-use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
+use TypeLang\PhpDoc\DocBlock\Reference\CodeReference;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
+use TypeLang\PhpDoc\DocBlock\Tag\AssertionTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\AssertOperator;
 
 /**
- * The `@assert` tag asserts that the given variable is narrowed to a
- * specified type once the call returns.
+ * The `@assert` tag asserts that the given subject is narrowed to the type it
+ * carries once the call returns.
  *
  * ```
- * "@assert" <Type> <Variable> [ <Description> ]
+ * "@assert" [ "!" | "=" | "!=" ] <Type> <Subject> [ <Description> ]
  * ```
  */
-final class AssertTagDefinition extends TagDefinition
+final class AssertTagDefinition extends AssertionTagDefinition
 {
-    public const string NAME = 'assert';
+    public const NAME = 'assert';
 
     public function __construct()
     {
-        parent::__construct(
-            name: self::NAME,
-            spec: Spec::sequence(
-                Spec::rule(TypeCombinator::NAME, 'type'),
-                Spec::rule(VariableCombinator::NAME, 'variable'),
-                Spec::maybe(
-                    Spec::rule(DescriptionCombinator::NAME, 'description'),
-                ),
-            ),
-            placement: TagPlacement::Block,
-        );
+        parent::__construct(self::NAME);
     }
 
-    public function create(string $name, TagPayload $result): AssertTag
-    {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
-
-        /** @var non-empty-string $variable */
-        $variable = $result->get('variable');
-
-        /** @var DescriptionInterface|null $description */
-        $description = $result->find('description');
-
-        return new AssertTag($name, $type, $variable, $description);
+    protected function createAssertion(
+        string $name,
+        TypeReference $statement,
+        CodeReference $subject,
+        AssertOperator $operator,
+        ?DescriptionInterface $description,
+    ): AssertTag {
+        return new AssertTag($name, $statement, $subject, $operator, $description);
     }
 }

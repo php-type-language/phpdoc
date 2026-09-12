@@ -14,11 +14,11 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<non-empty-string>
  */
-final readonly class IssueNameCombinator implements CombinatorInterface
+final class IssueNameCombinator implements CombinatorInterface
 {
-    public const string NAME = 'IssueName';
+    public const NAME = 'IssueName';
 
-    private const string CHARS = 'abcdefghijklmnopqrstuvwxyz'
+    private const CHARS = 'abcdefghijklmnopqrstuvwxyz'
         . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         . '0123456789_.-';
 

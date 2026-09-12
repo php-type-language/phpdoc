@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanHardcodeReturnTypeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-hardcode-return-type';
+    public const NAME = 'phan-hardcode-return-type';
 
     public function __construct()
     {

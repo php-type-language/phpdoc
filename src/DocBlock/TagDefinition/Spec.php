@@ -12,7 +12,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Rule\RepetitionRule;
 use TypeLang\PhpDoc\Parser\Grammar\Rule\RuleInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Rule\SequencingRule;
 
-final readonly class Spec
+final class Spec
 {
     /**
      * @param non-empty-string $value

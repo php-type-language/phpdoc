@@ -18,7 +18,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class UseTagDefinition extends InheritanceTagDefinition
 {
-    public const string NAME = 'use';
+    public const NAME = 'use';
 
     public function __construct()
     {

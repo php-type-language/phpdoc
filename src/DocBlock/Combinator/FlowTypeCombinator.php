@@ -14,9 +14,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<FlowType>
  */
-final readonly class FlowTypeCombinator implements CombinatorInterface
+final class FlowTypeCombinator implements CombinatorInterface
 {
-    public const string NAME = 'FlowType';
+    public const NAME = 'FlowType';
 
     public function __invoke(Cursor $cursor): FlowType
     {

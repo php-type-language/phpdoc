@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class LicenseTagDefinition extends TagDefinition
 {
-    public const string NAME = 'license';
+    public const NAME = 'license';
 
     public function __construct()
     {

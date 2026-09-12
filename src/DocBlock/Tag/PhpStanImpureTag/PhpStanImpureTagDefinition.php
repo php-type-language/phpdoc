@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhpStanImpureTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phpstan-impure';
+    public const NAME = 'phpstan-impure';
 
     public function __construct()
     {

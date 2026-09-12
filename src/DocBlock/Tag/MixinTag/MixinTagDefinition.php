@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class MixinTagDefinition extends TagDefinition
 {
-    public const string NAME = 'mixin';
+    public const NAME = 'mixin';
 
     public function __construct()
     {

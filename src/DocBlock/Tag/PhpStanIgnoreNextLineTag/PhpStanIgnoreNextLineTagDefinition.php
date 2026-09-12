@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhpStanIgnoreNextLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phpstan-ignore-next-line';
+    public const NAME = 'phpstan-ignore-next-line';
 
     public function __construct()
     {

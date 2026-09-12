@@ -9,18 +9,18 @@ use TypeLang\Type\TypeNode;
 /**
  * A parsed type together with the exact source text it was read from.
  */
-final readonly class TypeReference implements ReferenceInterface
+final class TypeReference implements ReferenceInterface
 {
-    public bool $isExternal;
+    public readonly bool $isExternal;
 
     public function __construct(
-        public TypeNode $type,
+        public readonly TypeNode $type,
         /**
          * The original type text, exactly as it appeared in the source.
          *
          * @var non-empty-string
          */
-        public string $source,
+        public readonly string $source,
     ) {
         $this->isExternal = false;
     }

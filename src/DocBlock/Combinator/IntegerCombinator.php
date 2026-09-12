@@ -13,11 +13,11 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<int<0, max>>
  */
-final readonly class IntegerCombinator implements CombinatorInterface
+final class IntegerCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Integer';
+    public const NAME = 'Integer';
 
-    private const string DIGITS = '0123456789';
+    private const DIGITS = '0123456789';
 
     /**
      * @return int<0, max>

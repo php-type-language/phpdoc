@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Description;
 
-final readonly class Description implements DescriptionInterface
+final class Description implements DescriptionInterface
 {
     public function __construct(
-        public string $value = '',
+        public readonly string $value = '',
     ) {}
 
     public static function createIfNotEmpty(string $value): ?self

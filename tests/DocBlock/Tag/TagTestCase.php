@@ -82,16 +82,16 @@ abstract class TagTestCase extends TestCase
         array $combinators = [],
         array $aliases = [],
     ): PlatformInterface {
-        return new readonly class ('testing', $tags, $aliases, $combinators) implements PlatformInterface {
+        return new class ('testing', $tags, $aliases, $combinators) implements PlatformInterface {
             public function __construct(
                 /** @var non-empty-string */
-                public string $name,
+                public readonly string $name,
                 /** @var iterable<non-empty-string, TagDefinitionInterface> */
-                public iterable $tags,
+                public readonly iterable $tags,
                 /** @var iterable<non-empty-string, non-empty-string> */
-                public iterable $aliases,
+                public readonly iterable $aliases,
                 /** @var iterable<non-empty-string, (callable(Cursor): mixed)> */
-                public iterable $combinators,
+                public readonly iterable $combinators,
             ) {}
         };
     }

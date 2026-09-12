@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PureUnlessCallableIsImpureTagDefinition extends TagDefinition
 {
-    public const string NAME = 'pure-unless-callable-is-impure';
+    public const NAME = 'pure-unless-callable-is-impure';
 
     public function __construct()
     {

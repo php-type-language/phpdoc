@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class NoinspectionTagDefinition extends TagDefinition
 {
-    public const string NAME = 'noinspection';
+    public const NAME = 'noinspection';
 
     public function __construct()
     {

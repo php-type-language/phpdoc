@@ -19,10 +19,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpCodeSnifferPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-string, TagDefinitionInterface>
+     * @return iterable<non-empty-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             CodingStandardsIgnoreStartTagDefinition::NAME => new CodingStandardsIgnoreStartTagDefinition(),
             CodingStandardsIgnoreEndTagDefinition::NAME => new CodingStandardsIgnoreEndTagDefinition(),
             CodingStandardsIgnoreLineTagDefinition::NAME => new CodingStandardsIgnoreLineTagDefinition(),

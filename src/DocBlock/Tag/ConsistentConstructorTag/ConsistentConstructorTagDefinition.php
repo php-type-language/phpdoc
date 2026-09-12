@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ConsistentConstructorTagDefinition extends TagDefinition
 {
-    public const string NAME = 'consistent-constructor';
+    public const NAME = 'consistent-constructor';
 
     public function __construct()
     {

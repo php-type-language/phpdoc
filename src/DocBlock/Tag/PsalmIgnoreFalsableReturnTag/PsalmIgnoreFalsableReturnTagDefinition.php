@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmIgnoreFalsableReturnTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-ignore-falsable-return';
+    public const NAME = 'psalm-ignore-falsable-return';
 
     public function __construct()
     {

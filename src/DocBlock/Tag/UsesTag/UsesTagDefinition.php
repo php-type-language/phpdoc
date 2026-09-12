@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class UsesTagDefinition extends TagDefinition
 {
-    public const string NAME = 'uses';
+    public const NAME = 'uses';
 
     public function __construct()
     {

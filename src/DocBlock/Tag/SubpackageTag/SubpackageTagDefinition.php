@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SubpackageTagDefinition extends TagDefinition
 {
-    public const string NAME = 'subpackage';
+    public const NAME = 'subpackage';
 
     public function __construct()
     {

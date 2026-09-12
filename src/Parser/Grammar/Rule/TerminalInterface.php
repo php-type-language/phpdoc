@@ -6,16 +6,7 @@ namespace TypeLang\PhpDoc\Parser\Grammar\Rule;
 
 /**
  * Interface denoting a leaf (that is a terminal) rule.
+ *
+ * @property-read ?non-empty-string $alias The name the matched value is captured under, if any.
  */
-interface TerminalInterface extends RuleInterface
-{
-    /**
-     * Capture name under which the presence of the rule is recorded,
-     * or {@see null} to match without capturing.
-     *
-     * @var non-empty-string|null
-     */
-    public ?string $alias {
-        get;
-    }
-}
+interface TerminalInterface extends RuleInterface {}

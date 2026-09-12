@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmStubOverrideTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-stub-override';
+    public const NAME = 'psalm-stub-override';
 
     public function __construct()
     {

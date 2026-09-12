@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class TemplateCovariantTagDefinition extends TypeParameterTagDefinition
 {
-    public const string NAME = 'template-covariant';
+    public const NAME = 'template-covariant';
 
     public function __construct()
     {

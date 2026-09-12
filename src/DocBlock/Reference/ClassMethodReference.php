@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
 /**
  * A reference to a method of a class.
  */
-final readonly class ClassMethodReference extends CodeReference
+final class ClassMethodReference extends CodeReference
 {
     public function __construct(
         /**
@@ -15,13 +15,13 @@ final readonly class ClassMethodReference extends CodeReference
          *
          * @var non-empty-string
          */
-        public string $class,
+        public readonly string $class,
         /**
          * The name of the referenced method.
          *
          * @var non-empty-string
          */
-        public string $name,
+        public readonly string $name,
     ) {
         parent::__construct();
     }

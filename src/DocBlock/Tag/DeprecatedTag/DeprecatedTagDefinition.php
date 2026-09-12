@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class DeprecatedTagDefinition extends TagDefinition
 {
-    public const string NAME = 'deprecated';
+    public const NAME = 'deprecated';
 
     public function __construct()
     {

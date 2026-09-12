@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanSuppressNextNextLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-suppress-next-next-line';
+    public const NAME = 'phan-suppress-next-next-line';
 
     public function __construct()
     {

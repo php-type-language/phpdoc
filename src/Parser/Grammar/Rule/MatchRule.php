@@ -15,7 +15,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Context;
  * new MatchRule('URI');        // matches but captures nothing
  * ```
  */
-final readonly class MatchRule implements TerminalInterface
+final class MatchRule implements TerminalInterface
 {
     public function __construct(
         /**
@@ -23,15 +23,15 @@ final readonly class MatchRule implements TerminalInterface
          *
          * @var non-empty-string
          */
-        private string $rule,
+        private readonly string $rule,
         /**
          * @var non-empty-string|null
          */
-        public ?string $alias = null,
+        public readonly ?string $alias = null,
         /**
          * @var non-empty-string|null
          */
-        public ?string $renderAs = null,
+        public readonly ?string $renderAs = null,
     ) {}
 
     public function match(Context $context): void

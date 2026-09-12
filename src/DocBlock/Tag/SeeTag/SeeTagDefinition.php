@@ -37,7 +37,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SeeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'see';
+    public const NAME = 'see';
 
     public function __construct()
     {

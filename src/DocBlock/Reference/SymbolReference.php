@@ -8,7 +8,7 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
  * A reference to a named symbol, such as a class, interface, trait, enum
  * or a global constant.
  */
-final readonly class SymbolReference extends CodeReference
+final class SymbolReference extends CodeReference
 {
     public function __construct(
         /**
@@ -16,7 +16,7 @@ final readonly class SymbolReference extends CodeReference
          *
          * @var non-empty-string
          */
-        public string $name,
+        public readonly string $name,
     ) {
         parent::__construct();
     }

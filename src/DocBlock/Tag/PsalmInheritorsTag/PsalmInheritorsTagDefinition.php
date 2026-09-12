@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmInheritorsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-inheritors';
+    public const NAME = 'psalm-inheritors';
 
     public function __construct()
     {

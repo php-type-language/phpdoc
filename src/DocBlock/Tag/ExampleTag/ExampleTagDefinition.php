@@ -25,7 +25,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ExampleTagDefinition extends TagDefinition
 {
-    public const string NAME = 'example';
+    public const NAME = 'example';
 
     public function __construct()
     {

@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ApiTagDefinition extends TagDefinition
 {
-    public const string NAME = 'api';
+    public const NAME = 'api';
 
     public function __construct()
     {

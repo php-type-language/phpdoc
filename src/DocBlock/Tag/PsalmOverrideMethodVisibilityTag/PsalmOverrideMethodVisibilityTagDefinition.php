@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmOverrideMethodVisibilityTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-override-method-visibility';
+    public const NAME = 'psalm-override-method-visibility';
 
     public function __construct()
     {

@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhpStanIgnoreLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phpstan-ignore-line';
+    public const NAME = 'phpstan-ignore-line';
 
     public function __construct()
     {

@@ -10,16 +10,16 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Matches an inner rule as many times as it applies.
  */
-final readonly class RepetitionRule implements ProductionInterface
+final class RepetitionRule implements ProductionInterface
 {
     public function __construct(
-        private RuleInterface $rule,
+        private readonly RuleInterface $rule,
         /**
          * Least number of repetitions required to match.
          *
          * @var int<0, max>
          */
-        private int $min = 0,
+        private readonly int $min = 0,
     ) {}
 
     public function match(Context $context): void
@@ -43,7 +43,7 @@ final readonly class RepetitionRule implements ProductionInterface
 
             ++$count;
 
-            if ($context->cursor->position === $snapshot[0]) {
+            if ($context->cursor->getPosition() === $snapshot[0]) {
                 break;
             }
         }

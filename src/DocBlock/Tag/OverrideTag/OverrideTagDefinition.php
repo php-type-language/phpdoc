@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class OverrideTagDefinition extends TagDefinition
 {
-    public const string NAME = 'override';
+    public const NAME = 'override';
 
     public function __construct()
     {

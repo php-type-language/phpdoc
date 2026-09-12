@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SinceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'since';
+    public const NAME = 'since';
 
     public function __construct()
     {

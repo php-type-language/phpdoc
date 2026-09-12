@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTaintSourceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-taint-source';
+    public const NAME = 'psalm-taint-source';
 
     public function __construct()
     {

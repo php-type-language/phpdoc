@@ -14,11 +14,11 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<non-empty-string>
  */
-final readonly class VersionCombinator implements CombinatorInterface
+final class VersionCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Version';
+    public const NAME = 'Version';
 
-    private const string DIGITS = '0123456789';
+    private const DIGITS = '0123456789';
 
     /**
      * @return non-empty-string

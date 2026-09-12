@@ -17,7 +17,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class TemplateContravariantTagDefinition extends TypeParameterTagDefinition
 {
-    public const string NAME = 'template-contravariant';
+    public const NAME = 'template-contravariant';
 
     public function __construct()
     {

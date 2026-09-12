@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SealMethodsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'seal-methods';
+    public const NAME = 'seal-methods';
 
     public function __construct()
     {

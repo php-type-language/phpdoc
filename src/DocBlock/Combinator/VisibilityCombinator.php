@@ -15,9 +15,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<Visibility>
  */
-final readonly class VisibilityCombinator implements CombinatorInterface
+final class VisibilityCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Visibility';
+    public const NAME = 'Visibility';
 
     public function __invoke(Cursor $cursor): Visibility
     {

@@ -14,13 +14,13 @@ final class TagTest extends TagTestCase
     #[Test]
     public function constructorStoresName(): void
     {
-        self::assertSame('param', new Tag('param')->name);
+        self::assertSame('param', (new Tag('param'))->name);
     }
 
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        self::assertNull(new Tag('param')->description);
+        self::assertNull((new Tag('param'))->description);
     }
 
     #[Test]
@@ -28,7 +28,7 @@ final class TagTest extends TagTestCase
     {
         $description = new Description('int $a');
 
-        self::assertSame($description, new Tag('param', $description)->description);
+        self::assertSame($description, (new Tag('param', $description))->description);
     }
 
     #[Test]

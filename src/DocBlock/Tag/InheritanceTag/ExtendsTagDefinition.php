@@ -19,7 +19,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class ExtendsTagDefinition extends InheritanceTagDefinition
 {
-    public const string NAME = 'extends';
+    public const NAME = 'extends';
 
     public function __construct()
     {

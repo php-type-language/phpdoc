@@ -18,9 +18,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Grammar;
 /**
  * @phpstan-import-type CombinatorType from CombinatorInterface
  */
-final readonly class TagSpecificationParser
+final class TagSpecificationParser
 {
-    private Grammar $grammar;
+    private readonly Grammar $grammar;
 
     /**
      * @param iterable<non-empty-string, CombinatorType> $combinators
@@ -49,7 +49,7 @@ final readonly class TagSpecificationParser
                 tag: $name,
                 grammar: (string) $rule,
                 source: $suffix,
-                offset: $cursor->furthestOffset,
+                offset: $cursor->getFurthestOffset(),
             );
         }
 

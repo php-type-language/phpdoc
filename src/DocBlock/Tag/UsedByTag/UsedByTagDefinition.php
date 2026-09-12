@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class UsedByTagDefinition extends TagDefinition
 {
-    public const string NAME = 'used-by';
+    public const NAME = 'used-by';
 
     public function __construct()
     {

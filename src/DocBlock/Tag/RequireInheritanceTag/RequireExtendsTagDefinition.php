@@ -17,7 +17,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class RequireExtendsTagDefinition extends RequireInheritanceTagDefinition
 {
-    public const string NAME = 'require-extends';
+    public const NAME = 'require-extends';
 
     public function __construct()
     {

@@ -17,7 +17,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class PropertyWriteTagDefinition extends MagicPropertyTagDefinition
 {
-    public const string NAME = 'property-write';
+    public const NAME = 'property-write';
 
     public function __construct()
     {

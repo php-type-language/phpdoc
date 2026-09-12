@@ -28,7 +28,7 @@ use TypeLang\Type\CallableTypeNode;
  */
 final class MethodTagDefinition extends TagDefinition
 {
-    public const string NAME = 'method';
+    public const NAME = 'method';
 
     public function __construct()
     {

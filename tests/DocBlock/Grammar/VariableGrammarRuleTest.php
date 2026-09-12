@@ -43,7 +43,7 @@ final class VariableGrammarRuleTest extends GrammarRuleTestCase
         $name = $this->matchCursor($cursor);
 
         self::assertSame('var', $name);
-        self::assertSame(4, $cursor->offset);
+        self::assertSame(4, $cursor->getOffset());
     }
 
     /**
@@ -56,7 +56,7 @@ final class VariableGrammarRuleTest extends GrammarRuleTestCase
         yield 'missing dollar' => ['var'];
         yield 'dollar only' => ['$'];
         yield 'illegal character' => ['$foo!bar'];
-        yield 'namespace separator' => ['$foo\\bar'];
+        yield 'namespace separator' => ['$foo\$tag->typear'];
     }
 
     #[Test]

@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ExpectedExceptionTagDefinition extends TagDefinition
 {
-    public const string NAME = 'expectedException';
+    public const NAME = 'expectedException';
 
     public function __construct()
     {

@@ -345,7 +345,9 @@ final class SplitterTest extends TestCase
      */
     private static function segments(iterable $result): array
     {
-        return \iterator_to_array($result, false);
+        return \is_array($result)
+            ? \array_values($result)
+            : \iterator_to_array($result, false);
     }
 
     /**

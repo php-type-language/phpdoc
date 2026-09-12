@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanConstructorUsedForSideEffectsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-constructor-used-for-side-effects';
+    public const NAME = 'phan-constructor-used-for-side-effects';
 
     public function __construct()
     {

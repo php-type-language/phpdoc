@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
+use TypeLang\Parser\Partial\SuccessfulParsedResult;
 use TypeLang\Parser\TypeParserInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
@@ -18,29 +19,30 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<TypeReference>
  */
-readonly class TypeCombinator implements CombinatorInterface
+class TypeCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Type';
+    public const NAME = 'Type';
 
     public function __construct(
-        private TypeParserInterface $typeParser
+        private readonly TypeParserInterface $typeParser
     ) {}
 
     public function __invoke(Cursor $cursor): TypeReference
     {
-        $start = $cursor->position;
+        $start = $cursor->getPosition();
         $source = $cursor->readRemainder();
 
         if ($source === '') {
             throw new NoMatchException('Expected a type');
         }
 
-        // Tolerant parsing yields the type together with the offset of the next
-        // token after it, so the cursor is left at the start of the trailing
-        // text (e.g. a description) rather than at the end of the buffer.
-        $result = $this->typeParser->parseTolerant($source);
+        $result = $this->typeParser->partial($source);
 
-        $cursor->position = $start + $result->offset;
+        if (!$result instanceof SuccessfulParsedResult) {
+            throw new NoMatchException($result->message);
+        }
+
+        $cursor->moveTo($start + $result->offset);
 
         // The tolerant offset also covers the whitespace up to the next token,
         // so the trailing run is trimmed off the preserved type text.

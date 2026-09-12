@@ -26,7 +26,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ThrowsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'throws';
+    public const NAME = 'throws';
 
     public function __construct()
     {

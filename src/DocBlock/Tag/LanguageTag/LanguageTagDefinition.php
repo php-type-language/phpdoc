@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class LanguageTagDefinition extends TagDefinition
 {
-    public const string NAME = 'language';
+    public const NAME = 'language';
 
     public function __construct()
     {

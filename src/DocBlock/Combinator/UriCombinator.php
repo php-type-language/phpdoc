@@ -15,9 +15,9 @@ use Uri\Rfc3986\Uri;
  *
  * @template-implements CombinatorInterface<UriReference>
  */
-final readonly class UriCombinator implements CombinatorInterface
+final class UriCombinator implements CombinatorInterface
 {
-    public const string NAME = 'URI';
+    public const NAME = 'URI';
 
     public function __invoke(Cursor $cursor): UriReference
     {

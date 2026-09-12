@@ -37,7 +37,7 @@ final class Context
      */
     public function mark(): array
     {
-        return [$this->cursor->position, \count($this->captures)];
+        return [$this->cursor->getPosition(), \count($this->captures)];
     }
 
     /**
@@ -50,7 +50,7 @@ final class Context
     {
         [$position, $length] = $snapshot;
 
-        $this->cursor->position = $position;
+        $this->cursor->moveTo($position);
 
         if (\count($this->captures) > $length) {
             $this->captures = \array_slice($this->captures, 0, $length);

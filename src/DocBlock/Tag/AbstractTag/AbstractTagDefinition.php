@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class AbstractTagDefinition extends TagDefinition
 {
-    public const string NAME = 'abstract';
+    public const NAME = 'abstract';
 
     public function __construct()
     {

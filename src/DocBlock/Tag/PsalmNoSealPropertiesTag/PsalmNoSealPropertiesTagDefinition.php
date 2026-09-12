@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmNoSealPropertiesTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-no-seal-properties';
+    public const NAME = 'psalm-no-seal-properties';
 
     public function __construct()
     {

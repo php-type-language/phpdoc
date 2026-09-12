@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ImmutableTagDefinition extends TagDefinition
 {
-    public const string NAME = 'immutable';
+    public const NAME = 'immutable';
 
     public function __construct()
     {

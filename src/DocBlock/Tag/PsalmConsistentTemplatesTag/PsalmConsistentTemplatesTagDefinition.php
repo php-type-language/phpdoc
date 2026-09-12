@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmConsistentTemplatesTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-consistent-templates';
+    public const NAME = 'psalm-consistent-templates';
 
     public function __construct()
     {

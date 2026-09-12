@@ -10,12 +10,12 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Matches the first of the given alternatives that applies.
  */
-final readonly class AlternationRule implements ProductionInterface
+final class AlternationRule implements ProductionInterface
 {
     /**
      * @var non-empty-list<RuleInterface>
      */
-    private array $rules;
+    private readonly array $rules;
 
     public function __construct(RuleInterface $rule, RuleInterface ...$other)
     {

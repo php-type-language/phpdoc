@@ -30,7 +30,7 @@ final class InvalidTagTest extends TagTestCase
     #[Test]
     public function descriptionDefaultsToNull(): void
     {
-        self::assertNull(new InvalidTag(new \RuntimeException(), 'param')->description);
+        self::assertNull((new InvalidTag(new \RuntimeException(), 'param'))->description);
     }
 
     #[Test]

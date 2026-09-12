@@ -19,9 +19,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  * Reads a reference to a code element: a class, a function, a class method, a
  * class constant, a class property or a variable.
  */
-final readonly class ReferenceCombinator implements CombinatorInterface
+final class ReferenceCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Reference';
+    public const NAME = 'Reference';
 
     public function __invoke(Cursor $cursor): CodeReference
     {

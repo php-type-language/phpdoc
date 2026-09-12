@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PackageTagDefinition extends TagDefinition
 {
-    public const string NAME = 'package';
+    public const NAME = 'package';
 
     public function __construct()
     {

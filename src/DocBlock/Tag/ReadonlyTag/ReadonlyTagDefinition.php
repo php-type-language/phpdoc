@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ReadonlyTagDefinition extends TagDefinition
 {
-    public const string NAME = 'readonly';
+    public const NAME = 'readonly';
 
     public function __construct()
     {

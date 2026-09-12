@@ -13,9 +13,10 @@ use TypeLang\Type\TypeNode;
  */
 abstract class TypedTag extends Tag implements TypedTagInterface
 {
-    public TypeNode $type {
-        get => $this->statement->type;
-    }
+    /**
+     * The type declared by the tag.
+     */
+    public readonly TypeNode $type;
 
     public function __construct(
         string $name,
@@ -25,6 +26,8 @@ abstract class TypedTag extends Tag implements TypedTagInterface
         protected readonly TypeReference $statement,
         ?DescriptionInterface $description = null,
     ) {
+        $this->type = $statement->type;
+
         parent::__construct($name, $description);
     }
 

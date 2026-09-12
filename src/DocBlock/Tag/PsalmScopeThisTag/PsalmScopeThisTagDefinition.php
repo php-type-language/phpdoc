@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmScopeThisTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-scope-this';
+    public const NAME = 'psalm-scope-this';
 
     public function __construct()
     {

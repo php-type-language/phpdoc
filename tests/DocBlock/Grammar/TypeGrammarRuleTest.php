@@ -65,7 +65,7 @@ final class TypeGrammarRuleTest extends GrammarRuleTestCase
 
         self::assertInstanceOf(UnionTypeNode::class, $statement->type);
         self::assertSame('int|string', $statement->source);
-        self::assertSame(11, $cursor->offset);
+        self::assertSame(11, $cursor->getOffset());
     }
 
     #[Test]
@@ -75,7 +75,7 @@ final class TypeGrammarRuleTest extends GrammarRuleTestCase
         $statement = $this->matchCursor($cursor);
 
         self::assertInstanceOf(TypeReference::class, $statement);
-        self::assertSame(104, $cursor->offset);
+        self::assertSame(104, $cursor->getOffset());
     }
 
     #[Test]

@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ImportTypeAliasTagDefinition extends TagDefinition
 {
-    public const string NAME = 'import-type';
+    public const NAME = 'import-type';
 
     public function __construct()
     {

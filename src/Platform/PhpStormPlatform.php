@@ -17,10 +17,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpStormPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-string, TagDefinitionInterface>
+     * @return iterable<non-empty-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             ExpectedExceptionTagDefinition::NAME => new ExpectedExceptionTagDefinition(),
             FormatterOffTagDefinition::NAME => new FormatterOffTagDefinition(),
             FormatterOnTagDefinition::NAME => new FormatterOnTagDefinition(),

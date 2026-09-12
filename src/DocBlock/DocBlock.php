@@ -33,7 +33,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
  * @template-implements \ArrayAccess<array-key, TagInterface>
  * @template-implements \IteratorAggregate<array-key, TagInterface>
  */
-final readonly class DocBlock implements
+final class DocBlock implements
     ComponentInterface,
     \IteratorAggregate,
     \ArrayAccess,
@@ -58,7 +58,7 @@ final readonly class DocBlock implements
      *
      * @var list<TagInterface>
      */
-    public array $tags;
+    public readonly array $tags;
 
     /**
      * @param iterable<mixed, TagInterface> $tags list of all tags contained
@@ -86,10 +86,12 @@ final readonly class DocBlock implements
          * echo $block->description; // "Sends a notification..."
          * ```
          */
-        public ?DescriptionInterface $description = null,
+        public readonly ?DescriptionInterface $description = null,
         iterable $tags = [],
     ) {
-        $this->tags = \iterator_to_array($tags, false);
+        $this->tags = \is_array($tags)
+            ? \array_values($tags)
+            : \iterator_to_array($tags, false);
     }
 
     public function offsetExists(mixed $offset): bool

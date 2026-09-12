@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmVariadicTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-variadic';
+    public const NAME = 'psalm-variadic';
 
     public function __construct()
     {

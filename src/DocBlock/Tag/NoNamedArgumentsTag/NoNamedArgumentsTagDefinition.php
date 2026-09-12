@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class NoNamedArgumentsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'no-named-arguments';
+    public const NAME = 'no-named-arguments';
 
     public function __construct()
     {

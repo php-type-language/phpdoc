@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmIfThisIsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-if-this-is';
+    public const NAME = 'psalm-if-this-is';
 
     public function __construct()
     {

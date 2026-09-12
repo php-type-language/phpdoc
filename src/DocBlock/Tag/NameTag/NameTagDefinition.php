@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class NameTagDefinition extends TagDefinition
 {
-    public const string NAME = 'name';
+    public const NAME = 'name';
 
     public function __construct()
     {

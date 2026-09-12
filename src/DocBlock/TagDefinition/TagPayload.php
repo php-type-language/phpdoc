@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\UncapturedRuleException;
  * $result->getAll('parameter'); // every value captured under the alias
  * ```
  */
-final readonly class TagPayload
+final class TagPayload
 {
     public function __construct(
         /**
@@ -24,7 +24,7 @@ final readonly class TagPayload
          *
          * @var array<string, list<mixed>>
          */
-        private array $captures = [],
+        private readonly array $captures = [],
     ) {}
 
     public function has(string $alias): bool

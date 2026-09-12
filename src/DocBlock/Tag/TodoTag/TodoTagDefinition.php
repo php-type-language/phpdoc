@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class TodoTagDefinition extends TagDefinition
 {
-    public const string NAME = 'todo';
+    public const NAME = 'todo';
 
     public function __construct()
     {

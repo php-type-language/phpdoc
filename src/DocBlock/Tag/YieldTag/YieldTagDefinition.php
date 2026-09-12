@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class YieldTagDefinition extends TagDefinition
 {
-    public const string NAME = 'yield';
+    public const NAME = 'yield';
 
     public function __construct()
     {

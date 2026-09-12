@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ReadonlyAllowPrivateMutationTagDefinition extends TagDefinition
 {
-    public const string NAME = 'readonly-allow-private-mutation';
+    public const NAME = 'readonly-allow-private-mutation';
 
     public function __construct()
     {

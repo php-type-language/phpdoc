@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanForbidUndeclaredMagicPropertiesTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-forbid-undeclared-magic-properties';
+    public const NAME = 'phan-forbid-undeclared-magic-properties';
 
     public function __construct()
     {

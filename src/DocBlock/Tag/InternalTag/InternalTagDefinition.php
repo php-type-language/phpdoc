@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class InternalTagDefinition extends TagDefinition
 {
-    public const string NAME = 'internal';
+    public const NAME = 'internal';
 
     public function __construct()
     {

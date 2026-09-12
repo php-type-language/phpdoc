@@ -18,19 +18,19 @@ use TypeLang\PhpDoc\Parser\Tag\TagParserInterface;
  *
  * An inline tag is any `{@...}` sequence whose curly braces are balanced.
  */
-final readonly class BalancedBraceAwareParser implements DescriptionParserInterface
+final class BalancedBraceAwareParser implements DescriptionParserInterface
 {
-    private const string INLINE_TAG_START_SEQUENCE = '{@';
+    private const INLINE_TAG_START_SEQUENCE = '{@';
 
-    private const string NESTING_INC_CHAR = '{';
-    private const string NESTING_DEC_CHAR = '}';
+    private const NESTING_INC_CHAR = '{';
+    private const NESTING_DEC_CHAR = '}';
 
-    private const string NESTING_CHARS
+    private const NESTING_CHARS
         = self::NESTING_INC_CHAR
         . self::NESTING_DEC_CHAR;
 
     public function __construct(
-        private TagParserInterface $tagParser,
+        private readonly TagParserInterface $tagParser,
     ) {}
 
     public function tryParse(string $description): ?DescriptionInterface

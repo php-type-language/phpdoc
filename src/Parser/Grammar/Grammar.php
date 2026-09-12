@@ -42,7 +42,9 @@ final class Grammar implements \Countable, \IteratorAggregate
      */
     public function __construct(iterable $rules = [])
     {
-        $this->combinators = \iterator_to_array($rules);
+        $this->combinators = \is_array($rules)
+            ? $rules
+            : \iterator_to_array($rules);
     }
 
     /**

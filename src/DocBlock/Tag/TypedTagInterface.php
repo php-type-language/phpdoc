@@ -8,13 +8,7 @@ use TypeLang\Type\TypeNode;
 
 /**
  * A tag that carries a single type.
+ *
+ * @property-read TypeNode $type The type declared by the tag.
  */
-interface TypedTagInterface extends TagInterface
-{
-    /**
-     * The type declared by the tag.
-     */
-    public TypeNode $type {
-        get;
-    }
-}
+interface TypedTagInterface extends TagInterface {}

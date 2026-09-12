@@ -26,7 +26,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ParamTagDefinition extends TagDefinition
 {
-    public const string NAME = 'param';
+    public const NAME = 'param';
 
     public function __construct()
     {

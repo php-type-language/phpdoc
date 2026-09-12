@@ -9,14 +9,8 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
  *
  * The target may either be an element of the described codebase or an
  * external resource located outside of it.
+ *
+ * @property-read bool $isExternal Gets {@see true} in case of the reference points outside of the described
+ *                codebase, such as an external web page.
  */
-interface ReferenceInterface extends \Stringable
-{
-    /**
-     * Gets {@see true} when the reference points to a resource located
-     * outside of the described codebase, such as an external web page.
-     */
-    public bool $isExternal {
-        get;
-    }
-}
+interface ReferenceInterface extends \Stringable {}

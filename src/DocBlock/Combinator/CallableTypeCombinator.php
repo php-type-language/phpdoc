@@ -13,9 +13,9 @@ use TypeLang\Type\CallableTypeNode;
  * Reads a type and accepts it only when it is a callable, so that a plain word
  * (which would parse as a type) is left for the following combinators.
  */
-final readonly class CallableTypeCombinator extends TypeCombinator
+final class CallableTypeCombinator extends TypeCombinator
 {
-    public const string NAME = 'CallableType';
+    public const NAME = 'CallableType';
 
     #[\Override]
     public function __invoke(Cursor $cursor): TypeReference

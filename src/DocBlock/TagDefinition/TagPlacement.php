@@ -27,5 +27,5 @@ enum TagPlacement
     /**
      * Placement assumed when a definition does not specify one.
      */
-    public const self DEFAULT = self::Any;
+    public const DEFAULT = self::Any;
 }

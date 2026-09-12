@@ -93,8 +93,8 @@ final class FlagTagTest extends TagTestCase
     #[Test]
     public function placementIsRecognized(): void
     {
-        self::assertSame(TagPlacement::Any, new InternalTagDefinition()->placement);
-        self::assertSame(TagPlacement::Block, new AbstractTagDefinition()->placement);
+        self::assertSame(TagPlacement::Any, (new InternalTagDefinition())->placement);
+        self::assertSame(TagPlacement::Block, (new AbstractTagDefinition())->placement);
     }
 
     /**

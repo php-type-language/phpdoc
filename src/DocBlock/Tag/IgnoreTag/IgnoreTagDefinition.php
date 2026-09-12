@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class IgnoreTagDefinition extends TagDefinition
 {
-    public const string NAME = 'ignore';
+    public const NAME = 'ignore';
 
     public function __construct()
     {

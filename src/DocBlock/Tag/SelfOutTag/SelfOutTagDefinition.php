@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SelfOutTagDefinition extends TagDefinition
 {
-    public const string NAME = 'self-out';
+    public const NAME = 'self-out';
 
     public function __construct()
     {

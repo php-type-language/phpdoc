@@ -80,10 +80,11 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class PsalmPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @return iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             'psalm-allow-private-mutation' => new AllowPrivateMutationTagDefinition(),
             'psalm-assert' => new AssertTagDefinition(),
             'psalm-assert-if-true' => new AssertIfTrueTagDefinition(),
@@ -126,10 +127,11 @@ final class PsalmPlatform extends Platform
     }
 
     /**
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @return iterable<non-empty-lowercase-string, non-empty-lowercase-string>
      */
-    public iterable $aliases {
-        get => [
+    public function getAliases(): iterable
+    {
+        return [
             'psalm-api' => ApiTagDefinition::NAME,
             'psalm-extends' => ExtendsTagDefinition::NAME,
             'psalm-immutable' => ImmutableTagDefinition::NAME,
@@ -158,10 +160,11 @@ final class PsalmPlatform extends Platform
     }
 
     /**
-     * @var iterable<non-empty-string, CombinatorType>
+     * @return iterable<non-empty-string, CombinatorType>
      */
-    public iterable $combinators {
-        get => [
+    public function getCombinators(): iterable
+    {
+        return [
             FlowTypeCombinator::NAME => new FlowTypeCombinator(),
         ];
     }

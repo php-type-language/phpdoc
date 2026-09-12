@@ -17,7 +17,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class RequireImplementsTagDefinition extends RequireInheritanceTagDefinition
 {
-    public const string NAME = 'require-implements';
+    public const NAME = 'require-implements';
 
     public function __construct()
     {

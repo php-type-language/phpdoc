@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmFlowTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-flow';
+    public const NAME = 'psalm-flow';
 
     public function __construct()
     {

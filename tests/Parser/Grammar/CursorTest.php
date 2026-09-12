@@ -16,9 +16,9 @@ final class CursorTest extends TestCase
     {
         $cursor = new Cursor('example');
 
-        self::assertSame(0, $cursor->position);
-        self::assertSame(0, $cursor->offset);
-        self::assertFalse($cursor->isEof);
+        self::assertSame(0, $cursor->getPosition());
+        self::assertSame(0, $cursor->getOffset());
+        self::assertFalse($cursor->isEof());
     }
 
     #[Test]
@@ -27,8 +27,8 @@ final class CursorTest extends TestCase
         $cursor = new Cursor('example', base: 100);
         $cursor->read(3);
 
-        self::assertSame(3, $cursor->position);
-        self::assertSame(103, $cursor->offset);
+        self::assertSame(3, $cursor->getPosition());
+        self::assertSame(103, $cursor->getOffset());
     }
 
     #[Test]
@@ -38,7 +38,7 @@ final class CursorTest extends TestCase
 
         self::assertSame('e', $cursor->peek());
         self::assertSame('exam', $cursor->peek(4));
-        self::assertSame(0, $cursor->position);
+        self::assertSame(0, $cursor->getPosition());
     }
 
     #[Test]
@@ -49,7 +49,7 @@ final class CursorTest extends TestCase
         self::assertSame('exa', $cursor->read(3));
         self::assertSame('mple', $cursor->read(100));
         self::assertSame('', $cursor->read(1));
-        self::assertTrue($cursor->isEof);
+        self::assertTrue($cursor->isEof());
     }
 
     #[Test]
@@ -119,7 +119,7 @@ final class CursorTest extends TestCase
         $cursor = new Cursor('$name');
 
         self::assertTrue($cursor->readLiteral('$'));
-        self::assertSame(1, $cursor->position);
+        self::assertSame(1, $cursor->getPosition());
     }
 
     #[Test]
@@ -128,7 +128,7 @@ final class CursorTest extends TestCase
         $cursor = new Cursor('name');
 
         self::assertFalse($cursor->readLiteral('$'));
-        self::assertSame(0, $cursor->position);
+        self::assertSame(0, $cursor->getPosition());
     }
 
     #[Test]
@@ -137,7 +137,7 @@ final class CursorTest extends TestCase
         $cursor = new Cursor('ab');
 
         self::assertFalse($cursor->readLiteral('abc'));
-        self::assertSame(0, $cursor->position);
+        self::assertSame(0, $cursor->getPosition());
     }
 
     #[Test]
@@ -145,9 +145,9 @@ final class CursorTest extends TestCase
     {
         $cursor = new Cursor('example', base: 10);
         $cursor->read(5);
-        $cursor->position = 2;
+        $cursor->moveTo(2);
 
-        self::assertSame(12, $cursor->offset);
-        self::assertSame(15, $cursor->furthestOffset);
+        self::assertSame(12, $cursor->getOffset());
+        self::assertSame(15, $cursor->getFurthestOffset());
     }
 }

@@ -11,9 +11,9 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
  * References of this kind are always considered internal, so they are never
  * external.
  */
-abstract readonly class CodeReference implements ReferenceInterface
+abstract class CodeReference implements ReferenceInterface
 {
-    public bool $isExternal;
+    public readonly bool $isExternal;
 
     public function __construct()
     {

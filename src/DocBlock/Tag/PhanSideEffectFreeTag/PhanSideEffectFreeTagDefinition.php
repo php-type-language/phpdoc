@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanSideEffectFreeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-side-effect-free';
+    public const NAME = 'phan-side-effect-free';
 
     public function __construct()
     {

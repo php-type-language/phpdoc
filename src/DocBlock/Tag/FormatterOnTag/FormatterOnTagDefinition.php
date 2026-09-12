@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class FormatterOnTagDefinition extends TagDefinition
 {
-    public const string NAME = 'formatter:on';
+    public const NAME = 'formatter:on';
 
     public function __construct()
     {

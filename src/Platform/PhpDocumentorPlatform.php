@@ -43,10 +43,11 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class PhpDocumentorPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-string, TagDefinitionInterface>
+     * @return iterable<non-empty-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             AccessTagDefinition::NAME => new AccessTagDefinition(),
             AuthorTagDefinition::NAME => new AuthorTagDefinition(),
             CategoryTagDefinition::NAME => new CategoryTagDefinition(),
@@ -72,10 +73,11 @@ final class PhpDocumentorPlatform extends Platform
     }
 
     /**
-     * @var iterable<non-empty-string, CombinatorType>
+     * @return iterable<non-empty-string, CombinatorType>
      */
-    public iterable $combinators {
-        get => [
+    public function getCombinators(): iterable
+    {
+        return [
             VisibilityCombinator::NAME => new VisibilityCombinator(),
             AuthorNameCombinator::NAME => new AuthorNameCombinator(),
             EmailCombinator::NAME => new EmailCombinator(),

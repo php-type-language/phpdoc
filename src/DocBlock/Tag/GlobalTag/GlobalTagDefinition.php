@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class GlobalTagDefinition extends TagDefinition
 {
-    public const string NAME = 'global';
+    public const NAME = 'global';
 
     public function __construct()
     {

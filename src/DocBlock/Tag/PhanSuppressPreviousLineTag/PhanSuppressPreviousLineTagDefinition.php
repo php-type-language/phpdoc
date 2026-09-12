@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanSuppressPreviousLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-suppress-previous-line';
+    public const NAME = 'phan-suppress-previous-line';
 
     public function __construct()
     {

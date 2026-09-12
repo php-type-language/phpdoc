@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class StaticTagDefinition extends TagDefinition
 {
-    public const string NAME = 'static';
+    public const NAME = 'static';
 
     public function __construct()
     {

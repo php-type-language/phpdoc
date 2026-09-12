@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTaintSpecializeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-taint-specialize';
+    public const NAME = 'psalm-taint-specialize';
 
     public function __construct()
     {

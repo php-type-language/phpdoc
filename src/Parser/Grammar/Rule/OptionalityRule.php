@@ -10,10 +10,10 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 /**
  * Matches an inner rule when it applies, and is skipped when it does not.
  */
-final readonly class OptionalityRule implements ProductionInterface
+final class OptionalityRule implements ProductionInterface
 {
     public function __construct(
-        private RuleInterface $rule,
+        private readonly RuleInterface $rule,
     ) {}
 
     public function match(Context $context): void

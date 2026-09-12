@@ -50,10 +50,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhanPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @return iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             'phan-assert' => new AssertTagDefinition(),
             'phan-assert-if-true' => new AssertIfTrueTagDefinition(),
             'phan-assert-if-false' => new AssertIfFalseTagDefinition(),
@@ -78,10 +79,11 @@ final class PhanPlatform extends Platform
     }
 
     /**
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @return iterable<non-empty-lowercase-string, non-empty-lowercase-string>
      */
-    public iterable $aliases {
-        get => [
+    public function getAliases(): iterable
+    {
+        return [
             'phan-abstract' => AbstractTagDefinition::NAME,
             'phanclosurescope' => PhanClosureScopeTagDefinition::NAME,
             'phan-extends' => ExtendsTagDefinition::NAME,

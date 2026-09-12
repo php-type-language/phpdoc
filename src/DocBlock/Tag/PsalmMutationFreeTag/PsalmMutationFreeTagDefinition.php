@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmMutationFreeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-mutation-free';
+    public const NAME = 'psalm-mutation-free';
 
     public function __construct()
     {

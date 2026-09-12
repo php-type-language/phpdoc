@@ -16,6 +16,7 @@ use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PhpDoc\Parser\DocBlockAnalyzer;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
+use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Splitter\Segment;
 use TypeLang\PhpDoc\Parser\Splitter\SplitterInterface;
 use TypeLang\PhpDoc\Parser\Splitter\StringSplitter;
@@ -35,15 +36,15 @@ use TypeLang\PhpDoc\Platform\StandardPlatform;
 /**
  * @phpstan-import-type CombinatorType from CombinatorInterface
  */
-final readonly class DocBlockParser implements DocBlockParserInterface
+final class DocBlockParser implements DocBlockParserInterface
 {
-    public TagFactoryInterface $factory;
+    public readonly TagFactoryInterface $factory;
 
-    public TagRegistryInterface $tags;
+    public readonly TagRegistryInterface $tags;
 
-    private DocBlockAnalyzer $docBlockAnalyzer;
-    private TagParserInterface $tagParser;
-    private DescriptionParserInterface $descriptionParser;
+    private readonly DocBlockAnalyzer $docBlockAnalyzer;
+    private readonly TagParserInterface $tagParser;
+    private readonly DescriptionParserInterface $descriptionParser;
 
     /**
      * @param iterable<mixed, PlatformInterface> $platforms additional tag platforms
@@ -72,7 +73,9 @@ final readonly class DocBlockParser implements DocBlockParserInterface
             new PhanPlatform(),
             new PhpStormPlatform(),
             new PhpCodeSnifferPlatform(),
-            ...\iterator_to_array($additionalPlatforms, false),
+            ...(\is_array($additionalPlatforms)
+                ? \array_values($additionalPlatforms)
+                : \iterator_to_array($additionalPlatforms, false)),
         ]);
     }
 
@@ -112,17 +115,18 @@ final readonly class DocBlockParser implements DocBlockParserInterface
         $aliases = [];
 
         foreach ($platforms as $platform) {
-            foreach ($platform->tags as $name => $definition) {
+            foreach ($platform->getTags() as $name => $definition) {
                 $definitions[$name] = $definition;
             }
 
-            foreach ($platform->aliases as $alias => $canonical) {
+            foreach ($platform->getAliases() as $alias => $canonical) {
                 $aliases[$alias] = $canonical;
             }
         }
 
-        return new TagRegistryBuilder($definitions, $aliases)
-            ->build();
+        $builder = new TagRegistryBuilder($definitions, $aliases);
+
+        return $builder->build();
     }
 
     /**
@@ -134,16 +138,24 @@ final readonly class DocBlockParser implements DocBlockParserInterface
         $combinators = [];
 
         foreach ($platforms as $platform) {
-            foreach ($platform->combinators as $name => $combinator) {
+            foreach ($platform->getCombinators() as $name => $combinator) {
                 $combinators[$name] = $combinator;
             }
         }
 
-        // Description is always present and cannot be redefined
-        $combinators[DescriptionCombinator::NAME] = new \ReflectionClass(DescriptionCombinator::class)
-            ->newLazyProxy(fn(): DescriptionCombinator => new DescriptionCombinator(
+        $description = null;
+
+        // Description is always present and cannot be redefined.
+        //
+        // The combinator is created on the first call, because the description
+        // parser is not available at the moment of the combinators creation.
+        $combinators[DescriptionCombinator::NAME] = function (Cursor $cursor) use (&$description): mixed {
+            $description ??= new DescriptionCombinator(
                 descriptionParser: $this->descriptionParser,
-            ));
+            );
+
+            return $description($cursor);
+        };
 
         return $combinators;
     }

@@ -69,7 +69,7 @@ final class ReferenceGrammarRuleTest extends GrammarRuleTestCase
 
         self::assertInstanceOf(VariableReference::class, $reference);
         self::assertSame('var', $reference->name);
-        self::assertSame(4, $cursor->offset);
+        self::assertSame(4, $cursor->getOffset());
     }
 
     #[Test]
@@ -79,7 +79,7 @@ final class ReferenceGrammarRuleTest extends GrammarRuleTestCase
         $reference = $this->matchCursor($cursor);
 
         self::assertInstanceOf(ClassMethodReference::class, $reference);
-        self::assertSame(21, $cursor->offset);
+        self::assertSame(21, $cursor->getOffset());
     }
 
     /**

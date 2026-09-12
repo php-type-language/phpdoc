@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PureTagDefinition extends TagDefinition
 {
-    public const string NAME = 'pure';
+    public const NAME = 'pure';
 
     public function __construct()
     {

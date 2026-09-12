@@ -30,7 +30,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class LinkTagDefinition extends TagDefinition
 {
-    public const string NAME = 'link';
+    public const NAME = 'link';
 
     public function __construct()
     {

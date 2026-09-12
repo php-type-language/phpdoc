@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class SourceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'source';
+    public const NAME = 'source';
 
     public function __construct()
     {

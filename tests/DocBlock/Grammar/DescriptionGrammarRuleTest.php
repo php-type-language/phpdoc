@@ -21,23 +21,28 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
 {
     protected function rule(): DescriptionCombinator
     {
-        return new \ReflectionClass(DescriptionCombinator::class)
-            ->newLazyProxy(function (DescriptionCombinator $proxy) {
-                $registry = new TagRegistry(
-                    definitions: [],
-                    genericTagDefinition: new GenericTagDefinition(),
-                );
+        $registry = new TagRegistry(
+            definitions: [],
+            genericTagDefinition: new GenericTagDefinition(),
+        );
 
-                return new DescriptionCombinator(
-                    descriptionParser: new BalancedBraceAwareParser(
-                        tagParser: new StringTagParser(
-                            tagFactory: new TagFactory($registry, [
-                                DescriptionCombinator::NAME => $proxy,
-                            ]),
-                        ),
-                    ),
-                );
-            });
+        $rule = null;
+
+        $nested = static function (Cursor $cursor) use (&$rule): mixed {
+            \assert($rule instanceof DescriptionCombinator);
+
+            return $rule($cursor);
+        };
+
+        return $rule = new DescriptionCombinator(
+            descriptionParser: new BalancedBraceAwareParser(
+                tagParser: new StringTagParser(
+                    tagFactory: new TagFactory($registry, [
+                        DescriptionCombinator::NAME => $nested,
+                    ]),
+                ),
+            ),
+        );
     }
 
     #[Test]
@@ -66,7 +71,7 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
 
         self::assertInstanceOf(Description::class, $description);
         self::assertSame('a b c', (string) $description);
-        self::assertTrue($cursor->isEof);
+        self::assertTrue($cursor->isEof());
     }
 
     /**

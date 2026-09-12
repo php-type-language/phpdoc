@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhpcsSuppressTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phpcsSuppress';
+    public const NAME = 'phpcsSuppress';
 
     public function __construct()
     {

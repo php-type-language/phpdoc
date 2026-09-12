@@ -27,7 +27,7 @@ final class DefinitionTest extends TestCase
     #[Test]
     public function ruleStringifiesToItsGrammar(): void
     {
-        self::assertSame('<URI> [ <Description> ]', (string) new LinkTagDefinition()->spec);
+        self::assertSame('<URI> [ <Description> ]', (string) (new LinkTagDefinition())->spec);
     }
 
     #[Test]

@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanSuppressCurrentLineTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-suppress-current-line';
+    public const NAME = 'phan-suppress-current-line';
 
     public function __construct()
     {

@@ -28,22 +28,22 @@ use TypeLang\PhpDoc\TagFactoryInterface;
  * A definition that does not start with an "@", or whose "@" is not followed
  * by a name, is an {@see InvalidTag}.
  */
-final readonly class StringTagParser implements TagParserInterface
+final class StringTagParser implements TagParserInterface
 {
     /**
      * The ASCII characters allowed inside a tag name.
      *
      * @var non-empty-string
      */
-    private const string ASCII_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz'
+    private const ASCII_NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz'
         . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         . '0123456789'
         . '_-\\:';
 
-    private string $nameTerminators;
+    private readonly string $nameTerminators;
 
     public function __construct(
-        private TagFactoryInterface $tagFactory,
+        private readonly TagFactoryInterface $tagFactory,
     ) {
         $this->nameTerminators = self::createTerminatorMask();
     }

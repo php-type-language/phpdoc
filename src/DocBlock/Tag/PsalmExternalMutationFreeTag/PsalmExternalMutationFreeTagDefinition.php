@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmExternalMutationFreeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-external-mutation-free';
+    public const NAME = 'psalm-external-mutation-free';
 
     public function __construct()
     {

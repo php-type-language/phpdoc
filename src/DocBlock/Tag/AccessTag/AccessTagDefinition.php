@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class AccessTagDefinition extends TagDefinition
 {
-    public const string NAME = 'access';
+    public const NAME = 'access';
 
     public function __construct()
     {

@@ -8,15 +8,15 @@ namespace TypeLang\PhpDoc\Parser\Grammar;
  * A reading position over a tag suffix that grammar rules consume from.
  *
  * The reading methods cover the shapes a rule usually needs (a word, an
- * identifier, a literal, a run of characters), so a rule rarely has to touch
- * {@see $position} by hand that is reserved for rewinding a speculative match.
+ * identifier, a literal, a run of characters), so a rule rarely has to call
+ * {@see moveTo()} by hand that is reserved for rewinding a speculative match.
  */
 final class Cursor
 {
     /**
      * The whitespace bytes that separate words.
      */
-    private const string CHARS_WHITESPACE = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}";
+    private const CHARS_WHITESPACE = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}";
 
     /**
      * @var int<0, max>
@@ -24,8 +24,8 @@ final class Cursor
     private readonly int $length;
 
     /**
-     * The furthest position ever reached, reported by {@see $furthestOffset}
-     * when a match fails.
+     * The furthest position ever reached, reported by
+     * {@see getFurthestOffset()} when a match fails.
      *
      * @var int<0, max>
      */
@@ -34,21 +34,12 @@ final class Cursor
     /**
      * The current position within the buffer.
      *
-     * Reading advances it; assigning rewinds it to roll a speculative match
-     * back. Whatever it is set to, the furthest position reached is remembered
-     * for failure reporting.
+     * Reading advances it, {@see moveTo()} rewinds it to roll a speculative
+     * match back.
      *
      * @var int<0, max>
      */
-    public int $position = 0 {
-        set(int $position) {
-            $this->position = $position;
-
-            if ($position > $this->furthest) {
-                $this->furthest = $position;
-            }
-        }
-    }
+    private int $current = 0;
 
     /**
      * List of PHP identifier chars as string
@@ -72,25 +63,53 @@ final class Cursor
     }
 
     /**
+     * The current position within the buffer.
+     *
+     * @return int<0, max>
+     */
+    public function getPosition(): int
+    {
+        return $this->current;
+    }
+
+    /**
+     * Rewinds the cursor to roll a speculative match back. Whatever it is set
+     * to, the furthest position reached is remembered for failure reporting.
+     *
+     * @param int<0, max> $position
+     */
+    public function moveTo(int $position): void
+    {
+        $this->current = $position;
+
+        if ($position > $this->furthest) {
+            $this->furthest = $position;
+        }
+    }
+
+    /**
      * The current byte offset within the source.
      *
-     * @var int<0, max>
+     * @return int<0, max>
      */
-    public int $offset {
-        get => $this->base + $this->position;
+    public function getOffset(): int
+    {
+        return $this->base + $this->current;
     }
 
     /**
      * The byte offset to report when a match fails.
      *
-     * @var int<0, max>
+     * @return int<0, max>
      */
-    public int $furthestOffset {
-        get => $this->base + $this->furthest;
+    public function getFurthestOffset(): int
+    {
+        return $this->base + $this->furthest;
     }
 
-    public bool $isEof {
-        get => $this->position >= $this->length;
+    public function isEof(): bool
+    {
+        return $this->current >= $this->length;
     }
 
     /**
@@ -98,7 +117,7 @@ final class Cursor
      */
     public function peek(int $length = 1): string
     {
-        return \substr($this->buffer, $this->position, \max(0, $length));
+        return \substr($this->buffer, $this->current, \max(0, $length));
     }
 
     /**
@@ -106,8 +125,9 @@ final class Cursor
      */
     public function read(int $length): string
     {
-        $value = \substr($this->buffer, $this->position, \max(0, $length));
-        $this->position += \strlen($value);
+        $value = \substr($this->buffer, $this->current, \max(0, $length));
+
+        $this->moveTo($this->current + \strlen($value));
 
         return $value;
     }
@@ -118,7 +138,7 @@ final class Cursor
      */
     public function readWhile(string $characters): string
     {
-        return $this->read(\strspn($this->buffer, $characters, $this->position));
+        return $this->read(\strspn($this->buffer, $characters, $this->current));
     }
 
     /**
@@ -128,7 +148,7 @@ final class Cursor
      */
     public function readUntil(string $characters): string
     {
-        return $this->read(\strcspn($this->buffer, $characters, $this->position));
+        return $this->read(\strcspn($this->buffer, $characters, $this->current));
     }
 
     /**
@@ -170,13 +190,13 @@ final class Cursor
             return true;
         }
 
-        if ($this->position + $length > $this->length
-            || \substr_compare($this->buffer, $literal, $this->position, $length) !== 0
+        if ($this->current + $length > $this->length
+            || \substr_compare($this->buffer, $literal, $this->current, $length) !== 0
         ) {
             return false;
         }
 
-        $this->position += $length;
+        $this->moveTo($this->current + $length);
 
         return true;
     }
@@ -186,7 +206,7 @@ final class Cursor
      */
     public function skipWhitespace(): void
     {
-        $this->position += \strspn($this->buffer, self::CHARS_WHITESPACE, $this->position);
+        $this->moveTo($this->current + \strspn($this->buffer, self::CHARS_WHITESPACE, $this->current));
     }
 
     /**
@@ -194,8 +214,9 @@ final class Cursor
      */
     public function readRemainder(): string
     {
-        $rest = \substr($this->buffer, $this->position);
-        $this->position = $this->length;
+        $rest = \substr($this->buffer, $this->current);
+
+        $this->moveTo($this->length);
 
         return $rest;
     }

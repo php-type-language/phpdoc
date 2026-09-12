@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhpStanIgnoreTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phpstan-ignore';
+    public const NAME = 'phpstan-ignore';
 
     public function __construct()
     {

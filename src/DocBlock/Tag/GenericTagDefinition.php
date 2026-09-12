@@ -13,7 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 final class GenericTagDefinition extends TagDefinition
 {
-    public const string NAME = '<Tag>';
+    public const NAME = '<Tag>';
 
     /**
      * @param TagPlacement $placement generic (unknown) tag has no dedicated

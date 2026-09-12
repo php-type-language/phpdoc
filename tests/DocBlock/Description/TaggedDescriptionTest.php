@@ -27,7 +27,7 @@ final class TaggedDescriptionTest extends TestCase
     #[Test]
     public function componentsDefaultToEmptyList(): void
     {
-        self::assertSame([], new TaggedDescription()->components);
+        self::assertSame([], (new TaggedDescription())->components);
     }
 
     #[Test]
@@ -95,7 +95,7 @@ final class TaggedDescriptionTest extends TestCase
     #[Test]
     public function offsetGetReturnsNullForMissingOffset(): void
     {
-        self::assertNull(new TaggedDescription()[42]);
+        self::assertNull((new TaggedDescription())[42]);
     }
 
     #[Test]
@@ -124,7 +124,7 @@ final class TaggedDescriptionTest extends TestCase
         $components = [new Description('a'), new Tag('see'), new Description('b')];
         $description = new TaggedDescription($components);
 
-        self::assertSame($components, \iterator_to_array($description, false));
+        self::assertSame($components, \iterator_to_array($description->getIterator(), false));
     }
 
     #[Test]

@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTaintEscapeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-taint-escape';
+    public const NAME = 'psalm-taint-escape';
 
     public function __construct()
     {

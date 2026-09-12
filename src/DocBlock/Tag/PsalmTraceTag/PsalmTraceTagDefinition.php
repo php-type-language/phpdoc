@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTraceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-trace';
+    public const NAME = 'psalm-trace';
 
     public function __construct()
     {

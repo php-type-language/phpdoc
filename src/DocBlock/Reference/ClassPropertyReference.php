@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
 /**
  * A reference to a property of a class.
  */
-final readonly class ClassPropertyReference extends CodeReference
+final class ClassPropertyReference extends CodeReference
 {
     public function __construct(
         /**
@@ -15,13 +15,13 @@ final readonly class ClassPropertyReference extends CodeReference
          *
          * @var non-empty-string
          */
-        public string $class,
+        public readonly string $class,
         /**
          * The name of the referenced property, without the leading "$".
          *
          * @var non-empty-string
          */
-        public string $name,
+        public readonly string $name,
     ) {
         parent::__construct();
     }

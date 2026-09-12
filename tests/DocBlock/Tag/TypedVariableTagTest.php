@@ -91,16 +91,7 @@ final class TypedVariableTagTest extends TagTestCase
         yield '@property-write' => ['property-write', PropertyWriteTag::class];
         yield '@global' => ['global', GlobalTag::class];
 
-        // The assert family is shared across Psalm, PHPStan and Phan, each
-        // contributing it under its own vendor-prefixed name.
-        yield '@psalm-assert' => ['psalm-assert', AssertTag::class];
-        yield '@phpstan-assert' => ['phpstan-assert', AssertTag::class];
-        yield '@phan-assert' => ['phan-assert', AssertTag::class];
-        yield '@psalm-assert-if-true' => ['psalm-assert-if-true', AssertIfTrueTag::class];
-        yield '@phpstan-assert-if-true' => ['phpstan-assert-if-true', AssertIfTrueTag::class];
-        yield '@phan-assert-if-true' => ['phan-assert-if-true', AssertIfTrueTag::class];
-        yield '@psalm-assert-if-false' => ['psalm-assert-if-false', AssertIfFalseTag::class];
-        yield '@phpstan-assert-if-false' => ['phpstan-assert-if-false', AssertIfFalseTag::class];
-        yield '@phan-assert-if-false' => ['phan-assert-if-false', AssertIfFalseTag::class];
+        // The assert family carries a subject rather than a variable, so it is
+        // covered by the {@see AssertionTagTest} of its own.
     }
 }

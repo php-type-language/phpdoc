@@ -53,10 +53,11 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 final class PhpStanPlatform extends Platform
 {
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @return iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             'phpstan-allow-private-mutation' => new AllowPrivateMutationTagDefinition(),
             'phpstan-assert' => new AssertTagDefinition(),
             'phpstan-assert-if-true' => new AssertIfTrueTagDefinition(),
@@ -76,10 +77,11 @@ final class PhpStanPlatform extends Platform
     }
 
     /**
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @return iterable<non-empty-lowercase-string, non-empty-lowercase-string>
      */
-    public iterable $aliases {
-        get => [
+    public function getAliases(): iterable
+    {
+        return [
             'phpstan-extends' => ExtendsTagDefinition::NAME,
             'phpstan-immutable' => ImmutableTagDefinition::NAME,
             'phpstan-implements' => ImplementsTagDefinition::NAME,

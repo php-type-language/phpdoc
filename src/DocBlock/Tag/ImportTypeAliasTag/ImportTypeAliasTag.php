@@ -14,9 +14,10 @@ use TypeLang\Type\TypeNode;
  */
 final class ImportTypeAliasTag extends Tag
 {
-    public TypeNode $type {
-        get => $this->statement->type;
-    }
+    /**
+     * The type declared by the tag.
+     */
+    public readonly TypeNode $type;
 
     public function __construct(
         string $name,
@@ -37,6 +38,8 @@ final class ImportTypeAliasTag extends Tag
          */
         public readonly ?string $as = null,
     ) {
+        $this->type = $statement->type;
+
         parent::__construct($name);
     }
 

@@ -21,27 +21,21 @@ interface PlatformInterface
     /**
      * Tag definitions keyed by their canonical (lower-case) name.
      *
-     * @var iterable<non-empty-string, TagDefinitionInterface>
+     * @return iterable<non-empty-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get;
-    }
+    public function getTags(): iterable;
 
     /**
      * Alias-to-canonical name pairs, both lower-case.
      *
-     * @var iterable<non-empty-string, non-empty-string>
+     * @return iterable<non-empty-string, non-empty-string>
      */
-    public iterable $aliases {
-        get;
-    }
+    public function getAliases(): iterable;
 
     /**
      * Grammar combinators keyed by their name.
      *
-     * @var iterable<non-empty-string, CombinatorType>
+     * @return iterable<non-empty-string, CombinatorType>
      */
-    public iterable $combinators {
-        get;
-    }
+    public function getCombinators(): iterable;
 }

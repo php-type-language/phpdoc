@@ -26,14 +26,14 @@ use TypeLang\PhpDoc\TagRegistryInterface;
  *
  * @template-implements \IteratorAggregate<non-empty-lowercase-string, TagDefinitionInterface>
  */
-final readonly class TagRegistry implements TagRegistryInterface, \IteratorAggregate
+final class TagRegistry implements TagRegistryInterface, \IteratorAggregate
 {
     public function __construct(
         /**
          * @var array<non-empty-lowercase-string, TagDefinitionInterface>
          */
-        private array $definitions,
-        private TagDefinitionInterface $genericTagDefinition,
+        private readonly array $definitions,
+        private readonly TagDefinitionInterface $genericTagDefinition,
     ) {}
 
     public function has(string $name): bool

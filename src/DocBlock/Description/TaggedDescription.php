@@ -30,20 +30,22 @@ final class TaggedDescription implements
     public readonly array $components;
 
     /**
-     * Gets a list of all tags within a description
+     * A list of all tags within a description
      *
      * @var list<TagInterface>
      */
-    public array $tags {
-        get => $this->tags ??= $this->only(TagInterface::class);
-    }
+    public readonly array $tags;
 
     /**
      * @param iterable<mixed, ComponentInterface> $components
      */
     public function __construct(iterable $components = [])
     {
-        $this->components = \iterator_to_array($components, false);
+        $this->components = \is_array($components)
+            ? \array_values($components)
+            : \iterator_to_array($components, false);
+
+        $this->tags = $this->only(TagInterface::class);
     }
 
     /**

@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanFileSuppressTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-file-suppress';
+    public const NAME = 'phan-file-suppress';
 
     public function __construct()
     {

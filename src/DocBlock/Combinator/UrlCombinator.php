@@ -17,9 +17,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<UrlReference>
  */
-final readonly class UrlCombinator implements CombinatorInterface
+final class UrlCombinator implements CombinatorInterface
 {
-    public const string NAME = 'URL';
+    public const NAME = 'URL';
 
     public function __invoke(Cursor $cursor): UrlReference
     {

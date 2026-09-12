@@ -22,7 +22,7 @@ final class DescriptionTest extends TestCase
     #[Test]
     public function valueDefaultsToEmptyString(): void
     {
-        self::assertSame('', new Description()->value);
+        self::assertSame('', (new Description())->value);
     }
 
     #[Test]

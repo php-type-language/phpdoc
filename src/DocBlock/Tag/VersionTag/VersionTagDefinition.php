@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class VersionTagDefinition extends TagDefinition
 {
-    public const string NAME = 'version';
+    public const NAME = 'version';
 
     public function __construct()
     {

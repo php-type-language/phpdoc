@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanRealReturnTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-real-return';
+    public const NAME = 'phan-real-return';
 
     public function __construct()
     {

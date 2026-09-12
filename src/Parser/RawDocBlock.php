@@ -6,13 +6,13 @@ namespace TypeLang\PhpDoc\Parser;
 
 use TypeLang\PhpDoc\Parser\Splitter\Segment;
 
-final readonly class RawDocBlock
+final class RawDocBlock
 {
     public function __construct(
-        public ?Segment $description,
+        public readonly ?Segment $description,
         /**
          * @var list<Segment>
          */
-        public array $tags,
+        public readonly array $tags,
     ) {}
 }

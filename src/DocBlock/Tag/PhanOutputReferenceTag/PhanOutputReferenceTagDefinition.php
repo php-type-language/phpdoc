@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanOutputReferenceTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-output-reference';
+    public const NAME = 'phan-output-reference';
 
     public function __construct()
     {

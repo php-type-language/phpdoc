@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class AuthorTagDefinition extends TagDefinition
 {
-    public const string NAME = 'author';
+    public const NAME = 'author';
 
     public function __construct()
     {

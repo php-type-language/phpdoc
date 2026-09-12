@@ -11,9 +11,9 @@ namespace TypeLang\PhpDoc\DocBlock\Reference;
  * Such a reference always points outside the described codebase, so it
  * is always external.
  */
-readonly class UriReference implements ReferenceInterface
+class UriReference implements ReferenceInterface
 {
-    public bool $isExternal;
+    public readonly bool $isExternal;
 
     public function __construct(
         /**
@@ -21,7 +21,7 @@ readonly class UriReference implements ReferenceInterface
          *
          * @var non-empty-string
          */
-        public string $uri,
+        public readonly string $uri,
     ) {
         $this->isExternal = true;
     }

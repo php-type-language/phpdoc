@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class AllowPrivateMutationTagDefinition extends TagDefinition
 {
-    public const string NAME = 'allow-private-mutation';
+    public const NAME = 'allow-private-mutation';
 
     public function __construct()
     {

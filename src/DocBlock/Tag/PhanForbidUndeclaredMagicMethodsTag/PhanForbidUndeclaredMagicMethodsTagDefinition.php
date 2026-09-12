@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PhanForbidUndeclaredMagicMethodsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'phan-forbid-undeclared-magic-methods';
+    public const NAME = 'phan-forbid-undeclared-magic-methods';
 
     public function __construct()
     {

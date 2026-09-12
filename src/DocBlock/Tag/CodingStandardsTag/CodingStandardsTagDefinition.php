@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class CodingStandardsTagDefinition extends TagDefinition
 {
-    public const string NAME = 'codingStandards';
+    public const NAME = 'codingStandards';
 
     public function __construct()
     {

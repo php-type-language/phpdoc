@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class FormatterOffTagDefinition extends TagDefinition
 {
-    public const string NAME = 'formatter:off';
+    public const NAME = 'formatter:off';
 
     public function __construct()
     {

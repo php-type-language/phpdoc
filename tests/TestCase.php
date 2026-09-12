@@ -14,6 +14,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
+use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Tag\StringTagParser;
 use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
@@ -42,32 +43,20 @@ abstract class TestCase extends BaseTestCase
         ];
 
         $tagFactory = null;
+        $description = null;
 
-        $baseRules[DescriptionCombinator::NAME] = new \ReflectionClass(DescriptionCombinator::class)
-            ->newLazyProxy(function () use (&$tagFactory): DescriptionCombinator {
-                if ($tagFactory === null) {
-                    return new DescriptionCombinator(new BalancedBraceAwareParser(
-                        new StringTagParser(new TagFactory(
-                            registry: new TagRegistryBuilder()
-                                ->build(),
-                            combinators: [
-                                UriCombinator::NAME => new UriCombinator(),
-                                ReferenceCombinator::NAME => new ReferenceCombinator(),
-                                TypeCombinator::NAME => new TypeCombinator(typeParser: new TypeParser()),
-                                VariableCombinator::NAME => new VariableCombinator(),
-                            ],
-                        )),
-                    ));
-                }
+        $baseRules[DescriptionCombinator::NAME] = static function (Cursor $cursor) use (
+            &$tagFactory,
+            &$description,
+        ): mixed {
+            $description ??= new DescriptionCombinator(
+                new BalancedBraceAwareParser(new StringTagParser($tagFactory)),
+            );
 
-                return new DescriptionCombinator(
-                    new BalancedBraceAwareParser(new StringTagParser($tagFactory)),
-                );
-            });
+            return $description($cursor);
+        };
 
-        $tagFactory = new TagFactory(new TagRegistryBuilder()->build(), $baseRules);
-
-        return $tagFactory;
+        return $tagFactory = new TagFactory((new TagRegistryBuilder())->build(), $baseRules);
     }
 
     protected static function createDescriptionParser(): DescriptionParserInterface

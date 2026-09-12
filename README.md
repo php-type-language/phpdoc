@@ -28,7 +28,7 @@ composer require type-lang/phpdoc
 ```
 
 **Requirements:** 
-- PHP 8.4+
+- PHP 8.1+
 
 ## Usage
 

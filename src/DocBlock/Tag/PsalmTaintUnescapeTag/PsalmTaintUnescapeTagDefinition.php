@@ -23,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmTaintUnescapeTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-taint-unescape';
+    public const NAME = 'psalm-taint-unescape';
 
     public function __construct()
     {

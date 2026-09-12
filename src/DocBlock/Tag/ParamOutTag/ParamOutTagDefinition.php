@@ -24,7 +24,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class ParamOutTagDefinition extends TagDefinition
 {
-    public const string NAME = 'param-out';
+    public const NAME = 'param-out';
 
     public function __construct()
     {

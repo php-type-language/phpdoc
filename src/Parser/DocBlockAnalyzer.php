@@ -14,10 +14,10 @@ use TypeLang\PhpDoc\Parser\Splitter\SplitterInterface;
  * A line opening with "@" starts a new tag; any line before the first tag
  * belongs to the description, and any non-tag line after a tag continues it.
  */
-final readonly class DocBlockAnalyzer
+final class DocBlockAnalyzer
 {
     public function __construct(
-        private SplitterInterface $splitter,
+        private readonly SplitterInterface $splitter,
     ) {}
 
     public function analyze(string $docblock): RawDocBlock

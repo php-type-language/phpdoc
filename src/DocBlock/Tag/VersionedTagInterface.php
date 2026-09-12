@@ -6,15 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag;
 
 /**
  * A tag that carries an optional version.
+ *
+ * @property-read ?non-empty-string $version The version the tag refers to, if any.
  */
-interface VersionedTagInterface extends TagInterface
-{
-    /**
-     * The version the tag refers to, or {@see null} when none was given.
-     *
-     * @var non-empty-string|null
-     */
-    public ?string $version {
-        get;
-    }
-}
+interface VersionedTagInterface extends TagInterface {}

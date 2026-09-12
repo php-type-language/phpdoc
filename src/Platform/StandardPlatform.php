@@ -6,6 +6,7 @@ namespace TypeLang\PhpDoc\Platform;
 
 use TypeLang\Parser\TypeParser;
 use TypeLang\Parser\TypeParserInterface;
+use TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator;
@@ -69,10 +70,11 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 final class StandardPlatform implements PlatformInterface
 {
     /**
-     * @var iterable<non-empty-lowercase-string, TagDefinitionInterface>
+     * @return iterable<non-empty-lowercase-string, TagDefinitionInterface>
      */
-    public iterable $tags {
-        get => [
+    public function getTags(): iterable
+    {
+        return [
             LinkTagDefinition::NAME => new LinkTagDefinition(),
             SeeTagDefinition::NAME => new SeeTagDefinition(),
             ReturnTagDefinition::NAME => new ReturnTagDefinition(),
@@ -115,10 +117,11 @@ final class StandardPlatform implements PlatformInterface
     }
 
     /**
-     * @var iterable<non-empty-lowercase-string, non-empty-lowercase-string>
+     * @return iterable<non-empty-lowercase-string, non-empty-lowercase-string>
      */
-    public iterable $aliases {
-        get => [
+    public function getAliases(): iterable
+    {
+        return [
             'inherits' => ExtendsTagDefinition::NAME,
             'template-extends' => ExtendsTagDefinition::NAME,
             'template-implements' => ImplementsTagDefinition::NAME,
@@ -131,16 +134,18 @@ final class StandardPlatform implements PlatformInterface
     }
 
     /**
-     * @var iterable<non-empty-string, CombinatorType>
+     * @return iterable<non-empty-string, CombinatorType>
      */
-    public iterable $combinators {
-        get => [
+    public function getCombinators(): iterable
+    {
+        return [
             UriCombinator::NAME => new UriCombinator(),
             UrlCombinator::NAME => new UrlCombinator(),
             ReferenceCombinator::NAME => new ReferenceCombinator(),
             TypeCombinator::NAME => new TypeCombinator($this->typeParser),
             CallableTypeCombinator::NAME => new CallableTypeCombinator($this->typeParser),
             VariableCombinator::NAME => new VariableCombinator(),
+            AssertSubjectCombinator::NAME => new AssertSubjectCombinator(),
             IntegerCombinator::NAME => new IntegerCombinator(),
             IssueNameCombinator::NAME => new IssueNameCombinator(),
             VersionCombinator::NAME => new VersionCombinator(),

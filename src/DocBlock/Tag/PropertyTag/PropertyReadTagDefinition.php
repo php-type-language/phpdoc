@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  */
 final class PropertyReadTagDefinition extends MagicPropertyTagDefinition
 {
-    public const string NAME = 'property-read';
+    public const NAME = 'property-read';
 
     public function __construct()
     {

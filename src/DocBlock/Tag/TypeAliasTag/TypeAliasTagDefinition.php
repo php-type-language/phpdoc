@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class TypeAliasTagDefinition extends TagDefinition
 {
-    public const string NAME = 'type';
+    public const NAME = 'type';
 
     public function __construct()
     {

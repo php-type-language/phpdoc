@@ -4,39 +4,39 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Parser\Splitter;
 
-final readonly class StringSplitter implements SplitterInterface
+final class StringSplitter implements SplitterInterface
 {
     /**
      * @var non-empty-string
      */
-    private const string SEQUENCE_OPENING = '/*';
+    private const SEQUENCE_OPENING = '/*';
 
     /**
      * @var non-empty-string
      */
-    private const string SEQUENCE_OPENING_DOCBLOCK = '/**';
+    private const SEQUENCE_OPENING_DOCBLOCK = '/**';
 
     /**
      * @var non-empty-string
      */
-    private const string SEQUENCE_CLOSING = '*/';
+    private const SEQUENCE_CLOSING = '*/';
 
     /**
      * @var non-empty-string
      */
-    private const string SEQUENCE_BODY = '*';
+    private const SEQUENCE_BODY = '*';
 
     /**
      * @var non-empty-string
      */
-    private const string LINE_TERMINATORS = "\r\n";
+    private const LINE_TERMINATORS = "\r\n";
 
     /**
      * Characters trimmed from the head of a line before its content begins.
      *
      * @var non-empty-string
      */
-    private const string BLANK = " \t\n\r\0\x0B";
+    private const BLANK = " \t\n\r\0\x0B";
 
     /**
      * Trailing whitespace trimmed from a line: {@see BLANK} without the line
@@ -44,7 +44,7 @@ final readonly class StringSplitter implements SplitterInterface
      *
      * @var non-empty-string
      */
-    private const string TRAILING_WHITESPACE = " \t\0\x0B";
+    private const TRAILING_WHITESPACE = " \t\0\x0B";
 
     /**
      * @return list<Segment>

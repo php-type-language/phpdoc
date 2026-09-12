@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class InheritDocTagDefinition extends TagDefinition
 {
-    public const string NAME = 'inheritDoc';
+    public const NAME = 'inheritDoc';
 
     public function __construct()
     {

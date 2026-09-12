@@ -20,7 +20,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class CategoryTagDefinition extends TagDefinition
 {
-    public const string NAME = 'category';
+    public const NAME = 'category';
 
     public function __construct()
     {

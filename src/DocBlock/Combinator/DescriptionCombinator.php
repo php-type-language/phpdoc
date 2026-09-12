@@ -19,12 +19,12 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
  *
  * @template-implements CombinatorInterface<DescriptionInterface>
  */
-final readonly class DescriptionCombinator implements CombinatorInterface
+final class DescriptionCombinator implements CombinatorInterface
 {
-    public const string NAME = 'Description';
+    public const NAME = 'Description';
 
     public function __construct(
-        private DescriptionParserInterface $descriptionParser,
+        private readonly DescriptionParserInterface $descriptionParser,
     ) {}
 
     public function __invoke(Cursor $cursor): DescriptionInterface

@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
  */
 final class ParamImmediatelyInvokedCallableTagDefinition extends ParamInvokedCallableTagDefinition
 {
-    public const string NAME = 'param-immediately-invoked-callable';
+    public const NAME = 'param-immediately-invoked-callable';
 
     public function __construct()
     {

@@ -21,7 +21,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class PsalmIgnoreVariableMethodTagDefinition extends TagDefinition
 {
-    public const string NAME = 'psalm-ignore-variable-method';
+    public const NAME = 'psalm-ignore-variable-method';
 
     public function __construct()
     {

@@ -22,7 +22,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  */
 final class UnusedParamTagDefinition extends TagDefinition
 {
-    public const string NAME = 'unused-param';
+    public const NAME = 'unused-param';
 
     public function __construct()
     {
