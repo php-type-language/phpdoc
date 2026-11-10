@@ -55,9 +55,8 @@ abstract class AssertionTagDefinition extends TagDefinition
             name: $name,
             spec: Spec::sequence(
                 // A literal reports nothing but its own presence, so each of
-                // the prefixes is asked about under a name of its own. The
-                // longest one is offered first, so that the "!" of a "!=" is
-                // not taken for the whole of it.
+                // the prefixes is asked about under a name of its own.
+                // The longest one is offered first ("!=" before "!").
                 Spec::maybe(
                     Spec::oneOf(
                         Spec::literal(AssertOperator::NotEquals->value, self::OPERATOR_NOT_EQUALS),

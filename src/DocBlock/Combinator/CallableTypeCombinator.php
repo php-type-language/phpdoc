@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
-use TypeLang\Type\CallableTypeNode;
+use TypeLang\Type\Callable\CallableTypeNode;
 
 /**
  * Reads a type and accepts it only when it is a callable, so that a plain word

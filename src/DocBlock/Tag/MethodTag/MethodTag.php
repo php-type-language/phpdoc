@@ -6,7 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\MethodTag;
 
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
-use TypeLang\Type\CallableTypeNode;
+use TypeLang\Type\Callable\CallableTypeNode;
 
 /**
  * The `@method` tag declares a "magic" method that can be called on the

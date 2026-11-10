@@ -85,8 +85,8 @@ final class DocBlockParser implements DocBlockParserInterface
      */
     private function loadPlatforms(iterable $platforms): array
     {
-        // The standard platform is always loaded first; the caller's platforms
-        // extend it, overriding an entry when they reuse its name.
+        // The standard platform is always loaded first, the caller's platforms
+        // extend it and override an entry with the same name.
         $result = [new StandardPlatform()];
 
         foreach ($platforms as $platform) {
@@ -147,8 +147,7 @@ final class DocBlockParser implements DocBlockParserInterface
 
         // Description is always present and cannot be redefined.
         //
-        // The combinator is created on the first call, because the description
-        // parser is not available at the moment of the combinators creation.
+        // The combinator is created lazily on the first call.
         $combinators[DescriptionCombinator::NAME] = function (Cursor $cursor) use (&$description): mixed {
             $description ??= new DescriptionCombinator(
                 descriptionParser: $this->descriptionParser,
@@ -240,8 +239,8 @@ final class DocBlockParser implements DocBlockParserInterface
             return $e;
         }
 
-        // An internal (non-library) failure is wrapped so that the whole
-        // docblock and the failing offset are still reported to the caller.
+        // An internal (non-library) failure is wrapped into a tag parsing
+        // exception carrying the whole docblock and the failing offset.
         return TagParsingException::becauseInternalErrorOccurs($e, $source, $offset);
     }
 

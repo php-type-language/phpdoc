@@ -78,7 +78,7 @@ final class StringSplitter implements SplitterInterface
 
         $length = \strlen($docblock);
 
-        // Content ends at the closing "*/"; nothing from there on counts.
+        // Content ends at the closing "*/", nothing from there on counts.
         $closing = \strpos($docblock, self::SEQUENCE_CLOSING, $offset);
         $end = $closing === false ? $length : $closing;
 
@@ -98,7 +98,7 @@ final class StringSplitter implements SplitterInterface
                 $offset += $docblock[$break] === "\r" && ($docblock[$break + 1] ?? '') === "\n" ? 2 : 1;
             }
 
-            // Blank lines are dropped; a significant one keeps its terminator.
+            // Blank lines are dropped, a significant one keeps its terminator.
             if ($content !== '') {
                 $terminator = $break < $end ? \substr($docblock, $break, $offset - $break) : '';
 

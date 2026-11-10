@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\Parser\Partial\SuccessfulParsedResult;
-use TypeLang\Parser\TypeParserInterface;
+use TypeLang\Parser\TypeParser;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
+use TypeLang\Type\TypeNode;
 
 /**
  * Reads a type from the cursor, consuming exactly the part that forms
@@ -23,9 +24,15 @@ class TypeCombinator implements CombinatorInterface
 {
     public const NAME = 'Type';
 
-    public function __construct(
-        private readonly TypeParserInterface $typeParser
-    ) {}
+    /**
+     * @var TypeParser<TypeNode>
+     */
+    private TypeParser $typeParser;
+
+    public function __construct(TypeParser $typeParser)
+    {
+        $this->typeParser = $typeParser->forType();
+    }
 
     public function __invoke(Cursor $cursor): TypeReference
     {

@@ -275,7 +275,7 @@ final class SplitterTest extends TestCase
     #[DataProvider('splitterDataProvider')]
     public function leadingWhitespaceIsStrippedWhenLineHasNoStarPrefix(SplitterInterface $parser): void
     {
-        // "/**\n @return example\n */" — note the space before "@", and no "*".
+        // "/**\n @return example\n */", note the space before "@", and no "*".
         $input = self::comment('/**', ' @return example', ' */');
 
         $segments = self::segments($parser->split($input));

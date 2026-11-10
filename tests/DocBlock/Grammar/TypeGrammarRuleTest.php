@@ -11,8 +11,8 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\Type\NamedTypeNode;
-use TypeLang\Type\NullableTypeNode;
-use TypeLang\Type\UnionTypeNode;
+use TypeLang\Type\WrappingTypeNode\NullableTypeNode;
+use TypeLang\Type\LogicalTypeNode\UnionTypeNode;
 
 final class TypeGrammarRuleTest extends GrammarRuleTestCase
 {

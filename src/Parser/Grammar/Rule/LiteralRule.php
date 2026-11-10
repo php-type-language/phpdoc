@@ -28,7 +28,7 @@ final class LiteralRule implements TerminalInterface
         $cursor = $context->cursor;
 
         // A literal ending in a word character must be followed by a word
-        // boundary, so that e.g. "of" does not match the start of "offset".
+        // boundary ("of" does not match the start of "offset").
         if (self::isWordByte($this->value[\strlen($this->value) - 1])) {
             $lookahead = $cursor->peek(\strlen($this->value) + 1);
 

@@ -47,7 +47,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 /**
  * The PHPStan platform: the `@phpstan-*` tag family understood by PHPStan.
  *
- * Tags that restate an existing one are wired as aliases onto it; PHPStan's own
+ * Tags that restate an existing one are wired as aliases onto it, PHPStan's own
  * marker tags are contributed as their own flag definitions.
  */
 final class PhpStanPlatform extends Platform

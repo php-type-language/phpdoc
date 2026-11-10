@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
  * A platform contributes a named set of tags, aliases and combinators to the
  * parser.
  *
- * The {@see StandardPlatform} is always loaded first; every additional platform
+ * The {@see StandardPlatform} is always loaded first, every additional platform
  * extends it, overriding an entry when it reuses the same name.
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface

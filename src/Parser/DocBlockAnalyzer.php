@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\Parser\Splitter\SplitterInterface;
  * Groups the significant segments of a DocBlock comment into a leading
  * description followed by tags, joining each tag with its continuation lines.
  *
- * A line opening with "@" starts a new tag; any line before the first tag
+ * A line opening with "@" starts a new tag. Any line before the first tag
  * belongs to the description, and any non-tag line after a tag continues it.
  */
 final class DocBlockAnalyzer
@@ -33,7 +33,7 @@ final class DocBlockAnalyzer
         $offset = 0;
 
         foreach ($this->splitter->split($docblock) as $segment) {
-            // A tag opens a new group; the previous one is finished first.
+            // A tag opens a new group and finishes the previous one.
             if ($buffer !== '' && $segment->text[0] === '@') {
                 /** @phpstan-ignore-next-line : Allow external mutation */
                 $prototype->text = $buffer;

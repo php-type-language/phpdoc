@@ -106,7 +106,7 @@ final class BalancedBraceAwareParser implements DescriptionParserInterface
             $offset = $cursor = $close + 1;
         }
 
-        // Flush the trailing text; this also captures an unclosed "{@..." tail.
+        // Flush the trailing text, including an unclosed "{@..." tail.
         if ($offset < $length) {
             $components[] = new Description(\substr($description, $offset));
         }

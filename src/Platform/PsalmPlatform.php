@@ -72,7 +72,7 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 /**
  * The Psalm platform: the `@psalm-*` tag family understood by Psalm.
  *
- * Tags that restate an existing one are wired as aliases onto it; Psalm's own
+ * Tags that restate an existing one are wired as aliases onto it, Psalm's own
  * marker tags are contributed as their own flag definitions.
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface
