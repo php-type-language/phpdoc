@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phan-suppress-next-line` tag silences the listed issue types
+ * The `@​phan-suppress-next-line` tag silences the listed issue types
  * reported on the next line.
  *
  * ```
- * "@phan-suppress-next-line" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@​phan-suppress-next-line" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanSuppressNextLineTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-suppress-next-line';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-suppress-next-line';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class PhanSuppressNextLineTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanSuppressNextLineTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanSuppressNextLineTag($name, $issues, $description);
+        return new PhanSuppressNextLineTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

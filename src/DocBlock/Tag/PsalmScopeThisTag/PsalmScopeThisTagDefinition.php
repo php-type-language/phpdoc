@@ -21,15 +21,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-scope-this" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmScopeThisTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-scope-this';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-scope-this';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -42,12 +50,16 @@ final class PsalmScopeThisTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmScopeThisTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmScopeThisTag($name, $type, $description);
+        return new PsalmScopeThisTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

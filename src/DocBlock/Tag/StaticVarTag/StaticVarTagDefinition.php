@@ -15,21 +15,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@staticvar` tag documents the type of static variable declared
- * within a function or method.
+ * The `@staticvar` tag documents the type of static variable declared within
+ * a function or method, optionally naming the variable it applies to.
  *
  * ```
  * "@staticvar" <Type> [ <Variable> ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class StaticVarTagDefinition extends TagDefinition
 {
-    public const NAME = 'staticvar';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'staticvar';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -45,15 +53,20 @@ final class StaticVarTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): StaticVarTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var non-empty-string|null $variable */
+        /** @var non-empty-string|null */
         $variable = $result->find('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new StaticVarTag($name, $type, $variable, $description);
+        return new StaticVarTag(
+            name: $name,
+            statement: $statement,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

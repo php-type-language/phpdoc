@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@global" <Type> <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class GlobalTagDefinition extends TagDefinition
 {
-    public const NAME = 'global';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'global';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::rule(VariableCombinator::NAME, 'variable'),
@@ -42,15 +50,20 @@ final class GlobalTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): GlobalTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new GlobalTag($name, $type, $variable, $description);
+        return new GlobalTag(
+            name: $name,
+            statement: $statement,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

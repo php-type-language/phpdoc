@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phan-suppress-previous-line` tag silences the listed issue types
+ * The `@​phan-suppress-previous-line` tag silences the listed issue types
  * reported on the previous line.
  *
  * ```
- * "@phan-suppress-previous-line" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@​phan-suppress-previous-line" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanSuppressPreviousLineTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-suppress-previous-line';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-suppress-previous-line';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class PhanSuppressPreviousLineTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanSuppressPreviousLineTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanSuppressPreviousLineTag($name, $issues, $description);
+        return new PhanSuppressPreviousLineTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

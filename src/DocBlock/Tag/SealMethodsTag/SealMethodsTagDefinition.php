@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@seal-methods` tag forbids declaring magic methods beyond those
- * already documented.
+ * The `@seal-methods` tag forbids declaring magic methods beyond those already
+ * documented.
  *
  * ```
  * "@seal-methods" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class SealMethodsTagDefinition extends TagDefinition
 {
-    public const NAME = 'seal-methods';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'seal-methods';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class SealMethodsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): SealMethodsTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new SealMethodsTag($name, $description);
+        return new SealMethodsTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

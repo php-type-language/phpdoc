@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@​phpstan-ignore-line" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstan.xml, edit the model instead
  */
 final class PhpStanIgnoreLineTagDefinition extends TagDefinition
 {
-    public const NAME = 'phpstan-ignore-line';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phpstan-ignore-line';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhpStanIgnoreLineTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhpStanIgnoreLineTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhpStanIgnoreLineTag($name, $description);
+        return new PhpStanIgnoreLineTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

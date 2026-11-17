@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-ignore-nullable-return` tag ignores a possible `null`
- * value in the return type.
+ * The `@psalm-ignore-nullable-return` tag ignores a possible `null` value
+ * in the return type.
  *
  * ```
  * "@psalm-ignore-nullable-return" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIgnoreNullableReturnTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-ignore-nullable-return';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-ignore-nullable-return';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmIgnoreNullableReturnTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmIgnoreNullableReturnTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmIgnoreNullableReturnTag($name, $description);
+        return new PsalmIgnoreNullableReturnTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@pure" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class PureTagDefinition extends TagDefinition
 {
-    public const NAME = 'pure';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'pure';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PureTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PureTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PureTag($name, $description);
+        return new PureTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

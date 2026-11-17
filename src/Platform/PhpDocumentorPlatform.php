@@ -35,10 +35,11 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
  * The phpDocumentor platform: the legacy tag family defined by phpDocumentor
  * that a modern, static-analysis-oriented docblock rarely uses.
  *
- * It extends the {@see StandardPlatform} with these older tags and the few
- * combinators only they rely on.
+ * It contributes these older tags and the few combinators only they rely on.
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class PhpDocumentorPlatform extends Platform
 {
@@ -48,27 +49,27 @@ final class PhpDocumentorPlatform extends Platform
     public function getTags(): iterable
     {
         return [
-            AccessTagDefinition::NAME => new AccessTagDefinition(),
-            AuthorTagDefinition::NAME => new AuthorTagDefinition(),
-            CategoryTagDefinition::NAME => new CategoryTagDefinition(),
-            CopyrightTagDefinition::NAME => new CopyrightTagDefinition(),
-            ExampleTagDefinition::NAME => new ExampleTagDefinition(),
-            FilesourceTagDefinition::NAME => new FilesourceTagDefinition(),
-            GlobalTagDefinition::NAME => new GlobalTagDefinition(),
-            IgnoreTagDefinition::NAME => new IgnoreTagDefinition(),
-            InheritDocTagDefinition::NAME => new InheritDocTagDefinition(),
-            LicenseTagDefinition::NAME => new LicenseTagDefinition(),
-            NameTagDefinition::NAME => new NameTagDefinition(),
-            PackageTagDefinition::NAME => new PackageTagDefinition(),
-            SinceTagDefinition::NAME => new SinceTagDefinition(),
-            SourceTagDefinition::NAME => new SourceTagDefinition(),
-            StaticTagDefinition::NAME => new StaticTagDefinition(),
-            StaticVarTagDefinition::NAME => new StaticVarTagDefinition(),
-            SubpackageTagDefinition::NAME => new SubpackageTagDefinition(),
-            TodoTagDefinition::NAME => new TodoTagDefinition(),
-            UsedByTagDefinition::NAME => new UsedByTagDefinition(),
-            UsesTagDefinition::NAME => new UsesTagDefinition(),
-            VersionTagDefinition::NAME => new VersionTagDefinition(),
+            AccessTagDefinition::getCanonicalName() => new AccessTagDefinition(),
+            AuthorTagDefinition::getCanonicalName() => new AuthorTagDefinition(),
+            CategoryTagDefinition::getCanonicalName() => new CategoryTagDefinition(),
+            CopyrightTagDefinition::getCanonicalName() => new CopyrightTagDefinition(),
+            ExampleTagDefinition::getCanonicalName() => new ExampleTagDefinition(),
+            FilesourceTagDefinition::getCanonicalName() => new FilesourceTagDefinition(),
+            GlobalTagDefinition::getCanonicalName() => new GlobalTagDefinition(),
+            IgnoreTagDefinition::getCanonicalName() => new IgnoreTagDefinition(),
+            InheritDocTagDefinition::getCanonicalName() => new InheritDocTagDefinition(),
+            LicenseTagDefinition::getCanonicalName() => new LicenseTagDefinition(),
+            NameTagDefinition::getCanonicalName() => new NameTagDefinition(),
+            PackageTagDefinition::getCanonicalName() => new PackageTagDefinition(),
+            SinceTagDefinition::getCanonicalName() => new SinceTagDefinition(),
+            SourceTagDefinition::getCanonicalName() => new SourceTagDefinition(),
+            StaticTagDefinition::getCanonicalName() => new StaticTagDefinition(),
+            StaticVarTagDefinition::getCanonicalName() => new StaticVarTagDefinition(),
+            SubpackageTagDefinition::getCanonicalName() => new SubpackageTagDefinition(),
+            TodoTagDefinition::getCanonicalName() => new TodoTagDefinition(),
+            UsedByTagDefinition::getCanonicalName() => new UsedByTagDefinition(),
+            UsesTagDefinition::getCanonicalName() => new UsesTagDefinition(),
+            VersionTagDefinition::getCanonicalName() => new VersionTagDefinition(),
         ];
     }
 
@@ -78,9 +79,9 @@ final class PhpDocumentorPlatform extends Platform
     public function getCombinators(): iterable
     {
         return [
-            VisibilityCombinator::NAME => new VisibilityCombinator(),
             AuthorNameCombinator::NAME => new AuthorNameCombinator(),
             EmailCombinator::NAME => new EmailCombinator(),
+            VisibilityCombinator::NAME => new VisibilityCombinator(),
         ];
     }
 }

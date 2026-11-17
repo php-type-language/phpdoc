@@ -10,5 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
  * The `@pure` tag declares a function or method as pure, meaning it is
  * free of side effects: calling it repeatedly with the same arguments
  * always produces the same result, without observably mutating any state.
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class PureTag extends FlagTag {}

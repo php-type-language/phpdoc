@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+namespace TypeLang\PhpDoc\Tests\Parser;
+
+use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
+use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTag;
+use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\Tag;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
+use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
+use TypeLang\PhpDoc\Parser\TagFactory;
+use TypeLang\PhpDoc\Parser\TagRegistry;
+use TypeLang\PhpDoc\Tests\TestCase;
+
+final class TagFactoryTest extends TestCase
+{
+    public function testUnknownTagKeepsItsWrittenName(): void
+    {
+        $factory = new TagFactory(new TagRegistry(), self::combinators());
+
+        $tag = $factory->create('Custom-Tag', '');
+
+        self::assertSame(Tag::class, $tag::class);
+        self::assertSame('Custom-Tag', $tag->name);
+    }
+
+    public function testUnknownTagDefinitionIsCreatedByLowerCaseName(): void
+    {
+        $names = [];
+
+        $factory = new TagFactory(
+            registry: new TagRegistry(),
+            combinators: self::combinators(),
+            createUnknownTagDefinition: static function (string $name) use (&$names): TagDefinitionInterface {
+                $names[] = $name;
+
+                return new FinalTagDefinition();
+            },
+        );
+
+        $tag = $factory->create('Custom-Tag', '');
+
+        self::assertInstanceOf(FinalTag::class, $tag);
+        self::assertSame(['custom-tag'], $names);
+    }
+
+    public function testRegisteredTagIsNotReadByUnknownTagDefinition(): void
+    {
+        $factory = new TagFactory(
+            registry: new TagRegistry(['final' => new FinalTagDefinition()]),
+            combinators: self::combinators(),
+            createUnknownTagDefinition: static function (): never {
+                throw new \LogicException('Must not be called');
+            },
+        );
+
+        self::assertInstanceOf(FinalTag::class, $factory->create('final', ''));
+    }
+
+    /**
+     * Combinators of the tags with an empty body: the description is absent.
+     *
+     * @return array<non-empty-string, \Closure(): never>
+     */
+    private static function combinators(): array
+    {
+        return [
+            DescriptionCombinator::NAME => static function (): never {
+                throw new NoMatchException('No description');
+            },
+        ];
+    }
+}

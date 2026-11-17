@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@codingStandardsIgnoreFile` tag ignores the whole file for
+ * The `@​codingStandardsIgnoreFile` tag ignores the whole file for
  * coding-standard checks.
  *
  * ```
- * "@codingStandardsIgnoreFile" [ <Description> ]
+ * "@​codingStandardsIgnoreFile" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class CodingStandardsIgnoreFileTagDefinition extends TagDefinition
 {
-    public const NAME = 'codingStandardsIgnoreFile';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'codingStandardsIgnoreFile';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class CodingStandardsIgnoreFileTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): CodingStandardsIgnoreFileTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new CodingStandardsIgnoreFileTag($name, $description);
+        return new CodingStandardsIgnoreFileTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

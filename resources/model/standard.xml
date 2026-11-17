@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="standard">
+    <package name="standard" class="TypeLang\PhpDoc\Platform\StandardPlatform" title="Standard">
+        <description>
+            The standard platform: the common tags, without a tool prefix, understood by
+            most of the documentation and static analysis tools.
+        </description>
+    </package>
+
+    <tag name="abstract" class="TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@abstract` tag declares an element as abstract.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Flagging a magic method as one subclasses are expected to implement."><![CDATA[
+            /**
+             * @method void handle(Event $event)
+             * @abstract
+             */
+            abstract class Listener {}
+        ]]></example>
+        <example title="With a description explaining what implementers must provide."><![CDATA[
+            /**
+             * @abstract Subclasses must return the storage backend to use.
+             */
+            protected function makeStorage(): Storage
+        ]]></example>
+    </tag>
+
+    <tag name="api" class="TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@api` tag marks an element as part of the public, supported API of its
+            package.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A class marked as part of the public API."><![CDATA[
+            /**
+             * @api
+             */
+            final class Mailer {}
+        ]]></example>
+        <example title="With a description explaining the guarantee."><![CDATA[
+            /**
+             * @api Stable since 2.0; changes follow semantic versioning.
+             */
+            public function send(Message $message): bool
+        ]]></example>
+    </tag>
+
+    <tag name="deprecated" class="TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VersionedTag" placement="block">
+        <summary>
+            The `@deprecated` tag marks an element as deprecated, optionally since
+            a given version.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <rule name="Version" as="version"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Naming the version and pointing to a replacement."><![CDATA[
+            /**
+             * @deprecated 2.0 Use Mailer::send() instead.
+             */
+            public function dispatch(Message $message): bool
+        ]]></example>
+        <example title="Without a version, just explaining the reason."><![CDATA[
+            /**
+             * @deprecated No longer needed now that transport is chosen
+             *             automatically.
+             */
+            public function withTransport(Transport $transport): static
+        ]]></example>
+    </tag>
+
+    <tag name="extends" class="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\InheritanceTag" placement="block">
+        <summary>
+            The `@extends` tag allows to extend templated classes and interfaces,
+            providing the concrete type arguments of the parent.
+        </summary>
+        <description>
+            The `@extends` tag makes a generic parent class or interface concrete by
+            providing the type arguments for its template parameters.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Binding a generic collection's item type to a concrete class."><![CDATA[
+            /**
+             * @extends Collection<User>
+             */
+            final class UserCollection extends Collection {}
+        ]]></example>
+        <example title="Forwarding a still-open type parameter to a further subclass."><![CDATA[
+            /**
+             * @template T
+             * @extends Repository<T>
+             */
+            abstract class BaseRepository extends Repository {}
+        ]]></example>
+    </tag>
+
+    <tag name="final" class="TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@final` tag declares that an element must not be overridden or extended.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Marking a method as final without declaring the whole class final."><![CDATA[
+            /**
+             * @final Overriding this would break the transaction guarantees
+             *        below.
+             */
+            public function commit(): void
+        ]]></example>
+        <example title="A plain marker on a class already close to its native counterpart."><![CDATA[
+            /**
+             * @final
+             */
+            class Money {}
+        ]]></example>
+    </tag>
+
+    <tag name="immutable" class="TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@immutable` tag declares a class as immutable, meaning none of its state
+            can change after construction.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A value object whose state is fixed once built."><![CDATA[
+            /**
+             * @immutable
+             */
+            final class Money {}
+        ]]></example>
+        <example title="With a description explaining the guarantee."><![CDATA[
+            /**
+             * @immutable Every "with*" method returns a new instance.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="implements" class="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\InheritanceTag" placement="block">
+        <summary>
+            The `@implements` tag allows to extend templated interfaces, providing the
+            concrete type arguments of the implemented interface.
+        </summary>
+        <description>
+            The `@implements` tag makes a generic interface concrete by providing the
+            type arguments for its template parameters.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting the key and value types of an `ArrayAccess` implementation."><![CDATA[
+            /**
+             * @implements ArrayAccess<int, User>
+             */
+            final class UserList implements ArrayAccess {}
+        ]]></example>
+        <example title="Implementing a generic repository interface with a concrete entity type."><![CDATA[
+            /**
+             * @implements RepositoryInterface<Order>
+             */
+            final class OrderRepository implements RepositoryInterface {}
+        ]]></example>
+    </tag>
+
+    <tag name="internal" class="TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag">
+        <summary>
+            The `@internal` tag marks an element as internal to its package, or documents
+            information meant only for the maintainers of that package.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="An entire method excluded from the public API."><![CDATA[
+            /**
+             * @internal Used by the container to wire up lazy proxies.
+             */
+            public function __setDependencies(array $dependencies): void
+        ]]></example>
+        <example title="An inline note tucked inside an otherwise public description."><![CDATA[
+            /**
+             * Formats the message body. {@internal
+             * Encoding is UTF-8 for now; revisit once
+             * transports negotiate charsets.}
+             */
+            public function format(Message $message): string
+        ]]></example>
+    </tag>
+
+    <tag name="link" class="TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTag">
+        <summary>
+            The `@link` tag can be used to define a relation, or link, between
+            the element, or part of the long description when used inline, to a URI.
+        </summary>
+        <description>
+            The URI MUST be complete and well-formed as specified in RFC2396.
+
+            The `@link` tag MAY have a description appended to indicate the type of
+            relation defined by this occurrence.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="URI" as="uri"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A bare link to an external specification."><![CDATA[
+            /**
+             * @link https://www.rfc-editor.org/rfc/rfc3986
+             */
+        ]]></example>
+        <example title="A link with a description explaining why it's relevant."><![CDATA[
+            /**
+             * @link https://example.com/docs/rate-limits Applies to all public
+             *       endpoints.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="method" class="TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag" definition="manual" placement="block">
+        <summary>
+            The `@method` tag declares a "magic" method that can be called on the
+            described class, described as a callable carrying its name, parameters and
+            return type.
+        </summary>
+        <description>
+            The method is written as a callable, either carrying its own return type or
+            having it spelled out in front of the signature.
+        </description>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <literal value="static" as="static"/>
+                </maybe>
+                <one-of>
+                    <sequence>
+                        <rule name="Type" as="return-type"/>
+                        <rule name="CallableType" as="callable"/>
+                    </sequence>
+                    <rule name="CallableType" as="callable"/>
+                </one-of>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A magic instance method with no return type."><![CDATA[
+            /**
+             * @method void setName(string $name)
+             */
+            class Model {}
+        ]]></example>
+        <example title="A magic static method, with its return type inside the signature."><![CDATA[
+            /**
+             * @method static static create(array $attributes)
+             */
+            class Model {}
+        ]]></example>
+        <example title="The return type may instead be written before the signature; the two forms are equivalent."><![CDATA[
+            /**
+             * @method int getId()
+             * @method getId(): int
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="mixin" class="TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@mixin` tag declares that the members of the referenced type are made
+            available on the described class.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A query builder that forwards undefined method calls to its underlying connection."><![CDATA[
+            /**
+             * @mixin Connection
+             */
+            class QueryBuilder
+            {
+                public function __call(string $name, array $arguments): mixed {
+                    return $this->connection
+                        ->$name(...$arguments);
+                }
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="no-named-arguments" class="TypeLang\PhpDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@no-named-arguments` tag indicates that the argument names may change
+            and must not be relied upon by callers.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A plain marker on a method whose argument names are still in flux."><![CDATA[
+            /**
+             * @no-named-arguments
+             */
+            public function configure(string $host, int $port): void
+        ]]></example>
+        <example title="With a description explaining why."><![CDATA[
+            /**
+             * @no-named-arguments Parameter names will change once the driver
+             *                     abstraction lands.
+             */
+            function connect(string $dsn, ?string $user, ?string $password): PDO
+        ]]></example>
+    </tag>
+
+    <tag name="not-deprecated" class="TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@not-deprecated` tag marks an element as explicitly not deprecated,
+            overriding a `@deprecated` tag it would otherwise inherit from a parent.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A method that stays supported even though the interface it implements is deprecated."><![CDATA[
+            /**
+             * @not-deprecated
+             */
+            public function send(): void {}
+        ]]></example>
+        <example title="With a description explaining why it is kept."><![CDATA[
+            /**
+             * @not-deprecated Still the recommended entry point.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="override" class="TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@override` tag marks a method as overriding an inherited definition.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Flagging an override on a codebase targeting PHP versions before 8.3."><![CDATA[
+            /**
+             * @override
+             */
+            public function handle(Request $request): Response
+        ]]></example>
+        <example title="With a note about what changed relative to the parent implementation."><![CDATA[
+            /**
+             * @override Adds retry handling on top of the base transport.
+             */
+            public function send(Message $message): bool
+        ]]></example>
+    </tag>
+
+    <tag name="param" class="TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag" placement="block">
+        <summary>
+            The `@param` tag documents a single argument of a function or method.
+        </summary>
+        <description>
+            The `@param` tag MAY be followed by a description that clarifies the
+            meaning of the argument.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A plain scalar type."><![CDATA[
+            /**
+             * @param int $amount
+             */
+        ]]></example>
+        <example title="A generic collection type, with a description."><![CDATA[
+            /**
+             * @param list<User> $recipients The people to notify.
+             */
+        ]]></example>
+        <example title="A shape describing the accepted array structure."><![CDATA[
+            /**
+             * @param array{name: string, age: int<0, max>} $profile
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="param-closure-this" class="TypeLang\PhpDoc\DocBlock\Tag\ParamClosureThisTag\ParamClosureThisTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag" placement="block">
+        <summary>
+            The `@param-closure-this` tag documents the bound "$this" type of closure
+            passed as an argument.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Pinning `$this` for a closure evaluated in the context of a builder."><![CDATA[
+            /**
+             * @param Closure(): string $formatter
+             * @param-closure-this Builder $formatter
+             */
+            function withFormatter(Closure $formatter): static
+        ]]></example>
+        <example title="With a description explaining the binding."><![CDATA[
+            /**
+             * @param Closure(int): void $callback
+             * @param-closure-this Connection $callback Bound before dispatch so
+             *                     the callback can reach the connection's
+             *                     protected members.
+             */
+            function onConnect(Closure $callback): void
+        ]]></example>
+    </tag>
+
+    <tag name="param-immediately-invoked-callable" class="TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTag" extends="TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamInvokedCallableTag" placement="block">
+        <summary>
+            The `@param-immediately-invoked-callable` tag marks a callable argument that
+            is invoked before the function or method returns.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A plain marker on a mapping callback."><![CDATA[
+            /**
+             * @param callable(int): int $mapper
+             * @param-immediately-invoked-callable $mapper
+             */
+            function transform(array $items, callable $mapper): array
+        ]]></example>
+        <example title="With a description explaining why it matters here."><![CDATA[
+            /**
+             * @param-immediately-invoked-callable $callback Runs before the
+             *                                     lock is released, so it can
+             *                                     safely mutate the shared
+             *                                     buffer.
+             */
+            function withLock(callable $callback): mixed
+        ]]></example>
+    </tag>
+
+    <tag name="param-later-invoked-callable" class="TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTag" extends="TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamInvokedCallableTag" placement="block">
+        <summary>
+            The `@param-later-invoked-callable` tag marks a callable argument that is
+            invoked after the function or method returns.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A plain marker on a listener registration."><![CDATA[
+            /**
+             * @param callable(Event): void $listener
+             * @param-later-invoked-callable $listener
+             */
+            function on(string $event, callable $listener): void
+        ]]></example>
+        <example title="With a description explaining when it actually runs."><![CDATA[
+            /**
+             * @param-later-invoked-callable $callback Invoked once the response
+             *                               arrives, which may be long after
+             *                               this method returns.
+             */
+            function then(callable $callback): static
+        ]]></example>
+    </tag>
+
+    <tag name="param-out" class="TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag" placement="block">
+        <summary>
+            The `@param-out` tag documents the type a by-reference argument holds after
+            the function or method returns.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A reference parameter that starts nullable but ends up always set."><![CDATA[
+            /**
+             * @param string|null $error
+             * @param-out string $error
+             */
+            function tryParse(string $input, ?string &$error): bool
+        ]]></example>
+        <example title="With a description of what the narrower outgoing type represents."><![CDATA[
+            /**
+             * @param list<int> $matches
+             * @param-out non-empty-list<int> $matches Populated only when the
+             *            function returns true.
+             */
+            function findAll(string $pattern, array &$matches): bool
+        ]]></example>
+    </tag>
+
+    <tag name="property" class="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTag" extends="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\MagicPropertyTag" placement="block">
+        <summary>
+            The `@property` tag declares a magic property that can be both read and
+            written.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A single magic property on a value object."><![CDATA[
+            /**
+             * @property string $name
+             */
+            class User
+            {
+                public function __get(string $name): mixed
+                {
+                    /* ... */
+                }
+
+                public function __set(string $name, mixed $value): void {
+                    /* ... */
+                }
+            }
+        ]]></example>
+        <example title="Several magic properties, with descriptions."><![CDATA[
+            /**
+             * @property int $id The record's primary key.
+             * @property DateTimeImmutable $createdAt When the record was
+             *           inserted.
+             */
+            class Record {}
+        ]]></example>
+    </tag>
+
+    <tag name="property-read" class="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTag" extends="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\MagicPropertyTag" placement="block">
+        <summary>
+            The `@property-read` tag declares a magic property that can only be read.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A computed value with no corresponding setter."><![CDATA[
+            /**
+             * @property-read int $length
+             */
+            class ImmutableString
+            {
+                public function __get(string $name): mixed { /* ... */ }
+            }
+        ]]></example>
+        <example title="A read-only property with a description."><![CDATA[
+            /**
+             * @property-read DateTimeImmutable $createdAt When the record was
+             *                inserted.
+             */
+            class Record {}
+        ]]></example>
+    </tag>
+
+    <tag name="property-write" class="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTag" extends="TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\MagicPropertyTag" placement="block">
+        <summary>
+            The `@property-write` tag declares a magic property that can only be written.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A setter with no corresponding getter."><![CDATA[
+            /**
+             * @property-write string $password
+             */
+            class Account
+            {
+                public function __set(string $name, mixed $value): void {
+                    /* ... */
+                }
+            }
+        ]]></example>
+        <example title="A write-only property with a description."><![CDATA[
+            /**
+             * @property-write LoggerInterface $logger Replaces the logger used
+             *                 internally.
+             */
+            class Service {}
+        ]]></example>
+    </tag>
+
+    <tag name="pure-unless-callable-is-impure" class="TypeLang\PhpDoc\DocBlock\Tag\PureUnlessCallableIsImpureTag\PureUnlessCallableIsImpureTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@pure-unless-callable-is-impure` tag declares a function pure unless a
+            callable it receives is itself impure.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A plain marker on a mapping helper."><![CDATA[
+            /**
+             * @pure-unless-callable-is-impure
+             */
+            function mapValues(array $items, callable $mapper): array
+        ]]></example>
+        <example title="With a description naming the parameter the purity depends on."><![CDATA[
+            /**
+             * @pure-unless-callable-is-impure Purity follows whatever $reducer
+             *                                 does.
+             */
+            function reduce(
+                array $items,
+                callable $reducer,
+                mixed $initial,
+            ): mixed
+        ]]></example>
+    </tag>
+
+    <tag name="readonly" class="TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@readonly` tag declares that a property may only be written once, during
+            initialization.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A magic property that is only ever set once, from the constructor."><![CDATA[
+            /**
+             * @property-read string $id
+             * @readonly
+             */
+            class Entity {}
+        ]]></example>
+        <example title="With a description explaining why it isn't a native readonly property."><![CDATA[
+            /**
+             * @readonly Assigned lazily on first access; kept mutable
+             *           internally.
+             */
+            public $identifier;
+        ]]></example>
+    </tag>
+
+    <tag name="require-extends" class="TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireInheritanceTag" placement="block">
+        <summary>
+            The `@require-extends` tag constrains a trait so it may only be used by a
+            class that extends the given type.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A trait that assumes it is only ever mixed into an `Entity` subclass."><![CDATA[
+            /**
+             * @require-extends Entity
+             */
+            trait SoftDeletable
+            {
+                public function delete(): void
+                {
+                    $this->deletedAt = new DateTimeImmutable();
+                }
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="require-implements" class="TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireInheritanceTag" placement="block">
+        <summary>
+            The `@require-implements` tag constrains a trait so it may only be used by a
+            class that implements the given interface.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A trait that provides a default implementation on top of a required interface."><![CDATA[
+            /**
+             * @require-implements Comparable
+             */
+            trait SortableByDefault
+            {
+                public function isGreaterThan(self $other): bool
+                {
+                    return $this->compareTo($other) > 0;
+                }
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="return" class="TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@return` tag documents the return value of a function or method.
+        </summary>
+        <description>
+            The `@return` tag MAY be followed by a description that clarifies the
+            meaning of the returned value.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Narrowing a native `array` return type to its actual shape."><![CDATA[
+            /**
+             * @return array{id: int, name: string}
+             */
+        ]]></example>
+        <example title="Documenting a generic collection returned by a factory method."><![CDATA[
+            /**
+             * @return list<User> All currently active users.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="seal-methods" class="TypeLang\PhpDoc\DocBlock\Tag\SealMethodsTag\SealMethodsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@seal-methods` tag forbids declaring magic methods beyond those already
+            documented.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Closing the magic method surface of a fluent builder."><![CDATA[
+            /**
+             * @method static setName(string $name)
+             * @method static setAge(int $age)
+             * @seal-methods
+             */
+            class Builder {}
+        ]]></example>
+        <example title="With a description explaining the intent."><![CDATA[
+            /**
+             * @method string getName()
+             * @seal-methods No further magic methods will ever be added here.
+             */
+            class ReadOnlyModel {}
+        ]]></example>
+    </tag>
+
+    <tag name="seal-properties" class="TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@seal-properties` tag forbids declaring magic properties beyond those
+            already documented.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Closing the magic property surface of a data object."><![CDATA[
+            /**
+             * @property-read int $id
+             * @property string $name
+             * @seal-properties
+             */
+            class Record {}
+        ]]></example>
+        <example title="With a description explaining the intent."><![CDATA[
+            /**
+             * @property-read DateTimeImmutable $createdAt
+             * @seal-properties Every magic property this class exposes is
+             *                  listed above.
+             */
+            class Entry {}
+        ]]></example>
+    </tag>
+
+    <tag name="see" class="TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTag">
+        <summary>
+            The `@see` tag can be used to define a {@see CodeReference element}.
+        </summary>
+        <description>
+            When defining a reference to other elements, you can refer to a specific
+            element by appending a double colon and providing the name of that element
+            (also called the 'Fully Qualified Name' or _FQN_).
+
+            A URI MUST be complete and well-formed as specified in RFC 2396.
+
+            The `@see` tag SHOULD have a description to provide additional information
+            regarding the relationship between the element and its target.
+
+            The `@see` tag cannot refer to a namespace element.
+        </description>
+        <grammar>
+            <sequence>
+                <one-of>
+                    <rule name="Reference" as="ref" parameter="reference"/>
+                    <rule name="URI" as="ref" parameter="reference"/>
+                </one-of>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A reference to another method."><![CDATA[
+            /**
+             * @see Mailer::send()
+             */
+        ]]></example>
+        <example title="A reference to a class constant, with a description."><![CDATA[
+            /**
+             * @see Status::ACTIVE The only value accepted here.
+             */
+        ]]></example>
+        <example title="A reference to an external page."><![CDATA[
+            /**
+             * @see https://example.com/docs/delivery
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="suppress" class="TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
+        <summary>
+            The `@suppress` tag silences the listed diagnostics that would otherwise be
+            reported for an element.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="IssueName" as="issue" parameter="issues"/>
+                <repeat>
+                    <sequence>
+                        <literal value=","/>
+                        <rule name="IssueName" as="issue" parameter="issues"/>
+                    </sequence>
+                </repeat>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Silencing a single diagnostic."><![CDATA[
+            /**
+             * @suppress UndefinedMethod
+             */
+        ]]></example>
+        <example title="Silencing several diagnostics at once, with a description explaining why."><![CDATA[
+            /**
+             * @suppress UndefinedMethod, PossiblyUnusedMethod Called only from
+             *           tests.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="template" class="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TypeParameterTag" placement="block">
+        <summary>
+            The `@template` tag declares an invariant generic type parameter.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="parameter"/>
+                <maybe>
+                    <sequence>
+                        <literal value="of"/>
+                        <rule name="Type" as="bound"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <sequence>
+                        <literal value="="/>
+                        <rule name="Type" as="default"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A bare, unconstrained type parameter."><![CDATA[
+            /**
+             * @template T
+             */
+            class Collection {}
+        ]]></example>
+        <example title="A parameter bounded to throwable types only."><![CDATA[
+            /**
+             * @template T of \Throwable
+             */
+            class ExceptionHandler {}
+        ]]></example>
+        <example title="A parameter with both a bound and a default, used when it is left unspecified."><![CDATA[
+            /**
+             * @template T of \Stringable = \Stringable
+             */
+            class Renderer {}
+        ]]></example>
+    </tag>
+
+    <tag name="template-contravariant" class="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TypeParameterTag" placement="block">
+        <summary>
+            The `@template-contravariant` tag declares a contravariant generic type
+            parameter.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="parameter"/>
+                <maybe>
+                    <sequence>
+                        <literal value="of"/>
+                        <rule name="Type" as="bound"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <sequence>
+                        <literal value="="/>
+                        <rule name="Type" as="default"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A comparator whose type parameter only ever appears as an argument."><![CDATA[
+            /**
+             * @template-contravariant T
+             */
+            interface Comparator
+            {
+                /**
+                 * @param T $a
+                 * @param T $b
+                 */
+                public function compare(mixed $a, mixed $b): int;
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="template-covariant" class="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TypeParameterTag" placement="block">
+        <summary>
+            The `@template-covariant` tag declares a covariant generic type parameter.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="parameter"/>
+                <maybe>
+                    <sequence>
+                        <literal value="of"/>
+                        <rule name="Type" as="bound"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <sequence>
+                        <literal value="="/>
+                        <rule name="Type" as="default"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A read-only collection whose item type only ever comes out, never goes in."><![CDATA[
+            /**
+             * @template-covariant T
+             */
+            final class Collection
+            {
+                /** @param T $item */
+                private function __construct(private readonly mixed $item) {}
+
+                /** @return T */
+                public function get(): mixed
+                {
+                    return $this->item;
+                }
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="throws" class="TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@throws` tag indicates the type of "\Throwable" that an element may
+            throw.
+        </summary>
+        <description>
+            The `@throws` tag indicates that a function or method is able to throw
+            a specific type of "\Throwable" (an exception or an error).
+
+            The `@throws` tag MAY be followed by a description explaining when and why
+            the "\Throwable" is thrown.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting the exceptions raised by a single method, each with its own tag."><![CDATA[
+            /**
+             * @throws NotFoundException If the user does not exist.
+             * @throws AccessDeniedException If the current user lacks
+             *         permission.
+             */
+            function fetchUser(int $id): User
+            {
+                // ...
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="unused-param" class="TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VariableTag" placement="block">
+        <summary>
+            The `@unused-param` tag marks an argument that is intentionally left unused.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Silencing the warning for an interface parameter the implementation ignores."><![CDATA[
+            /**
+             * @unused-param $ctx
+             */
+            public function handle(Request $request, array $ctx): Response
+        ]]></example>
+        <example title="With a description explaining why the argument is unused."><![CDATA[
+            /**
+             * @unused-param $previous This listener never needs the old value.
+             */
+            function onChange(mixed $current, mixed $previous): void
+        ]]></example>
+    </tag>
+
+    <tag name="use" class="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTag" extends="TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\InheritanceTag" placement="block">
+        <summary>
+            The `@use` tag allows to extend templated traits, providing the concrete
+            type arguments of the used trait.
+        </summary>
+        <description>
+            The `@use` tag makes a generic trait concrete by providing the type
+            arguments for its template parameters.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Binding a generic caching trait's value type."><![CDATA[
+            final class ProductRepository
+            {
+                /** @use Cacheable<Product> */
+                use Cacheable;
+            }
+        ]]></example>
+        <example title="Binding a comparable trait to the class it is mixed into."><![CDATA[
+            final class Money
+            {
+                /** @use ComparableTrait<Money> */
+                use ComparableTrait;
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="var" class="TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTag" placement="block">
+        <summary>
+            The `@var` tag documents the type of a property, constant or inline
+            variable, optionally naming the variable it applies to.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Variable" as="variable"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting a property's type."><![CDATA[
+            class Model
+            {
+                /** @var list<string> */
+                private array $tags;
+            }
+        ]]></example>
+        <example title="Narrowing an inline local variable's inferred type."><![CDATA[
+            /** @var User $user */
+            $user = $session->get('user');
+        ]]></example>
+        <example title="Naming the variable to disambiguate a multi-assignment line."><![CDATA[
+            /** @var User $user */
+            [$user, $token] = $authenticator
+                ->resolve();
+        ]]></example>
+    </tag>
+
+    <alias name="inherits" of="extends">
+        <example><![CDATA[
+            /**
+             * @inherits Collection<User>
+             */
+            final class UserCollection extends Collection {}
+        ]]></example>
+    </alias>
+    <alias name="returns" of="return">
+        <example><![CDATA[
+            /**
+             * @returns array{id: int, name: string}
+             */
+        ]]></example>
+    </alias>
+    <alias name="template-extends" of="extends">
+        <example><![CDATA[
+            /**
+             * @template T
+             * @template-extends Repository<T>
+             */
+            abstract class BaseRepository extends Repository {}
+        ]]></example>
+    </alias>
+    <alias name="template-implements" of="implements">
+        <example><![CDATA[
+            /**
+             * @template-implements ArrayAccess<int, User>
+             */
+            final class UserList implements ArrayAccess {}
+        ]]></example>
+    </alias>
+    <alias name="template-invariant" of="template">
+        <example><![CDATA[
+            /**
+             * @template-invariant T
+             */
+            class Collection {}
+        ]]></example>
+    </alias>
+    <alias name="template-use" of="use">
+        <example><![CDATA[
+            final class ProductRepository
+            {
+                /** @template-use Cacheable<Product> */
+                use Cacheable;
+            }
+        ]]></example>
+    </alias>
+    <alias name="throw" of="throws">
+        <example><![CDATA[
+            /**
+             * @throw NotFoundException
+             */
+            function fetchUser(int $id): User
+            {
+                // ...
+            }
+        ]]></example>
+    </alias>
+</model>

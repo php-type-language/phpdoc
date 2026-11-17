@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd">
+    <tag name="allow-private-mutation" class="TypeLang\PhpDoc\DocBlock\Tag\AllowPrivateMutationTag\AllowPrivateMutationTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@allow-private-mutation` tag allows a private-scope mutation of an
+            otherwise immutable property.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="assert" class="TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTag" extends="TypeLang\PhpDoc\DocBlock\Tag\AssertionTag" definition="manual" placement="block">
+        <summary>
+            The `@assert` tag asserts that the given subject is narrowed to the type it
+            carries once the call returns.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <one-of>
+                        <literal value="!=" as="not-equals"/>
+                        <literal value="!" as="is-not"/>
+                        <literal value="=" as="equals"/>
+                    </one-of>
+                </maybe>
+                <rule name="Type" as="type"/>
+                <rule name="AssertSubject" as="subject"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="assert-if-false" class="TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTag" extends="TypeLang\PhpDoc\DocBlock\Tag\AssertionTag" definition="manual" placement="block">
+        <summary>
+            The `@assert-if-false` tag asserts the given type for a subject, but
+            only when the function returns `false`.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <one-of>
+                        <literal value="!=" as="not-equals"/>
+                        <literal value="!" as="is-not"/>
+                        <literal value="=" as="equals"/>
+                    </one-of>
+                </maybe>
+                <rule name="Type" as="type"/>
+                <rule name="AssertSubject" as="subject"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="assert-if-true" class="TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTag" extends="TypeLang\PhpDoc\DocBlock\Tag\AssertionTag" definition="manual" placement="block">
+        <summary>
+            The `@assert-if-true` tag asserts the given type for a subject, but
+            only when the function returns `true`.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <one-of>
+                        <literal value="!=" as="not-equals"/>
+                        <literal value="!" as="is-not"/>
+                        <literal value="=" as="equals"/>
+                    </one-of>
+                </maybe>
+                <rule name="Type" as="type"/>
+                <rule name="AssertSubject" as="subject"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="consistent-constructor" class="TypeLang\PhpDoc\DocBlock\Tag\ConsistentConstructorTag\ConsistentConstructorTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@consistent-constructor` tag requires that all subclasses declare a
+            constructor compatible with the parent's.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="import-type" class="TypeLang\PhpDoc\DocBlock\Tag\ImportTypeAliasTag\ImportTypeAliasTag" placement="block">
+        <summary>
+            A tag that imports a type alias declared elsewhere, optionally rebinding it
+            to a local name.
+        </summary>
+        <description>
+            The import-type tag brings a type alias declared elsewhere into the current
+            scope, optionally rebinding it to a local name after "as".
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="alias"/>
+                <literal value="from"/>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <sequence>
+                        <literal value="as"/>
+                        <rule name="Name" as="as"/>
+                    </sequence>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="pure" class="TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@pure` tag declares a function or method as pure, meaning it is
+            free of side effects: calling it repeatedly with the same arguments
+            always produces the same result, without observably mutating any state.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="readonly-allow-private-mutation" class="TypeLang\PhpDoc\DocBlock\Tag\ReadonlyAllowPrivateMutationTag\ReadonlyAllowPrivateMutationTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@readonly-allow-private-mutation` tag allows a readonly property to
+            be mutated from within the declaring class, rather than only during
+            initialization.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="self-out" class="TypeLang\PhpDoc\DocBlock\Tag\SelfOutTag\SelfOutTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@self-out` tag documents the refined type of `$this` after a method
+            call, letting callers see a narrower object type than the one they
+            started with.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="type" class="TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTag" placement="block">
+        <summary>
+            A tag that declares a local type alias: a name bound to a type expression.
+        </summary>
+        <description>
+            The type-alias tag binds a name to a type expression, with an optional "="
+            between the two.
+        </description>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="alias"/>
+                <maybe>
+                    <literal value="="/>
+                </maybe>
+                <rule name="Type" as="type" parameter="statement"/>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="yield" class="TypeLang\PhpDoc\DocBlock\Tag\YieldTag\YieldTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@yield` tag documents the type yielded by a `Generator`, distinct
+            from the type it returns on completion.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+</model>

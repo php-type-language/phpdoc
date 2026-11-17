@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@no-named-arguments" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class NoNamedArgumentsTagDefinition extends TagDefinition
 {
-    public const NAME = 'no-named-arguments';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'no-named-arguments';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class NoNamedArgumentsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): NoNamedArgumentsTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new NoNamedArgumentsTag($name, $description);
+        return new NoNamedArgumentsTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

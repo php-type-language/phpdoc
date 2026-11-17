@@ -1,0 +1,232 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+
+## tags
+@phan-abstract
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition
+  name: abstract
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-assert
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTagDefinition
+  name: assert
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@phan-assert-if-false
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTagDefinition
+  name: assert-if-false
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@phan-assert-if-true
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTagDefinition
+  name: assert-if-true
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@phan-closure-scope
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanClosureScopeTag\PhanClosureScopeTagDefinition
+  name: phan-closure-scope
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanClosureScopeTag\PhanClosureScopeTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-constructor-used-for-side-effects
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanConstructorUsedForSideEffectsTag\PhanConstructorUsedForSideEffectsTagDefinition
+  name: phan-constructor-used-for-side-effects
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanConstructorUsedForSideEffectsTag\PhanConstructorUsedForSideEffectsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-extends
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition
+  name: extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-file-suppress
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTagDefinition
+  name: phan-file-suppress
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@phan-forbid-undeclared-magic-methods
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicMethodsTag\PhanForbidUndeclaredMagicMethodsTagDefinition
+  name: phan-forbid-undeclared-magic-methods
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicMethodsTag\PhanForbidUndeclaredMagicMethodsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-forbid-undeclared-magic-properties
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicPropertiesTag\PhanForbidUndeclaredMagicPropertiesTagDefinition
+  name: phan-forbid-undeclared-magic-properties
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicPropertiesTag\PhanForbidUndeclaredMagicPropertiesTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-hardcode-return-type
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanHardcodeReturnTypeTag\PhanHardcodeReturnTypeTagDefinition
+  name: phan-hardcode-return-type
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanHardcodeReturnTypeTag\PhanHardcodeReturnTypeTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-immutable
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition
+  name: immutable
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-inherits
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition
+  name: extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-method
+  definition: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition
+  name: method
+  creates: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag
+  placement: Block
+  grammar: seq(maybe("static" as static), oneOf(seq(<Type> as return-type, <CallableType> as callable), <CallableType> as callable), maybe(<Description> as description))
+@phan-mixin
+  definition: TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTagDefinition
+  name: mixin
+  creates: TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-output-reference
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanOutputReferenceTag\PhanOutputReferenceTagDefinition
+  name: phan-output-reference
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanOutputReferenceTag\PhanOutputReferenceTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-override
+  definition: TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTagDefinition
+  name: override
+  creates: TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-param
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition
+  name: param
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@phan-property
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition
+  name: property
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@phan-property-read
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition
+  name: property-read
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@phan-property-write
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagDefinition
+  name: property-write
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@phan-pure
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition
+  name: pure
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-read-only
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition
+  name: readonly
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-real-return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanRealReturnTag\PhanRealReturnTagDefinition
+  name: phan-real-return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanRealReturnTag\PhanRealReturnTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTagDefinition
+  name: return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@phan-side-effect-free
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanSideEffectFreeTag\PhanSideEffectFreeTagDefinition
+  name: phan-side-effect-free
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanSideEffectFreeTag\PhanSideEffectFreeTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-suppress-current-line
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag\PhanSuppressCurrentLineTagDefinition
+  name: phan-suppress-current-line
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag\PhanSuppressCurrentLineTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@phan-suppress-next-line
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextLineTag\PhanSuppressNextLineTagDefinition
+  name: phan-suppress-next-line
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextLineTag\PhanSuppressNextLineTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@phan-suppress-next-next-line
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNextLineTagDefinition
+  name: phan-suppress-next-next-line
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNextLineTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@phan-suppress-previous-line
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTagDefinition
+  name: phan-suppress-previous-line
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@phan-template
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition
+  name: template
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@phan-transient
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanTransientTag\PhanTransientTagDefinition
+  name: phan-transient
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanTransientTag\PhanTransientTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phan-type
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTagDefinition
+  name: type
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTag
+  placement: Block
+  grammar: seq(<Name> as alias, maybe("="), <Type> as type)
+@phan-unused-param
+  definition: TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition
+  name: unused-param
+  creates: TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@phan-var
+  definition: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition
+  name: var
+  creates: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Variable> as variable), maybe(<Description> as description))
+@phan-write-only
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhanWriteOnlyTag\PhanWriteOnlyTagDefinition
+  name: phan-write-only
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhanWriteOnlyTag\PhanWriteOnlyTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phanclosurescope = @phan-closure-scope

@@ -8,5 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\VersionedTag;
 
 /**
  * The `@version` tag documents the current version of an element.
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class VersionTag extends VersionedTag {}

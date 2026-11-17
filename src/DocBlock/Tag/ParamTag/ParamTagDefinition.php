@@ -23,15 +23,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@param" <Type> <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ParamTagDefinition extends TagDefinition
 {
-    public const NAME = 'param';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'param';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::rule(VariableCombinator::NAME, 'variable'),
@@ -45,15 +53,20 @@ final class ParamTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ParamTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ParamTag($name, $type, $variable, $description);
+        return new ParamTag(
+            name: $name,
+            statement: $statement,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-taint-unescape" <Name> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintUnescapeTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-taint-unescape';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-taint-unescape';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'identifier'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class PsalmTaintUnescapeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmTaintUnescapeTag
     {
-        /** @var non-empty-string $identifier */
+        /** @var non-empty-string */
         $identifier = $result->get('identifier');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmTaintUnescapeTag($name, $identifier, $description);
+        return new PsalmTaintUnescapeTag(
+            name: $name,
+            identifier: $identifier,
+            description: $description,
+        );
     }
 }

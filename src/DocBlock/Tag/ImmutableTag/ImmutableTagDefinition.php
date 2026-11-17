@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@immutable` tag declares a class as immutable, meaning none of its
- * state can change after construction.
+ * The `@immutable` tag declares a class as immutable, meaning none of its state
+ * can change after construction.
  *
  * ```
  * "@immutable" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ImmutableTagDefinition extends TagDefinition
 {
-    public const NAME = 'immutable';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'immutable';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class ImmutableTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ImmutableTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ImmutableTag($name, $description);
+        return new ImmutableTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

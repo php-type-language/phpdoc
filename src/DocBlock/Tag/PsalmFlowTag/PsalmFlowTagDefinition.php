@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-flow" <FlowType> [ <Variable> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmFlowTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-flow';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-flow';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(FlowTypeCombinator::NAME, 'flow'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class PsalmFlowTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmFlowTag
     {
-        /** @var FlowType $flow */
+        /** @var FlowType */
         $flow = $result->get('flow');
 
-        /** @var non-empty-string|null $variable */
+        /** @var non-empty-string|null */
         $variable = $result->find('variable');
 
-        return new PsalmFlowTag($name, $flow, $variable);
+        return new PsalmFlowTag(
+            name: $name,
+            flow: $flow,
+            variable: $variable,
+        );
     }
 }

@@ -13,21 +13,31 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
+ * A tag that declares a local type alias: a name bound to a type expression.
+ *
  * The type-alias tag binds a name to a type expression, with an optional "="
  * between the two.
  *
  * ```
  * "@type" <Name> [ "=" ] <Type>
  * ```
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class TypeAliasTagDefinition extends TagDefinition
 {
-    public const NAME = 'type';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'type';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'alias'),
                 Spec::maybe(
@@ -41,12 +51,16 @@ final class TypeAliasTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): TypeAliasTag
     {
-        /** @var non-empty-string $alias */
+        /** @var non-empty-string */
         $alias = $result->get('alias');
 
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        return new TypeAliasTag($name, $alias, $type);
+        return new TypeAliasTag(
+            name: $name,
+            alias: $alias,
+            statement: $statement,
+        );
     }
 }

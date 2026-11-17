@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@codingStandards" <Name> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class CodingStandardsTagDefinition extends TagDefinition
 {
-    public const NAME = 'codingStandards';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'codingStandards';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'identifier'),
                 Spec::maybe(
@@ -39,12 +47,16 @@ final class CodingStandardsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): CodingStandardsTag
     {
-        /** @var non-empty-string $identifier */
+        /** @var non-empty-string */
         $identifier = $result->get('identifier');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new CodingStandardsTag($name, $identifier, $description);
+        return new CodingStandardsTag(
+            name: $name,
+            identifier: $identifier,
+            description: $description,
+        );
     }
 }

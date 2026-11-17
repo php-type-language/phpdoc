@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Tag\PropertyTag;
 
+use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The `@property-read` tag declares a magic property that can only be read.
@@ -13,22 +20,50 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  * ```
  * "@property-read" <Type> <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
-final class PropertyReadTagDefinition extends MagicPropertyTagDefinition
+final class PropertyReadTagDefinition extends TagDefinition
 {
-    public const NAME = 'property-read';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'property-read';
+    }
 
     public function __construct()
     {
-        parent::__construct(self::NAME);
+        parent::__construct(
+            name: self::getCanonicalName(),
+            spec: Spec::sequence(
+                Spec::rule(TypeCombinator::NAME, 'type'),
+                Spec::rule(VariableCombinator::NAME, 'variable'),
+                Spec::maybe(
+                    Spec::rule(DescriptionCombinator::NAME, 'description'),
+                ),
+            ),
+            placement: TagPlacement::Block,
+        );
     }
 
-    protected function make(
-        string $name,
-        TypeReference $type,
-        string $variable,
-        ?DescriptionInterface $description,
-    ): PropertyReadTag {
-        return new PropertyReadTag($name, $type, $variable, $description);
+    public function create(string $name, TagPayload $result): PropertyReadTag
+    {
+        /** @var TypeReference */
+        $statement = $result->get('type');
+
+        /** @var non-empty-string */
+        $variable = $result->get('variable');
+
+        /** @var DescriptionInterface|null */
+        $description = $result->find('description');
+
+        return new PropertyReadTag(
+            name: $name,
+            statement: $statement,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@readonly` tag declares that a property may only be written once, during
  * initialization.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ReadonlyTag extends FlagTag {}

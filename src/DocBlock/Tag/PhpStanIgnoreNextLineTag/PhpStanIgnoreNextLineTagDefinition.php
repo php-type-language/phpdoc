@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@​phpstan-ignore-next-line" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstan.xml, edit the model instead
  */
 final class PhpStanIgnoreNextLineTagDefinition extends TagDefinition
 {
-    public const NAME = 'phpstan-ignore-next-line';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phpstan-ignore-next-line';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhpStanIgnoreNextLineTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhpStanIgnoreNextLineTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhpStanIgnoreNextLineTag($name, $description);
+        return new PhpStanIgnoreNextLineTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

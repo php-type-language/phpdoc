@@ -8,5 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag;
 
 /**
  * The `@codingStandards` tag names a coding standard for reference.
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class CodingStandardsTag extends IdentifierTag {}

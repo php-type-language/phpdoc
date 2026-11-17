@@ -8,5 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag;
 
 /**
  * The `@param` tag documents a single argument of a function or method.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ParamTag extends TypedVariableTag {}

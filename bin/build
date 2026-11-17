@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Symfony\Component\Console\Application;
+use TypeLang\PhpDoc\Build\Command\CheckCommand;
+use TypeLang\PhpDoc\Build\Command\DocsCommand;
+use TypeLang\PhpDoc\Build\Command\GenerateCommand;
+use TypeLang\PhpDoc\Build\Command\SnapshotCommand;
+
+if (!\in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
+    \trigger_error('The console should be invoked via the CLI version of PHP, not the '
+        . \PHP_SAPI . ' SAPI.', \E_USER_WARNING);
+}
+
+// The package autoloader, or the one of the monorepository it is part of.
+$directory = __DIR__;
+
+while (\dirname($directory) !== $directory) {
+    $directory = \dirname($directory);
+
+    if (\is_file($directory . '/vendor/autoload.php')) {
+        require $directory . '/vendor/autoload.php';
+
+        break;
+    }
+}
+
+if (!\class_exists(Application::class) || !\class_exists(GenerateCommand::class)) {
+    \fwrite(\STDERR, 'The development dependencies of "type-lang/phpdoc" are required.' . \PHP_EOL);
+
+    exit(1);
+}
+
+$root = \dirname(__DIR__);
+
+$application = new Application('type-lang/phpdoc build');
+$application->addCommands([
+    new GenerateCommand($root),
+    new CheckCommand($root),
+    new SnapshotCommand($root),
+    new DocsCommand($root),
+]);
+$application->run();

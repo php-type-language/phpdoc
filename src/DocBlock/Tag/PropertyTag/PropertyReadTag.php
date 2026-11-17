@@ -6,5 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\PropertyTag;
 
 /**
  * The `@property-read` tag declares a magic property that can only be read.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class PropertyReadTag extends MagicPropertyTag {}

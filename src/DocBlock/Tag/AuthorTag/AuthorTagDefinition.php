@@ -14,21 +14,28 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@author` tag documents the author of an element, together with an
- * optional email address.
+ * The `@author` tag documents the author of an element.
  *
  * ```
  * "@author" <AuthorName> [ "<" <Email> ">" ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class AuthorTagDefinition extends TagDefinition
 {
-    public const NAME = 'author';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'author';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(AuthorNameCombinator::NAME, 'author'),
                 Spec::maybe(
@@ -48,17 +55,17 @@ final class AuthorTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): AuthorTag
     {
-        /** @var non-empty-string $author */
+        /** @var non-empty-string */
         $author = $result->get('author');
 
-        /** @var non-empty-string|null $email */
+        /** @var non-empty-string|null */
         $email = $result->find('email');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         return new AuthorTag(
-            name: self::NAME,
+            name: $name,
             author: $author,
             email: $email,
             description: $description,

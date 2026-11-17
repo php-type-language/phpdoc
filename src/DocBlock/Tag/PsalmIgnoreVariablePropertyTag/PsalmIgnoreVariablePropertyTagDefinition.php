@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-ignore-variable-property" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIgnoreVariablePropertyTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-ignore-variable-property';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-ignore-variable-property';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmIgnoreVariablePropertyTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmIgnoreVariablePropertyTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmIgnoreVariablePropertyTag($name, $description);
+        return new PsalmIgnoreVariablePropertyTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

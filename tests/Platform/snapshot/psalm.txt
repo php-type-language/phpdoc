@@ -1,0 +1,383 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+FlowType: TypeLang\PhpDoc\DocBlock\Combinator\FlowTypeCombinator
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+
+## tags
+@psalm-allow-private-mutation
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AllowPrivateMutationTag\AllowPrivateMutationTagDefinition
+  name: allow-private-mutation
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AllowPrivateMutationTag\AllowPrivateMutationTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-api
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition
+  name: api
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-assert
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTagDefinition
+  name: assert
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertTag\AssertTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@psalm-assert-if-false
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTagDefinition
+  name: assert-if-false
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertIfFalseTag\AssertIfFalseTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@psalm-assert-if-true
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTagDefinition
+  name: assert-if-true
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AssertIfTrueTag\AssertIfTrueTag
+  placement: Block
+  grammar: seq(maybe(oneOf("!=" as not-equals, "!" as is-not, "=" as equals)), <Type> as type, <AssertSubject> as subject, maybe(<Description> as description))
+@psalm-assert-untainted
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmAssertUntaintedTag\PsalmAssertUntaintedTagDefinition
+  name: psalm-assert-untainted
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmAssertUntaintedTag\PsalmAssertUntaintedTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@psalm-check-type
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeTagDefinition
+  name: psalm-check-type
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeTag
+  placement: Block
+  grammar: seq(<Variable> as variable, "=", <Type> as type)
+@psalm-check-type-exact
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeExactTagDefinition
+  name: psalm-check-type-exact
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeExactTag
+  placement: Block
+  grammar: seq(<Variable> as variable, "=", <Type> as type)
+@psalm-consistent-constructor
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ConsistentConstructorTag\ConsistentConstructorTagDefinition
+  name: consistent-constructor
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ConsistentConstructorTag\ConsistentConstructorTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-consistent-templates
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmConsistentTemplatesTag\PsalmConsistentTemplatesTagDefinition
+  name: psalm-consistent-templates
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmConsistentTemplatesTag\PsalmConsistentTemplatesTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-extends
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition
+  name: extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-external-mutation-free
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmExternalMutationFreeTag\PsalmExternalMutationFreeTagDefinition
+  name: psalm-external-mutation-free
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmExternalMutationFreeTag\PsalmExternalMutationFreeTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-flow
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmFlowTag\PsalmFlowTagDefinition
+  name: psalm-flow
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmFlowTag\PsalmFlowTag
+  placement: Block
+  grammar: seq(<FlowType> as flow, maybe(<Variable> as variable))
+@psalm-if-this-is
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIfThisIsTag\PsalmIfThisIsTagDefinition
+  name: psalm-if-this-is
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIfThisIsTag\PsalmIfThisIsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-ignore-falsable-return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreFalsableReturnTag\PsalmIgnoreFalsableReturnTagDefinition
+  name: psalm-ignore-falsable-return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreFalsableReturnTag\PsalmIgnoreFalsableReturnTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-ignore-nullable-return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreNullableReturnTag\PsalmIgnoreNullableReturnTagDefinition
+  name: psalm-ignore-nullable-return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreNullableReturnTag\PsalmIgnoreNullableReturnTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-ignore-var
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVarTag\PsalmIgnoreVarTagDefinition
+  name: psalm-ignore-var
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVarTag\PsalmIgnoreVarTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-ignore-variable-method
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariableMethodTag\PsalmIgnoreVariableMethodTagDefinition
+  name: psalm-ignore-variable-method
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariableMethodTag\PsalmIgnoreVariableMethodTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-ignore-variable-property
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariablePropertyTag\PsalmIgnoreVariablePropertyTagDefinition
+  name: psalm-ignore-variable-property
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariablePropertyTag\PsalmIgnoreVariablePropertyTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-immutable
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition
+  name: immutable
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-implements
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTagDefinition
+  name: implements
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-import-type
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ImportTypeAliasTag\ImportTypeAliasTagDefinition
+  name: import-type
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ImportTypeAliasTag\ImportTypeAliasTag
+  placement: Block
+  grammar: seq(<Name> as alias, "from", <Type> as type, maybe(seq("as", <Name> as as)))
+@psalm-inheritors
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmInheritorsTag\PsalmInheritorsTagDefinition
+  name: psalm-inheritors
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmInheritorsTag\PsalmInheritorsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-internal
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTagDefinition
+  name: internal
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTag
+  placement: Any
+  grammar: maybe(<Description> as description)
+@psalm-method
+  definition: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition
+  name: method
+  creates: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag
+  placement: Block
+  grammar: seq(maybe("static" as static), oneOf(seq(<Type> as return-type, <CallableType> as callable), <CallableType> as callable), maybe(<Description> as description))
+@psalm-mutation-free
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmMutationFreeTag\PsalmMutationFreeTagDefinition
+  name: psalm-mutation-free
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmMutationFreeTag\PsalmMutationFreeTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-no-seal-methods
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealMethodsTag\PsalmNoSealMethodsTagDefinition
+  name: psalm-no-seal-methods
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealMethodsTag\PsalmNoSealMethodsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-no-seal-properties
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealPropertiesTag\PsalmNoSealPropertiesTagDefinition
+  name: psalm-no-seal-properties
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealPropertiesTag\PsalmNoSealPropertiesTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-override-method-visibility
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideMethodVisibilityTagDefinition
+  name: psalm-override-method-visibility
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideMethodVisibilityTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-override-property-visibility
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTagDefinition
+  name: psalm-override-property-visibility
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-param
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition
+  name: param
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@psalm-param-out
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTagDefinition
+  name: param-out
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@psalm-property
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition
+  name: property
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@psalm-property-read
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition
+  name: property-read
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@psalm-property-write
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagDefinition
+  name: property-write
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@psalm-pure
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTagDefinition
+  name: pure
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PureTag\PureTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-readonly
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition
+  name: readonly
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-readonly-allow-private-mutation
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyAllowPrivateMutationTag\ReadonlyAllowPrivateMutationTagDefinition
+  name: readonly-allow-private-mutation
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyAllowPrivateMutationTag\ReadonlyAllowPrivateMutationTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-require-extends
+  definition: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTagDefinition
+  name: require-extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-require-implements
+  definition: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTagDefinition
+  name: require-implements
+  creates: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTagDefinition
+  name: return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-scope-this
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTagDefinition
+  name: psalm-scope-this
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-seal-methods
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SealMethodsTag\SealMethodsTagDefinition
+  name: seal-methods
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SealMethodsTag\SealMethodsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-seal-properties
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTagDefinition
+  name: seal-properties
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-self-out
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SelfOutTag\SelfOutTagDefinition
+  name: self-out
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SelfOutTag\SelfOutTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-stub-override
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTagDefinition
+  name: psalm-stub-override
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-suppress
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition
+  name: suppress
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@psalm-taint-escape
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTagDefinition
+  name: psalm-taint-escape
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))
+@psalm-taint-sink
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSinkTag\PsalmTaintSinkTagDefinition
+  name: psalm-taint-sink
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSinkTag\PsalmTaintSinkTag
+  placement: Block
+  grammar: seq(<Name> as taint, <Variable> as variable)
+@psalm-taint-source
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTagDefinition
+  name: psalm-taint-source
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))
+@psalm-taint-specialize
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTagDefinition
+  name: psalm-taint-specialize
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-taint-unescape
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTagDefinition
+  name: psalm-taint-unescape
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))
+@psalm-template
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition
+  name: template
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@psalm-template-contravariant
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTagDefinition
+  name: template-contravariant
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@psalm-template-covariant
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagDefinition
+  name: template-covariant
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@psalm-this-out = @psalm-self-out
+@psalm-trace
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTagDefinition
+  name: psalm-trace
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@psalm-type
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTagDefinition
+  name: type
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TypeAliasTag\TypeAliasTag
+  placement: Block
+  grammar: seq(<Name> as alias, maybe("="), <Type> as type)
+@psalm-use
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTagDefinition
+  name: use
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@psalm-var
+  definition: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition
+  name: var
+  creates: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Variable> as variable), maybe(<Description> as description))
+@psalm-variadic
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PsalmVariadicTag\PsalmVariadicTagDefinition
+  name: psalm-variadic
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PsalmVariadicTag\PsalmVariadicTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@psalm-yield
+  definition: TypeLang\PhpDoc\DocBlock\Tag\YieldTag\YieldTagDefinition
+  name: yield
+  creates: TypeLang\PhpDoc\DocBlock\Tag\YieldTag\YieldTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))

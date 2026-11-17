@@ -10,5 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag;
  * The `@psalm-taint-unescape` tag marks a value as tainted again after
  * passing through the described element, reversing an earlier
  * `@psalm-taint-escape`.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintUnescapeTag extends IdentifierTag {}

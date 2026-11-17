@@ -12,21 +12,28 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@final` tag declares that an element must not be overridden or
- * extended.
+ * The `@final` tag declares that an element must not be overridden or extended.
  *
  * ```
  * "@final" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class FinalTagDefinition extends TagDefinition
 {
-    public const NAME = 'final';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'final';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +43,12 @@ final class FinalTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): FinalTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new FinalTag($name, $description);
+        return new FinalTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

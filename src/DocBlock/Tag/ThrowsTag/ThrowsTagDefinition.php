@@ -14,6 +14,9 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
+ * The `@throws` tag indicates the type of "\Throwable" that an element may
+ * throw.
+ *
  * The `@throws` tag indicates that a function or method is able to throw
  * a specific type of "\Throwable" (an exception or an error).
  *
@@ -23,15 +26,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@throws" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ThrowsTagDefinition extends TagDefinition
 {
-    public const NAME = 'throws';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'throws';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -44,12 +55,16 @@ final class ThrowsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ThrowsTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ThrowsTag($name, $type, $description);
+        return new ThrowsTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

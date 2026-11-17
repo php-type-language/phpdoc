@@ -7,7 +7,9 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag;
 use TypeLang\PhpDoc\DocBlock\Tag\IssueListTag;
 
 /**
- * The `@phan-suppress-current-line` tag silences the listed issue types
+ * The `@​phan-suppress-current-line` tag silences the listed issue types
  * reported on the current line.
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanSuppressCurrentLineTag extends IssueListTag {}

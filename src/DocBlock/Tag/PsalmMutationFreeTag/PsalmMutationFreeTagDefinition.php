@@ -12,22 +12,30 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-mutation-free` tag declares that a method never mutates
- * any state, whether observable from outside the object or purely internal
- * to it.
+ * The `@psalm-mutation-free` tag declares that a method never mutates any
+ * state, whether observable from outside the object or purely internal to
+ * it.
  *
  * ```
  * "@psalm-mutation-free" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmMutationFreeTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-mutation-free';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-mutation-free';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PsalmMutationFreeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmMutationFreeTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmMutationFreeTag($name, $description);
+        return new PsalmMutationFreeTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -12,22 +12,30 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@codingStandardsIgnoreEnd` tag ends a block of code started by
- * `@codingStandardsIgnoreStart`, resuming coding-standard checks from this
+ * The `@​codingStandardsIgnoreEnd` tag ends a block of code started by
+ * `@​codingStandardsIgnoreStart`, resuming coding-standard checks from this
  * point on.
  *
  * ```
- * "@codingStandardsIgnoreEnd" [ <Description> ]
+ * "@​codingStandardsIgnoreEnd" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class CodingStandardsIgnoreEndTagDefinition extends TagDefinition
 {
-    public const NAME = 'codingStandardsIgnoreEnd';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'codingStandardsIgnoreEnd';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class CodingStandardsIgnoreEndTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): CodingStandardsIgnoreEndTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new CodingStandardsIgnoreEndTag($name, $description);
+        return new CodingStandardsIgnoreEndTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

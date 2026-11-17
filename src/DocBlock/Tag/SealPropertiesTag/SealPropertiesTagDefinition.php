@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@seal-properties" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class SealPropertiesTagDefinition extends TagDefinition
 {
-    public const NAME = 'seal-properties';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'seal-properties';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class SealPropertiesTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): SealPropertiesTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new SealPropertiesTag($name, $description);
+        return new SealPropertiesTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

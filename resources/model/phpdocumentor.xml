@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="phpdocumentor">
+    <package name="phpdocumentor" class="TypeLang\PhpDoc\Platform\PhpDocumentorPlatform" title="phpDocumentor">
+        <description>
+            The phpDocumentor platform: the legacy tag family defined by phpDocumentor
+            that a modern, static-analysis-oriented docblock rarely uses.
+
+            It contributes these older tags and the few combinators only they rely on.
+        </description>
+    </package>
+
+    <combinator name="Visibility" class="TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator" package="phpdocumentor"/>
+    <combinator name="AuthorName" class="TypeLang\PhpDoc\DocBlock\Combinator\AuthorNameCombinator" package="phpdocumentor"/>
+    <combinator name="Email" class="TypeLang\PhpDoc\DocBlock\Combinator\EmailCombinator" package="phpdocumentor"/>
+
+    <tag name="access" class="TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTag" placement="block">
+        <summary>
+            The `@access` tag documents the visibility of an element.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Visibility" as="access" shown-as="AccessVisibility"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting a magic property as effectively private."><![CDATA[
+            /**
+             * @property string $token
+             * @access private
+             */
+            class Session {}
+        ]]></example>
+        <example title="With a description explaining the reasoning."><![CDATA[
+            /**
+             * @access protected Only subclasses should read the raw buffer.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="author" class="TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTag" placement="block">
+        <summary>
+            The `@author` tag documents the author of an element.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="AuthorName" as="author"/>
+                <maybe>
+                    <sequence>
+                        <literal value="&lt;"/>
+                        <rule name="Email" as="email"/>
+                        <literal value="&gt;"/>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Just a name, with no way to contact them directly."><![CDATA[
+            /**
+             * @author Jane Doe
+             */
+        ]]></example>
+        <example title="A name with an email address for follow-up questions."><![CDATA[
+            /**
+             * @author Jane Doe <jane.doe@example.com>
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="category" class="TypeLang\PhpDoc\DocBlock\Tag\CategoryTag\CategoryTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@category` tag organizes groups of packages together.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Placing a package under a broad category."><![CDATA[
+            /**
+             * @category Database
+             * @package Connection
+             */
+        ]]></example>
+        <example title="With additional context about the grouping."><![CDATA[
+            /**
+             * @category Database Drivers and connection pooling for relational
+             *           stores.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="copyright" class="TypeLang\PhpDoc\DocBlock\Tag\CopyrightTag\CopyrightTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@copyright` tag documents the copyright information of an element.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="A copyright notice naming the holder and year."><![CDATA[
+            /**
+             * @copyright 2024 Acme Corp
+             */
+            final class Mailer {}
+        ]]></example>
+        <example title="A range of years, used on a file that has been maintained over time."><![CDATA[
+            /**
+             * @copyright 2018-2024 Acme Corp. All rights reserved.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="example" class="TypeLang\PhpDoc\DocBlock\Tag\ExampleTag\ExampleTag">
+        <summary>
+            The `@example` tag points at an external source that illustrates the use of
+            the documented element, optionally narrowing it to a range of lines starting
+            at a line and spanning a number of lines.
+        </summary>
+        <grammar>
+            <sequence>
+                <one-of>
+                    <rule name="URL" as="location"/>
+                    <rule name="URI" as="location"/>
+                </one-of>
+                <maybe>
+                    <sequence>
+                        <rule name="Integer" as="start" shown-as="StartLine"/>
+                        <maybe>
+                            <rule name="Integer" as="count" shown-as="LinesCount"/>
+                        </maybe>
+                    </sequence>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Pointing at an entire example file."><![CDATA[
+            /**
+             * @example docs/examples/mailer-basic.php
+             */
+            public function send(Message $message): bool
+        ]]></example>
+        <example title="Narrowed to the lines that show the relevant usage."><![CDATA[
+            /**
+             * @example docs/examples/mailer-retry.php 12 8 Configuring a retry
+             *          policy.
+             */
+            public function withRetries(int $attempts): static
+        ]]></example>
+    </tag>
+
+    <tag name="filesource" class="TypeLang\PhpDoc\DocBlock\Tag\FilesourceTag\FilesourceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@filesource` tag tells documentation tooling to include the source of
+            the current file in its output.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Requesting the source listing for an entire file."><![CDATA[
+            /**
+             * Mailer transport implementations.
+             *
+             * @filesource
+             */
+        ]]></example>
+        <example title="With a description explaining why the listing is useful here."><![CDATA[
+            /**
+             * @filesource Reference implementation; read alongside the
+             *             interface.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="global" class="TypeLang\PhpDoc\DocBlock\Tag\GlobalTag\GlobalTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag" placement="block">
+        <summary>
+            The `@global` tag documents a global variable that a function relies on.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting a global relied upon inside the function body."><![CDATA[
+            /**
+             * @global PDO $connection
+             */
+            function fetchUsers(): array
+            {
+                global $connection;
+
+                return $connection
+                    ->query('SELECT * FROM users')
+                    ->fetchAll();
+            }
+        ]]></example>
+        <example title="With a description explaining how the global is used."><![CDATA[
+            /**
+             * @global Config $config Read for the current retry policy.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="ignore" class="TypeLang\PhpDoc\DocBlock\Tag\IgnoreTag\IgnoreTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@ignore` tag tells documentation tooling to skip the element it is
+            attached to.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Hiding a helper method from generated documentation."><![CDATA[
+            /**
+             * @ignore
+             */
+            protected function debugDump(): void {}
+        ]]></example>
+        <example title="With a description explaining why it's excluded."><![CDATA[
+            /**
+             * @ignore Scaffolding left over from the migration; will be
+             *         removed.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="inheritDoc" class="TypeLang\PhpDoc\DocBlock\Tag\InheritDocTag\InheritDocTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="inline">
+        <summary>
+            The `@inheritDoc` tag reuses the documentation of the parent element.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="As a standalone tag, inheriting the parent docblock wholesale."><![CDATA[
+            /**
+             * @inheritDoc
+             */
+            public function send(Message $message): bool
+        ]]></example>
+        <example title="Used inline, to graft an addition onto the inherited text."><![CDATA[
+            /**
+             * {@inheritDoc} Also flushes the queue before
+             * returning.
+             */
+            public function send(Message $message): bool
+        ]]></example>
+    </tag>
+
+    <tag name="license" class="TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTag" placement="block">
+        <summary>
+            The `@license` tag pointing to the license text by a URL.
+        </summary>
+        <description>
+            The `@license` tag documents the license that applies to an element, given
+            either as a URL to the license text or by its name.
+        </description>
+        <grammar>
+            <one-of>
+                <sequence>
+                    <rule name="URL" as="url"/>
+                    <maybe>
+                        <rule name="Description" as="description"/>
+                    </maybe>
+                </sequence>
+                <rule name="Description" as="description"/>
+            </one-of>
+        </grammar>
+        <example title="Pointing at the canonical license text."><![CDATA[
+            /**
+             * @license https://opensource.org/license/mit MIT License
+             */
+        ]]></example>
+        <example title="Naming the license without a URL."><![CDATA[
+            /**
+             * @license MIT
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="name" class="TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTag" placement="block">
+        <summary>
+            The `@name` tag assigns an alias to a procedural page or global variable so
+            that it can be referred to by that alias in the generated documentation.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="alias"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Giving a global configuration array a clearer alias."><![CDATA[
+            /**
+             * @global array $config
+             * @name config
+             */
+        ]]></example>
+        <example title="With a description explaining the alias."><![CDATA[
+            /**
+             * @name legacy_mailer Superseded by Mailer::class; kept for BC.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="package" class="TypeLang\PhpDoc\DocBlock\Tag\PackageTag\PackageTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@package` tag categorizes elements into a logical subdivision.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Grouping a class into a package."><![CDATA[
+            /**
+             * @package Mail
+             */
+            final class Mailer {}
+        ]]></example>
+        <example title="With a short description of the grouping."><![CDATA[
+            /**
+             * @package Mail Everything related to composing and sending
+             *          messages.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="since" class="TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VersionedTag" placement="block">
+        <summary>
+            The `@since` tag documents the version at which an element became available.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <rule name="Version" as="version"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A method added in a later minor release."><![CDATA[
+            /**
+             * @since 1.3 Added to support batched sends.
+             */
+            public function sendMany(iterable $messages): void
+        ]]></example>
+        <example title="Just the version, with no further explanation needed."><![CDATA[
+            /**
+             * @since 1.0
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="source" class="TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTag" placement="inline">
+        <summary>
+            The `@source` tag points at a range of lines of the documented element's
+            source, starting at a line and optionally spanning a number of lines.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Integer" as="start" shown-as="StartLine"/>
+                <maybe>
+                    <rule name="Integer" as="count" shown-as="LinesCount"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Excerpting a specific block of the method's own body."><![CDATA[
+            /**
+             * @source 4 6
+             */
+            public function normalize(string $value): string
+            {
+                // ...
+            }
+        ]]></example>
+        <example title="From a given line through the rest of the element, with a description."><![CDATA[
+            /**
+             * @source 10 The core resolution algorithm starts here.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="static" class="TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@static` tag declares a method or property as static.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Declaring a magic property as static."><![CDATA[
+            /**
+             * @property Connection $default
+             * @static
+             */
+            class ConnectionRegistry {}
+        ]]></example>
+        <example title="With a description explaining the intent."><![CDATA[
+            /**
+             * @static Shared across all instances of the registry.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="staticvar" class="TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTag" placement="block">
+        <summary>
+            The `@staticvar` tag documents the type of static variable declared within
+            a function or method, optionally naming the variable it applies to.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Variable" as="variable"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Documenting a static counter's type."><![CDATA[
+            /**
+             * @staticvar int $calls
+             */
+            function trackCalls(): int
+            {
+                static $calls = 0;
+
+                return ++$calls;
+            }
+        ]]></example>
+        <example title="Naming the type alone, with a description but no explicit variable."><![CDATA[
+            /**
+             * @staticvar array Memoized results, keyed by input hash.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="subpackage" class="TypeLang\PhpDoc\DocBlock\Tag\SubpackageTag\SubpackageTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@subpackage` tag categorizes elements into a logical subdivision below
+            their package.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Narrowing a package into a specific subsection."><![CDATA[
+            /**
+             * @package Mail
+             * @subpackage Transport
+             */
+            final class SmtpTransport {}
+        ]]></example>
+        <example title="With a description of what the subsection covers."><![CDATA[
+            /**
+             * @subpackage Transport Concrete delivery mechanisms for outgoing
+             *             mail.
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="todo" class="TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@todo` tag records a task that still needs to be done for an element.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+        <example title="Describing the outstanding work directly."><![CDATA[
+            /**
+             * @todo Support cancellation once the transport exposes it.
+             */
+            public function send(Message $message): bool
+        ]]></example>
+        <example title="Referencing a tracking issue alongside the description."><![CDATA[
+            /**
+             * @todo Validate recipient addresses before dispatch (see
+             *       ISSUE-482).
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="used-by" class="TypeLang\PhpDoc\DocBlock\Tag\UsedByTag\UsedByTag" extends="TypeLang\PhpDoc\DocBlock\Tag\ReferenceTag" template="TypeLang\PhpDoc\DocBlock\Reference\CodeReference" placement="block">
+        <summary>
+            The `@used-by` tag indicates that the described element is used by the
+            referenced one.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Reference" as="reference"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A low-level helper documenting a caller it must stay compatible with."><![CDATA[
+            /**
+             * @used-by Mailer::send()
+             */
+            function normalizeAddress(string $address): string {
+                /* ... */
+            }
+        ]]></example>
+        <example title="With a description explaining the dependency."><![CDATA[
+            /**
+             * @used-by ReportExporter::export() Relies on the column order
+             *          returned here.
+             */
+            function columns(): array
+            {
+                /* ... */
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="uses" class="TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\ReferenceTag" template="TypeLang\PhpDoc\DocBlock\Reference\CodeReference" placement="block">
+        <summary>
+            The `@uses` tag indicates that the described element uses the referenced one.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Reference" as="reference"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="A method documenting the helper it relies on."><![CDATA[
+            /**
+             * @uses normalizeAddress()
+             */
+            function send(string $address): void
+            {
+                /* ... */
+            }
+        ]]></example>
+        <example title="With a description explaining the dependency."><![CDATA[
+            /**
+             * @uses Config::DEFAULT_TIMEOUT Falls back to this when none is
+             *       given.
+             */
+            function connect(?int $timeout = null): void 
+            {
+                /* ... */
+            }
+        ]]></example>
+    </tag>
+
+    <tag name="version" class="TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VersionedTag" placement="block">
+        <summary>
+            The `@version` tag documents the current version of an element.
+        </summary>
+        <grammar>
+            <sequence>
+                <maybe>
+                    <rule name="Version" as="version"/>
+                </maybe>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Tagging a class with the release it ships in."><![CDATA[
+            /**
+             * @version 1.4.2
+             */
+            final class Mailer {}
+        ]]></example>
+        <example title="With a short description alongside the version."><![CDATA[
+            /**
+             * @version 2.0.0-beta.1 Transport negotiation is not yet finalized.
+             */
+        ]]></example>
+    </tag>
+</model>

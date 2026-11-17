@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Tag\TemplateTag;
 
+use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The `@template-covariant` tag declares a covariant generic type parameter.
@@ -13,23 +20,65 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  * ```
  * "@template-covariant" <Name> [ "of" <Type> ] [ "=" <Type> ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
-final class TemplateCovariantTagDefinition extends TypeParameterTagDefinition
+final class TemplateCovariantTagDefinition extends TagDefinition
 {
-    public const NAME = 'template-covariant';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'template-covariant';
+    }
 
     public function __construct()
     {
-        parent::__construct(self::NAME);
+        parent::__construct(
+            name: self::getCanonicalName(),
+            spec: Spec::sequence(
+                Spec::rule(NameCombinator::NAME, 'parameter'),
+                Spec::maybe(
+                    Spec::sequence(
+                        Spec::literal('of'),
+                        Spec::rule(TypeCombinator::NAME, 'bound'),
+                    ),
+                ),
+                Spec::maybe(
+                    Spec::sequence(
+                        Spec::literal('='),
+                        Spec::rule(TypeCombinator::NAME, 'default'),
+                    ),
+                ),
+                Spec::maybe(
+                    Spec::rule(DescriptionCombinator::NAME, 'description'),
+                ),
+            ),
+            placement: TagPlacement::Block,
+        );
     }
 
-    protected function make(
-        string $name,
-        string $parameter,
-        ?TypeReference $bound,
-        ?TypeReference $default,
-        ?DescriptionInterface $description,
-    ): TemplateCovariantTag {
-        return new TemplateCovariantTag($name, $parameter, $bound, $default, $description);
+    public function create(string $name, TagPayload $result): TemplateCovariantTag
+    {
+        /** @var non-empty-string */
+        $parameter = $result->get('parameter');
+
+        /** @var TypeReference|null */
+        $bound = $result->find('bound');
+
+        /** @var TypeReference|null */
+        $default = $result->find('default');
+
+        /** @var DescriptionInterface|null */
+        $description = $result->find('description');
+
+        return new TemplateCovariantTag(
+            name: $name,
+            parameter: $parameter,
+            bound: $bound,
+            default: $default,
+            description: $description,
+        );
     }
 }

@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@psalm-ignore-falsable-return` tag ignores a possible `false` value
  * in the return type.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIgnoreFalsableReturnTag extends FlagTag {}

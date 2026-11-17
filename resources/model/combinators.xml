@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd">
+    <combinator name="AssertSubject" class="TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator"/>
+    <combinator name="CallableType" class="TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator"/>
+    <combinator name="Description" class="TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator" instance="manual"/>
+    <combinator name="Integer" class="TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator"/>
+    <combinator name="IssueName" class="TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator"/>
+    <combinator name="Name" class="TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator"/>
+    <combinator name="Reference" class="TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator"/>
+    <combinator name="Type" class="TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator"/>
+    <combinator name="URI" class="TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator"/>
+    <combinator name="URL" class="TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator"/>
+    <combinator name="Variable" class="TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator"/>
+    <combinator name="Version" class="TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator"/>
+</model>

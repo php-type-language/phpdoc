@@ -15,21 +15,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@param-out` tag documents the type that a by-reference argument holds
- * after the function or method returns.
+ * The `@param-out` tag documents the type a by-reference argument holds after
+ * the function or method returns.
  *
  * ```
  * "@param-out" <Type> <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ParamOutTagDefinition extends TagDefinition
 {
-    public const NAME = 'param-out';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'param-out';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::rule(VariableCombinator::NAME, 'variable'),
@@ -43,15 +51,20 @@ final class ParamOutTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ParamOutTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ParamOutTag($name, $type, $variable, $description);
+        return new ParamOutTag(
+            name: $name,
+            statement: $statement,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

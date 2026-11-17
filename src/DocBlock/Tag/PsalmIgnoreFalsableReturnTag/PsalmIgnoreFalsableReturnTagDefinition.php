@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-ignore-falsable-return` tag ignores a possible `false`
- * value in the return type.
+ * The `@psalm-ignore-falsable-return` tag ignores a possible `false` value
+ * in the return type.
  *
  * ```
  * "@psalm-ignore-falsable-return" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIgnoreFalsableReturnTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-ignore-falsable-return';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-ignore-falsable-return';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmIgnoreFalsableReturnTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmIgnoreFalsableReturnTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmIgnoreFalsableReturnTag($name, $description);
+        return new PsalmIgnoreFalsableReturnTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

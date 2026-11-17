@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag;
 /**
  * The `@param-closure-this` tag documents the bound "$this" type of closure
  * passed as an argument.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ParamClosureThisTag extends TypedVariableTag {}

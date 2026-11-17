@@ -4,18 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Platform;
 
-use TypeLang\Parser\TypeParser;
-use TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
-use TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTagDefinition;
@@ -55,18 +43,14 @@ use TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
-use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 
 /**
- * The built-in platform: every tag, alias and combinator that ships with the
- * library. It is always loaded first, and additional platforms extend it.
+ * The standard platform: the common tags, without a tool prefix, understood by
+ * most of the documentation and static analysis tools.
  *
- * The description combinator is intentionally not provided here: it is wired by
- * the parser itself, since it depends on the parser's own description parser.
- *
- * @phpstan-import-type CombinatorType from CombinatorInterface
+ * @generated from resources/model/standard.xml, edit the model instead
  */
-final class StandardPlatform implements PlatformInterface
+final class StandardPlatform extends Platform
 {
     /**
      * @return iterable<non-empty-lowercase-string, TagDefinitionInterface>
@@ -74,44 +58,44 @@ final class StandardPlatform implements PlatformInterface
     public function getTags(): iterable
     {
         return [
-            LinkTagDefinition::NAME => new LinkTagDefinition(),
-            SeeTagDefinition::NAME => new SeeTagDefinition(),
-            ReturnTagDefinition::NAME => new ReturnTagDefinition(),
-            ThrowsTagDefinition::NAME => new ThrowsTagDefinition(),
-            MixinTagDefinition::NAME => new MixinTagDefinition(),
-            ExtendsTagDefinition::NAME => new ExtendsTagDefinition(),
-            ImplementsTagDefinition::NAME => new ImplementsTagDefinition(),
-            UseTagDefinition::NAME => new UseTagDefinition(),
-            RequireExtendsTagDefinition::NAME => new RequireExtendsTagDefinition(),
-            RequireImplementsTagDefinition::NAME => new RequireImplementsTagDefinition(),
-            ParamTagDefinition::NAME => new ParamTagDefinition(),
-            ParamOutTagDefinition::NAME => new ParamOutTagDefinition(),
-            ParamClosureThisTagDefinition::NAME => new ParamClosureThisTagDefinition(),
-            PropertyTagDefinition::NAME => new PropertyTagDefinition(),
-            PropertyReadTagDefinition::NAME => new PropertyReadTagDefinition(),
-            PropertyWriteTagDefinition::NAME => new PropertyWriteTagDefinition(),
-            ParamImmediatelyInvokedCallableTagDefinition::NAME => new ParamImmediatelyInvokedCallableTagDefinition(),
-            ParamLaterInvokedCallableTagDefinition::NAME => new ParamLaterInvokedCallableTagDefinition(),
-            UnusedParamTagDefinition::NAME => new UnusedParamTagDefinition(),
-            AbstractTagDefinition::NAME => new AbstractTagDefinition(),
-            ApiTagDefinition::NAME => new ApiTagDefinition(),
-            FinalTagDefinition::NAME => new FinalTagDefinition(),
-            InternalTagDefinition::NAME => new InternalTagDefinition(),
-            NoNamedArgumentsTagDefinition::NAME => new NoNamedArgumentsTagDefinition(),
-            OverrideTagDefinition::NAME => new OverrideTagDefinition(),
-            ReadonlyTagDefinition::NAME => new ReadonlyTagDefinition(),
-            ImmutableTagDefinition::NAME => new ImmutableTagDefinition(),
-            SealMethodsTagDefinition::NAME => new SealMethodsTagDefinition(),
-            SealPropertiesTagDefinition::NAME => new SealPropertiesTagDefinition(),
-            PureUnlessCallableIsImpureTagDefinition::NAME => new PureUnlessCallableIsImpureTagDefinition(),
-            TemplateTagDefinition::NAME => new TemplateTagDefinition(),
-            TemplateCovariantTagDefinition::NAME => new TemplateCovariantTagDefinition(),
-            TemplateContravariantTagDefinition::NAME => new TemplateContravariantTagDefinition(),
-            DeprecatedTagDefinition::NAME => new DeprecatedTagDefinition(),
-            NotDeprecatedTagDefinition::NAME => new NotDeprecatedTagDefinition(),
-            VarTagDefinition::NAME => new VarTagDefinition(),
-            SuppressTagDefinition::NAME => new SuppressTagDefinition(),
-            MethodTagDefinition::NAME => new MethodTagDefinition(),
+            AbstractTagDefinition::getCanonicalName() => new AbstractTagDefinition(),
+            ApiTagDefinition::getCanonicalName() => new ApiTagDefinition(),
+            DeprecatedTagDefinition::getCanonicalName() => new DeprecatedTagDefinition(),
+            ExtendsTagDefinition::getCanonicalName() => new ExtendsTagDefinition(),
+            FinalTagDefinition::getCanonicalName() => new FinalTagDefinition(),
+            ImmutableTagDefinition::getCanonicalName() => new ImmutableTagDefinition(),
+            ImplementsTagDefinition::getCanonicalName() => new ImplementsTagDefinition(),
+            InternalTagDefinition::getCanonicalName() => new InternalTagDefinition(),
+            LinkTagDefinition::getCanonicalName() => new LinkTagDefinition(),
+            MethodTagDefinition::getCanonicalName() => new MethodTagDefinition(),
+            MixinTagDefinition::getCanonicalName() => new MixinTagDefinition(),
+            NoNamedArgumentsTagDefinition::getCanonicalName() => new NoNamedArgumentsTagDefinition(),
+            NotDeprecatedTagDefinition::getCanonicalName() => new NotDeprecatedTagDefinition(),
+            OverrideTagDefinition::getCanonicalName() => new OverrideTagDefinition(),
+            ParamTagDefinition::getCanonicalName() => new ParamTagDefinition(),
+            ParamClosureThisTagDefinition::getCanonicalName() => new ParamClosureThisTagDefinition(),
+            ParamImmediatelyInvokedCallableTagDefinition::getCanonicalName() => new ParamImmediatelyInvokedCallableTagDefinition(),
+            ParamLaterInvokedCallableTagDefinition::getCanonicalName() => new ParamLaterInvokedCallableTagDefinition(),
+            ParamOutTagDefinition::getCanonicalName() => new ParamOutTagDefinition(),
+            PropertyTagDefinition::getCanonicalName() => new PropertyTagDefinition(),
+            PropertyReadTagDefinition::getCanonicalName() => new PropertyReadTagDefinition(),
+            PropertyWriteTagDefinition::getCanonicalName() => new PropertyWriteTagDefinition(),
+            PureUnlessCallableIsImpureTagDefinition::getCanonicalName() => new PureUnlessCallableIsImpureTagDefinition(),
+            ReadonlyTagDefinition::getCanonicalName() => new ReadonlyTagDefinition(),
+            RequireExtendsTagDefinition::getCanonicalName() => new RequireExtendsTagDefinition(),
+            RequireImplementsTagDefinition::getCanonicalName() => new RequireImplementsTagDefinition(),
+            ReturnTagDefinition::getCanonicalName() => new ReturnTagDefinition(),
+            SealMethodsTagDefinition::getCanonicalName() => new SealMethodsTagDefinition(),
+            SealPropertiesTagDefinition::getCanonicalName() => new SealPropertiesTagDefinition(),
+            SeeTagDefinition::getCanonicalName() => new SeeTagDefinition(),
+            SuppressTagDefinition::getCanonicalName() => new SuppressTagDefinition(),
+            TemplateTagDefinition::getCanonicalName() => new TemplateTagDefinition(),
+            TemplateContravariantTagDefinition::getCanonicalName() => new TemplateContravariantTagDefinition(),
+            TemplateCovariantTagDefinition::getCanonicalName() => new TemplateCovariantTagDefinition(),
+            ThrowsTagDefinition::getCanonicalName() => new ThrowsTagDefinition(),
+            UnusedParamTagDefinition::getCanonicalName() => new UnusedParamTagDefinition(),
+            UseTagDefinition::getCanonicalName() => new UseTagDefinition(),
+            VarTagDefinition::getCanonicalName() => new VarTagDefinition(),
         ];
     }
 
@@ -121,38 +105,13 @@ final class StandardPlatform implements PlatformInterface
     public function getAliases(): iterable
     {
         return [
-            'inherits' => ExtendsTagDefinition::NAME,
-            'template-extends' => ExtendsTagDefinition::NAME,
-            'template-implements' => ImplementsTagDefinition::NAME,
-            'template-use' => UseTagDefinition::NAME,
-            'template-invariant' => TemplateTagDefinition::NAME,
-            // A fairly common typos in code
-            'returns' => ReturnTagDefinition::NAME,
-            'throw' => ThrowsTagDefinition::NAME,
+            'inherits' => 'extends',
+            'returns' => 'return',
+            'template-extends' => 'extends',
+            'template-implements' => 'implements',
+            'template-invariant' => 'template',
+            'template-use' => 'use',
+            'throw' => 'throws',
         ];
     }
-
-    /**
-     * @return iterable<non-empty-string, CombinatorType>
-     */
-    public function getCombinators(): iterable
-    {
-        return [
-            UriCombinator::NAME => new UriCombinator(),
-            UrlCombinator::NAME => new UrlCombinator(),
-            ReferenceCombinator::NAME => new ReferenceCombinator(),
-            TypeCombinator::NAME => new TypeCombinator($this->typeParser),
-            CallableTypeCombinator::NAME => new CallableTypeCombinator($this->typeParser),
-            VariableCombinator::NAME => new VariableCombinator(),
-            AssertSubjectCombinator::NAME => new AssertSubjectCombinator(),
-            IntegerCombinator::NAME => new IntegerCombinator(),
-            IssueNameCombinator::NAME => new IssueNameCombinator(),
-            VersionCombinator::NAME => new VersionCombinator(),
-            NameCombinator::NAME => new NameCombinator(),
-        ];
-    }
-
-    public function __construct(
-        private readonly TypeParser $typeParser = new TypeParser(),
-    ) {}
 }

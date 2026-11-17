@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-constructor-used-for-side-effects" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanConstructorUsedForSideEffectsTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-constructor-used-for-side-effects';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-constructor-used-for-side-effects';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PhanConstructorUsedForSideEffectsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanConstructorUsedForSideEffectsTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanConstructorUsedForSideEffectsTag($name, $description);
+        return new PhanConstructorUsedForSideEffectsTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

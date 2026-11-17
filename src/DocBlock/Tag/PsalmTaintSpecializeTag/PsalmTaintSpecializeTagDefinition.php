@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-taint-specialize" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintSpecializeTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-taint-specialize';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-taint-specialize';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PsalmTaintSpecializeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmTaintSpecializeTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmTaintSpecializeTag($name, $description);
+        return new PsalmTaintSpecializeTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -23,12 +23,16 @@ final class MatchRule implements TerminalInterface
          *
          * @var non-empty-string
          */
-        private readonly string $rule,
+        public readonly string $rule,
         /**
+         * Capture name of the matched value, {@see null} to capture nothing.
+         *
          * @var non-empty-string|null
          */
         public readonly ?string $alias = null,
         /**
+         * Name shown in place of {@see $rule} in the rendered grammar.
+         *
          * @var non-empty-string|null
          */
         public readonly ?string $renderAs = null,

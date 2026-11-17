@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-no-seal-methods` tag allows a class to declare magic
- * methods beyond those already documented.
+ * The `@psalm-no-seal-methods` tag allows a class to declare magic methods
+ * beyond those already documented.
  *
  * ```
  * "@psalm-no-seal-methods" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmNoSealMethodsTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-no-seal-methods';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-no-seal-methods';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmNoSealMethodsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmNoSealMethodsTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmNoSealMethodsTag($name, $description);
+        return new PsalmNoSealMethodsTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

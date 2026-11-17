@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag;
 /**
  * The `@param-out` tag documents the type a by-reference argument holds after
  * the function or method returns.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ParamOutTag extends TypedVariableTag {}

@@ -24,7 +24,7 @@ final class ToolPlatformAliasTest extends TestCase
 
         self::assertSame(
             $canonical,
-            $registry->get($alias)->name,
+            $registry->find($alias)?->name,
             \sprintf('@%s must resolve to @%s', $alias, $canonical),
         );
     }

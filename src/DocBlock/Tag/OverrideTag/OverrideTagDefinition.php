@@ -17,15 +17,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@override" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class OverrideTagDefinition extends TagDefinition
 {
-    public const NAME = 'override';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'override';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -35,9 +43,12 @@ final class OverrideTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): OverrideTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new OverrideTag($name, $description);
+        return new OverrideTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-taint-source" <Name> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintSourceTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-taint-source';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-taint-source';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'identifier'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class PsalmTaintSourceTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmTaintSourceTag
     {
-        /** @var non-empty-string $identifier */
+        /** @var non-empty-string */
         $identifier = $result->get('identifier');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmTaintSourceTag($name, $identifier, $description);
+        return new PsalmTaintSourceTag(
+            name: $name,
+            identifier: $identifier,
+            description: $description,
+        );
     }
 }

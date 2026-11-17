@@ -28,12 +28,18 @@ use TypeLang\Type\Callable\CallableTypeNode;
  */
 final class MethodTagDefinition extends TagDefinition
 {
-    public const NAME = 'method';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'method';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::maybe(
                     Spec::literal('static', 'static'),

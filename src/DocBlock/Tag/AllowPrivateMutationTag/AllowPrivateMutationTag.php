@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@allow-private-mutation` tag allows a private-scope mutation of an
  * otherwise immutable property.
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class AllowPrivateMutationTag extends FlagTag {}

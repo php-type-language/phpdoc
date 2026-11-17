@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\AssertionTag;
 /**
  * The `@assert-if-true` tag asserts the given type for a subject, but
  * only when the function returns `true`.
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class AssertIfTrueTag extends AssertionTag {}

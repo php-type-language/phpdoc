@@ -14,21 +14,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phan-real-return` tag documents the actual native return type of
- * a function or method, kept distinct from the documented `@return` type.
+ * The `@phan-real-return` tag documents the actual native return type of a
+ * function or method, kept distinct from the documented `@return` type.
  *
  * ```
  * "@phan-real-return" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanRealReturnTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-real-return';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-real-return';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class PhanRealReturnTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanRealReturnTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanRealReturnTag($name, $type, $description);
+        return new PhanRealReturnTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

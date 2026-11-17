@@ -7,5 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag;
 /**
  * The `@use` tag allows to extend templated traits, providing the concrete
  * type arguments of the used trait.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class UseTag extends InheritanceTag {}

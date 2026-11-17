@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\Test;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\Description;
 use TypeLang\PhpDoc\DocBlock\Description\TaggedDescription;
-use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
@@ -21,10 +20,7 @@ final class DescriptionGrammarRuleTest extends GrammarRuleTestCase
 {
     protected function rule(): DescriptionCombinator
     {
-        $registry = new TagRegistry(
-            definitions: [],
-            genericTagDefinition: new GenericTagDefinition(),
-        );
+        $registry = new TagRegistry();
 
         $rule = null;
 

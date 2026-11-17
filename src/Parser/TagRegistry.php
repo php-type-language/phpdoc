@@ -5,24 +5,11 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Parser;
 
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
-use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\TagRegistryInterface;
 
 /**
- * Builds a tag from its name and suffix using the matching
- * {@see TagDefinitionInterface}.
- *
- * A tag with no registered definition becomes a plain {@see Tag} whose whole
- * suffix is its description.
- *
- * ```
- * $factory = new TagFactory(
- *     definitions: ['link' => new LinkTagDefinition()],
- *     grammar: $grammar,
- * );
- * ```
- *
- * @phpstan-import-type CombinatorType from CombinatorInterface
+ * The tag definitions keyed by the lower-case tag name, built by
+ * {@see TagRegistryBuilder} with the aliases already resolved.
  *
  * @template-implements \IteratorAggregate<non-empty-lowercase-string, TagDefinitionInterface>
  */
@@ -32,8 +19,7 @@ final class TagRegistry implements TagRegistryInterface, \IteratorAggregate
         /**
          * @var array<non-empty-lowercase-string, TagDefinitionInterface>
          */
-        private readonly array $definitions,
-        private readonly TagDefinitionInterface $genericTagDefinition,
+        private readonly array $definitions = [],
     ) {}
 
     public function has(string $name): bool
@@ -41,10 +27,9 @@ final class TagRegistry implements TagRegistryInterface, \IteratorAggregate
         return isset($this->definitions[\strtolower($name)]);
     }
 
-    public function get(string $name): TagDefinitionInterface
+    public function find(string $name): ?TagDefinitionInterface
     {
-        return $this->definitions[\strtolower($name)]
-            ?? $this->genericTagDefinition;
+        return $this->definitions[\strtolower($name)] ?? null;
     }
 
     public function getIterator(): \Traversable

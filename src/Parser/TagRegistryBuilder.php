@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Parser;
 
-use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\Exception\RecursiveTagAliasException;
 use TypeLang\PhpDoc\Exception\UnknownTagAliasException;
@@ -29,23 +28,9 @@ final class TagRegistryBuilder
     public function __construct(
         iterable $definitions = [],
         iterable $aliases = [],
-        private TagDefinitionInterface $genericTagDefinition = new GenericTagDefinition(),
     ) {
         $this->addTagDefinitions($definitions);
         $this->addTagAliases($aliases);
-    }
-
-    private function setGenericTagDefinition(TagDefinitionInterface $genericTagDefinition): void
-    {
-        $this->genericTagDefinition = $genericTagDefinition;
-    }
-
-    public function withGenericTagDefinition(TagDefinitionInterface $definition): self
-    {
-        $self = clone $this;
-        $self->setGenericTagDefinition($definition);
-
-        return $self;
     }
 
     /**
@@ -143,9 +128,6 @@ final class TagRegistryBuilder
 
     public function build(): TagRegistryInterface
     {
-        return new TagRegistry(
-            definitions: $this->getAllTagDefinitions(),
-            genericTagDefinition: $this->genericTagDefinition,
-        );
+        return new TagRegistry($this->getAllTagDefinitions());
     }
 }

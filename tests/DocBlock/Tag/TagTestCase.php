@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\DocBlockParserInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistry;
+use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
 use TypeLang\PhpDoc\Platform\PlatformInterface;
 use TypeLang\PhpDoc\TagFactoryInterface;
 use TypeLang\PhpDoc\TagRegistryInterface;
@@ -54,7 +54,7 @@ abstract class TagTestCase extends TestCase
         array $tags = [],
         array $aliases = [],
     ): TagRegistryInterface {
-        return new TagRegistry($tags, $aliases);
+        return (new TagRegistryBuilder($tags, $aliases))->build();
     }
 
     /**

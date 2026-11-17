@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-output-reference" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanOutputReferenceTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-output-reference';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-output-reference';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhanOutputReferenceTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanOutputReferenceTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanOutputReferenceTag($name, $description);
+        return new PhanOutputReferenceTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

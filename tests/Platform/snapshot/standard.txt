@@ -1,0 +1,250 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+
+## tags
+@abstract
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTagDefinition
+  name: abstract
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AbstractTag\AbstractTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@api
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTagDefinition
+  name: api
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ApiTag\ApiTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@deprecated
+  definition: TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTagDefinition
+  name: deprecated
+  creates: TypeLang\PhpDoc\DocBlock\Tag\DeprecatedTag\DeprecatedTag
+  placement: Block
+  grammar: seq(maybe(<Version> as version), maybe(<Description> as description))
+@extends
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTagDefinition
+  name: extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@final
+  definition: TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTagDefinition
+  name: final
+  creates: TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@immutable
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTagDefinition
+  name: immutable
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ImmutableTag\ImmutableTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@implements
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTagDefinition
+  name: implements
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\ImplementsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@inherits = @extends
+@internal
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTagDefinition
+  name: internal
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InternalTag\InternalTag
+  placement: Any
+  grammar: maybe(<Description> as description)
+@link
+  definition: TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTagDefinition
+  name: link
+  creates: TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTag
+  placement: Any
+  grammar: seq(<URI> as uri, maybe(<Description> as description))
+@method
+  definition: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition
+  name: method
+  creates: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTag
+  placement: Block
+  grammar: seq(maybe("static" as static), oneOf(seq(<Type> as return-type, <CallableType> as callable), <CallableType> as callable), maybe(<Description> as description))
+@mixin
+  definition: TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTagDefinition
+  name: mixin
+  creates: TypeLang\PhpDoc\DocBlock\Tag\MixinTag\MixinTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@no-named-arguments
+  definition: TypeLang\PhpDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTagDefinition
+  name: no-named-arguments
+  creates: TypeLang\PhpDoc\DocBlock\Tag\NoNamedArgumentsTag\NoNamedArgumentsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@not-deprecated
+  definition: TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTagDefinition
+  name: not-deprecated
+  creates: TypeLang\PhpDoc\DocBlock\Tag\NotDeprecatedTag\NotDeprecatedTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@override
+  definition: TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTagDefinition
+  name: override
+  creates: TypeLang\PhpDoc\DocBlock\Tag\OverrideTag\OverrideTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@param
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTagDefinition
+  name: param
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@param-closure-this
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamClosureThisTag\ParamClosureThisTagDefinition
+  name: param-closure-this
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamClosureThisTag\ParamClosureThisTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@param-immediately-invoked-callable
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTagDefinition
+  name: param-immediately-invoked-callable
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamImmediatelyInvokedCallableTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@param-later-invoked-callable
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTagDefinition
+  name: param-later-invoked-callable
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamInvokedCallableTag\ParamLaterInvokedCallableTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@param-out
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTagDefinition
+  name: param-out
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ParamOutTag\ParamOutTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@property
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTagDefinition
+  name: property
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@property-read
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTagDefinition
+  name: property-read
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyReadTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@property-write
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTagDefinition
+  name: property-write
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PropertyTag\PropertyWriteTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@pure-unless-callable-is-impure
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PureUnlessCallableIsImpureTag\PureUnlessCallableIsImpureTagDefinition
+  name: pure-unless-callable-is-impure
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PureUnlessCallableIsImpureTag\PureUnlessCallableIsImpureTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@readonly
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTagDefinition
+  name: readonly
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReadonlyTag\ReadonlyTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@require-extends
+  definition: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTagDefinition
+  name: require-extends
+  creates: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireExtendsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@require-implements
+  definition: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTagDefinition
+  name: require-implements
+  creates: TypeLang\PhpDoc\DocBlock\Tag\RequireInheritanceTag\RequireImplementsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@return
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTagDefinition
+  name: return
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ReturnTag\ReturnTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@returns = @return
+@seal-methods
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SealMethodsTag\SealMethodsTagDefinition
+  name: seal-methods
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SealMethodsTag\SealMethodsTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@seal-properties
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTagDefinition
+  name: seal-properties
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SealPropertiesTag\SealPropertiesTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@see
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTagDefinition
+  name: see
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTag
+  placement: Any
+  grammar: seq(oneOf(<Reference> as ref, <URI> as ref), maybe(<Description> as description))
+@suppress
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition
+  name: suppress
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTag
+  placement: Block
+  grammar: seq(<IssueName> as issue, repeat(seq(",", <IssueName> as issue), 0), maybe(<Description> as description))
+@template
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTagDefinition
+  name: template
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@template-contravariant
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTagDefinition
+  name: template-contravariant
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateContravariantTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@template-covariant
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTagDefinition
+  name: template-covariant
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TemplateTag\TemplateCovariantTag
+  placement: Block
+  grammar: seq(<Name> as parameter, maybe(seq("of", <Type> as bound)), maybe(seq("=", <Type> as default)), maybe(<Description> as description))
+@template-extends = @extends
+@template-implements = @implements
+@template-invariant = @template
+@template-use = @use
+@throw = @throws
+@throws
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTagDefinition
+  name: throws
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ThrowsTag\ThrowsTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@unused-param
+  definition: TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTagDefinition
+  name: unused-param
+  creates: TypeLang\PhpDoc\DocBlock\Tag\UnusedParamTag\UnusedParamTag
+  placement: Block
+  grammar: seq(<Variable> as variable, maybe(<Description> as description))
+@use
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTagDefinition
+  name: use
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritanceTag\UseTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@var
+  definition: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTagDefinition
+  name: var
+  creates: TypeLang\PhpDoc\DocBlock\Tag\VarTag\VarTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Variable> as variable), maybe(<Description> as description))

@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-override-property-visibility" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmOverridePropertyVisibilityTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-override-property-visibility';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-override-property-visibility';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PsalmOverridePropertyVisibilityTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmOverridePropertyVisibilityTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmOverridePropertyVisibilityTag($name, $description);
+        return new PsalmOverridePropertyVisibilityTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@noinspection` tag suppresses the named IDE inspection for the
+ * The `@​noinspection` tag suppresses the named IDE inspection for the
  * element that follows it.
  *
  * ```
- * "@noinspection" <Name> [ <Description> ]
+ * "@​noinspection" <Name> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstorm.xml, edit the model instead
  */
 final class NoinspectionTagDefinition extends TagDefinition
 {
-    public const NAME = 'noinspection';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'noinspection';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'identifier'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class NoinspectionTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): NoinspectionTag
     {
-        /** @var non-empty-string $identifier */
+        /** @var non-empty-string */
         $identifier = $result->get('identifier');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new NoinspectionTag($name, $identifier, $description);
+        return new NoinspectionTag(
+            name: $name,
+            identifier: $identifier,
+            description: $description,
+        );
     }
 }

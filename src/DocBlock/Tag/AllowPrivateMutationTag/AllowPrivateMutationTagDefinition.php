@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@allow-private-mutation` tag allows a private-scope mutation of
- * an otherwise immutable property.
+ * The `@allow-private-mutation` tag allows a private-scope mutation of an
+ * otherwise immutable property.
  *
  * ```
  * "@allow-private-mutation" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class AllowPrivateMutationTagDefinition extends TagDefinition
 {
-    public const NAME = 'allow-private-mutation';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'allow-private-mutation';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class AllowPrivateMutationTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): AllowPrivateMutationTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new AllowPrivateMutationTag($name, $description);
+        return new AllowPrivateMutationTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

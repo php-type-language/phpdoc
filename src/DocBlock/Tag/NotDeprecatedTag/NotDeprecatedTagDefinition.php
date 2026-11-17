@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@not-deprecated" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class NotDeprecatedTagDefinition extends TagDefinition
 {
-    public const NAME = 'not-deprecated';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'not-deprecated';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class NotDeprecatedTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): NotDeprecatedTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new NotDeprecatedTag($name, $description);
+        return new NotDeprecatedTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

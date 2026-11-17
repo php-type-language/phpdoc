@@ -8,3 +8,4 @@ parameters:
     - php
   paths:
     - src
+    - build

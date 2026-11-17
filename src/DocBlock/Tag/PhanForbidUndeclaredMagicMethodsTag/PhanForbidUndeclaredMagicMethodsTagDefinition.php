@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-forbid-undeclared-magic-methods" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanForbidUndeclaredMagicMethodsTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-forbid-undeclared-magic-methods';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-forbid-undeclared-magic-methods';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PhanForbidUndeclaredMagicMethodsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanForbidUndeclaredMagicMethodsTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanForbidUndeclaredMagicMethodsTag($name, $description);
+        return new PhanForbidUndeclaredMagicMethodsTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

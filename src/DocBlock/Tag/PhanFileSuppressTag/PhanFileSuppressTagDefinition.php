@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phan-file-suppress` tag silences the listed issue types for the
+ * The `@​phan-file-suppress` tag silences the listed issue types for the
  * whole file it appears in, rather than just a single element or line.
  *
  * ```
- * "@phan-file-suppress" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@​phan-file-suppress" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanFileSuppressTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-file-suppress';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-file-suppress';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class PhanFileSuppressTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanFileSuppressTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanFileSuppressTag($name, $issues, $description);
+        return new PhanFileSuppressTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

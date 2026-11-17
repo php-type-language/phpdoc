@@ -12,22 +12,34 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
+ * The `@​codingStandardsIgnoreStart` tag starts a block of code excluded
+ * from coding-standard checks, closed by a matching
+ * `@​codingStandardsIgnoreEnd`.
+ *
  * The `@codingstandardsignorestart` tag starts a block of code excluded
  * from coding-standard checks, closed by a matching
- * `@codingStandardsIgnoreEnd`.
+ * `@​codingStandardsIgnoreEnd`.
  *
  * ```
- * "@codingStandardsIgnoreStart" [ <Description> ]
+ * "@​codingStandardsIgnoreStart" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class CodingStandardsIgnoreStartTagDefinition extends TagDefinition
 {
-    public const NAME = 'codingStandardsIgnoreStart';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'codingStandardsIgnoreStart';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +49,12 @@ final class CodingStandardsIgnoreStartTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): CodingStandardsIgnoreStartTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new CodingStandardsIgnoreStartTag($name, $description);
+        return new CodingStandardsIgnoreStartTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

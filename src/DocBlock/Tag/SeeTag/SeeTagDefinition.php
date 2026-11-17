@@ -13,7 +13,6 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The `@see` tag can be used to define a {@see CodeReference element}.
@@ -33,16 +32,22 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * "@see" ( <Reference> | <URI> ) [ <Description> ]
  * ```
  *
- * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class SeeTagDefinition extends TagDefinition
 {
-    public const NAME = 'see';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'see';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::oneOf(
                     Spec::rule(ReferenceCombinator::NAME, 'ref'),
@@ -52,16 +57,15 @@ final class SeeTagDefinition extends TagDefinition
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
-            placement: TagPlacement::Any,
         );
     }
 
     public function create(string $name, TagPayload $result): SeeTag
     {
-        /** @var CodeReference|UriReference $reference */
+        /** @var UriReference|CodeReference */
         $reference = $result->get('ref');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         return new SeeTag(

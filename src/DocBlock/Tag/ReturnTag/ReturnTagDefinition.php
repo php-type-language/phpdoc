@@ -14,8 +14,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@return` tag documents the value that a function or method returns to
- * its caller.
+ * The `@return` tag documents the return value of a function or method.
  *
  * The `@return` tag MAY be followed by a description that clarifies the
  * meaning of the returned value.
@@ -23,15 +22,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@return" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class ReturnTagDefinition extends TagDefinition
 {
-    public const NAME = 'return';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'return';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -44,12 +51,16 @@ final class ReturnTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ReturnTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ReturnTag($name, $type, $description);
+        return new ReturnTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

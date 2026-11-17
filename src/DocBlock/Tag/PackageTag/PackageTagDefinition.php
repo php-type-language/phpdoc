@@ -17,15 +17,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@package" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class PackageTagDefinition extends TagDefinition
 {
-    public const NAME = 'package';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'package';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -35,9 +43,12 @@ final class PackageTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PackageTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PackageTag($name, $description);
+        return new PackageTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

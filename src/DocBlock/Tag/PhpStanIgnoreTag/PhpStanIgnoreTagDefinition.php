@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@​phpstan-ignore` tag silences the listed error identifiers
- * reported on the current line.
+ * The `@​phpstan-ignore` tag silences the listed error identifiers reported
+ * on the current line.
  *
  * ```
- * "@​phpstan-ignore" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@​phpstan-ignore" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstan.xml, edit the model instead
  */
 final class PhpStanIgnoreTagDefinition extends TagDefinition
 {
-    public const NAME = 'phpstan-ignore';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phpstan-ignore';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class PhpStanIgnoreTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhpStanIgnoreTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhpStanIgnoreTag($name, $issues, $description);
+        return new PhpStanIgnoreTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

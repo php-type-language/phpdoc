@@ -47,8 +47,10 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 /**
  * The PHPStan platform: the `@phpstan-*` tag family understood by PHPStan.
  *
- * Tags that restate an existing one are wired as aliases onto it, PHPStan's own
- * marker tags are contributed as their own flag definitions.
+ * A prefixed tag that restates a common one gets the definition of that tag,
+ * PHPStan's own marker tags are contributed as their own flag definitions.
+ *
+ * @generated from resources/model/phpstan.xml, edit the model instead
  */
 final class PhpStanPlatform extends Platform
 {
@@ -60,19 +62,42 @@ final class PhpStanPlatform extends Platform
         return [
             'phpstan-allow-private-mutation' => new AllowPrivateMutationTagDefinition(),
             'phpstan-assert' => new AssertTagDefinition(),
-            'phpstan-assert-if-true' => new AssertIfTrueTagDefinition(),
             'phpstan-assert-if-false' => new AssertIfFalseTagDefinition(),
+            'phpstan-assert-if-true' => new AssertIfTrueTagDefinition(),
             'phpstan-consistent-constructor' => new ConsistentConstructorTagDefinition(),
+            'phpstan-extends' => new ExtendsTagDefinition(),
+            PhpStanIgnoreTagDefinition::getCanonicalName() => new PhpStanIgnoreTagDefinition(),
+            PhpStanIgnoreLineTagDefinition::getCanonicalName() => new PhpStanIgnoreLineTagDefinition(),
+            PhpStanIgnoreNextLineTagDefinition::getCanonicalName() => new PhpStanIgnoreNextLineTagDefinition(),
+            'phpstan-immutable' => new ImmutableTagDefinition(),
+            'phpstan-implements' => new ImplementsTagDefinition(),
             'phpstan-import-type' => new ImportTypeAliasTagDefinition(),
+            PhpStanImpureTagDefinition::getCanonicalName() => new PhpStanImpureTagDefinition(),
+            'phpstan-method' => new MethodTagDefinition(),
+            'phpstan-param' => new ParamTagDefinition(),
+            'phpstan-param-closure-this' => new ParamClosureThisTagDefinition(),
+            'phpstan-param-immediately-invoked-callable' => new ParamImmediatelyInvokedCallableTagDefinition(),
+            'phpstan-param-later-invoked-callable' => new ParamLaterInvokedCallableTagDefinition(),
+            'phpstan-param-out' => new ParamOutTagDefinition(),
+            'phpstan-property' => new PropertyTagDefinition(),
+            'phpstan-property-read' => new PropertyReadTagDefinition(),
+            'phpstan-property-write' => new PropertyWriteTagDefinition(),
             'phpstan-pure' => new PureTagDefinition(),
+            'phpstan-pure-unless-callable-is-impure' => new PureUnlessCallableIsImpureTagDefinition(),
+            'phpstan-readonly' => new ReadonlyTagDefinition(),
             'phpstan-readonly-allow-private-mutation' => new ReadonlyAllowPrivateMutationTagDefinition(),
+            'phpstan-require-extends' => new RequireExtendsTagDefinition(),
+            'phpstan-require-implements' => new RequireImplementsTagDefinition(),
+            'phpstan-return' => new ReturnTagDefinition(),
             'phpstan-self-out' => new SelfOutTagDefinition(),
+            'phpstan-template' => new TemplateTagDefinition(),
+            'phpstan-template-contravariant' => new TemplateContravariantTagDefinition(),
+            'phpstan-template-covariant' => new TemplateCovariantTagDefinition(),
+            'phpstan-throws' => new ThrowsTagDefinition(),
             'phpstan-type' => new TypeAliasTagDefinition(),
+            'phpstan-use' => new UseTagDefinition(),
+            'phpstan-var' => new VarTagDefinition(),
             'phpstan-yield' => new YieldTagDefinition(),
-            PhpStanImpureTagDefinition::NAME => new PhpStanImpureTagDefinition(),
-            PhpStanIgnoreTagDefinition::NAME => new PhpStanIgnoreTagDefinition(),
-            PhpStanIgnoreLineTagDefinition::NAME => new PhpStanIgnoreLineTagDefinition(),
-            PhpStanIgnoreNextLineTagDefinition::NAME => new PhpStanIgnoreNextLineTagDefinition(),
         ];
     }
 
@@ -82,30 +107,7 @@ final class PhpStanPlatform extends Platform
     public function getAliases(): iterable
     {
         return [
-            'phpstan-extends' => ExtendsTagDefinition::NAME,
-            'phpstan-immutable' => ImmutableTagDefinition::NAME,
-            'phpstan-implements' => ImplementsTagDefinition::NAME,
-            'phpstan-method' => MethodTagDefinition::NAME,
-            'phpstan-param' => ParamTagDefinition::NAME,
-            'phpstan-param-closure-this' => ParamClosureThisTagDefinition::NAME,
-            'phpstan-param-immediately-invoked-callable' => ParamImmediatelyInvokedCallableTagDefinition::NAME,
-            'phpstan-param-later-invoked-callable' => ParamLaterInvokedCallableTagDefinition::NAME,
-            'phpstan-param-out' => ParamOutTagDefinition::NAME,
-            'phpstan-property' => PropertyTagDefinition::NAME,
-            'phpstan-property-read' => PropertyReadTagDefinition::NAME,
-            'phpstan-property-write' => PropertyWriteTagDefinition::NAME,
-            'phpstan-pure-unless-callable-is-impure' => PureUnlessCallableIsImpureTagDefinition::NAME,
-            'phpstan-readonly' => ReadonlyTagDefinition::NAME,
-            'phpstan-require-extends' => RequireExtendsTagDefinition::NAME,
-            'phpstan-require-implements' => RequireImplementsTagDefinition::NAME,
-            'phpstan-return' => ReturnTagDefinition::NAME,
-            'phpstan-template' => TemplateTagDefinition::NAME,
-            'phpstan-template-contravariant' => TemplateContravariantTagDefinition::NAME,
-            'phpstan-template-covariant' => TemplateCovariantTagDefinition::NAME,
             'phpstan-this-out' => 'phpstan-self-out',
-            'phpstan-throws' => ThrowsTagDefinition::NAME,
-            'phpstan-use' => UseTagDefinition::NAME,
-            'phpstan-var' => VarTagDefinition::NAME,
         ];
     }
 }

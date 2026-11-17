@@ -1,6 +1,7 @@
 * text=auto eol=lf
 *.pp eol=lf linguist-language=EBNF
 *.pp2 eol=lf linguist-language=EBNF
+*.pp3 eol=lf linguist-language=EBNF
 
 # GIT
 .editorconfig export-ignore
@@ -15,4 +16,6 @@ phpstan.neon export-ignore
 phpunit.xml export-ignore
 
 /.github export-ignore
+/bin export-ignore
+/build export-ignore
 /tests export-ignore

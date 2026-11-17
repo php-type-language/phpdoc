@@ -13,21 +13,28 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@unused-param` tag marks an argument that is intentionally left
- * unused.
+ * The `@unused-param` tag marks an argument that is intentionally left unused.
  *
  * ```
  * "@unused-param" <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class UnusedParamTagDefinition extends TagDefinition
 {
-    public const NAME = 'unused-param';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'unused-param';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(VariableCombinator::NAME, 'variable'),
                 Spec::maybe(
@@ -40,12 +47,16 @@ final class UnusedParamTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): UnusedParamTag
     {
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new UnusedParamTag($name, $variable, $description);
+        return new UnusedParamTag(
+            name: $name,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

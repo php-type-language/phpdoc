@@ -14,10 +14,15 @@ final class LiteralRule implements TerminalInterface
 {
     public function __construct(
         /**
+         * Exact text to match.
+         *
          * @var non-empty-string
          */
-        private readonly string $value,
+        public readonly string $value,
         /**
+         * Capture name reporting the presence of the literal, {@see null} to
+         * capture nothing.
+         *
          * @var non-empty-string|null
          */
         public readonly ?string $alias = null,

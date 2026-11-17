@@ -19,15 +19,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-override-method-visibility" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmOverrideMethodVisibilityTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-override-method-visibility';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-override-method-visibility';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -37,9 +45,12 @@ final class PsalmOverrideMethodVisibilityTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmOverrideMethodVisibilityTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmOverrideMethodVisibilityTag($name, $description);
+        return new PsalmOverrideMethodVisibilityTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

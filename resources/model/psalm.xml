@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="psalm">
+    <package name="psalm" class="TypeLang\PhpDoc\Platform\PsalmPlatform" title="Psalm">
+        <description>
+            The Psalm platform: the `@psalm-*` tag family understood by Psalm.
+
+            A prefixed tag that restates a common one gets the definition of that tag,
+            Psalm's own marker tags are contributed as their own flag definitions.
+        </description>
+    </package>
+
+    <combinator name="FlowType" class="TypeLang\PhpDoc\DocBlock\Combinator\FlowTypeCombinator" package="psalm"/>
+
+    <tag name="psalm-assert-untainted" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmAssertUntaintedTag\PsalmAssertUntaintedTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VariableTag" placement="block">
+        <summary>
+            The `@psalm-assert-untainted` tag asserts that the given variable holds no
+            tainted data from this point on.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Asserting that a value is safe after sanitization."><![CDATA[
+            /**
+             * @psalm-assert-untainted $input
+             */
+            function sanitize(string $input): string {}
+        ]]></example>
+    </tag>
+
+    <tag name="psalm-check-type" class="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\CheckTypeTag" placement="block">
+        <summary>
+            The `@psalm-check-type` tag reports an issue unless the inferred type of the
+            given variable is assignable to the expected type.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <literal value="="/>
+                <rule name="Type" as="type" parameter="statement"/>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-check-type-exact" class="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeExactTag" extends="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\CheckTypeTag" placement="block">
+        <summary>
+            The `@psalm-check-type-exact` tag reports an issue unless the inferred type
+            of the given variable is exactly the expected type.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <literal value="="/>
+                <rule name="Type" as="type" parameter="statement"/>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-consistent-templates" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmConsistentTemplatesTag\PsalmConsistentTemplatesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-consistent-templates` tag requires that all subclasses use
+            the same template parameters as the parent.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-external-mutation-free" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmExternalMutationFreeTag\PsalmExternalMutationFreeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-external-mutation-free` tag declares that a method never
+            mutates state observable from outside the object.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-flow" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmFlowTag\PsalmFlowTag" placement="block">
+        <summary>
+            The `@psalm-flow` tag describes how tainted data flows through a function,
+            optionally naming the parameter the flow applies to.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="FlowType" as="flow"/>
+                <maybe>
+                    <rule name="Variable" as="variable"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-if-this-is" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIfThisIsTag\PsalmIfThisIsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@psalm-if-this-is` tag narrows the type of `$this` inside a method
+            when the given type matches.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-ignore-falsable-return" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreFalsableReturnTag\PsalmIgnoreFalsableReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-ignore-falsable-return` tag ignores a possible `false` value
+            in the return type.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-ignore-nullable-return" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreNullableReturnTag\PsalmIgnoreNullableReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-ignore-nullable-return` tag ignores a possible `null` value
+            in the return type.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-ignore-var" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVarTag\PsalmIgnoreVarTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-ignore-var` tag excludes the immediately following `@var`
+            annotation from type inference, falling back to the inferred type
+            instead of the declared one.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-ignore-variable-method" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariableMethodTag\PsalmIgnoreVariableMethodTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-ignore-variable-method` tag suppresses "undefined method"
+            issues for methods called on the annotated variable.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-ignore-variable-property" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariablePropertyTag\PsalmIgnoreVariablePropertyTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-ignore-variable-property` tag suppresses "undefined
+            property" issues for properties accessed on the annotated variable.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-inheritors" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmInheritorsTag\PsalmInheritorsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@psalm-inheritors` tag restricts which classes are allowed to
+            extend or implement the described type.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-mutation-free" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmMutationFreeTag\PsalmMutationFreeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-mutation-free` tag declares that a method never mutates any
+            state, whether observable from outside the object or purely internal to
+            it.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-no-seal-methods" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealMethodsTag\PsalmNoSealMethodsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-no-seal-methods` tag allows a class to declare magic methods
+            beyond those already documented.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-no-seal-properties" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealPropertiesTag\PsalmNoSealPropertiesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-no-seal-properties` tag allows a class to declare magic
+            properties beyond those already documented.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-override-method-visibility" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideMethodVisibilityTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-override-method-visibility` tag allows a subclass to
+            override an inherited method with a different visibility than the parent
+            declares.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-override-property-visibility" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-override-property-visibility` tag allows a subclass to
+            override an inherited property with a different visibility than the
+            parent declares.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-scope-this" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@psalm-scope-this` tag binds the type of `$this` inside a
+            `Closure`, so the closure body is type-checked as if it were a method of
+            the given class.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-stub-override" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-stub-override` tag marks a stub declaration as intentionally
+            overriding the real signature.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-taint-escape" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@psalm-taint-escape` tag marks a value as no longer tainted after
+            passing through the described element.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-taint-sink" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSinkTag\PsalmTaintSinkTag" placement="block">
+        <summary>
+            The `@psalm-taint-sink` tag marks the given variable as a sink where tainted
+            data of the named taint type must never arrive.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="taint"/>
+                <rule name="Variable" as="variable"/>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-taint-source" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@psalm-taint-source` tag marks the return value as a taint source
+            of the given type.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-taint-specialize" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-taint-specialize` tag tracks tainted data separately per
+            call site, rather than merging taint information from all callers
+            together.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-taint-unescape" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@psalm-taint-unescape` tag marks a value as tainted again after
+            passing through the described element, reversing an earlier
+            `@psalm-taint-escape`.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="psalm-trace" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VariableTag" placement="block">
+        <summary>
+            The `@psalm-trace` tag outputs the inferred type of the given variable, for
+            debugging purposes.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Variable" as="variable"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+        <example title="Inspecting the type Psalm infers for a variable."><![CDATA[
+            /**
+             * @psalm-trace $result
+             */
+        ]]></example>
+    </tag>
+
+    <tag name="psalm-variadic" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmVariadicTag\PsalmVariadicTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@psalm-variadic` tag declares that a class's magic
+            `__call`/`__callStatic` methods accept a variadic list of arguments.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <alias name="psalm-allow-private-mutation" of="allow-private-mutation"/>
+    <alias name="psalm-api" of="api"/>
+    <alias name="psalm-assert" of="assert"/>
+    <alias name="psalm-assert-if-false" of="assert-if-false"/>
+    <alias name="psalm-assert-if-true" of="assert-if-true"/>
+    <alias name="psalm-consistent-constructor" of="consistent-constructor"/>
+    <alias name="psalm-extends" of="extends"/>
+    <alias name="psalm-immutable" of="immutable"/>
+    <alias name="psalm-implements" of="implements"/>
+    <alias name="psalm-import-type" of="import-type"/>
+    <alias name="psalm-internal" of="internal"/>
+    <alias name="psalm-method" of="method"/>
+    <alias name="psalm-param" of="param"/>
+    <alias name="psalm-param-out" of="param-out"/>
+    <alias name="psalm-property" of="property"/>
+    <alias name="psalm-property-read" of="property-read"/>
+    <alias name="psalm-property-write" of="property-write"/>
+    <alias name="psalm-pure" of="pure"/>
+    <alias name="psalm-readonly" of="readonly"/>
+    <alias name="psalm-readonly-allow-private-mutation" of="readonly-allow-private-mutation"/>
+    <alias name="psalm-require-extends" of="require-extends"/>
+    <alias name="psalm-require-implements" of="require-implements"/>
+    <alias name="psalm-return" of="return"/>
+    <alias name="psalm-seal-methods" of="seal-methods"/>
+    <alias name="psalm-seal-properties" of="seal-properties"/>
+    <alias name="psalm-self-out" of="self-out"/>
+    <alias name="psalm-suppress" of="suppress"/>
+    <alias name="psalm-template" of="template"/>
+    <alias name="psalm-template-contravariant" of="template-contravariant"/>
+    <alias name="psalm-template-covariant" of="template-covariant"/>
+    <alias name="psalm-this-out" of="psalm-self-out"/>
+    <alias name="psalm-type" of="type"/>
+    <alias name="psalm-use" of="use"/>
+    <alias name="psalm-var" of="var"/>
+    <alias name="psalm-yield" of="yield"/>
+</model>

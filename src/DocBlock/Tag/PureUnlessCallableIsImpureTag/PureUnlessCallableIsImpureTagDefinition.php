@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@pure-unless-callable-is-impure" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class PureUnlessCallableIsImpureTagDefinition extends TagDefinition
 {
-    public const NAME = 'pure-unless-callable-is-impure';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'pure-unless-callable-is-impure';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PureUnlessCallableIsImpureTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PureUnlessCallableIsImpureTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PureUnlessCallableIsImpureTag($name, $description);
+        return new PureUnlessCallableIsImpureTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

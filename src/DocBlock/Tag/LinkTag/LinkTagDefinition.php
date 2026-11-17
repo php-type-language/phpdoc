@@ -11,7 +11,6 @@ use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The `@link` tag can be used to define a relation, or link, between
@@ -23,35 +22,40 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * relation defined by this occurrence.
  *
  * ```
- * "@link" <URI> [<Description>]
+ * "@link" <URI> [ <Description> ]
  * ```
  *
- * @link https://www.ietf.org/rfc/rfc2396.txt RFC2396
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class LinkTagDefinition extends TagDefinition
 {
-    public const NAME = 'link';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'link';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(UriCombinator::NAME, 'uri'),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
-            placement: TagPlacement::Any,
         );
     }
 
     public function create(string $name, TagPayload $result): LinkTag
     {
-        /** @var UriReference $uri */
+        /** @var UriReference */
         $uri = $result->get('uri');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         return new LinkTag(

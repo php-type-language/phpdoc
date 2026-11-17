@@ -21,15 +21,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-closure-scope" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanClosureScopeTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-closure-scope';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-closure-scope';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -42,12 +50,16 @@ final class PhanClosureScopeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanClosureScopeTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanClosureScopeTag($name, $type, $description);
+        return new PhanClosureScopeTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

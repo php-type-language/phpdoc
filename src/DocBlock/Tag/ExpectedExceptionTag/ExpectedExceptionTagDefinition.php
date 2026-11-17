@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@expectedException" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstorm.xml, edit the model instead
  */
 final class ExpectedExceptionTagDefinition extends TagDefinition
 {
-    public const NAME = 'expectedException';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'expectedException';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class ExpectedExceptionTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): ExpectedExceptionTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new ExpectedExceptionTag($name, $type, $description);
+        return new ExpectedExceptionTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@ignore" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class IgnoreTagDefinition extends TagDefinition
 {
-    public const NAME = 'ignore';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'ignore';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class IgnoreTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): IgnoreTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new IgnoreTag($name, $description);
+        return new IgnoreTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

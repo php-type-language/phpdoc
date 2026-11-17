@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phpstan-impure` tag declares a function or method as impure,
- * that is, having side effects.
+ * The `@phpstan-impure` tag declares a function or method as impure, that
+ * is, having side effects.
  *
  * ```
  * "@phpstan-impure" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstan.xml, edit the model instead
  */
 final class PhpStanImpureTagDefinition extends TagDefinition
 {
-    public const NAME = 'phpstan-impure';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phpstan-impure';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhpStanImpureTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhpStanImpureTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhpStanImpureTag($name, $description);
+        return new PhpStanImpureTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

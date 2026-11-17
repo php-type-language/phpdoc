@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-consistent-templates" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmConsistentTemplatesTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-consistent-templates';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-consistent-templates';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmConsistentTemplatesTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmConsistentTemplatesTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmConsistentTemplatesTag($name, $description);
+        return new PsalmConsistentTemplatesTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

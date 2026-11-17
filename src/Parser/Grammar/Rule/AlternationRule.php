@@ -13,9 +13,11 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 final class AlternationRule implements ProductionInterface
 {
     /**
+     * Alternatives in the order they are tried.
+     *
      * @var non-empty-list<RuleInterface>
      */
-    private readonly array $rules;
+    public readonly array $rules;
 
     public function __construct(RuleInterface $rule, RuleInterface ...$other)
     {

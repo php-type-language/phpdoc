@@ -14,21 +14,28 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@uses` tag indicates that the described element uses the referenced
- * one.
+ * The `@uses` tag indicates that the described element uses the referenced one.
  *
  * ```
  * "@uses" <Reference> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class UsesTagDefinition extends TagDefinition
 {
-    public const NAME = 'uses';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'uses';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(ReferenceCombinator::NAME, 'reference'),
                 Spec::maybe(
@@ -41,12 +48,16 @@ final class UsesTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): UsesTag
     {
-        /** @var CodeReference $reference */
+        /** @var CodeReference */
         $reference = $result->get('reference');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new UsesTag($name, $reference, $description);
+        return new UsesTag(
+            name: $name,
+            reference: $reference,
+            description: $description,
+        );
     }
 }

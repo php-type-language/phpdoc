@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-hardcode-return-type" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanHardcodeReturnTypeTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-hardcode-return-type';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-hardcode-return-type';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class PhanHardcodeReturnTypeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanHardcodeReturnTypeTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanHardcodeReturnTypeTag($name, $type, $description);
+        return new PhanHardcodeReturnTypeTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

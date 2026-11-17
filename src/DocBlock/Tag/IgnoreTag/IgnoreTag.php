@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@ignore` tag tells documentation tooling to skip the element it is
  * attached to.
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class IgnoreTag extends FlagTag {}

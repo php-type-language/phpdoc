@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-taint-sink` tag marks the given variable as a sink where
- * tainted data of the named taint type must never arrive.
+ * The `@psalm-taint-sink` tag marks the given variable as a sink where tainted
+ * data of the named taint type must never arrive.
  *
  * ```
  * "@psalm-taint-sink" <Name> <Variable>
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintSinkTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-taint-sink';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-taint-sink';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'taint'),
                 Spec::rule(VariableCombinator::NAME, 'variable'),
@@ -37,12 +45,16 @@ final class PsalmTaintSinkTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmTaintSinkTag
     {
-        /** @var non-empty-string $taint */
+        /** @var non-empty-string */
         $taint = $result->get('taint');
 
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        return new PsalmTaintSinkTag($name, $taint, $variable);
+        return new PsalmTaintSinkTag(
+            name: $name,
+            taint: $taint,
+            variable: $variable,
+        );
     }
 }

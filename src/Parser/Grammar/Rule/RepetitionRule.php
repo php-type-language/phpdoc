@@ -13,13 +13,16 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 final class RepetitionRule implements ProductionInterface
 {
     public function __construct(
-        private readonly RuleInterface $rule,
+        /**
+         * Rule matched repeatedly.
+         */
+        public readonly RuleInterface $rule,
         /**
          * Least number of repetitions required to match.
          *
          * @var int<0, max>
          */
-        private readonly int $min = 0,
+        public readonly int $min = 0,
     ) {}
 
     public function match(Context $context): void

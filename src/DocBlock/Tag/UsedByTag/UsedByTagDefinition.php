@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@used-by" <Reference> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class UsedByTagDefinition extends TagDefinition
 {
-    public const NAME = 'used-by';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'used-by';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(ReferenceCombinator::NAME, 'reference'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class UsedByTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): UsedByTag
     {
-        /** @var CodeReference $reference */
+        /** @var CodeReference */
         $reference = $result->get('reference');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new UsedByTag($name, $reference, $description);
+        return new UsedByTag(
+            name: $name,
+            reference: $reference,
+            description: $description,
+        );
     }
 }

@@ -10,5 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
  * The `@psalm-override-method-visibility` tag allows a subclass to
  * override an inherited method with a different visibility than the parent
  * declares.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmOverrideMethodVisibilityTag extends FlagTag {}

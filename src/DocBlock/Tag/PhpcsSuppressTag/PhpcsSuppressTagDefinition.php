@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phpcsSuppress` tag suppresses the named coding-standard check
- * for the element it decorates.
+ * The `@​phpcsSuppress` tag suppresses the named coding-standard check for
+ * the element it decorates.
  *
  * ```
- * "@phpcsSuppress" <Name> [ <Description> ]
+ * "@​phpcsSuppress" <Name> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class PhpcsSuppressTagDefinition extends TagDefinition
 {
-    public const NAME = 'phpcsSuppress';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phpcsSuppress';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(NameCombinator::NAME, 'identifier'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class PhpcsSuppressTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhpcsSuppressTag
     {
-        /** @var non-empty-string $identifier */
+        /** @var non-empty-string */
         $identifier = $result->get('identifier');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhpcsSuppressTag($name, $identifier, $description);
+        return new PhpcsSuppressTag(
+            name: $name,
+            identifier: $identifier,
+            description: $description,
+        );
     }
 }

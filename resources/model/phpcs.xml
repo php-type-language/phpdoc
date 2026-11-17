@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="phpcs">
+    <package name="phpcs" class="TypeLang\PhpDoc\Platform\PhpCodeSnifferPlatform" title="PHP CodeSniffer">
+        <description>
+            The PHP CodeSniffer platform: the `@phpcs:*` tag family understood by PHP
+            CodeSniffer.
+        </description>
+    </package>
+
+    <tag name="codingStandards" class="TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsTag\CodingStandardsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@codingStandards` tag names a coding standard for reference.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="codingStandardsIgnoreEnd" class="TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreEndTag\CodingStandardsIgnoreEndTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@codingStandardsIgnoreEnd` tag ends a block of code started by
+            `@codingStandardsIgnoreStart`, resuming coding-standard checks from this
+            point on.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="codingStandardsIgnoreFile" class="TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreFileTag\CodingStandardsIgnoreFileTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@codingStandardsIgnoreFile` tag ignores the whole file for
+            coding-standard checks.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="codingStandardsIgnoreLine" class="TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreLineTag\CodingStandardsIgnoreLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@codingStandardsIgnoreLine` tag ignores a single line of code for
+            coding-standard checks.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="codingStandardsIgnoreStart" class="TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreStartTag\CodingStandardsIgnoreStartTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@codingStandardsIgnoreStart` tag starts a block of code excluded
+            from coding-standard checks, closed by a matching
+            `@codingStandardsIgnoreEnd`.
+        </summary>
+        <description>
+            The `@codingstandardsignorestart` tag starts a block of code excluded
+            from coding-standard checks, closed by a matching
+            `@codingStandardsIgnoreEnd`.
+        </description>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="phpcsSuppress" class="TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@phpcsSuppress` tag suppresses the named coding-standard check for
+            the element it decorates.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+</model>

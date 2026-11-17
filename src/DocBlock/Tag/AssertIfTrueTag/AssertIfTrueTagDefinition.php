@@ -20,11 +20,17 @@ use TypeLang\PhpDoc\DocBlock\Tag\AssertOperator;
  */
 final class AssertIfTrueTagDefinition extends AssertionTagDefinition
 {
-    public const NAME = 'assert-if-true';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'assert-if-true';
+    }
 
     public function __construct()
     {
-        parent::__construct(self::NAME);
+        parent::__construct(self::getCanonicalName());
     }
 
     protected function createAssertion(

@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@filesource` tag tells documentation tooling to include the source of
  * the current file in its output.
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class FilesourceTag extends FlagTag {}

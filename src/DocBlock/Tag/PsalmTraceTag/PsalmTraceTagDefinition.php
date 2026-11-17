@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-trace` tag outputs the inferred type of the given variable,
- * for debugging purposes.
+ * The `@psalm-trace` tag outputs the inferred type of the given variable, for
+ * debugging purposes.
  *
  * ```
  * "@psalm-trace" <Variable> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTraceTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-trace';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-trace';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(VariableCombinator::NAME, 'variable'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class PsalmTraceTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmTraceTag
     {
-        /** @var non-empty-string $variable */
+        /** @var non-empty-string */
         $variable = $result->get('variable');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmTraceTag($name, $variable, $description);
+        return new PsalmTraceTag(
+            name: $name,
+            variable: $variable,
+            description: $description,
+        );
     }
 }

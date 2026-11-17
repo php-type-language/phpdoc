@@ -1,0 +1,51 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+
+## tags
+@codingstandards
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsTag\CodingStandardsTagDefinition
+  name: codingStandards
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsTag\CodingStandardsTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))
+@codingstandardsignoreend
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreEndTag\CodingStandardsIgnoreEndTagDefinition
+  name: codingStandardsIgnoreEnd
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreEndTag\CodingStandardsIgnoreEndTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@codingstandardsignorefile
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreFileTag\CodingStandardsIgnoreFileTagDefinition
+  name: codingStandardsIgnoreFile
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreFileTag\CodingStandardsIgnoreFileTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@codingstandardsignoreline
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreLineTag\CodingStandardsIgnoreLineTagDefinition
+  name: codingStandardsIgnoreLine
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreLineTag\CodingStandardsIgnoreLineTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@codingstandardsignorestart
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreStartTag\CodingStandardsIgnoreStartTagDefinition
+  name: codingStandardsIgnoreStart
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CodingStandardsIgnoreStartTag\CodingStandardsIgnoreStartTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@phpcssuppress
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTagDefinition
+  name: phpcsSuppress
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))

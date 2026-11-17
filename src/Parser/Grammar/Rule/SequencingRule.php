@@ -13,9 +13,11 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 final class SequencingRule implements ProductionInterface
 {
     /**
+     * Rules matched in order.
+     *
      * @var non-empty-list<RuleInterface>
      */
-    private readonly array $rules;
+    public readonly array $rules;
 
     public function __construct(RuleInterface $rule, RuleInterface ...$other)
     {

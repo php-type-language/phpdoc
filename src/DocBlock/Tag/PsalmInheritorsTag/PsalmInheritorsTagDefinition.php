@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-inheritors" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmInheritorsTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-inheritors';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-inheritors';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class PsalmInheritorsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmInheritorsTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmInheritorsTag($name, $type, $description);
+        return new PsalmInheritorsTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

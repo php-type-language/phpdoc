@@ -6,5 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\PropertyTag;
 
 /**
  * The `@property-write` tag declares a magic property that can only be written.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class PropertyWriteTag extends MagicPropertyTag {}

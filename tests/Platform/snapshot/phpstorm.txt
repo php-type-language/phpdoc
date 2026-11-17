@@ -1,0 +1,45 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+
+## tags
+@expectedexception
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTagDefinition
+  name: expectedException
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Description> as description))
+@formatter:off
+  definition: TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTagDefinition
+  name: formatter:off
+  creates: TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@formatter:on
+  definition: TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTagDefinition
+  name: formatter:on
+  creates: TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@language
+  definition: TypeLang\PhpDoc\DocBlock\Tag\LanguageTag\LanguageTagDefinition
+  name: language
+  creates: TypeLang\PhpDoc\DocBlock\Tag\LanguageTag\LanguageTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))
+@noinspection
+  definition: TypeLang\PhpDoc\DocBlock\Tag\NoinspectionTag\NoinspectionTagDefinition
+  name: noinspection
+  creates: TypeLang\PhpDoc\DocBlock\Tag\NoinspectionTag\NoinspectionTag
+  placement: Block
+  grammar: seq(<Name> as identifier, maybe(<Description> as description))

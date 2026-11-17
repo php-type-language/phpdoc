@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-side-effect-free" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanSideEffectFreeTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-side-effect-free';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-side-effect-free';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhanSideEffectFreeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanSideEffectFreeTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanSideEffectFreeTag($name, $description);
+        return new PhanSideEffectFreeTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

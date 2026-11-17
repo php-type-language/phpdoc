@@ -14,20 +14,28 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@access` tag documents the visibility (access level) of an element.
+ * The `@access` tag documents the visibility of an element.
  *
  * ```
- * "@access" ( <AccessVisibility> ) [ <Description> ]
+ * "@access" <AccessVisibility> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class AccessTagDefinition extends TagDefinition
 {
-    public const NAME = 'access';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'access';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(VisibilityCombinator::NAME, 'access', 'AccessVisibility'),
                 Spec::maybe(
@@ -40,12 +48,16 @@ final class AccessTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): AccessTag
     {
-        /** @var Visibility $access */
+        /** @var Visibility */
         $access = $result->get('access');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new AccessTag($name, $access, $description);
+        return new AccessTag(
+            name: $name,
+            access: $access,
+            description: $description,
+        );
     }
 }

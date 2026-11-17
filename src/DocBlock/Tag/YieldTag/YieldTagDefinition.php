@@ -20,15 +20,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@yield" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class YieldTagDefinition extends TagDefinition
 {
-    public const NAME = 'yield';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'yield';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class YieldTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): YieldTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new YieldTag($name, $type, $description);
+        return new YieldTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

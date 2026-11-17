@@ -17,15 +17,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@copyright" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class CopyrightTagDefinition extends TagDefinition
 {
-    public const NAME = 'copyright';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'copyright';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -35,9 +43,12 @@ final class CopyrightTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): CopyrightTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new CopyrightTag($name, $description);
+        return new CopyrightTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

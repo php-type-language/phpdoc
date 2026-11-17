@@ -17,15 +17,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@inheritDoc" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class InheritDocTagDefinition extends TagDefinition
 {
-    public const NAME = 'inheritDoc';
+    /**
+     * @return non-empty-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'inheritDoc';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -35,9 +43,12 @@ final class InheritDocTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): InheritDocTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new InheritDocTag($name, $description);
+        return new InheritDocTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

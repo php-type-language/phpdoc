@@ -17,17 +17,25 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * reported for an element.
  *
  * ```
- * "@suppress" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@suppress" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class SuppressTagDefinition extends TagDefinition
 {
-    public const NAME = 'suppress';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'suppress';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class SuppressTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): SuppressTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new SuppressTag($name, $issues, $description);
+        return new SuppressTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

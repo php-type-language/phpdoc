@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Metamodel of the PHPDoc tags: the single source the tag definitions, the
+    empty tag classes and the platforms are generated from.
+
+    Every class is referenced by its fully qualified name, without the leading
+    backslash: TypeLang\PhpDoc\DocBlock\Tag\FlagTag.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="model">
+        <xs:annotation>
+            <xs:documentation>
+                One model file. The "package" attribute is the default package of the tags and
+                aliases of the file, a tag of a file without it is registered only through aliases.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="package" type="PackageType"/>
+                <xs:element name="combinator" type="CombinatorType"/>
+                <xs:element name="tag" type="TagType"/>
+                <xs:element name="alias" type="AliasType"/>
+            </xs:choice>
+            <xs:attribute name="package" type="IdentifierType"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Names -->
+
+    <xs:simpleType name="IdentifierType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z][a-z0-9-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TagNameType">
+        <xs:annotation>
+            <xs:documentation>Tag name without the leading "@".</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z][a-zA-Z0-9:-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CombinatorNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Za-z0-9]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CaptureNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z][a-z0-9-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClassNameType">
+        <xs:annotation>
+            <xs:documentation>Fully qualified class name without the leading backslash.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Za-z0-9]*(\\[A-Z][A-Za-z0-9]*)+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClassListType">
+        <xs:list itemType="ClassNameType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ParameterNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z][A-Za-z0-9]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VersionType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+(\.[0-9]+){0,2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PlacementType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="block"/>
+            <xs:enumeration value="inline"/>
+            <xs:enumeration value="any"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Declarations -->
+
+    <xs:complexType name="PackageType">
+        <xs:annotation>
+            <xs:documentation>A family of tags of one tool, generated as a platform class.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="IdentifierType" use="required"/>
+        <xs:attribute name="class" type="ClassNameType" use="required"/>
+        <xs:attribute name="title" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CombinatorType">
+        <xs:annotation>
+            <xs:documentation>
+                A named terminal of the grammar, implemented by hand. A combinator without a
+                package is provided by the parser itself to the tags of every package.
+
+                Its instance is created by the generated code: with no arguments, or with the
+                type parser for a combinator of the parser whose constructor asks for it. The
+                parser creates a combinator with "instance" set to "manual" itself.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="CombinatorNameType" use="required"/>
+        <xs:attribute name="class" type="ClassNameType" use="required"/>
+        <xs:attribute name="package" type="IdentifierType"/>
+        <xs:attribute name="instance" default="generated">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="generated"/>
+                    <xs:enumeration value="manual"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="TagType">
+        <xs:annotation>
+            <xs:documentation>
+                A tag under its canonical name. The tag class is generated when "extends" is
+                given, the definition class (the tag class with the "Definition" suffix) unless
+                "definition" is "manual".
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="summary" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="grammar" type="GrammarType"/>
+            <xs:element name="example" type="ExampleType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="TagNameType" use="required"/>
+        <xs:attribute name="class" type="ClassNameType" use="required"/>
+        <xs:attribute name="extends" type="ClassNameType"/>
+        <xs:attribute name="template" type="ClassListType"/>
+        <xs:attribute name="definition" default="generated">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="generated"/>
+                    <xs:enumeration value="manual"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="placement" type="PlacementType" default="any"/>
+        <xs:attribute name="package" type="IdentifierType"/>
+        <xs:attribute name="since" type="VersionType"/>
+        <xs:attribute name="deprecated" type="VersionType"/>
+    </xs:complexType>
+
+    <xs:complexType name="AliasType">
+        <xs:annotation>
+            <xs:documentation>
+                Another name of a tag or of an alias: a runtime alias within the package of its
+                target, an entry of its own with the definition of the tag in another package.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="example" type="ExampleType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="TagNameType" use="required"/>
+        <xs:attribute name="of" type="TagNameType" use="required"/>
+        <xs:attribute name="package" type="IdentifierType"/>
+    </xs:complexType>
+
+    <xs:complexType name="ExampleType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="title" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Grammar -->
+
+    <xs:group name="RuleGroup">
+        <xs:choice>
+            <xs:element name="sequence" type="RuleListType"/>
+            <xs:element name="one-of" type="RuleListType"/>
+            <xs:element name="maybe" type="SingleRuleType"/>
+            <xs:element name="repeat" type="RepeatType"/>
+            <xs:element name="rule" type="MatchType"/>
+            <xs:element name="literal" type="LiteralType"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:complexType name="GrammarType">
+        <xs:group ref="RuleGroup"/>
+    </xs:complexType>
+
+    <xs:complexType name="SingleRuleType">
+        <xs:group ref="RuleGroup"/>
+    </xs:complexType>
+
+    <xs:complexType name="RuleListType">
+        <xs:group ref="RuleGroup" maxOccurs="unbounded"/>
+    </xs:complexType>
+
+    <xs:complexType name="RepeatType">
+        <xs:group ref="RuleGroup"/>
+        <xs:attribute name="min" type="xs:nonNegativeInteger" default="0"/>
+    </xs:complexType>
+
+    <xs:complexType name="MatchType">
+        <xs:annotation>
+            <xs:documentation>
+                A combinator. "as" captures its value, "parameter" names the constructor parameter
+                of the tag class receiving it when it differs from "as" in camelCase, "shown-as"
+                replaces the combinator name in the rendered grammar.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="CombinatorNameType" use="required"/>
+        <xs:attribute name="as" type="CaptureNameType"/>
+        <xs:attribute name="parameter" type="ParameterNameType"/>
+        <xs:attribute name="shown-as" type="CombinatorNameType"/>
+    </xs:complexType>
+
+    <xs:complexType name="LiteralType">
+        <xs:annotation>
+            <xs:documentation>An exact text. "as" captures the fact of its presence.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="as" type="CaptureNameType"/>
+    </xs:complexType>
+
+</xs:schema>

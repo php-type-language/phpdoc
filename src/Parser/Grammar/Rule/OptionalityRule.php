@@ -13,7 +13,10 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 final class OptionalityRule implements ProductionInterface
 {
     public function __construct(
-        private readonly RuleInterface $rule,
+        /**
+         * Rule that may be absent.
+         */
+        public readonly RuleInterface $rule,
     ) {}
 
     public function match(Context $context): void

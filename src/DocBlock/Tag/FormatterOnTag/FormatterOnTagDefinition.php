@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@formatter:on` tag re-enables automatic code formatting from this
- * point on, pairing with an earlier `@formatter:off`.
+ * The `@​formatter:on` tag re-enables automatic code formatting from this
+ * point on, pairing with an earlier `@​formatter:off`.
  *
  * ```
- * "@formatter:on" [ <Description> ]
+ * "@​formatter:on" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phpstorm.xml, edit the model instead
  */
 final class FormatterOnTagDefinition extends TagDefinition
 {
-    public const NAME = 'formatter:on';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'formatter:on';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class FormatterOnTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): FormatterOnTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new FormatterOnTag($name, $description);
+        return new FormatterOnTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

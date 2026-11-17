@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag;
 
+use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
+use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
  * The `@psalm-check-type-exact` tag reports an issue unless the inferred type
@@ -13,21 +19,44 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  * ```
  * "@psalm-check-type-exact" <Variable> "=" <Type>
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
-final class PsalmCheckTypeExactTagDefinition extends CheckTypeTagDefinition
+final class PsalmCheckTypeExactTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-check-type-exact';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-check-type-exact';
+    }
 
     public function __construct()
     {
-        parent::__construct(self::NAME);
+        parent::__construct(
+            name: self::getCanonicalName(),
+            spec: Spec::sequence(
+                Spec::rule(VariableCombinator::NAME, 'variable'),
+                Spec::literal('='),
+                Spec::rule(TypeCombinator::NAME, 'type'),
+            ),
+            placement: TagPlacement::Block,
+        );
     }
 
-    protected function make(
-        string $name,
-        string $variable,
-        TypeReference $type,
-    ): PsalmCheckTypeExactTag {
-        return new PsalmCheckTypeExactTag($name, $variable, $type);
+    public function create(string $name, TagPayload $result): PsalmCheckTypeExactTag
+    {
+        /** @var non-empty-string */
+        $variable = $result->get('variable');
+
+        /** @var TypeReference */
+        $statement = $result->get('type');
+
+        return new PsalmCheckTypeExactTag(
+            name: $name,
+            variable: $variable,
+            statement: $statement,
+        );
     }
 }

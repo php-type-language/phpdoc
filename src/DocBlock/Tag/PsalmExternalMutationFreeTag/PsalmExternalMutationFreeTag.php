@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@psalm-external-mutation-free` tag declares that a method never
  * mutates state observable from outside the object.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmExternalMutationFreeTag extends FlagTag {}

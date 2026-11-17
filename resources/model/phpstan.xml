@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="phpstan">
+    <package name="phpstan" class="TypeLang\PhpDoc\Platform\PhpStanPlatform" title="PHPStan">
+        <description>
+            The PHPStan platform: the `@phpstan-*` tag family understood by PHPStan.
+
+            A prefixed tag that restates a common one gets the definition of that tag,
+            PHPStan's own marker tags are contributed as their own flag definitions.
+        </description>
+    </package>
+
+    <tag name="phpstan-ignore" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreTag\PhpStanIgnoreTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
+        <summary>
+            The `@phpstan-ignore` tag silences the listed error identifiers reported
+            on the current line.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="IssueName" as="issue" parameter="issues"/>
+                <repeat>
+                    <sequence>
+                        <literal value=","/>
+                        <rule name="IssueName" as="issue" parameter="issues"/>
+                    </sequence>
+                </repeat>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="phpstan-ignore-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreLineTag\PhpStanIgnoreLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@phpstan-ignore-line` tag silences any error reported on the
+            current line.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="phpstan-ignore-next-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreNextLineTag\PhpStanIgnoreNextLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@phpstan-ignore-next-line` tag silences any error reported on the
+            next line.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="phpstan-impure" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanImpureTag\PhpStanImpureTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@phpstan-impure` tag declares a function or method as impure, that
+            is, having side effects.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <alias name="phpstan-allow-private-mutation" of="allow-private-mutation"/>
+    <alias name="phpstan-assert" of="assert"/>
+    <alias name="phpstan-assert-if-false" of="assert-if-false"/>
+    <alias name="phpstan-assert-if-true" of="assert-if-true"/>
+    <alias name="phpstan-consistent-constructor" of="consistent-constructor"/>
+    <alias name="phpstan-extends" of="extends"/>
+    <alias name="phpstan-immutable" of="immutable"/>
+    <alias name="phpstan-implements" of="implements"/>
+    <alias name="phpstan-import-type" of="import-type"/>
+    <alias name="phpstan-method" of="method"/>
+    <alias name="phpstan-param" of="param"/>
+    <alias name="phpstan-param-closure-this" of="param-closure-this"/>
+    <alias name="phpstan-param-immediately-invoked-callable" of="param-immediately-invoked-callable"/>
+    <alias name="phpstan-param-later-invoked-callable" of="param-later-invoked-callable"/>
+    <alias name="phpstan-param-out" of="param-out"/>
+    <alias name="phpstan-property" of="property"/>
+    <alias name="phpstan-property-read" of="property-read"/>
+    <alias name="phpstan-property-write" of="property-write"/>
+    <alias name="phpstan-pure" of="pure"/>
+    <alias name="phpstan-pure-unless-callable-is-impure" of="pure-unless-callable-is-impure"/>
+    <alias name="phpstan-readonly" of="readonly"/>
+    <alias name="phpstan-readonly-allow-private-mutation" of="readonly-allow-private-mutation"/>
+    <alias name="phpstan-require-extends" of="require-extends"/>
+    <alias name="phpstan-require-implements" of="require-implements"/>
+    <alias name="phpstan-return" of="return"/>
+    <alias name="phpstan-self-out" of="self-out"/>
+    <alias name="phpstan-template" of="template"/>
+    <alias name="phpstan-template-contravariant" of="template-contravariant"/>
+    <alias name="phpstan-template-covariant" of="template-covariant"/>
+    <alias name="phpstan-this-out" of="phpstan-self-out"/>
+    <alias name="phpstan-throws" of="throws"/>
+    <alias name="phpstan-type" of="type"/>
+    <alias name="phpstan-use" of="use"/>
+    <alias name="phpstan-var" of="var"/>
+    <alias name="phpstan-yield" of="yield"/>
+</model>

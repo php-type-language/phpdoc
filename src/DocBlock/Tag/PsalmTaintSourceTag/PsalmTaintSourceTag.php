@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag;
 /**
  * The `@psalm-taint-source` tag marks the return value as a taint source
  * of the given type.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmTaintSourceTag extends IdentifierTag {}

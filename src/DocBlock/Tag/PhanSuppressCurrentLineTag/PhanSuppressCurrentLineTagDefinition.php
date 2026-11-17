@@ -13,21 +13,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@phan-suppress-current-line` tag silences the listed issue types
+ * The `@​phan-suppress-current-line` tag silences the listed issue types
  * reported on the current line.
  *
  * ```
- * "@phan-suppress-current-line" <IssueName> { "," <IssueName> } [ <Description> ]
+ * "@​phan-suppress-current-line" <IssueName> [ "," <IssueName> ... ] [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanSuppressCurrentLineTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-suppress-current-line';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-suppress-current-line';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(IssueNameCombinator::NAME, 'issue'),
                 Spec::repeat(
@@ -46,12 +54,16 @@ final class PhanSuppressCurrentLineTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanSuppressCurrentLineTag
     {
-        /** @var non-empty-list<non-empty-string> $issues */
+        /** @var non-empty-list<non-empty-string> */
         $issues = $result->getAll('issue');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanSuppressCurrentLineTag($name, $issues, $description);
+        return new PhanSuppressCurrentLineTag(
+            name: $name,
+            issues: $issues,
+            description: $description,
+        );
     }
 }

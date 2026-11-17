@@ -12,5 +12,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\ReferenceTag;
  * referenced one.
  *
  * @template-extends ReferenceTag<CodeReference>
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class UsedByTag extends ReferenceTag {}

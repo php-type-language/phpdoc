@@ -8,5 +8,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 
 /**
  * The `@todo` tag records a task that still needs to be done for an element.
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class TodoTag extends FlagTag {}

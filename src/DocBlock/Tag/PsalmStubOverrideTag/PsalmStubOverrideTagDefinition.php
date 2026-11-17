@@ -12,21 +12,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-stub-override` tag marks a stub declaration as
- * intentionally overriding the real signature.
+ * The `@psalm-stub-override` tag marks a stub declaration as intentionally
+ * overriding the real signature.
  *
  * ```
  * "@psalm-stub-override" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmStubOverrideTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-stub-override';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-stub-override';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmStubOverrideTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmStubOverrideTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmStubOverrideTag($name, $description);
+        return new PsalmStubOverrideTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

@@ -14,21 +14,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@mixin` tag declares that the members of the referenced type are
- * magically available on the described class.
+ * The `@mixin` tag declares that the members of the referenced type are made
+ * available on the described class.
  *
  * ```
  * "@mixin" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class MixinTagDefinition extends TagDefinition
 {
-    public const NAME = 'mixin';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'mixin';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class MixinTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): MixinTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new MixinTag($name, $type, $description);
+        return new MixinTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

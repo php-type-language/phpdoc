@@ -14,22 +14,30 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@self-out` tag documents the refined type of `$this` after a
- * method call, letting callers see a narrower object type than the one
- * they started with.
+ * The `@self-out` tag documents the refined type of `$this` after a method
+ * call, letting callers see a narrower object type than the one they
+ * started with.
  *
  * ```
  * "@self-out" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/shared.xml, edit the model instead
  */
 final class SelfOutTagDefinition extends TagDefinition
 {
-    public const NAME = 'self-out';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'self-out';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -42,12 +50,16 @@ final class SelfOutTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): SelfOutTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new SelfOutTag($name, $type, $description);
+        return new SelfOutTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

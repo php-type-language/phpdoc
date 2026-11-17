@@ -10,5 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
  * The `@phan-forbid-undeclared-magic-properties` tag forbids accessing
  * undeclared magic properties on the class it decorates, so only
  * documented properties may be accessed.
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanForbidUndeclaredMagicPropertiesTag extends FlagTag {}

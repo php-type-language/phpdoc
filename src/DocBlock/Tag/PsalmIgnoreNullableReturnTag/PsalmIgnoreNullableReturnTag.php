@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@psalm-ignore-nullable-return` tag ignores a possible `null` value
  * in the return type.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIgnoreNullableReturnTag extends FlagTag {}

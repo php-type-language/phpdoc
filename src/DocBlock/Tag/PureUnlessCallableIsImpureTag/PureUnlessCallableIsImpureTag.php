@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@pure-unless-callable-is-impure` tag declares a function pure unless a
  * callable it receives is itself impure.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class PureUnlessCallableIsImpureTag extends FlagTag {}

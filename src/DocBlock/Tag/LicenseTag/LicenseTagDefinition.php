@@ -14,26 +14,37 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
+ * The `@license` tag pointing to the license text by a URL.
+ *
  * The `@license` tag documents the license that applies to an element, given
  * either as a URL to the license text or by its name.
  *
  * ```
- * "@license" <URL> [ <Description> ]
- * "@license" <Description>
+ * "@license" ( <URL> [ <Description> ] | <Description> )
  * ```
+ *
+ * @generated from resources/model/phpdocumentor.xml, edit the model instead
  */
 final class LicenseTagDefinition extends TagDefinition
 {
-    public const NAME = 'license';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'license';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::oneOf(
                 Spec::sequence(
                     Spec::rule(UrlCombinator::NAME, 'url'),
-                    Spec::maybe(Spec::rule(DescriptionCombinator::NAME, 'description')),
+                    Spec::maybe(
+                        Spec::rule(DescriptionCombinator::NAME, 'description'),
+                    ),
                 ),
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -43,12 +54,16 @@ final class LicenseTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): LicenseTag
     {
-        /** @var UrlReference|null $url */
+        /** @var UrlReference|null */
         $url = $result->find('url');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new LicenseTag($name, $url, $description);
+        return new LicenseTag(
+            name: $name,
+            url: $url,
+            description: $description,
+        );
     }
 }

@@ -11,8 +11,10 @@ use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
  * A platform contributes a named set of tags, aliases and combinators to the
  * parser.
  *
- * The {@see StandardPlatform} is always loaded first, every additional platform
- * extends it, overriding an entry when it reuses the same name.
+ * A platform is self-contained: its aliases point to its own tags, and its tags
+ * reference the combinators of the parser itself (`Type`, `Variable`, `Name`,
+ * ...) or its own ones. A later platform overrides an entry of an earlier one
+ * when it reuses the same name.
  *
  * @phpstan-import-type CombinatorType from CombinatorInterface
  */
@@ -34,6 +36,9 @@ interface PlatformInterface
 
     /**
      * Grammar combinators keyed by their name.
+     *
+     * The name is the contract of the combinator: a combinator with the name
+     * of an existing one replaces it for the tags of all platforms.
      *
      * @return iterable<non-empty-string, CombinatorType>
      */

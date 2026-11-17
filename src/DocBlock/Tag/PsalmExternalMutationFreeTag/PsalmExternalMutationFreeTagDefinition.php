@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@psalm-external-mutation-free" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmExternalMutationFreeTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-external-mutation-free';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-external-mutation-free';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PsalmExternalMutationFreeTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmExternalMutationFreeTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmExternalMutationFreeTag($name, $description);
+        return new PsalmExternalMutationFreeTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

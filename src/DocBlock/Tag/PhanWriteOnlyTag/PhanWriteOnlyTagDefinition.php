@@ -18,15 +18,23 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * ```
  * "@phan-write-only" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/phan.xml, edit the model instead
  */
 final class PhanWriteOnlyTagDefinition extends TagDefinition
 {
-    public const NAME = 'phan-write-only';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'phan-write-only';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
@@ -36,9 +44,12 @@ final class PhanWriteOnlyTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PhanWriteOnlyTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PhanWriteOnlyTag($name, $description);
+        return new PhanWriteOnlyTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

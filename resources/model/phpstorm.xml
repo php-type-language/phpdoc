@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="phpdoc.xsd"
+       package="phpstorm">
+    <package name="phpstorm" class="TypeLang\PhpDoc\Platform\PhpStormPlatform" title="PhpStorm">
+        <description>
+            The PhpStorm platform: the tag family understood by the PhpStorm IDE.
+        </description>
+    </package>
+
+    <tag name="expectedException" class="TypeLang\PhpDoc\DocBlock\Tag\ExpectedExceptionTag\ExpectedExceptionTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
+        <summary>
+            The `@expectedException` tag declares the `Throwable` a test method is
+            expected to throw.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="formatter:off" class="TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@formatter:off` tag disables automatic code formatting from this
+            point on, until a matching `@formatter:on` is found further down the
+            file.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="formatter:on" class="TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
+        <summary>
+            The `@formatter:on` tag re-enables automatic code formatting from this
+            point on, pairing with an earlier `@formatter:off`.
+        </summary>
+        <grammar>
+            <maybe>
+                <rule name="Description" as="description"/>
+            </maybe>
+        </grammar>
+    </tag>
+
+    <tag name="language" class="TypeLang\PhpDoc\DocBlock\Tag\LanguageTag\LanguageTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@language` tag injects a foreign-language grammar, such as SQL,
+            HTML or a regular expression, into a string literal, so an IDE can
+            apply the right highlighting and completion inside it.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+
+    <tag name="noinspection" class="TypeLang\PhpDoc\DocBlock\Tag\NoinspectionTag\NoinspectionTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
+        <summary>
+            The `@noinspection` tag suppresses the named IDE inspection for the
+            element that follows it.
+        </summary>
+        <grammar>
+            <sequence>
+                <rule name="Name" as="identifier"/>
+                <maybe>
+                    <rule name="Description" as="description"/>
+                </maybe>
+            </sequence>
+        </grammar>
+    </tag>
+</model>

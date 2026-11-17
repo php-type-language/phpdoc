@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@no-named-arguments` tag indicates that the argument names may change
  * and must not be relied upon by callers.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class NoNamedArgumentsTag extends FlagTag {}

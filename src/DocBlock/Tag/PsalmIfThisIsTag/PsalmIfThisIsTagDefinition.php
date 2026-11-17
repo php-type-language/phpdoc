@@ -14,21 +14,29 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@psalm-if-this-is` tag narrows the type of `$this` inside a
- * method when the given type matches.
+ * The `@psalm-if-this-is` tag narrows the type of `$this` inside a method
+ * when the given type matches.
  *
  * ```
  * "@psalm-if-this-is" <Type> [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmIfThisIsTagDefinition extends TagDefinition
 {
-    public const NAME = 'psalm-if-this-is';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'psalm-if-this-is';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
                 Spec::maybe(
@@ -41,12 +49,16 @@ final class PsalmIfThisIsTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): PsalmIfThisIsTag
     {
-        /** @var TypeReference $type */
-        $type = $result->get('type');
+        /** @var TypeReference */
+        $statement = $result->get('type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new PsalmIfThisIsTag($name, $type, $description);
+        return new PsalmIfThisIsTag(
+            name: $name,
+            statement: $statement,
+            description: $description,
+        );
     }
 }

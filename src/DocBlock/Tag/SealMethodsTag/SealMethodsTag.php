@@ -9,5 +9,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
 /**
  * The `@seal-methods` tag forbids declaring magic methods beyond those already
  * documented.
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class SealMethodsTag extends FlagTag {}

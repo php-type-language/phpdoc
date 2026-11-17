@@ -9,36 +9,45 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
 
 /**
- * The `@internal` tag marks an element as internal to its package, or, when
- * used inline, documents information meant only for that package's maintainers.
+ * The `@internal` tag marks an element as internal to its package, or documents
+ * information meant only for the maintainers of that package.
  *
  * ```
  * "@internal" [ <Description> ]
  * ```
+ *
+ * @generated from resources/model/standard.xml, edit the model instead
  */
 final class InternalTagDefinition extends TagDefinition
 {
-    public const NAME = 'internal';
+    /**
+     * @return non-empty-lowercase-string
+     */
+    public static function getCanonicalName(): string
+    {
+        return 'internal';
+    }
 
     public function __construct()
     {
         parent::__construct(
-            name: self::NAME,
+            name: self::getCanonicalName(),
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
-            placement: TagPlacement::Any,
         );
     }
 
     public function create(string $name, TagPayload $result): InternalTag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
-        return new InternalTag($name, $description);
+        return new InternalTag(
+            name: $name,
+            description: $description,
+        );
     }
 }

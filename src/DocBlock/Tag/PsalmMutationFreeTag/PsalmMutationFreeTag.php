@@ -10,5 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
  * The `@psalm-mutation-free` tag declares that a method never mutates any
  * state, whether observable from outside the object or purely internal to
  * it.
+ *
+ * @generated from resources/model/psalm.xml, edit the model instead
  */
 final class PsalmMutationFreeTag extends FlagTag {}

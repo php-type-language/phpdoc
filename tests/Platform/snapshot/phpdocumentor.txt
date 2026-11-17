@@ -1,0 +1,144 @@
+## combinators
+AssertSubject: TypeLang\PhpDoc\DocBlock\Combinator\AssertSubjectCombinator
+AuthorName: TypeLang\PhpDoc\DocBlock\Combinator\AuthorNameCombinator
+CallableType: TypeLang\PhpDoc\DocBlock\Combinator\CallableTypeCombinator
+Description: Closure
+Email: TypeLang\PhpDoc\DocBlock\Combinator\EmailCombinator
+Integer: TypeLang\PhpDoc\DocBlock\Combinator\IntegerCombinator
+IssueName: TypeLang\PhpDoc\DocBlock\Combinator\IssueNameCombinator
+Name: TypeLang\PhpDoc\DocBlock\Combinator\NameCombinator
+Reference: TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator
+Type: TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator
+URI: TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator
+URL: TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator
+Variable: TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator
+Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
+Visibility: TypeLang\PhpDoc\DocBlock\Combinator\VisibilityCombinator
+
+## tags
+@access
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTagDefinition
+  name: access
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AccessTag\AccessTag
+  placement: Block
+  grammar: seq(<Visibility> shown as <AccessVisibility> as access, maybe(<Description> as description))
+@author
+  definition: TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTagDefinition
+  name: author
+  creates: TypeLang\PhpDoc\DocBlock\Tag\AuthorTag\AuthorTag
+  placement: Block
+  grammar: seq(<AuthorName> as author, maybe(seq("<", <Email> as email, ">")), maybe(<Description> as description))
+@category
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CategoryTag\CategoryTagDefinition
+  name: category
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CategoryTag\CategoryTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@copyright
+  definition: TypeLang\PhpDoc\DocBlock\Tag\CopyrightTag\CopyrightTagDefinition
+  name: copyright
+  creates: TypeLang\PhpDoc\DocBlock\Tag\CopyrightTag\CopyrightTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@example
+  definition: TypeLang\PhpDoc\DocBlock\Tag\ExampleTag\ExampleTagDefinition
+  name: example
+  creates: TypeLang\PhpDoc\DocBlock\Tag\ExampleTag\ExampleTag
+  placement: Any
+  grammar: seq(oneOf(<URL> as location, <URI> as location), maybe(seq(<Integer> shown as <StartLine> as start, maybe(<Integer> shown as <LinesCount> as count))), maybe(<Description> as description))
+@filesource
+  definition: TypeLang\PhpDoc\DocBlock\Tag\FilesourceTag\FilesourceTagDefinition
+  name: filesource
+  creates: TypeLang\PhpDoc\DocBlock\Tag\FilesourceTag\FilesourceTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@global
+  definition: TypeLang\PhpDoc\DocBlock\Tag\GlobalTag\GlobalTagDefinition
+  name: global
+  creates: TypeLang\PhpDoc\DocBlock\Tag\GlobalTag\GlobalTag
+  placement: Block
+  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+@ignore
+  definition: TypeLang\PhpDoc\DocBlock\Tag\IgnoreTag\IgnoreTagDefinition
+  name: ignore
+  creates: TypeLang\PhpDoc\DocBlock\Tag\IgnoreTag\IgnoreTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@inheritdoc
+  definition: TypeLang\PhpDoc\DocBlock\Tag\InheritDocTag\InheritDocTagDefinition
+  name: inheritDoc
+  creates: TypeLang\PhpDoc\DocBlock\Tag\InheritDocTag\InheritDocTag
+  placement: Inline
+  grammar: maybe(<Description> as description)
+@license
+  definition: TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTagDefinition
+  name: license
+  creates: TypeLang\PhpDoc\DocBlock\Tag\LicenseTag\LicenseTag
+  placement: Block
+  grammar: oneOf(seq(<URL> as url, maybe(<Description> as description)), <Description> as description)
+@name
+  definition: TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTagDefinition
+  name: name
+  creates: TypeLang\PhpDoc\DocBlock\Tag\NameTag\NameTag
+  placement: Block
+  grammar: seq(<Name> as alias, maybe(<Description> as description))
+@package
+  definition: TypeLang\PhpDoc\DocBlock\Tag\PackageTag\PackageTagDefinition
+  name: package
+  creates: TypeLang\PhpDoc\DocBlock\Tag\PackageTag\PackageTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@since
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTagDefinition
+  name: since
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SinceTag\SinceTag
+  placement: Block
+  grammar: seq(maybe(<Version> as version), maybe(<Description> as description))
+@source
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTagDefinition
+  name: source
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SourceTag\SourceTag
+  placement: Inline
+  grammar: seq(<Integer> shown as <StartLine> as start, maybe(<Integer> shown as <LinesCount> as count), maybe(<Description> as description))
+@static
+  definition: TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTagDefinition
+  name: static
+  creates: TypeLang\PhpDoc\DocBlock\Tag\StaticTag\StaticTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@staticvar
+  definition: TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTagDefinition
+  name: staticvar
+  creates: TypeLang\PhpDoc\DocBlock\Tag\StaticVarTag\StaticVarTag
+  placement: Block
+  grammar: seq(<Type> as type, maybe(<Variable> as variable), maybe(<Description> as description))
+@subpackage
+  definition: TypeLang\PhpDoc\DocBlock\Tag\SubpackageTag\SubpackageTagDefinition
+  name: subpackage
+  creates: TypeLang\PhpDoc\DocBlock\Tag\SubpackageTag\SubpackageTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@todo
+  definition: TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTagDefinition
+  name: todo
+  creates: TypeLang\PhpDoc\DocBlock\Tag\TodoTag\TodoTag
+  placement: Block
+  grammar: maybe(<Description> as description)
+@used-by
+  definition: TypeLang\PhpDoc\DocBlock\Tag\UsedByTag\UsedByTagDefinition
+  name: used-by
+  creates: TypeLang\PhpDoc\DocBlock\Tag\UsedByTag\UsedByTag
+  placement: Block
+  grammar: seq(<Reference> as reference, maybe(<Description> as description))
+@uses
+  definition: TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTagDefinition
+  name: uses
+  creates: TypeLang\PhpDoc\DocBlock\Tag\UsesTag\UsesTag
+  placement: Block
+  grammar: seq(<Reference> as reference, maybe(<Description> as description))
+@version
+  definition: TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTagDefinition
+  name: version
+  creates: TypeLang\PhpDoc\DocBlock\Tag\VersionTag\VersionTag
+  placement: Block
+  grammar: seq(maybe(<Version> as version), maybe(<Description> as description))

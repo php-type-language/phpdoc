@@ -13,8 +13,10 @@ use TypeLang\PhpDoc\DocBlock\Tag\PhpcsSuppressTag\PhpcsSuppressTagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
- * The PHP CodeSniffer platform: the `@phpcs:*` tag family understood by PHP
+ * The PHP CodeSniffer platform: the `@​phpcs:*` tag family understood by PHP
  * CodeSniffer.
+ *
+ * @generated from resources/model/phpcs.xml, edit the model instead
  */
 final class PhpCodeSnifferPlatform extends Platform
 {
@@ -24,12 +26,12 @@ final class PhpCodeSnifferPlatform extends Platform
     public function getTags(): iterable
     {
         return [
-            CodingStandardsIgnoreStartTagDefinition::NAME => new CodingStandardsIgnoreStartTagDefinition(),
-            CodingStandardsIgnoreEndTagDefinition::NAME => new CodingStandardsIgnoreEndTagDefinition(),
-            CodingStandardsIgnoreLineTagDefinition::NAME => new CodingStandardsIgnoreLineTagDefinition(),
-            CodingStandardsIgnoreFileTagDefinition::NAME => new CodingStandardsIgnoreFileTagDefinition(),
-            CodingStandardsTagDefinition::NAME => new CodingStandardsTagDefinition(),
-            PhpcsSuppressTagDefinition::NAME => new PhpcsSuppressTagDefinition(),
+            CodingStandardsTagDefinition::getCanonicalName() => new CodingStandardsTagDefinition(),
+            CodingStandardsIgnoreEndTagDefinition::getCanonicalName() => new CodingStandardsIgnoreEndTagDefinition(),
+            CodingStandardsIgnoreFileTagDefinition::getCanonicalName() => new CodingStandardsIgnoreFileTagDefinition(),
+            CodingStandardsIgnoreLineTagDefinition::getCanonicalName() => new CodingStandardsIgnoreLineTagDefinition(),
+            CodingStandardsIgnoreStartTagDefinition::getCanonicalName() => new CodingStandardsIgnoreStartTagDefinition(),
+            PhpcsSuppressTagDefinition::getCanonicalName() => new PhpcsSuppressTagDefinition(),
         ];
     }
 }

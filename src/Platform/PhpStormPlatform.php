@@ -13,6 +13,8 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 
 /**
  * The PhpStorm platform: the tag family understood by the PhpStorm IDE.
+ *
+ * @generated from resources/model/phpstorm.xml, edit the model instead
  */
 final class PhpStormPlatform extends Platform
 {
@@ -22,11 +24,11 @@ final class PhpStormPlatform extends Platform
     public function getTags(): iterable
     {
         return [
-            ExpectedExceptionTagDefinition::NAME => new ExpectedExceptionTagDefinition(),
-            FormatterOffTagDefinition::NAME => new FormatterOffTagDefinition(),
-            FormatterOnTagDefinition::NAME => new FormatterOnTagDefinition(),
-            LanguageTagDefinition::NAME => new LanguageTagDefinition(),
-            NoinspectionTagDefinition::NAME => new NoinspectionTagDefinition(),
+            ExpectedExceptionTagDefinition::getCanonicalName() => new ExpectedExceptionTagDefinition(),
+            FormatterOffTagDefinition::getCanonicalName() => new FormatterOffTagDefinition(),
+            FormatterOnTagDefinition::getCanonicalName() => new FormatterOnTagDefinition(),
+            LanguageTagDefinition::getCanonicalName() => new LanguageTagDefinition(),
+            NoinspectionTagDefinition::getCanonicalName() => new NoinspectionTagDefinition(),
         ];
     }
 }
