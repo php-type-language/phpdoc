@@ -17,7 +17,7 @@ interface SplitterInterface
      * the returned section, relative to the beginning.
      *
      * ```
-     * $result = $parser->parse(<<<'DOC'
+     * $result = $splitter->split(<<<'DOC'
      *      /**
      *       * Example line 1
      *       *

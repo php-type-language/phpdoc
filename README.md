@@ -3,7 +3,7 @@
 </a>
 
 <p align="center">
-    <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/require/php?style=for-the-badge" alt="PHP 8.4+"></a>
+    <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/require/php?style=for-the-badge" alt="PHP 8.1+"></a>
     <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/version?style=for-the-badge" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/type-lang/phpdoc"><img src="https://poser.pugx.org/type-lang/phpdoc/v/unstable?style=for-the-badge" alt="Latest Unstable Version"></a>
     <a href="https://raw.githubusercontent.com/php-type-language/phpdoc/blob/master/LICENSE"><img src="https://poser.pugx.org/type-lang/phpdoc/license?style=for-the-badge" alt="License MIT"></a>
@@ -38,7 +38,7 @@ comment's description and tags:
 ```php
 use TypeLang\PhpDoc\DocBlockParser;
 
-$parser = new DocBlockParser();
+$parser = DocBlockParser::createDefault();
 
 $block = $parser->parse(<<<'PHPDOC'
     /**
@@ -52,7 +52,7 @@ $block = $parser->parse(<<<'PHPDOC'
 
 // The leading description (everything before the first tag)
 echo $block->description;
-// "Sends a notification to the given recipient."
+// "Sends a notification to the given recipient.\n"
 
 // Tags form an ordered, countable, iterable collection
 echo \count($block); // 3

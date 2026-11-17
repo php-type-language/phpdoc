@@ -11,7 +11,7 @@ use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
  * Represents a parsed DocBlock comment.
  *
  * A structured view over the two logical parts of any documentation block:
- * An instance of description and an ordered set of ta
+ * the description and an ordered list of tags.
  *
  * The object is a read-only, IMMUTABLE value. It is a snapshot of a comment
  * and never mutates. It additionally behaves as a collection of its tags, so
@@ -137,7 +137,7 @@ final class DocBlock implements
      * Returns the number of tags contained in the comment.
      *
      * The value is always non-negative and equals the number of entries
-     * exposed by {@see DocBlockInterface::$tags}.
+     * exposed by {@see DocBlock::$tags}.
      *
      * ```
      * $count = \count($block); // e.g. 4

@@ -22,7 +22,7 @@ final class TaggedDescription implements
 {
     /**
      * Gets a list of {@see ComponentInterface} components that make up the
-     * {@see TaggedDescriptionInterface} in the order in which these
+     * {@see TaggedDescription} in the order in which these
      * elements are defined.
      *
      * @var list<ComponentInterface>

@@ -8,7 +8,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 
 /**
- * A platform contributes a named set of tags, aliases and combinators to the
+ * A platform contributes a set of tags, aliases and combinators to the
  * parser.
  *
  * A platform is self-contained: its aliases point to its own tags, and its tags
