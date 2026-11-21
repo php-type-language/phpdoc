@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Tests;
 
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use TypeLang\Parser\TypeParser;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
@@ -20,7 +19,6 @@ use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
 use TypeLang\PhpDoc\TagFactoryInterface;
 
-#[Group('type-lang/phpdoc')]
 abstract class TestCase extends BaseTestCase
 {
     private static ?TagFactoryInterface $cachedTagFactory = null;
