@@ -10,7 +10,7 @@
     },
     "require": {
         "php": "^8.1",
-        "type-lang/parser": "^2.0"
+        "type-lang/parser": "self.version"
     },
     "autoload": {
         "psr-4": {
