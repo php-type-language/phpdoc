@@ -21,6 +21,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="A test expected to throw."><![CDATA[
+            /**
+             * @expectedException InvalidArgumentException
+             */
+            public function testRejectsNegativeAmount(): void
+        ]]></example>
     </tag>
 
     <tag name="formatter:off" class="TypeLang\PhpDoc\DocBlock\Tag\FormatterOffTag\FormatterOffTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -34,6 +40,14 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Keeping a hand-formatted block as written."><![CDATA[
+            /** @formatter:off */
+            $matrix = [
+                1, 0, 0,
+                0, 1, 0,
+            ];
+            /** @formatter:on */
+        ]]></example>
     </tag>
 
     <tag name="formatter:on" class="TypeLang\PhpDoc\DocBlock\Tag\FormatterOnTag\FormatterOnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -46,6 +60,11 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Turning the formatter back on after a block."><![CDATA[
+            /** @formatter:off */
+            $pairs = ['a' => 1, 'bb' => 2];
+            /** @formatter:on */
+        ]]></example>
     </tag>
 
     <tag name="language" class="TypeLang\PhpDoc\DocBlock\Tag\LanguageTag\LanguageTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
@@ -62,6 +81,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Highlighting the SQL inside a string."><![CDATA[
+            /**
+             * @language SQL
+             */
+            $query = 'SELECT id, name FROM users WHERE active = 1';
+        ]]></example>
     </tag>
 
     <tag name="noinspection" class="TypeLang\PhpDoc\DocBlock\Tag\NoinspectionTag\NoinspectionTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
@@ -77,5 +102,9 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing one IDE inspection for a statement."><![CDATA[
+            /** @noinspection PhpUnusedLocalVariableInspection */
+            $unused = compute();
+        ]]></example>
     </tag>
 </model>

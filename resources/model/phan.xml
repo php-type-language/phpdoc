@@ -25,6 +25,14 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Analyzing a closure as if bound to a class."><![CDATA[
+            /**
+             * @phan-closure-scope Order
+             */
+            $total = function (): int {
+                return $this->amount;
+            };
+        ]]></example>
     </tag>
 
     <tag name="phan-constructor-used-for-side-effects" class="TypeLang\PhpDoc\DocBlock\Tag\PhanConstructorUsedForSideEffectsTag\PhanConstructorUsedForSideEffectsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -38,6 +46,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A constructor called only for what it does."><![CDATA[
+            /**
+             * @phan-constructor-used-for-side-effects
+             */
+            public function __construct()
+        ]]></example>
     </tag>
 
     <tag name="phan-file-suppress" class="TypeLang\PhpDoc\DocBlock\Tag\PhanFileSuppressTag\PhanFileSuppressTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
@@ -59,6 +73,11 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing issues for the whole file."><![CDATA[
+            /**
+             * @phan-file-suppress PhanUnreferencedUseNormal, PhanUnusedVariable
+             */
+        ]]></example>
     </tag>
 
     <tag name="phan-forbid-undeclared-magic-methods" class="TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicMethodsTag\PhanForbidUndeclaredMagicMethodsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -72,6 +91,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Only the documented magic methods may be called."><![CDATA[
+            /**
+             * @method void save()
+             * @phan-forbid-undeclared-magic-methods
+             */
+            final class Model {}
+        ]]></example>
     </tag>
 
     <tag name="phan-forbid-undeclared-magic-properties" class="TypeLang\PhpDoc\DocBlock\Tag\PhanForbidUndeclaredMagicPropertiesTag\PhanForbidUndeclaredMagicPropertiesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -85,6 +111,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Only the documented magic properties may be used."><![CDATA[
+            /**
+             * @property string $name
+             * @phan-forbid-undeclared-magic-properties
+             */
+            final class Record {}
+        ]]></example>
     </tag>
 
     <tag name="phan-hardcode-return-type" class="TypeLang\PhpDoc\DocBlock\Tag\PhanHardcodeReturnTypeTag\PhanHardcodeReturnTypeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
@@ -100,6 +133,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Using the documented return type over the inferred one."><![CDATA[
+            /**
+             * @phan-hardcode-return-type static
+             */
+            public function withName(string $name): self
+        ]]></example>
     </tag>
 
     <tag name="phan-output-reference" class="TypeLang\PhpDoc\DocBlock\Tag\PhanOutputReferenceTag\PhanOutputReferenceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -112,6 +151,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="An argument the function only writes into."><![CDATA[
+            /**
+             * @param array $errors
+             * @phan-output-reference
+             */
+            function validate(array $data, &$errors): bool
+        ]]></example>
     </tag>
 
     <tag name="phan-real-return" class="TypeLang\PhpDoc\DocBlock\Tag\PhanRealReturnTag\PhanRealReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
@@ -127,6 +173,13 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="The native return type next to the documented one."><![CDATA[
+            /**
+             * @return list<User>
+             * @phan-real-return array
+             */
+            public function findAll(): array
+        ]]></example>
     </tag>
 
     <tag name="phan-side-effect-free" class="TypeLang\PhpDoc\DocBlock\Tag\PhanSideEffectFreeTag\PhanSideEffectFreeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -139,6 +192,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A method without side effects."><![CDATA[
+            /**
+             * @phan-side-effect-free
+             */
+            public function isEmpty(): bool
+        ]]></example>
     </tag>
 
     <tag name="phan-suppress-current-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressCurrentLineTag\PhanSuppressCurrentLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
@@ -160,6 +219,9 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing an issue on the same line."><![CDATA[
+            $x = $legacy->call(); /** @phan-suppress-current-line PhanUndeclaredMethod */
+        ]]></example>
     </tag>
 
     <tag name="phan-suppress-next-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextLineTag\PhanSuppressNextLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
@@ -181,6 +243,10 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing an issue on the next line."><![CDATA[
+            /** @phan-suppress-next-line PhanUndeclaredMethod */
+            $value = $legacy->call();
+        ]]></example>
     </tag>
 
     <tag name="phan-suppress-next-next-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressNextNextLineTag\PhanSuppressNextNextLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
@@ -202,6 +268,11 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing an issue two lines below."><![CDATA[
+            /** @phan-suppress-next-next-line PhanTypeMismatchArgument */
+            $id = $request->get('id');
+            $user = $repository->find($id);
+        ]]></example>
     </tag>
 
     <tag name="phan-suppress-previous-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhanSuppressPreviousLineTag\PhanSuppressPreviousLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IssueListTag" placement="block">
@@ -223,6 +294,10 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing an issue on the line above."><![CDATA[
+            $value = $legacy->call();
+            /** @phan-suppress-previous-line PhanUndeclaredMethod */
+        ]]></example>
     </tag>
 
     <tag name="phan-transient" class="TypeLang\PhpDoc\DocBlock\Tag\PhanTransientTag\PhanTransientTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -235,6 +310,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A property left out of serialization."><![CDATA[
+            /**
+             * @phan-transient
+             */
+            private ?Connection $connection = null;
+        ]]></example>
     </tag>
 
     <tag name="phan-write-only" class="TypeLang\PhpDoc\DocBlock\Tag\PhanWriteOnlyTag\PhanWriteOnlyTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -247,12 +328,39 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A property that is only ever written."><![CDATA[
+            /**
+             * @phan-write-only
+             */
+            public string $lastError = '';
+        ]]></example>
     </tag>
 
     <alias name="phan-abstract" of="abstract"/>
-    <alias name="phan-assert" of="assert"/>
-    <alias name="phan-assert-if-false" of="assert-if-false"/>
-    <alias name="phan-assert-if-true" of="assert-if-true"/>
+    <alias name="phan-assert" of="assert">
+        <example title="Narrowing the argument after the call."><![CDATA[
+            /**
+             * @phan-assert string $value
+             */
+            function assertString(mixed $value): void
+        ]]></example>
+    </alias>
+    <alias name="phan-assert-if-false" of="assert-if-false">
+        <example title="Narrowing when the check returns false."><![CDATA[
+            /**
+             * @phan-assert-if-false string $value
+             */
+            function isNotString(mixed $value): bool
+        ]]></example>
+    </alias>
+    <alias name="phan-assert-if-true" of="assert-if-true">
+        <example title="Narrowing when the check returns true."><![CDATA[
+            /**
+             * @phan-assert-if-true string $value
+             */
+            function isString(mixed $value): bool
+        ]]></example>
+    </alias>
     <alias name="phan-extends" of="extends"/>
     <alias name="phan-immutable" of="immutable"/>
     <alias name="phan-inherits" of="extends"/>
@@ -263,11 +371,25 @@
     <alias name="phan-property" of="property"/>
     <alias name="phan-property-read" of="property-read"/>
     <alias name="phan-property-write" of="property-write"/>
-    <alias name="phan-pure" of="pure"/>
+    <alias name="phan-pure" of="pure">
+        <example title="A function without side effects."><![CDATA[
+            /**
+             * @phan-pure
+             */
+            function add(int $a, int $b): int
+        ]]></example>
+    </alias>
     <alias name="phan-read-only" of="readonly"/>
     <alias name="phan-return" of="return"/>
     <alias name="phan-template" of="template"/>
-    <alias name="phan-type" of="type"/>
+    <alias name="phan-type" of="type">
+        <example title="A local type alias."><![CDATA[
+            /**
+             * @phan-type UserId = positive-int
+             */
+            final class UserRepository {}
+        ]]></example>
+    </alias>
     <alias name="phan-unused-param" of="unused-param"/>
     <alias name="phan-var" of="var"/>
     <alias name="phanclosurescope" of="phan-closure-scope"/>

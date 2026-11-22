@@ -30,6 +30,10 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Silencing errors by their identifiers."><![CDATA[
+            /** @phpstan-ignore argument.type, method.notFound */
+            $result = $service->run($input);
+        ]]></example>
     </tag>
 
     <tag name="phpstan-ignore-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreLineTag\PhpStanIgnoreLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -42,6 +46,9 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Silencing every error on the line."><![CDATA[
+            $value = $legacy->call(); /** @phpstan-ignore-line */
+        ]]></example>
     </tag>
 
     <tag name="phpstan-ignore-next-line" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanIgnoreNextLineTag\PhpStanIgnoreNextLineTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -54,6 +61,10 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Silencing every error on the next line."><![CDATA[
+            /** @phpstan-ignore-next-line */
+            $value = $legacy->call();
+        ]]></example>
     </tag>
 
     <tag name="phpstan-impure" class="TypeLang\PhpDoc\DocBlock\Tag\PhpStanImpureTag\PhpStanImpureTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -66,17 +77,65 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A method with side effects."><![CDATA[
+            /**
+             * @phpstan-impure
+             */
+            public function next(): int
+        ]]></example>
     </tag>
 
-    <alias name="phpstan-allow-private-mutation" of="allow-private-mutation"/>
-    <alias name="phpstan-assert" of="assert"/>
-    <alias name="phpstan-assert-if-false" of="assert-if-false"/>
-    <alias name="phpstan-assert-if-true" of="assert-if-true"/>
-    <alias name="phpstan-consistent-constructor" of="consistent-constructor"/>
+    <alias name="phpstan-allow-private-mutation" of="allow-private-mutation">
+        <example title="An immutable property the class itself may change."><![CDATA[
+            /**
+             * @phpstan-allow-private-mutation
+             */
+            public int $version = 1;
+        ]]></example>
+    </alias>
+    <alias name="phpstan-assert" of="assert">
+        <example title="Narrowing the argument after the call."><![CDATA[
+            /**
+             * @phpstan-assert non-empty-string $value
+             */
+            function assertNonEmpty(string $value): void
+        ]]></example>
+    </alias>
+    <alias name="phpstan-assert-if-false" of="assert-if-false">
+        <example title="Narrowing when the check returns false."><![CDATA[
+            /**
+             * @phpstan-assert-if-false null $value
+             */
+            function isPresent(?object $value): bool
+        ]]></example>
+    </alias>
+    <alias name="phpstan-assert-if-true" of="assert-if-true">
+        <example title="Narrowing when the check returns true."><![CDATA[
+            /**
+             * @phpstan-assert-if-true int $value
+             */
+            function isInteger(mixed $value): bool
+        ]]></example>
+    </alias>
+    <alias name="phpstan-consistent-constructor" of="consistent-constructor">
+        <example title="Subclasses keep the constructor of the parent."><![CDATA[
+            /**
+             * @phpstan-consistent-constructor
+             */
+            abstract class Model {}
+        ]]></example>
+    </alias>
     <alias name="phpstan-extends" of="extends"/>
     <alias name="phpstan-immutable" of="immutable"/>
     <alias name="phpstan-implements" of="implements"/>
-    <alias name="phpstan-import-type" of="import-type"/>
+    <alias name="phpstan-import-type" of="import-type">
+        <example title="Using an alias declared by another class."><![CDATA[
+            /**
+             * @phpstan-import-type UserShape from UserRepository
+             */
+            final class UserController {}
+        ]]></example>
+    </alias>
     <alias name="phpstan-method" of="method"/>
     <alias name="phpstan-param" of="param"/>
     <alias name="phpstan-param-closure-this" of="param-closure-this"/>
@@ -86,21 +145,64 @@
     <alias name="phpstan-property" of="property"/>
     <alias name="phpstan-property-read" of="property-read"/>
     <alias name="phpstan-property-write" of="property-write"/>
-    <alias name="phpstan-pure" of="pure"/>
+    <alias name="phpstan-pure" of="pure">
+        <example title="A function without side effects."><![CDATA[
+            /**
+             * @phpstan-pure
+             */
+            function slug(string $title): string
+        ]]></example>
+    </alias>
     <alias name="phpstan-pure-unless-callable-is-impure" of="pure-unless-callable-is-impure"/>
     <alias name="phpstan-readonly" of="readonly"/>
-    <alias name="phpstan-readonly-allow-private-mutation" of="readonly-allow-private-mutation"/>
+    <alias name="phpstan-readonly-allow-private-mutation" of="readonly-allow-private-mutation">
+        <example title="A readonly property the class itself may change."><![CDATA[
+            /**
+             * @readonly
+             * @phpstan-readonly-allow-private-mutation
+             */
+            public array $items = [];
+        ]]></example>
+    </alias>
     <alias name="phpstan-require-extends" of="require-extends"/>
     <alias name="phpstan-require-implements" of="require-implements"/>
     <alias name="phpstan-return" of="return"/>
-    <alias name="phpstan-self-out" of="self-out"/>
+    <alias name="phpstan-self-out" of="self-out">
+        <example title="The type of the object after the call."><![CDATA[
+            /**
+             * @phpstan-self-out self<T>
+             */
+            public function add(mixed $item): void
+        ]]></example>
+    </alias>
     <alias name="phpstan-template" of="template"/>
     <alias name="phpstan-template-contravariant" of="template-contravariant"/>
     <alias name="phpstan-template-covariant" of="template-covariant"/>
-    <alias name="phpstan-this-out" of="phpstan-self-out"/>
+    <alias name="phpstan-this-out" of="phpstan-self-out">
+        <example title="The type of the object after the call."><![CDATA[
+            /**
+             * @phpstan-this-out static<T>
+             */
+            public function push(mixed $item): void
+        ]]></example>
+    </alias>
     <alias name="phpstan-throws" of="throws"/>
-    <alias name="phpstan-type" of="type"/>
+    <alias name="phpstan-type" of="type">
+        <example title="A local type alias."><![CDATA[
+            /**
+             * @phpstan-type UserShape array{id: int, name: string}
+             */
+            final class UserRepository {}
+        ]]></example>
+    </alias>
     <alias name="phpstan-use" of="use"/>
     <alias name="phpstan-var" of="var"/>
-    <alias name="phpstan-yield" of="yield"/>
+    <alias name="phpstan-yield" of="yield">
+        <example title="The values a generator yields."><![CDATA[
+            /**
+             * @phpstan-yield User
+             */
+            public function stream(): Generator
+        ]]></example>
+    </alias>
 </model>

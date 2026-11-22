@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 use Symfony\Component\Console\Application;
 use TypeLang\PhpDoc\Build\Command\CheckCommand;
-use TypeLang\PhpDoc\Build\Command\DocsCommand;
 use TypeLang\PhpDoc\Build\Command\GenerateCommand;
 use TypeLang\PhpDoc\Build\Command\SnapshotCommand;
 
@@ -40,6 +39,5 @@ $application->addCommands([
     new GenerateCommand($root),
     new CheckCommand($root),
     new SnapshotCommand($root),
-    new DocsCommand($root),
 ]);
 $application->run();

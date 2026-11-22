@@ -46,6 +46,10 @@
                 <rule name="Type" as="type" parameter="statement"/>
             </sequence>
         </grammar>
+        <example title="Checking the inferred type of a variable."><![CDATA[
+            $ids = array_map('intval', $input);
+            /** @psalm-check-type $ids = list<int> */
+        ]]></example>
     </tag>
 
     <tag name="psalm-check-type-exact" class="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\PsalmCheckTypeExactTag" extends="TypeLang\PhpDoc\DocBlock\Tag\CheckTypeTag\CheckTypeTag" placement="block">
@@ -60,6 +64,10 @@
                 <rule name="Type" as="type" parameter="statement"/>
             </sequence>
         </grammar>
+        <example title="Checking the exact inferred type of a variable."><![CDATA[
+            $name = trim($input);
+            /** @psalm-check-type-exact $name = string */
+        ]]></example>
     </tag>
 
     <tag name="psalm-consistent-templates" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmConsistentTemplatesTag\PsalmConsistentTemplatesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -72,6 +80,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Subclasses keep the template parameters of the parent."><![CDATA[
+            /**
+             * @template T
+             * @psalm-consistent-templates
+             */
+            abstract class Collection {}
+        ]]></example>
     </tag>
 
     <tag name="psalm-external-mutation-free" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmExternalMutationFreeTag\PsalmExternalMutationFreeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -84,6 +99,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A method that changes no state seen from outside."><![CDATA[
+            /**
+             * @psalm-external-mutation-free
+             */
+            public function count(): int
+        ]]></example>
     </tag>
 
     <tag name="psalm-flow" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmFlowTag\PsalmFlowTag" placement="block">
@@ -114,6 +135,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="A method callable only on a narrower type of the object."><![CDATA[
+            /**
+             * @psalm-if-this-is Collection<int>
+             */
+            public function sum(): int
+        ]]></example>
     </tag>
 
     <tag name="psalm-ignore-falsable-return" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreFalsableReturnTag\PsalmIgnoreFalsableReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -126,6 +153,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A false result that is not expected in practice."><![CDATA[
+            /**
+             * @return string|false
+             * @psalm-ignore-falsable-return
+             */
+            function readConfig(string $path): string|false
+        ]]></example>
     </tag>
 
     <tag name="psalm-ignore-nullable-return" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreNullableReturnTag\PsalmIgnoreNullableReturnTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -138,6 +172,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A null result that is not expected in practice."><![CDATA[
+            /**
+             * @psalm-ignore-nullable-return
+             */
+            public function getCurrentUser(): ?User
+        ]]></example>
     </tag>
 
     <tag name="psalm-ignore-var" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVarTag\PsalmIgnoreVarTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -151,6 +191,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Ignoring a @var written for another tool."><![CDATA[
+            /**
+             * @var Foo $foo
+             * @psalm-ignore-var
+             */
+            $foo = $container->get('foo');
+        ]]></example>
     </tag>
 
     <tag name="psalm-ignore-variable-method" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariableMethodTag\PsalmIgnoreVariableMethodTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -163,6 +210,10 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Calling methods Psalm cannot see."><![CDATA[
+            /** @psalm-ignore-variable-method */
+            $proxy->anyMethod();
+        ]]></example>
     </tag>
 
     <tag name="psalm-ignore-variable-property" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmIgnoreVariablePropertyTag\PsalmIgnoreVariablePropertyTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -175,6 +226,10 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Reading properties Psalm cannot see."><![CDATA[
+            /** @psalm-ignore-variable-property */
+            echo $proxy->anyProperty;
+        ]]></example>
     </tag>
 
     <tag name="psalm-inheritors" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmInheritorsTag\PsalmInheritorsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
@@ -190,6 +245,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="The only classes that may extend the type."><![CDATA[
+            /**
+             * @psalm-inheritors Circle|Square
+             */
+            abstract class Shape {}
+        ]]></example>
     </tag>
 
     <tag name="psalm-mutation-free" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmMutationFreeTag\PsalmMutationFreeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -203,6 +264,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A method that changes no state at all."><![CDATA[
+            /**
+             * @psalm-mutation-free
+             */
+            public function getName(): string
+        ]]></example>
     </tag>
 
     <tag name="psalm-no-seal-methods" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealMethodsTag\PsalmNoSealMethodsTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -215,6 +282,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Magic methods beyond the documented ones."><![CDATA[
+            /**
+             * @method void save()
+             * @psalm-no-seal-methods
+             */
+            final class Model {}
+        ]]></example>
     </tag>
 
     <tag name="psalm-no-seal-properties" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmNoSealPropertiesTag\PsalmNoSealPropertiesTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -227,6 +301,13 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Magic properties beyond the documented ones."><![CDATA[
+            /**
+             * @property string $name
+             * @psalm-no-seal-properties
+             */
+            final class Record {}
+        ]]></example>
     </tag>
 
     <tag name="psalm-override-method-visibility" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmOverrideMethodVisibilityTag\PsalmOverrideMethodVisibilityTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -240,6 +321,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A subclass widening the visibility of a method."><![CDATA[
+            /**
+             * @psalm-override-method-visibility
+             */
+            public function build(): Query
+        ]]></example>
     </tag>
 
     <tag name="psalm-override-property-visibility" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmOverridePropertyVisibilityTag\PsalmOverridePropertyVisibilityTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -253,6 +340,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A subclass widening the visibility of a property."><![CDATA[
+            /**
+             * @psalm-override-property-visibility
+             */
+            public string $table = 'users';
+        ]]></example>
     </tag>
 
     <tag name="psalm-scope-this" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmScopeThisTag\PsalmScopeThisTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedTag" placement="block">
@@ -269,6 +362,14 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="Checking a closure as a method of a class."><![CDATA[
+            /**
+             * @psalm-scope-this Order
+             */
+            $total = function (): int {
+                return $this->amount;
+            };
+        ]]></example>
     </tag>
 
     <tag name="psalm-stub-override" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmStubOverrideTag\PsalmStubOverrideTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -281,6 +382,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A stub replacing the real signature."><![CDATA[
+            /**
+             * @psalm-stub-override
+             */
+            function json_decode(string $json, ?bool $associative = null): mixed {}
+        ]]></example>
     </tag>
 
     <tag name="psalm-taint-escape" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintEscapeTag\PsalmTaintEscapeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
@@ -296,6 +403,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="A function that makes HTML safe."><![CDATA[
+            /**
+             * @psalm-taint-escape html
+             */
+            function escape(string $value): string
+        ]]></example>
     </tag>
 
     <tag name="psalm-taint-sink" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSinkTag\PsalmTaintSinkTag" placement="block">
@@ -309,6 +422,12 @@
                 <rule name="Variable" as="variable"/>
             </sequence>
         </grammar>
+        <example title="An argument that must not receive tainted SQL."><![CDATA[
+            /**
+             * @psalm-taint-sink sql $query
+             */
+            public function execute(string $query): void
+        ]]></example>
     </tag>
 
     <tag name="psalm-taint-source" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSourceTag\PsalmTaintSourceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
@@ -324,6 +443,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="A function returning user input."><![CDATA[
+            /**
+             * @psalm-taint-source input
+             */
+            function getQueryParameter(string $name): string
+        ]]></example>
     </tag>
 
     <tag name="psalm-taint-specialize" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintSpecializeTag\PsalmTaintSpecializeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\FlagTag" placement="block">
@@ -337,6 +462,12 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="Tracking the taint per call site."><![CDATA[
+            /**
+             * @psalm-taint-specialize
+             */
+            function identity(string $value): string
+        ]]></example>
     </tag>
 
     <tag name="psalm-taint-unescape" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTaintUnescapeTag\PsalmTaintUnescapeTag" extends="TypeLang\PhpDoc\DocBlock\Tag\IdentifierTag" placement="block">
@@ -353,6 +484,12 @@
                 </maybe>
             </sequence>
         </grammar>
+        <example title="A function that makes a value unsafe again."><![CDATA[
+            /**
+             * @psalm-taint-unescape html
+             */
+            function decode(string $value): string
+        ]]></example>
     </tag>
 
     <tag name="psalm-trace" class="TypeLang\PhpDoc\DocBlock\Tag\PsalmTraceTag\PsalmTraceTag" extends="TypeLang\PhpDoc\DocBlock\Tag\VariableTag" placement="block">
@@ -385,18 +522,66 @@
                 <rule name="Description" as="description"/>
             </maybe>
         </grammar>
+        <example title="A function reading its arguments with func_get_args()."><![CDATA[
+            /**
+             * @psalm-variadic
+             */
+            function sum()
+        ]]></example>
     </tag>
 
-    <alias name="psalm-allow-private-mutation" of="allow-private-mutation"/>
+    <alias name="psalm-allow-private-mutation" of="allow-private-mutation">
+        <example title="An immutable property the class itself may change."><![CDATA[
+            /**
+             * @psalm-allow-private-mutation
+             */
+            public int $count = 0;
+        ]]></example>
+    </alias>
     <alias name="psalm-api" of="api"/>
-    <alias name="psalm-assert" of="assert"/>
-    <alias name="psalm-assert-if-false" of="assert-if-false"/>
-    <alias name="psalm-assert-if-true" of="assert-if-true"/>
-    <alias name="psalm-consistent-constructor" of="consistent-constructor"/>
+    <alias name="psalm-assert" of="assert">
+        <example title="Narrowing the argument after the call."><![CDATA[
+            /**
+             * @psalm-assert !null $value
+             */
+            function assertNotNull(mixed $value): void
+        ]]></example>
+    </alias>
+    <alias name="psalm-assert-if-false" of="assert-if-false">
+        <example title="Narrowing when the check returns false."><![CDATA[
+            /**
+             * @psalm-assert-if-false non-empty-list $items
+             */
+            function isEmpty(array $items): bool
+        ]]></example>
+    </alias>
+    <alias name="psalm-assert-if-true" of="assert-if-true">
+        <example title="Narrowing when the check returns true."><![CDATA[
+            /**
+             * @psalm-assert-if-true array<string, mixed> $value
+             */
+            function isMap(mixed $value): bool
+        ]]></example>
+    </alias>
+    <alias name="psalm-consistent-constructor" of="consistent-constructor">
+        <example title="Subclasses keep the constructor of the parent."><![CDATA[
+            /**
+             * @psalm-consistent-constructor
+             */
+            abstract class Entity {}
+        ]]></example>
+    </alias>
     <alias name="psalm-extends" of="extends"/>
     <alias name="psalm-immutable" of="immutable"/>
     <alias name="psalm-implements" of="implements"/>
-    <alias name="psalm-import-type" of="import-type"/>
+    <alias name="psalm-import-type" of="import-type">
+        <example title="Using an alias under a local name."><![CDATA[
+            /**
+             * @psalm-import-type Status from Account as AccountStatus
+             */
+            final class AccountView {}
+        ]]></example>
+    </alias>
     <alias name="psalm-internal" of="internal"/>
     <alias name="psalm-method" of="method"/>
     <alias name="psalm-param" of="param"/>
@@ -404,22 +589,64 @@
     <alias name="psalm-property" of="property"/>
     <alias name="psalm-property-read" of="property-read"/>
     <alias name="psalm-property-write" of="property-write"/>
-    <alias name="psalm-pure" of="pure"/>
+    <alias name="psalm-pure" of="pure">
+        <example title="A function without side effects."><![CDATA[
+            /**
+             * @psalm-pure
+             */
+            function square(int $value): int
+        ]]></example>
+    </alias>
     <alias name="psalm-readonly" of="readonly"/>
-    <alias name="psalm-readonly-allow-private-mutation" of="readonly-allow-private-mutation"/>
+    <alias name="psalm-readonly-allow-private-mutation" of="readonly-allow-private-mutation">
+        <example title="A readonly property the class itself may change."><![CDATA[
+            /**
+             * @psalm-readonly-allow-private-mutation
+             */
+            public int $total = 0;
+        ]]></example>
+    </alias>
     <alias name="psalm-require-extends" of="require-extends"/>
     <alias name="psalm-require-implements" of="require-implements"/>
     <alias name="psalm-return" of="return"/>
     <alias name="psalm-seal-methods" of="seal-methods"/>
     <alias name="psalm-seal-properties" of="seal-properties"/>
-    <alias name="psalm-self-out" of="self-out"/>
+    <alias name="psalm-self-out" of="self-out">
+        <example title="The type of the object after the call."><![CDATA[
+            /**
+             * @psalm-self-out self<int>
+             */
+            public function useIntegers(): void
+        ]]></example>
+    </alias>
     <alias name="psalm-suppress" of="suppress"/>
     <alias name="psalm-template" of="template"/>
     <alias name="psalm-template-contravariant" of="template-contravariant"/>
     <alias name="psalm-template-covariant" of="template-covariant"/>
-    <alias name="psalm-this-out" of="psalm-self-out"/>
-    <alias name="psalm-type" of="type"/>
+    <alias name="psalm-this-out" of="psalm-self-out">
+        <example title="The type of the object after the call."><![CDATA[
+            /**
+             * @psalm-this-out static<string>
+             */
+            public function useStrings(): void
+        ]]></example>
+    </alias>
+    <alias name="psalm-type" of="type">
+        <example title="A local type alias."><![CDATA[
+            /**
+             * @psalm-type Status = 'active'|'blocked'
+             */
+            final class Account {}
+        ]]></example>
+    </alias>
     <alias name="psalm-use" of="use"/>
     <alias name="psalm-var" of="var"/>
-    <alias name="psalm-yield" of="yield"/>
+    <alias name="psalm-yield" of="yield">
+        <example title="The values a generator yields."><![CDATA[
+            /**
+             * @psalm-yield list<string>
+             */
+            public function chunks(): Generator
+        ]]></example>
+    </alias>
 </model>
