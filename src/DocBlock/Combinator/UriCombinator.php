@@ -11,7 +11,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use Uri\Rfc3986\Uri;
 
 /**
- * Reads a URI, that is a well-formed word as defined by RFC 3986.
+ * Reads a URI, that is a well-formed word as defined by RFC 3986, or an
+ * absolute URL with characters beyond ASCII as defined by WHATWG:
+ * `https://пример.рф/путь`.
  *
  * @template-implements CombinatorInterface<UriReference>
  */
@@ -42,7 +44,7 @@ final class UriCombinator implements CombinatorInterface
     private static function isUri(string $word): bool
     {
         if (\PHP_VERSION_ID >= 80500) {
-            return !self::isUriEmpty(Uri::parse($word));
+            return !self::isUriEmpty(Uri::parse($word)) || \Uri\WhatWg\Url::parse($word) !== null;
         }
 
         return \parse_url($word) !== false;
