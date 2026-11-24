@@ -13,6 +13,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\DocBlockParser;
+use TypeLang\PhpDoc\Parser\Grammar\Cursor;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\InvalidCombinatorForDefinitionException;
 use TypeLang\PhpDoc\Parser\Grammar\Rule\MatchRule;
 use TypeLang\PhpDoc\Parser\Grammar\Rule\RuleInterface;
@@ -75,7 +76,13 @@ final class PlatformTest extends TestCase
         $override = new class extends Platform {
             public function getCombinators(): iterable
             {
-                return ['Type' => static fn(): string => 'overridden'];
+                return [
+                    'Type' => static function (Cursor $cursor): string {
+                        $cursor->readRemainder();
+
+                        return 'overridden';
+                    },
+                ];
             }
         };
 

@@ -18,10 +18,12 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
  * The `@param` tag documents a single argument of a function or method.
  *
  * The `@param` tag MAY be followed by a description that clarifies the
- * meaning of the argument.
+ * meaning of the argument. The variable of a by-reference argument is
+ * prefixed with `&`, of a variadic one with `...`, of a variadic
+ * by-reference one with both.
  *
  * ```
- * "@param" <Type> <Variable> [ <Description> ]
+ * "@param" <Type> [ "&" ] [ "..." ] <Variable> [ <Description> ]
  * ```
  *
  * @generated from resources/model/standard.xml, edit the model instead
@@ -42,6 +44,12 @@ final class ParamTagDefinition extends TagDefinition
             name: self::getCanonicalName(),
             spec: Spec::sequence(
                 Spec::rule(TypeCombinator::NAME, 'type'),
+                Spec::maybe(
+                    Spec::literal('&', 'reference'),
+                ),
+                Spec::maybe(
+                    Spec::literal('...', 'variadic'),
+                ),
                 Spec::rule(VariableCombinator::NAME, 'variable'),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
@@ -62,11 +70,17 @@ final class ParamTagDefinition extends TagDefinition
         /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
+        $isReference = $result->has('reference');
+
+        $isVariadic = $result->has('variadic');
+
         return new ParamTag(
             name: $name,
             statement: $statement,
             variable: $variable,
             description: $description,
+            isReference: $isReference,
+            isVariadic: $isVariadic,
         );
     }
 }

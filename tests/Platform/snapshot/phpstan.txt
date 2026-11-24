@@ -102,7 +102,7 @@ Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
   name: param
   creates: TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag
   placement: Block
-  grammar: seq(<Type> as type, <Variable> as variable, maybe(<Description> as description))
+  grammar: seq(<Type> as type, maybe("&" as reference), maybe("..." as variadic), <Variable> as variable, maybe(<Description> as description))
 @phpstan-param-closure-this
   definition: TypeLang\PhpDoc\DocBlock\Tag\ParamClosureThisTag\ParamClosureThisTagDefinition
   name: param-closure-this

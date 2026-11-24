@@ -38,6 +38,12 @@ final class TagSpecificationParser
 
         try {
             $rule->match($context);
+
+            $cursor->skipWhitespace();
+
+            if (!$cursor->isEof()) {
+                throw new NoMatchException();
+            }
         } catch (InvalidCombinatorException $e) {
             throw InvalidCombinatorForDefinitionException::becauseInvalidRuleForDefinition(
                 name: $e->name,

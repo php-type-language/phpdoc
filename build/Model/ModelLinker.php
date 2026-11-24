@@ -449,12 +449,22 @@ final class ModelLinker
             $parameter = $parameters[$name] ?? null;
             $bound[$name] = true;
 
-            if ($captures->isLiteral($capture)) {
-                $this->error($tag->file, 'tag @%s: literal capture "%s" needs a manual definition', $tag->name, $capture);
-            }
-
             if ($parameter === null) {
                 $this->error($tag->file, 'tag @%s: capture "%s" has no parameter $%s', $tag->name, $capture, $name);
+
+                continue;
+            }
+
+            if ($captures->isLiteral($capture)) {
+                if ((string) $parameter->getType() !== 'bool') {
+                    $this->error(
+                        $tag->file,
+                        'tag @%s: literal capture "%s" goes to non-bool $%s',
+                        $tag->name,
+                        $capture,
+                        $name,
+                    );
+                }
 
                 continue;
             }

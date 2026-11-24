@@ -11,6 +11,12 @@ use TypeLang\PhpDoc\Tests\TestCase;
 
 final class CursorTest extends TestCase
 {
+    /**
+     * A url with a Cyrillic domain and path, spelled with escapes.
+     */
+    private const URL = "https://\u{43F}\u{440}\u{438}\u{43C}\u{435}\u{440}.\u{440}\u{444}"
+        . "/\u{43F}\u{443}\u{442}\u{44C}";
+
     #[Test]
     public function startsAtTheBeginning(): void
     {
@@ -80,6 +86,52 @@ final class CursorTest extends TestCase
         self::assertSame('first', $cursor->readWord());
         $cursor->skipWhitespace();
         self::assertSame('second', $cursor->readWord());
+    }
+
+    /**
+     * @return iterable<non-empty-string, array{string, string, string}>
+     */
+    public static function multibyteWordDataProvider(): iterable
+    {
+        yield 'guillemets' => ['«quoted» rest', '«quoted»', ' rest'];
+        yield 'fullwidth parenthesis' => ['（注） rest', '（注）', ' rest'];
+        yield 'cyrillic with A0, BB and BF bytes' => [self::URL . ' desc', self::URL, ' desc'];
+        yield 'nbsp separator' => ["word\u{A0}rest", 'word', "\u{A0}rest"];
+        yield 'bom separator' => ["word\u{FEFF}rest", 'word', "\u{FEFF}rest"];
+        yield 'latin character ending with BF byte' => ["\u{FF}x rest", "\u{FF}x", ' rest'];
+    }
+
+    #[Test]
+    #[DataProvider('multibyteWordDataProvider')]
+    public function readsMultibyteWordsWithoutSplittingCharacters(string $input, string $expected, string $rest): void
+    {
+        $cursor = new Cursor($input);
+        $word = $cursor->readWord();
+
+        self::assertSame($expected, $word);
+        self::assertTrue(\mb_check_encoding($word, 'UTF-8'));
+        self::assertSame($rest, $cursor->readRemainder());
+    }
+
+    #[Test]
+    public function skipsWholeMultibyteWhitespaceOnly(): void
+    {
+        $cursor = new Cursor(" \u{A0}\u{FEFF}\t«x»");
+        $cursor->skipWhitespace();
+
+        self::assertSame('«x»', $cursor->readRemainder());
+    }
+
+    #[Test]
+    public function doesNotSkipOtherCharactersSharingWhitespaceBytes(): void
+    {
+        $cursor = new Cursor('«x» （y）');
+        $cursor->skipWhitespace();
+
+        self::assertSame(0, $cursor->getPosition());
+        self::assertSame('«x»', $cursor->readWord());
+        $cursor->skipWhitespace();
+        self::assertSame('（y）', $cursor->readWord());
     }
 
     /**

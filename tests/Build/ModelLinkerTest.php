@@ -16,6 +16,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\FlagTag;
+use TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag;
 use TypeLang\PhpDoc\DocBlock\Tag\TypedTag;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPlacement;
@@ -184,10 +185,38 @@ final class ModelLinkerTest extends TestCase
             'combinator <Own>: only a combinator of the parser is created manually',
         ];
 
-        yield 'literal capture in generated definition' => [
-            self::model(tags: [self::tag('flag', 'one', Spec::literal('static', 'static'))]),
-            'literal capture "static" needs a manual definition',
+        yield 'literal capture to non-bool parameter' => [
+            self::model(tags: [self::tag(
+                'param',
+                'one',
+                self::paramGrammar(),
+                ParamTag::class,
+                ['type' => 'statement', 'variadic' => 'description'],
+            )]),
+            'literal capture "variadic" goes to non-bool $description',
         ];
+    }
+
+    public function testLiteralCaptureGoesToBoolParameter(): void
+    {
+        $linked = (new ModelLinker())->link(self::model(tags: [self::tag(
+            'param',
+            'one',
+            self::paramGrammar(),
+            ParamTag::class,
+            ['type' => 'statement', 'variadic' => 'isVariadic'],
+        )]));
+
+        self::assertSame(['param'], \array_keys($linked->packages['one']->tags));
+    }
+
+    private static function paramGrammar(): RuleInterface
+    {
+        return Spec::sequence(
+            Spec::rule('Type', 'type'),
+            Spec::maybe(Spec::literal('...', 'variadic')),
+            Spec::rule('Variable', 'variable'),
+        );
     }
 
     /**

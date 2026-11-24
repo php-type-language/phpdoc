@@ -201,6 +201,14 @@ final class DefinitionEmitter
                 continue;
             }
 
+            if ($captures->isLiteral($capture)) {
+                $reads .= '        $' . $parameter->name . ' = $result->has('
+                    . PhpFile::renderString($capture) . ");\n\n";
+                $arguments .= '            ' . $parameter->name . ': $' . $parameter->name . ",\n";
+
+                continue;
+            }
+
             $method = match (true) {
                 $captures->isRepeated($capture) => 'getAll',
                 $captures->isRequired($capture) => 'get',
@@ -224,21 +232,28 @@ final class DefinitionEmitter
     }
 
     /**
-     * The phpdoc type of the promoted property, or the native type of the
-     * parameter, with the template parameters of the base class replaced by
-     * the arguments of the tag.
+     * The phpdoc type of the property of the same name (declared or inherited),
+     * or the native type of the parameter, with the template parameters of
+     * the base class replaced by the arguments of the tag.
      */
     private function getParameterType(\ReflectionParameter $parameter, Tag $tag, Imports $imports): string
     {
-        if ($parameter->isPromoted()) {
-            $class = $parameter->getDeclaringClass();
+        $class = $parameter->getDeclaringClass();
 
-            \assert($class !== null);
+        \assert($class !== null);
 
-            $comment = (string) $class->getProperty($parameter->name)->getDocComment();
+        if ($class->hasProperty($parameter->name)) {
+            $property = $class->getProperty($parameter->name);
+            $owner = $property->getDeclaringClass();
+            $comment = (string) $property->getDocComment();
 
-            if (\preg_match('/@var\s+(\S(?:.*\S)?)\s*(?:\*\/|\n)/', $comment, $matches) === 1) {
-                return $this->replaceTemplates($matches[1], $class, $tag, $imports);
+            // The type of a generic base is known only from the template
+            // arguments of the tag
+            $isResolvable = $tag->templateArguments !== []
+                || !\str_contains((string) $owner->getDocComment(), '@template');
+
+            if ($isResolvable && \preg_match('/@var\s+(\S(?:.*\S)?)\s*(?:\*\/|\n)/', $comment, $matches) === 1) {
+                return $this->replaceTemplates($matches[1], $owner, $tag, $imports);
             }
         }
 

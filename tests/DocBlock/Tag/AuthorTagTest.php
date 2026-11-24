@@ -34,6 +34,24 @@ final class AuthorTagTest extends TagTestCase
     }
 
     #[Test]
+    public function printsTheDescription(): void
+    {
+        $tag = self::parseTag('@author Name <m@x.y> trailing');
+
+        self::assertInstanceOf(AuthorTag::class, $tag);
+        self::assertSame('@author Name <m@x.y> trailing', (string) $tag);
+    }
+
+    #[Test]
+    public function printsTheDescriptionWithoutEmail(): void
+    {
+        $tag = self::parseTag('@author Jane Roe trailing');
+
+        self::assertInstanceOf(AuthorTag::class, $tag);
+        self::assertSame('@author Jane Roe trailing', (string) $tag);
+    }
+
+    #[Test]
     public function rejectsEmailWithoutName(): void
     {
         self::assertInstanceOf(InvalidTag::class, self::parseTag('@author <john@example.com>'));

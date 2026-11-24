@@ -35,6 +35,10 @@ final class AuthorTag extends Tag
             $result .= \sprintf(' <%s>', $this->email);
         }
 
+        if ($this->description !== null) {
+            $result .= ' ' . $this->description;
+        }
+
         return $result;
     }
 }

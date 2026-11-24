@@ -14,9 +14,19 @@ namespace TypeLang\PhpDoc\Parser\Grammar;
 final class Cursor
 {
     /**
-     * The whitespace bytes that separate words.
+     * The single-byte whitespace characters that separate words.
      */
-    private const CHARS_WHITESPACE = " \t\n\r\0\x0B\x0C\u{A0}\u{FEFF}";
+    private const CHARS_WHITESPACE = " \t\n\r\0\x0B\x0C";
+
+    /**
+     * The lead bytes of the multibyte whitespace characters.
+     */
+    private const CHARS_WHITESPACE_LEAD = "\xC2\xEF";
+
+    /**
+     * The multibyte whitespace characters: NBSP (U+00A0) and BOM (U+FEFF).
+     */
+    private const SEQUENCES_WHITESPACE = ["\u{A0}", "\u{FEFF}"];
 
     /**
      * @var int<0, max>
@@ -157,7 +167,7 @@ final class Cursor
      */
     public function readWord(): string
     {
-        return $this->readUntil(self::CHARS_WHITESPACE);
+        return $this->readRun(self::CHARS_WHITESPACE, isStopSet: true);
     }
 
     /**
@@ -166,7 +176,7 @@ final class Cursor
      */
     public function readPhpIdentifier(): string
     {
-        return $this->readWhile(self::$phpIdentifierChars);
+        return $this->readRun(self::$phpIdentifierChars, isStopSet: false);
     }
 
     /**
@@ -175,7 +185,44 @@ final class Cursor
      */
     public function readPhpQualifiedName(): string
     {
-        return $this->readWhile('\\' . self::$phpIdentifierChars);
+        return $this->readRun('\\' . self::$phpIdentifierChars, isStopSet: false);
+    }
+
+    /**
+     * Consumes and returns the leading run of the given `$characters` (or, with
+     * `$isStopSet`, of everything but them). A multibyte whitespace character
+     * ends the run, any other multibyte character is never split.
+     *
+     * The `$characters` mask must not contain the lead bytes of multibyte
+     * whitespace.
+     */
+    private function readRun(string $characters, bool $isStopSet): string
+    {
+        $end = $this->current;
+
+        while (true) {
+            $end += match ($isStopSet) {
+                true => \strcspn($this->buffer, $characters . self::CHARS_WHITESPACE_LEAD, $end),
+                false => \strspn($this->buffer, $characters, $end),
+            };
+
+            if ($end >= $this->length
+                || !self::isWhitespaceLead($this->buffer[$end])
+                || $this->measureWhitespace($end) > 0
+            ) {
+                break;
+            }
+
+            // The lead byte of some other multibyte character.
+            ++$end;
+        }
+
+        return $this->read($end - $this->current);
+    }
+
+    private static function isWhitespaceLead(string $byte): bool
+    {
+        return \strpos(self::CHARS_WHITESPACE_LEAD, $byte) !== false;
     }
 
     /**
@@ -206,7 +253,39 @@ final class Cursor
      */
     public function skipWhitespace(): void
     {
-        $this->moveTo($this->current + \strspn($this->buffer, self::CHARS_WHITESPACE, $this->current));
+        $end = $this->current;
+
+        while (true) {
+            $end += \strspn($this->buffer, self::CHARS_WHITESPACE, $end);
+
+            $size = $this->measureWhitespace($end);
+
+            if ($size === 0) {
+                break;
+            }
+
+            $end += $size;
+        }
+
+        $this->moveTo($end);
+    }
+
+    /**
+     * Returns the byte length of the multibyte whitespace character at the
+     * given position, or zero when there is none.
+     *
+     * @param int<0, max> $position
+     * @return int<0, 3>
+     */
+    private function measureWhitespace(int $position): int
+    {
+        foreach (self::SEQUENCES_WHITESPACE as $sequence) {
+            if (\substr_compare($this->buffer, $sequence, $position, \strlen($sequence)) === 0) {
+                return \strlen($sequence);
+            }
+        }
+
+        return 0;
     }
 
     /**
@@ -230,8 +309,13 @@ final class Cursor
             . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             . '0123456789_';
 
-        // Every byte above 0x7F is part of a multibyte (e.g. Unicode) name.
+        // Every byte above 0x7F is part of a multibyte (e.g. Unicode) name,
+        // except the lead bytes of multibyte whitespace.
         for ($byte = 0x80; $byte <= 0xFF; ++$byte) {
+            if (self::isWhitespaceLead(\chr($byte))) {
+                continue;
+            }
+
             $mask .= \chr($byte);
         }
 

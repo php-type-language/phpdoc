@@ -53,6 +53,57 @@ final class TypedVariableTagTest extends TagTestCase
         self::assertSame('@property-read string $name', (string) $tag);
     }
 
+    /**
+     * @param non-empty-string $source
+     */
+    #[Test]
+    #[DataProvider('parameterFormProvider')]
+    public function parsesVariadicAndReferenceParameters(
+        string $source,
+        bool $isVariadic,
+        bool $isReference,
+    ): void {
+        $tag = self::parseTag($source);
+
+        self::assertInstanceOf(ParamTag::class, $tag);
+        self::assertSame('x', $tag->variable);
+        self::assertSame($isVariadic, $tag->isVariadic);
+        self::assertSame($isReference, $tag->isReference);
+        self::assertInstanceOf(NamedTypeNode::class, $tag->type);
+        self::assertSame($source, (string) $tag);
+    }
+
+    /**
+     * @return iterable<non-empty-string, array{non-empty-string, bool, bool}>
+     */
+    public static function parameterFormProvider(): iterable
+    {
+        yield 'plain' => ['@param int $x', false, false];
+        yield 'variadic' => ['@param int ...$x', true, false];
+        yield 'reference' => ['@param int &$x', false, true];
+        yield 'variadic reference' => ['@param int &...$x', true, true];
+        yield 'generic variadic' => ['@param array<int> ...$x', true, false];
+        yield 'with description' => ['@param int ...$x The values.', true, false];
+        yield 'phpstan alias' => ['@phpstan-param int ...$x', true, false];
+        yield 'psalm alias' => ['@psalm-param int &$x', false, true];
+    }
+
+    #[Test]
+    public function parsesVariadicParameterDescription(): void
+    {
+        $tag = self::parseTag('@param int ...$x The values.');
+
+        self::assertInstanceOf(ParamTag::class, $tag);
+        self::assertSame('The values.', (string) $tag->description);
+    }
+
+    #[Test]
+    public function rejectsFlagsWithoutVariable(): void
+    {
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@param int ...'));
+        self::assertInstanceOf(InvalidTag::class, self::parseTag('@param int ...&$x'));
+    }
+
     #[Test]
     public function rejectsMissingVariable(): void
     {

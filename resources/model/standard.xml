@@ -400,17 +400,25 @@
         ]]></example>
     </tag>
 
-    <tag name="param" class="TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag" extends="TypeLang\PhpDoc\DocBlock\Tag\TypedVariableTag" placement="block">
+    <tag name="param" class="TypeLang\PhpDoc\DocBlock\Tag\ParamTag\ParamTag" placement="block">
         <summary>
             The `@param` tag documents a single argument of a function or method.
         </summary>
         <description>
             The `@param` tag MAY be followed by a description that clarifies the
-            meaning of the argument.
+            meaning of the argument. The variable of a by-reference argument is
+            prefixed with `&amp;`, of a variadic one with `...`, of a variadic
+            by-reference one with both.
         </description>
         <grammar>
             <sequence>
                 <rule name="Type" as="type" parameter="statement"/>
+                <maybe>
+                    <literal value="&amp;" as="reference" parameter="isReference"/>
+                </maybe>
+                <maybe>
+                    <literal value="..." as="variadic" parameter="isVariadic"/>
+                </maybe>
                 <rule name="Variable" as="variable"/>
                 <maybe>
                     <rule name="Description" as="description"/>
@@ -430,6 +438,21 @@
         <example title="A shape describing the accepted array structure."><![CDATA[
             /**
              * @param array{name: string, age: int<0, max>} $profile
+             */
+        ]]></example>
+        <example title="A variadic argument."><![CDATA[
+            /**
+             * @param int ...$numbers The values to sum.
+             */
+        ]]></example>
+        <example title="A by-reference argument."><![CDATA[
+            /**
+             * @param array<string> &$items
+             */
+        ]]></example>
+        <example title="A variadic by-reference argument."><![CDATA[
+            /**
+             * @param Node &...$nodes
              */
         ]]></example>
     </tag>

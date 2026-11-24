@@ -28,12 +28,17 @@ abstract class TypedVariableTag extends TypedTag implements VariableTagInterface
     #[\Override]
     public function __toString(): string
     {
-        $result = \sprintf('@%s %s $%s', $this->name, $this->statement, $this->variable);
+        $result = \sprintf('@%s %s %s', $this->name, $this->statement, $this->printVariable());
 
         if ($this->description !== null) {
             $result .= ' ' . $this->description;
         }
 
         return $result;
+    }
+
+    protected function printVariable(): string
+    {
+        return '$' . $this->variable;
     }
 }

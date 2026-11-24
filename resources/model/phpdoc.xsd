@@ -227,10 +227,11 @@
 
     <xs:complexType name="LiteralType">
         <xs:annotation>
-            <xs:documentation>An exact text. "as" captures the fact of its presence.</xs:documentation>
+            <xs:documentation>An exact text. "as" captures the fact of its presence, "parameter" names the bool constructor parameter receiving it.</xs:documentation>
         </xs:annotation>
         <xs:attribute name="value" type="xs:string" use="required"/>
         <xs:attribute name="as" type="CaptureNameType"/>
+        <xs:attribute name="parameter" type="ParameterNameType"/>
     </xs:complexType>
 
 </xs:schema>
