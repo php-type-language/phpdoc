@@ -23,7 +23,8 @@ final class FlowTypeCombinator implements CombinatorInterface
         $flow = FlowType::tryFrom($cursor->readPhpIdentifier());
 
         if ($flow === null) {
-            throw new NoMatchException('Expected a flow type (one of "TaintSource", "TaintSink", "TaintSpecialize" or "TaintUnescape")');
+            throw new NoMatchException('Expected a flow type (one of'
+                . ' "TaintSource", "TaintSink", "TaintSpecialize" or "TaintUnescape")');
         }
 
         return $flow;

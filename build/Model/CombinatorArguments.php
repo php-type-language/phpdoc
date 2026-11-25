@@ -24,7 +24,7 @@ final class CombinatorArguments
      *
      * @param class-string $class
      */
-    public static function needsTypeParser(string $class): bool
+    public static function hasTypeParserParameter(string $class): bool
     {
         $constructor = (new \ReflectionClass($class))->getConstructor();
 

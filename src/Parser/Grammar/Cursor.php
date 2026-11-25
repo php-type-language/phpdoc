@@ -181,7 +181,8 @@ final class Cursor
 
     /**
      * Consumes and returns a namespaced name (a {@see readPhpIdentifier()} that
-     * may also contain "\"), or an empty string when the current byte starts none.
+     * may also contain "\"), or an empty string when the current byte starts
+     * none.
      */
     public function readPhpQualifiedName(): string
     {

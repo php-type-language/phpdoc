@@ -38,7 +38,7 @@ abstract class ModelCommand extends Command
     /**
      * Loads and links the model, reporting every problem of it.
      */
-    protected function findModel(OutputInterface $output): ?LinkedModel
+    protected function loadModel(OutputInterface $output): ?LinkedModel
     {
         try {
             return (new ModelLinker())->link((new ModelLoader())->load($this->getModelDirectory()));

@@ -15,7 +15,7 @@ final class LicenseTag extends Tag
 {
     public function __construct(
         string $name,
-        public ?UrlReference $url = null,
+        public readonly ?UrlReference $url = null,
         ?DescriptionInterface $description = null,
     ) {
         parent::__construct($name, $description);

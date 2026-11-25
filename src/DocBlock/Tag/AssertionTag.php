@@ -12,9 +12,8 @@ use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
  * A tag narrowing the type of something once the call it is written on
  * returns.
  *
- * What is narrowed is not a variable alone: an assertion is written of a
- * property or of a method just as well, which is why the subject is a
- * reference rather than a name.
+ * The subject is a reference: an assertion is written of a variable,
+ * a property or a method.
  *
  * ```
  *  "@assert" [ "!" | "=" | "!=" ] <Type> <Subject> [ <Description> ]

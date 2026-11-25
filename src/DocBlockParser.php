@@ -175,7 +175,7 @@ final class DocBlockParser implements DocBlockParserInterface
     /**
      * @param list<Segment> $segments
      * @return list<TagInterface>
-     * @throws PhpDocExceptionInterface
+     * @throws PhpDocExceptionInterface in case of a tag cannot be parsed
      */
     private function createTags(array $segments, string $docblock): array
     {
@@ -185,7 +185,7 @@ final class DocBlockParser implements DocBlockParserInterface
             try {
                 $result[] = $this->tagParser->parse($segment->text);
             } catch (\Throwable $e) {
-                throw $this->failure($e, $docblock, $segment->offset);
+                throw $this->createFailure($e, $docblock, $segment->offset);
             }
         }
 
@@ -193,7 +193,8 @@ final class DocBlockParser implements DocBlockParserInterface
     }
 
     /**
-     * @throws PhpDocExceptionInterface
+     * @throws PhpDocExceptionInterface in case of the description cannot be
+     *        parsed
      */
     private function tryCreateDescription(?Segment $segment, string $docblock): ?DescriptionInterface
     {
@@ -204,21 +205,22 @@ final class DocBlockParser implements DocBlockParserInterface
         try {
             return $this->descriptionParser->tryParse($segment->text);
         } catch (\Throwable $e) {
-            throw $this->failure($e, $docblock, $segment->offset);
+            throw $this->createFailure($e, $docblock, $segment->offset);
         }
     }
 
     /**
      * Guarantees that only a {@see PhpDocExceptionInterface} leaves the parser.
      *
-     * A parsing error is rebased onto the full docblock so that its offset
-     * becomes absolute (e.g. the position of the tag that failed to parse). Any
-     * other, internal failure is wrapped as a {@see TagParsingException} at the
-     * same location.
+     * A parsing error is rebased onto the full docblock: its offset becomes
+     * absolute (e.g. the position of the tag that failed to parse). Any other,
+     * internal failure is wrapped as a {@see TagParsingException} at the same
+     * location.
      *
-     * @param int<0, max> $offset byte offset of the failing section inside $source
+     * @param int<0, max> $offset byte offset of the failing section inside
+     *        $source
      */
-    private function failure(\Throwable $e, string $source, int $offset): PhpDocExceptionInterface
+    private function createFailure(\Throwable $e, string $source, int $offset): PhpDocExceptionInterface
     {
         // A parsing error carries an offset relative to the failing section;
         // rebasing it onto $source turns that into an absolute location.
@@ -236,6 +238,9 @@ final class DocBlockParser implements DocBlockParserInterface
         return TagParsingException::becauseInternalErrorOccurs($e, $source, $offset);
     }
 
+    /**
+     * @throws PhpDocExceptionInterface in case of the docblock cannot be parsed
+     */
     public function parse(#[Language('InjectablePHP')] string $docblock): DocBlock
     {
         $data = $this->docBlockAnalyzer->analyze($docblock);

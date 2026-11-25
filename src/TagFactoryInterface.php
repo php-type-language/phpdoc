@@ -15,7 +15,7 @@ interface TagFactoryInterface
     /**
      * @param non-empty-string $name
      * @return TTag
-     * @throws PhpDocExceptionInterface
+     * @throws PhpDocExceptionInterface in case of the tag cannot be created
      */
     public function create(string $name, string $suffix): TagInterface;
 }

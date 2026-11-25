@@ -16,8 +16,8 @@ interface RuleInterface extends \Stringable
     /**
      * Matches the rule against the input, recording its captures.
      *
-     * @throws NoMatchException when the rule does not apply
-     * @throws ParsingExceptionInterface when the input is malformed
+     * @throws NoMatchException in case of the rule does not apply
+     * @throws ParsingExceptionInterface in case of the input is malformed
      */
     public function match(Context $context): void;
 

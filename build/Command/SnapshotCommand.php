@@ -20,7 +20,7 @@ final class SnapshotCommand extends ModelCommand
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $model = $this->findModel($output);
+        $model = $this->loadModel($output);
 
         if ($model === null) {
             return self::FAILURE;

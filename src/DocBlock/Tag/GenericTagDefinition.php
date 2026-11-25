@@ -23,9 +23,8 @@ final class GenericTagDefinition extends TagDefinition
 {
     /**
      * @param non-empty-string $name the tag name, without the leading "@"
-     * @param TagPlacement $placement generic (unknown) tag has no dedicated
-     *        definition, so its placement cannot be inferred from the tag
-     *        itself and is decided by the caller
+     * @param TagPlacement $placement placement of the unknown tag, decided by
+     *        the caller
      */
     public function __construct(string $name, TagPlacement $placement = TagPlacement::DEFAULT)
     {
@@ -40,7 +39,7 @@ final class GenericTagDefinition extends TagDefinition
 
     public function create(string $name, TagPayload $result): Tag
     {
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         return new Tag(

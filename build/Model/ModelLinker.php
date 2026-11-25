@@ -61,11 +61,15 @@ final class ModelLinker
 
         foreach ($model->packages as $package) {
             if (isset($result[$package->name])) {
-                $this->error($package->file, 'package "%s" is declared twice', $package->name);
+                $this->addError(
+                    $package->file,
+                    'package "%s" is declared twice',
+                    \addcslashes($package->name, '"'),
+                );
             }
 
             if (isset($classes[$package->class])) {
-                $this->error($package->file, 'platform class %s is used twice', $package->class);
+                $this->addError($package->file, 'platform class %s is used twice', $package->class);
             }
 
             $result[$package->name] = $package;
@@ -85,19 +89,33 @@ final class ModelLinker
 
         foreach ($model->combinators as $combinator) {
             if (isset($result[$combinator->name])) {
-                $this->error($combinator->file, 'combinator <%s> is declared twice', $combinator->name);
+                $this->addError($combinator->file, 'combinator <%s> is declared twice', $combinator->name);
             }
 
             if ($combinator->package !== null && !isset($packages[$combinator->package])) {
-                $this->error($combinator->file, 'combinator <%s>: unknown package "%s"', $combinator->name, $combinator->package);
+                $this->addError(
+                    $combinator->file,
+                    'combinator <%s>: unknown package "%s"',
+                    $combinator->name,
+                    \addcslashes($combinator->package, '"'),
+                );
             }
 
             if (!\class_exists($combinator->class)) {
-                $this->error($combinator->file, 'combinator <%s>: class %s not found', $combinator->name, $combinator->class);
+                $this->addError(
+                    $combinator->file,
+                    'combinator <%s>: class %s not found',
+                    $combinator->name,
+                    $combinator->class,
+                );
             } elseif ($combinator->isInstanceGenerated) {
                 $this->checkCombinatorConstructor($combinator);
             } elseif ($combinator->package !== null) {
-                $this->error($combinator->file, 'combinator <%s>: only a combinator of the parser is created manually', $combinator->name);
+                $this->addError(
+                    $combinator->file,
+                    'combinator <%s>: only a combinator of the parser is created manually',
+                    $combinator->name,
+                );
             }
 
             $result[$combinator->name] = $combinator;
@@ -127,7 +145,7 @@ final class ModelLinker
                 continue;
             }
 
-            $this->error(
+            $this->addError(
                 $combinator->file,
                 'combinator <%s>: the generated code cannot pass $%s to the constructor',
                 $combinator->name,
@@ -150,15 +168,20 @@ final class ModelLinker
             $lower = \strtolower($tag->name);
 
             if (isset($names[$lower])) {
-                $this->error($tag->file, 'tag @%s is declared twice', $tag->name);
+                $this->addError($tag->file, 'tag @%s is declared twice', $tag->name);
             }
 
             if (isset($classes[$tag->class])) {
-                $this->error($tag->file, 'tag @%s: class %s is used twice', $tag->name, $tag->class);
+                $this->addError($tag->file, 'tag @%s: class %s is used twice', $tag->name, $tag->class);
             }
 
             if ($tag->package !== null && !isset($packages[$tag->package])) {
-                $this->error($tag->file, 'tag @%s: unknown package "%s"', $tag->name, $tag->package);
+                $this->addError(
+                    $tag->file,
+                    'tag @%s: unknown package "%s"',
+                    $tag->name,
+                    \addcslashes($tag->package, '"'),
+                );
             }
 
             $names[$lower] = true;
@@ -181,11 +204,21 @@ final class ModelLinker
             $lower = \strtolower($alias->name);
 
             if (!isset($packages[$alias->package])) {
-                $this->error($alias->file, 'alias @%s: unknown package "%s"', $alias->name, $alias->package);
+                $this->addError(
+                    $alias->file,
+                    'alias @%s: unknown package "%s"',
+                    $alias->name,
+                    \addcslashes($alias->package, '"'),
+                );
             }
 
             if (isset($result[$alias->package][$lower])) {
-                $this->error($alias->file, 'alias @%s is declared twice in "%s"', $alias->name, $alias->package);
+                $this->addError(
+                    $alias->file,
+                    'alias @%s is declared twice in "%s"',
+                    $alias->name,
+                    \addcslashes($alias->package, '"'),
+                );
             }
 
             $result[$alias->package][$lower] = $alias;
@@ -196,7 +229,10 @@ final class ModelLinker
 
     /**
      * @param array<non-empty-string, Tag> $tags
-     * @param array<non-empty-string, array<non-empty-lowercase-string, Alias>> $aliases
+     * @param array<
+     *     non-empty-string,
+     *     array<non-empty-lowercase-string, Alias>,
+     * > $aliases
      * @param array<non-empty-string, Combinator> $combinators
      */
     private function linkPackage(
@@ -236,7 +272,12 @@ final class ModelLinker
             $lower = \strtolower((string) $key);
 
             if (isset($keys[$lower])) {
-                $this->error($package->file, 'name @%s is registered twice in "%s"', (string) $key, $package->name);
+                $this->addError(
+                    $package->file,
+                    'name @%s is registered twice in "%s"',
+                    (string) $key,
+                    \addcslashes($package->name, '"'),
+                );
             }
 
             $keys[$lower] = true;
@@ -278,7 +319,17 @@ final class ModelLinker
 
         foreach ($owners as $key => $names) {
             if (\count($names) > 1) {
-                $this->error($packages[$names[0]]->package->file, '%s is registered by "%s"', $key, \implode('", "', $names));
+                $escaped = \array_map(
+                    static fn(string $name): string => \addcslashes($name, '"'),
+                    $names,
+                );
+
+                $this->addError(
+                    $packages[$names[0]]->package->file,
+                    '%s is registered by "%s"',
+                    $key,
+                    \implode('", "', $escaped),
+                );
             }
         }
     }
@@ -287,7 +338,10 @@ final class ModelLinker
      * Follows the alias chain down to the tag.
      *
      * @param array<non-empty-string, Tag> $tags
-     * @param array<non-empty-string, array<non-empty-lowercase-string, Alias>> $aliases
+     * @param array<
+     *     non-empty-string,
+     *     array<non-empty-lowercase-string, Alias>,
+     * > $aliases
      */
     private function resolveAlias(Alias $alias, array $tags, array $aliases): ?Tag
     {
@@ -300,7 +354,12 @@ final class ModelLinker
 
             if ($next !== null) {
                 if (\in_array($next->name, $visited, true)) {
-                    $this->error($alias->file, 'alias @%s is recursive: %s', $alias->name, \implode(' -> ', $visited));
+                    $this->addError(
+                        $alias->file,
+                        'alias @%s is recursive: %s',
+                        $alias->name,
+                        \implode(' -> ', $visited),
+                    );
 
                     return null;
                 }
@@ -313,7 +372,12 @@ final class ModelLinker
             $tag = $this->findTag($current->target, $tags);
 
             if ($tag === null) {
-                $this->error($alias->file, 'alias @%s: @%s is neither a tag nor an alias', $alias->name, $current->target);
+                $this->addError(
+                    $alias->file,
+                    'alias @%s: @%s is neither a tag nor an alias',
+                    $alias->name,
+                    $current->target,
+                );
             }
 
             return $tag;
@@ -324,7 +388,10 @@ final class ModelLinker
      * Whether the name is a tag of the package or an alias of it.
      *
      * @param array<non-empty-string, Tag> $tags
-     * @param array<non-empty-string, array<non-empty-lowercase-string, Alias>> $aliases
+     * @param array<
+     *     non-empty-string,
+     *     array<non-empty-lowercase-string, Alias>,
+     * > $aliases
      */
     private function isRegisteredIn(string $name, string $package, array $tags, array $aliases): bool
     {
@@ -354,7 +421,7 @@ final class ModelLinker
         $registrations = $model->getRegistrations($tag);
 
         if ($registrations === []) {
-            $this->error($tag->file, 'tag @%s is registered by no package', $tag->name);
+            $this->addError($tag->file, 'tag @%s is registered by no package', $tag->name);
         }
 
         $captures = Captures::collect($tag->grammar);
@@ -363,20 +430,20 @@ final class ModelLinker
             $combinator = $model->combinators[$name] ?? null;
 
             if ($combinator === null) {
-                $this->error($tag->file, 'tag @%s: unknown combinator <%s>', $tag->name, $name);
+                $this->addError($tag->file, 'tag @%s: unknown combinator <%s>', $tag->name, $name);
 
                 continue;
             }
 
             foreach (\array_keys($registrations) as $package) {
                 if ($combinator->package !== null && $combinator->package !== $package) {
-                    $this->error(
+                    $this->addError(
                         $tag->file,
                         'tag @%s: combinator <%s> of "%s" is not available in "%s"',
                         $tag->name,
                         $name,
-                        $combinator->package,
-                        $package,
+                        \addcslashes($combinator->package, '"'),
+                        \addcslashes($package, '"'),
                     );
                 }
             }
@@ -389,23 +456,29 @@ final class ModelLinker
         }
 
         if ($tag->since !== null && $tag->deprecated !== null && \version_compare($tag->deprecated, $tag->since, '<')) {
-            $this->error($tag->file, 'tag @%s: deprecated %s before since %s', $tag->name, $tag->deprecated, $tag->since);
+            $this->addError(
+                $tag->file,
+                'tag @%s: deprecated %s before since %s',
+                $tag->name,
+                $tag->deprecated,
+                $tag->since,
+            );
         }
     }
 
     private function checkClasses(Tag $tag): void
     {
         if ($tag->extends === null && !\class_exists($tag->class)) {
-            $this->error($tag->file, 'tag @%s: class %s is written by hand but not found', $tag->name, $tag->class);
+            $this->addError($tag->file, 'tag @%s: class %s is written by hand but not found', $tag->name, $tag->class);
         }
 
         if ($tag->extends !== null && !\class_exists($tag->extends)) {
-            $this->error($tag->file, 'tag @%s: base class %s not found', $tag->name, $tag->extends);
+            $this->addError($tag->file, 'tag @%s: base class %s not found', $tag->name, $tag->extends);
         }
 
         foreach ($tag->templateArguments as $argument) {
             if (!\class_exists($argument) && !\interface_exists($argument)) {
-                $this->error($tag->file, 'tag @%s: template argument %s not found', $tag->name, $argument);
+                $this->addError($tag->file, 'tag @%s: template argument %s not found', $tag->name, $argument);
             }
         }
 
@@ -416,7 +489,7 @@ final class ModelLinker
         $definition = $tag->getDefinitionClass();
 
         if (!\class_exists($definition) || !\is_subclass_of($definition, TagDefinitionInterface::class)) {
-            $this->error($tag->file, 'tag @%s: manual definition %s not found', $tag->name, $definition);
+            $this->addError($tag->file, 'tag @%s: manual definition %s not found', $tag->name, $definition);
         }
     }
 
@@ -439,7 +512,7 @@ final class ModelLinker
         }
 
         if (!isset($parameters['name'])) {
-            $this->error($tag->file, 'tag @%s: the tag class has no $name parameter', $tag->name);
+            $this->addError($tag->file, 'tag @%s: the tag class has no $name parameter', $tag->name);
         }
 
         $bound = ['name' => true];
@@ -450,18 +523,24 @@ final class ModelLinker
             $bound[$name] = true;
 
             if ($parameter === null) {
-                $this->error($tag->file, 'tag @%s: capture "%s" has no parameter $%s', $tag->name, $capture, $name);
+                $this->addError(
+                    $tag->file,
+                    'tag @%s: capture "%s" has no parameter $%s',
+                    $tag->name,
+                    \addcslashes($capture, '"'),
+                    $name,
+                );
 
                 continue;
             }
 
             if ($captures->isLiteral($capture)) {
                 if ((string) $parameter->getType() !== 'bool') {
-                    $this->error(
+                    $this->addError(
                         $tag->file,
                         'tag @%s: literal capture "%s" goes to non-bool $%s',
                         $tag->name,
-                        $capture,
+                        \addcslashes($capture, '"'),
                         $name,
                     );
                 }
@@ -470,13 +549,24 @@ final class ModelLinker
             }
 
             if (!$captures->isRequired($capture) && !$captures->isRepeated($capture) && !$parameter->allowsNull()) {
-                $this->error($tag->file, 'tag @%s: optional capture "%s" goes to non-nullable $%s', $tag->name, $capture, $name);
+                $this->addError(
+                    $tag->file,
+                    'tag @%s: optional capture "%s" goes to non-nullable $%s',
+                    $tag->name,
+                    \addcslashes($capture, '"'),
+                    $name,
+                );
             }
         }
 
         foreach ($parameters as $name => $parameter) {
             if (!isset($bound[$name]) && !$parameter->isOptional()) {
-                $this->error($tag->file, 'tag @%s: required parameter $%s is captured by nothing', $tag->name, $name);
+                $this->addError(
+                    $tag->file,
+                    'tag @%s: required parameter $%s is captured by nothing',
+                    $tag->name,
+                    $name,
+                );
             }
         }
     }
@@ -492,7 +582,7 @@ final class ModelLinker
         return (new \ReflectionClass($class))->getConstructor();
     }
 
-    private function error(string $file, string $format, string|int ...$arguments): void
+    private function addError(string $file, string $format, string|int ...$arguments): void
     {
         $message = \sprintf('%s: ' . $format, $file, ...$arguments);
 

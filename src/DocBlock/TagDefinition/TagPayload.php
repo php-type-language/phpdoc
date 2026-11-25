@@ -35,7 +35,8 @@ final class TagPayload
     /**
      * Returns the single value captured under $alias.
      *
-     * @throws UncapturedRuleException when nothing was captured under the alias
+     * @throws UncapturedRuleException in case of nothing was captured under
+     *        the alias
      */
     public function get(string $alias): mixed
     {

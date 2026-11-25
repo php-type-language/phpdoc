@@ -10,8 +10,8 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\Type\Callable\CallableTypeNode;
 
 /**
- * Reads a type and accepts it only when it is a callable, so that a plain word
- * (which would parse as a type) is left for the following combinators.
+ * Reads a type and accepts it only when it is a callable. Any other type,
+ * a plain word included, is left for the following combinators.
  */
 final class CallableTypeCombinator extends TypeCombinator
 {

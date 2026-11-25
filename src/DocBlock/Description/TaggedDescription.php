@@ -77,7 +77,7 @@ final class TaggedDescription implements
     }
 
     /**
-     * @throws \BadMethodCallException
+     * @throws \BadMethodCallException in case of any call
      */
     public function offsetSet(mixed $offset, mixed $value): never
     {
@@ -85,7 +85,7 @@ final class TaggedDescription implements
     }
 
     /**
-     * @throws \BadMethodCallException
+     * @throws \BadMethodCallException in case of any call
      */
     public function offsetUnset(mixed $offset): never
     {

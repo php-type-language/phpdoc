@@ -10,12 +10,14 @@ use TypeLang\PhpDoc\Parser\Grammar\Rule\RuleInterface;
 /**
  * Declares a single tag.
  *
- * The shape of its body (a {@see RuleInterface}) and how to build a {@see TagInterface}
- * from the parsed pieces.
+ * The shape of its body (a {@see RuleInterface}) and how to build
+ * a {@see TagInterface} from the parsed pieces.
  *
- * @property-read non-empty-string $name Canonical tag name.
- * @property-read RuleInterface $spec Tag definition specification: shape of the tag body.
- * @property-read TagPlacement $placement Where the tag may appear: only inline, only as a block tag, or anywhere.
+ * @property-read non-empty-string $name canonical tag name
+ * @property-read RuleInterface $spec tag definition specification: shape of
+ *        the tag body
+ * @property-read TagPlacement $placement where the tag may appear: only
+ *        inline, only as a block tag, or anywhere
  */
 interface TagDefinitionInterface extends \Stringable
 {

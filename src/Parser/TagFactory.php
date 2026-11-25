@@ -43,7 +43,9 @@ final class TagFactory implements TagFactoryInterface
 
     /**
      * @param iterable<non-empty-string, CombinatorType> $combinators
-     * @param (\Closure(non-empty-lowercase-string): TagDefinitionInterface)|null $createUnknownTagDefinition
+     * @param (\Closure(
+     *     non-empty-lowercase-string,
+     * ): TagDefinitionInterface)|null $createUnknownTagDefinition
      *        creates the definition of a tag missing in the registry by its
      *        lower-case name, {@see GenericTagDefinition} by default
      */

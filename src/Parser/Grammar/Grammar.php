@@ -69,7 +69,8 @@ final class Grammar implements \Countable, \IteratorAggregate
     /**
      * @param non-empty-string $name
      * @return CombinatorType
-     * @throws InvalidCombinatorException
+     * @throws InvalidCombinatorException in case of no combinator is
+     *        registered under the name
      */
     public function get(string $name): callable
     {

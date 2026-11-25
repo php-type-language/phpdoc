@@ -103,6 +103,8 @@ final class ModelLoader
 
     /**
      * @param non-empty-string $file
+     * @throws ModelException in case of a required attribute or element of
+     *        the package is missing
      */
     private function readPackage(\DOMElement $element, string $file): Package
     {
@@ -117,6 +119,8 @@ final class ModelLoader
 
     /**
      * @param non-empty-string $file
+     * @throws ModelException in case of a required attribute of the combinator
+     *        is missing
      */
     private function readCombinator(\DOMElement $element, string $file): Combinator
     {
@@ -132,6 +136,8 @@ final class ModelLoader
     /**
      * @param non-empty-string|null $default
      * @param non-empty-string $file
+     * @throws ModelException in case of a required attribute or element of
+     *        the tag is missing or the grammar is invalid
      */
     private function readTag(\DOMElement $element, ?string $default, string $file): Tag
     {
@@ -228,6 +234,8 @@ final class ModelLoader
     /**
      * @param array<non-empty-string, non-empty-string> $parameters
      *        receives the parameter names of the captures
+     * @throws ModelException in case of an unexpected grammar element or
+     *        a missing required attribute
      */
     private function readRule(\DOMElement $element, array &$parameters): RuleInterface
     {
@@ -289,6 +297,9 @@ final class ModelLoader
         return null;
     }
 
+    /**
+     * @throws ModelException in case of the child element is missing
+     */
     private function getChild(\DOMElement $element, string $name): \DOMElement
     {
         return $this->findChild($element, $name)
@@ -306,6 +317,9 @@ final class ModelLoader
         return self::dedent($child->textContent);
     }
 
+    /**
+     * @throws ModelException in case of the child element is missing
+     */
     private function getText(\DOMElement $element, string $name): string
     {
         return self::dedent($this->getChild($element, $name)->textContent);
@@ -327,6 +341,7 @@ final class ModelLoader
 
     /**
      * @return non-empty-string
+     * @throws ModelException in case of the attribute is missing or empty
      */
     private function getAttribute(\DOMElement $element, string $name): string
     {

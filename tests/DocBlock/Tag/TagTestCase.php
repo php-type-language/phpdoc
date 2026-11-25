@@ -5,21 +5,10 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Tests\DocBlock\Tag;
 
 use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
-use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\DocBlockParser;
 use TypeLang\PhpDoc\DocBlockParserInterface;
-use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
-use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\TagFactory;
-use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
-use TypeLang\PhpDoc\Platform\PlatformInterface;
-use TypeLang\PhpDoc\TagFactoryInterface;
-use TypeLang\PhpDoc\TagRegistryInterface;
 use TypeLang\PhpDoc\Tests\TestCase;
 
-/**
- * @phpstan-import-type CombinatorType from CombinatorInterface
- */
 abstract class TagTestCase extends TestCase
 {
     private static ?DocBlockParserInterface $defaultParser = null;
@@ -44,81 +33,5 @@ abstract class TagTestCase extends TestCase
         return (self::$defaultParser ??= DocBlockParser::createDefault())
             ->parse($docBlock)
             ->tags;
-    }
-
-    /**
-     * @param array<non-empty-string, TagDefinitionInterface> $tags
-     * @param array<non-empty-string, non-empty-string> $aliases
-     */
-    protected function createTagRegistry(
-        array $tags = [],
-        array $aliases = [],
-    ): TagRegistryInterface {
-        return (new TagRegistryBuilder($tags, $aliases))->build();
-    }
-
-    /**
-     * @param array<non-empty-string, TagDefinitionInterface> $tags
-     * @param array<non-empty-string, (callable(Cursor): mixed)> $combinators
-     * @param array<non-empty-string, non-empty-string> $aliases
-     */
-    protected function createFactory(
-        array $tags = [],
-        array $combinators = [],
-        array $aliases = [],
-    ): TagFactoryInterface {
-        $registry = $this->createTagRegistry($tags, $aliases);
-
-        return new TagFactory($registry, $combinators);
-    }
-
-    /**
-     * @param array<non-empty-string, TagDefinitionInterface> $tags
-     * @param array<non-empty-string, (callable(Cursor): mixed)> $combinators
-     * @param array<non-empty-string, non-empty-string> $aliases
-     */
-    protected function createPlatform(
-        array $tags = [],
-        array $combinators = [],
-        array $aliases = [],
-    ): PlatformInterface {
-        return new class ('testing', $tags, $aliases, $combinators) implements PlatformInterface {
-            public function __construct(
-                /** @var non-empty-string */
-                public readonly string $name,
-                /** @var iterable<non-empty-string, TagDefinitionInterface> */
-                public readonly iterable $tags,
-                /** @var iterable<non-empty-string, non-empty-string> */
-                public readonly iterable $aliases,
-                /** @var iterable<non-empty-string, (callable(Cursor): mixed)> */
-                public readonly iterable $combinators,
-            ) {}
-        };
-    }
-
-    /**
-     * @param array<non-empty-string, TagDefinitionInterface> $tags
-     * @param array<non-empty-string, (callable(Cursor): mixed)> $combinators
-     * @param array<non-empty-string, non-empty-string> $aliases
-     */
-    protected function createDocBlockParser(
-        array $tags = [],
-        array $combinators = [],
-        array $aliases = [],
-    ): DocBlockParserInterface {
-        $platform = $this->createPlatform($tags, $combinators, $aliases);
-
-        return $this->createDocBlockParserWithPlatform($platform);
-    }
-
-    protected function createDocBlockParserWithPlatform(
-        PlatformInterface ...$platform,
-    ): DocBlockParserInterface {
-        return new DocBlockParser($platform);
-    }
-
-    protected function createDefaultDocBlockParser(): DocBlockParserInterface
-    {
-        return DocBlockParser::createDefault();
     }
 }

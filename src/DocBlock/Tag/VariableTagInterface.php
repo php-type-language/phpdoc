@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag;
 /**
  * A tag that refers to a variable.
  *
- * @property-read non-empty-string $variable The referenced variable name, without the leading "$".
+ * @property-read non-empty-string $variable the referenced variable name,
+ *        without the leading "$"
  */
 interface VariableTagInterface extends TagInterface {}

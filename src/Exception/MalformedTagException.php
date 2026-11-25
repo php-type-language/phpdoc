@@ -12,7 +12,8 @@ final class MalformedTagException extends InvalidTagException
 {
     /**
      * @param string $tag the tag name, without the leading "@"
-     * @param string $grammar the expected grammar, e.g. `<URI> [ <description> ]`
+     * @param string $grammar the expected grammar,
+     *        e.g. `<URI> [ <description> ]`
      * @param int<0, max> $offset byte offset of the failure within $source
      */
     public static function becauseTagBodyIsMalformed(
@@ -21,7 +22,11 @@ final class MalformedTagException extends InvalidTagException
         string $source,
         int $offset = 0,
     ): self {
-        $message = \sprintf('Malformed "@%s" tag, expected: %s', $tag, $grammar);
+        $message = \sprintf(
+            'Malformed "@%s" tag, expected: %s',
+            \addcslashes($tag, '"'),
+            $grammar,
+        );
 
         return new self($source, $offset, $message);
     }

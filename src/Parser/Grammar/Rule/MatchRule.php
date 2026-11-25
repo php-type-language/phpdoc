@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Parser\Grammar\Rule;
 
 use TypeLang\PhpDoc\Parser\Grammar\Context;
+use TypeLang\PhpDoc\Parser\Grammar\Grammar;
 
 /**
  * Matches a named terminal from the {@see Grammar} (`URI`, a type, a variable,

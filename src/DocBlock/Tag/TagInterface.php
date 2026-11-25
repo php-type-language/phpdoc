@@ -10,8 +10,10 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 /**
  * Representation of the phpdoc tag.
  *
- * @property-read non-empty-string $name Gets tag name string without the "@" prefix.
- * @property-read ?DescriptionInterface $description Gets an optional description object or {@see null} in case of
- *                description is not defined in the entry.
+ * @property-read non-empty-string $name gets tag name string without the "@"
+ *        prefix
+ * @property-read ?DescriptionInterface $description gets an optional
+ *        description object or {@see null} in case of description is not
+ *        defined in the entry
  */
 interface TagInterface extends ComponentInterface {}

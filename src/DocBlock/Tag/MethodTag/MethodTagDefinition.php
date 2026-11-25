@@ -59,17 +59,21 @@ final class MethodTagDefinition extends TagDefinition
         );
     }
 
+    /**
+     * @throws \LogicException in case of the captured callable is not
+     *        a callable type
+     */
     public function create(string $name, TagPayload $result): MethodTag
     {
         $isStatic = $result->find('static') !== null;
 
-        /** @var TypeReference $callable */
+        /** @var TypeReference */
         $callable = $result->get('callable');
 
-        /** @var TypeReference|null $returnType */
+        /** @var TypeReference|null */
         $returnType = $result->find('return-type');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         $method = $callable->type;

@@ -44,7 +44,7 @@ final class BuiltinEmitter
             $class = $imports->add($combinator->class);
             $arguments = '';
 
-            if (CombinatorArguments::needsTypeParser($combinator->class)) {
+            if (CombinatorArguments::hasTypeParserParameter($combinator->class)) {
                 $arguments = '$typeParser';
             }
 

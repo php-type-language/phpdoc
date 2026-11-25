@@ -10,7 +10,10 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
  * The registered tag definitions keyed by the tag name, the names of aliases
  * included.
  *
- * @template-extends \Traversable<non-empty-lowercase-string, TagDefinitionInterface>
+ * @template-extends \Traversable<
+ *     non-empty-lowercase-string,
+ *     TagDefinitionInterface,
+ * >
  */
 interface TagRegistryInterface extends \Traversable, \Countable
 {

@@ -11,6 +11,6 @@ use TypeLang\PhpDoc\DocBlock\Reference\ReferenceInterface;
  *
  * @template-covariant TReference of ReferenceInterface = ReferenceInterface
  *
- * @property-read ReferenceInterface $reference The reference the tag points to.
+ * @property-read ReferenceInterface $reference the reference the tag points to
  */
 interface ReferencedTagInterface extends TagInterface {}

@@ -54,8 +54,7 @@ abstract class AssertionTagDefinition extends TagDefinition
         parent::__construct(
             name: $name,
             spec: Spec::sequence(
-                // A literal reports nothing but its own presence, so each of
-                // the prefixes is asked about under a name of its own.
+                // Each of the prefixes is captured under a name of its own.
                 // The longest one is offered first ("!=" before "!").
                 Spec::maybe(
                     Spec::oneOf(
@@ -76,13 +75,13 @@ abstract class AssertionTagDefinition extends TagDefinition
 
     final public function create(string $name, TagPayload $result): AssertionTag
     {
-        /** @var TypeReference $type */
+        /** @var TypeReference */
         $type = $result->get('type');
 
-        /** @var CodeReference $subject */
+        /** @var CodeReference */
         $subject = $result->get('subject');
 
-        /** @var DescriptionInterface|null $description */
+        /** @var DescriptionInterface|null */
         $description = $result->find('description');
 
         return $this->createAssertion(

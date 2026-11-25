@@ -68,8 +68,8 @@ final class DocBlock implements
         /**
          * Gets an instance of the description preceding the tags.
          *
-         * The description corresponds to everything before the **first tag**. For
-         * the comment:
+         * The description corresponds to everything before the **first tag**.
+         * For the comment:
          *
          * ```
          * /**
@@ -105,11 +105,10 @@ final class DocBlock implements
     }
 
     /**
-     * Writing tags through the array access syntax is **NOT SUPPORTED**.
+     * Writing tags through the array access syntax is **NOT SUPPORTED**,
+     * DocBlock tags are immutable.
      *
-     * @internal DocBlock tags are immutable
-     *
-     * @throws \BadMethodCallException
+     * @throws \BadMethodCallException in case of any call
      */
     public function offsetSet(mixed $offset, mixed $value): never
     {
@@ -117,11 +116,10 @@ final class DocBlock implements
     }
 
     /**
-     * Removing tags through the array access syntax is **NOT SUPPORTED**.
+     * Removing tags through the array access syntax is **NOT SUPPORTED**,
+     * DocBlock tags are immutable.
      *
-     * @internal DocBlock tags are immutable
-     *
-     * @throws \BadMethodCallException
+     * @throws \BadMethodCallException in case of any call
      */
     public function offsetUnset(mixed $offset): never
     {

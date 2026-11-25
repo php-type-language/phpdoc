@@ -40,7 +40,7 @@ final class StringSplitter implements SplitterInterface
 
     /**
      * Trailing whitespace trimmed from a line: {@see BLANK} without the line
-     * terminators, which delimit lines rather than pad them.
+     * terminators.
      *
      * @var non-empty-string
      */
@@ -72,8 +72,7 @@ final class StringSplitter implements SplitterInterface
      */
     private static function readComment(string $docblock, int $offset): array
     {
-        /** @phpstan-ignore-next-line : Pre-allocate (invalid) segment in order to use it as a
-         *                              template in the future (speeding up object instantiation) */
+        // @phpstan-ignore-next-line empty prototype, text set before clone
         $prototype = new Segment('');
 
         $length = \strlen($docblock);
@@ -88,7 +87,7 @@ final class StringSplitter implements SplitterInterface
             $break = $offset + \strcspn($docblock, self::LINE_TERMINATORS, $offset);
             $lineEnd = \min($break, $end);
 
-            $from = self::lineStartsAt($docblock, $offset, $lineEnd);
+            $from = self::skipLinePrefix($docblock, $offset, $lineEnd);
             $content = \rtrim(\substr($docblock, $from, $lineEnd - $from), self::TRAILING_WHITESPACE);
 
             // Move past the terminator ("\n", "\r" or "\r\n") ending the line.
@@ -102,9 +101,9 @@ final class StringSplitter implements SplitterInterface
             if ($content !== '') {
                 $terminator = $break < $end ? \substr($docblock, $break, $offset - $break) : '';
 
-                /** @phpstan-ignore-next-line : Allow external mutation */
+                // @phpstan-ignore-next-line writes the read-only prototype
                 $prototype->text = $content . $terminator;
-                /** @phpstan-ignore-next-line : Allow external mutation */
+                // @phpstan-ignore-next-line writes the read-only prototype
                 $prototype->offset = $from;
 
                 $segments[] = clone $prototype;
@@ -115,13 +114,14 @@ final class StringSplitter implements SplitterInterface
     }
 
     /**
-     * Returns offset of the comment's line start
+     * Returns the offset of the line content past the leading whitespace and
+     * the "*" of the comment.
      *
      * @param int<0, max> $offset
      * @param int<0, max> $lineEnd
      * @return int<0, max>
      */
-    private static function lineStartsAt(string $docblock, int $offset, int $lineEnd): int
+    private static function skipLinePrefix(string $docblock, int $offset, int $lineEnd): int
     {
         // Skip starting whitespaces (e.g. " * @tag" -> "* @tag")
         $offset += \strspn($docblock, self::BLANK, $offset, $lineEnd - $offset);
@@ -132,9 +132,10 @@ final class StringSplitter implements SplitterInterface
 
             // Skip other whitespaces (e.g. " @tag" -> "@tag")
             //
-            // TBD This behavior seems to make it impossible to use indents for
-            // markdown, and only the leading space needs to be removed.
-            // However, this behavior makes description parsing more... predictable (?)
+            // TBD This behavior seems to make it impossible to use indents
+            // for markdown, and only the leading space needs to be removed.
+            // However, this behavior makes description parsing more...
+            // predictable (?)
             $offset += \strspn($docblock, self::BLANK, $offset, $lineEnd - $offset);
         }
 

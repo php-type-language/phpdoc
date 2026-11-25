@@ -25,8 +25,7 @@ final class VersionCombinator implements CombinatorInterface
      */
     public function __invoke(Cursor $cursor): string
     {
-        // A version begins with a digit; \strspn avoids relying on the ctype
-        // extension, which may not be installed.
+        // A version begins with a digit.
         if (\strspn($cursor->peek(1), self::DIGITS) === 0) {
             throw new NoMatchException('Expected a version');
         }

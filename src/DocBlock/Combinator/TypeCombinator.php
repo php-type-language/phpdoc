@@ -51,8 +51,8 @@ class TypeCombinator implements CombinatorInterface
 
         $cursor->moveTo($start + $result->offset);
 
-        // The tolerant offset also covers the whitespace up to the next token,
-        // so the trailing run is trimmed off the preserved type text.
+        // The tolerant offset covers the whitespace up to the next token: the
+        // trailing whitespace is trimmed off the preserved type text.
         $consumed = \rtrim(\substr($source, 0, $result->offset));
 
         if ($consumed === '') {

@@ -77,7 +77,8 @@ final class PlatformEmitter
         $entries = '';
 
         foreach ($linked->aliases as $alias => $target) {
-            $entries .= '            ' . PhpFile::renderString($alias) . ' => ' . PhpFile::renderString($target) . ",\n";
+            $entries .= '            ' . PhpFile::renderString($alias)
+                . ' => ' . PhpFile::renderString($target) . ",\n";
         }
 
         $type = self::getKeyType([...\array_keys($linked->aliases), ...\array_values($linked->aliases)]);

@@ -10,12 +10,14 @@ use TypeLang\PhpDoc\Exception\ParsingExceptionInterface;
 interface DescriptionParserInterface
 {
     /**
-     * @throws ParsingExceptionInterface
+     * @throws ParsingExceptionInterface in case of an inline tag cannot be
+     *        parsed
      */
     public function tryParse(string $description): ?DescriptionInterface;
 
     /**
-     * @throws ParsingExceptionInterface
+     * @throws ParsingExceptionInterface in case of an inline tag cannot be
+     *        parsed
      */
     public function parse(string $description): DescriptionInterface;
 }

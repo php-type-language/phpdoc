@@ -40,12 +40,12 @@ final class LiteralRule implements TerminalInterface
             if (\strlen($lookahead) > \strlen($this->value)
                 && self::isWordByte($lookahead[\strlen($this->value)])
             ) {
-                throw new NoMatchException(\sprintf('Expected "%s"', $this->value));
+                throw new NoMatchException(\sprintf('Expected "%s"', \addcslashes($this->value, '"')));
             }
         }
 
         if (!$cursor->readLiteral($this->value)) {
-            throw new NoMatchException(\sprintf('Expected "%s"', $this->value));
+            throw new NoMatchException(\sprintf('Expected "%s"', \addcslashes($this->value, '"')));
         }
 
         if ($this->alias !== null) {

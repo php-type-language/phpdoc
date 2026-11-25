@@ -99,6 +99,9 @@ final class DefinitionEmitter
         return $result . "        );\n    }\n";
     }
 
+    /**
+     * @throws \LogicException in case of the rule kind is not supported
+     */
     private function emitRule(RuleInterface $rule, Imports $imports, int $indent): string
     {
         $spec = $imports->add(Spec::class);
@@ -292,6 +295,8 @@ final class DefinitionEmitter
 
     /**
      * @param \ReflectionClass<object> $declaring
+     * @throws \LogicException in case of the tag gives no argument for
+     *        a template parameter
      */
     private function replaceTemplates(string $type, \ReflectionClass $declaring, Tag $tag, Imports $imports): string
     {

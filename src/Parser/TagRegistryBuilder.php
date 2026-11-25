@@ -77,8 +77,10 @@ final class TagRegistryBuilder
 
     /**
      * @return array<non-empty-lowercase-string, TagDefinitionInterface>
-     * @throws UnknownTagAliasException if the alias cannot be resolved to a definition
-     * @throws RecursiveTagAliasException if the alias references form a cycle
+     * @throws UnknownTagAliasException in case of the alias cannot be resolved
+     *        to a definition
+     * @throws RecursiveTagAliasException in case of the alias references form
+     *        a cycle
      */
     private function getAllTagDefinitions(): array
     {
@@ -99,14 +101,16 @@ final class TagRegistryBuilder
      *
      * @param non-empty-lowercase-string $alias
      * @return non-empty-lowercase-string
-     * @throws UnknownTagAliasException if a link in the chain has neither a definition nor an alias
-     * @throws RecursiveTagAliasException if the chain references itself
+     * @throws UnknownTagAliasException in case of a link in the chain has
+     *        neither a definition nor an alias
+     * @throws RecursiveTagAliasException in case of the chain references
+     *        itself
      */
     private function getCanonicalName(string $alias): string
     {
         $current = $alias;
 
-        /** @var list<non-empty-lowercase-string> $visited */
+        /** @var list<non-empty-lowercase-string> */
         $visited = [];
 
         while (!isset($this->definitions[$current])) {
@@ -126,6 +130,12 @@ final class TagRegistryBuilder
         return $current;
     }
 
+    /**
+     * @throws UnknownTagAliasException in case of an alias cannot be resolved
+     *        to a definition
+     * @throws RecursiveTagAliasException in case of the alias references form
+     *        a cycle
+     */
     public function build(): TagRegistryInterface
     {
         return new TagRegistry($this->getAllTagDefinitions());

@@ -22,11 +22,10 @@ final class DocBlockAnalyzer
 
     public function analyze(string $docblock): RawDocBlock
     {
-        /** @phpstan-ignore-next-line : Pre-allocate (invalid) segment in order to use it as a
-         *                              template in the future (speeding up object instantiation) */
+        // @phpstan-ignore-next-line empty prototype, text set before clone
         $prototype = new Segment('');
 
-        /** @var list<Segment> $groups */
+        /** @var list<Segment> */
         $groups = [];
 
         $buffer = '';
@@ -35,9 +34,9 @@ final class DocBlockAnalyzer
         foreach ($this->splitter->split($docblock) as $segment) {
             // A tag opens a new group and finishes the previous one.
             if ($buffer !== '' && $segment->text[0] === '@') {
-                /** @phpstan-ignore-next-line : Allow external mutation */
+                // @phpstan-ignore-next-line writes the read-only prototype
                 $prototype->text = $buffer;
-                /** @phpstan-ignore-next-line : Allow external mutation */
+                // @phpstan-ignore-next-line writes the read-only prototype
                 $prototype->offset = $offset;
 
                 $groups[] = clone $prototype;
@@ -52,9 +51,9 @@ final class DocBlockAnalyzer
         }
 
         if ($buffer !== '') {
-            /** @phpstan-ignore-next-line : Allow external mutation */
+            // @phpstan-ignore-next-line writes the read-only prototype
             $prototype->text = $buffer;
-            /** @phpstan-ignore-next-line : Allow external mutation */
+            // @phpstan-ignore-next-line writes the read-only prototype
             $prototype->offset = $offset;
 
             $groups[] = clone $prototype;

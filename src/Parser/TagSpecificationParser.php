@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\Parser;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 use TypeLang\PhpDoc\Exception\MalformedTagException;
+use TypeLang\PhpDoc\Exception\ParsingExceptionInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Context;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
@@ -30,6 +31,14 @@ final class TagSpecificationParser
         $this->grammar = new Grammar($combinators);
     }
 
+    /**
+     * @throws InvalidCombinatorForDefinitionException in case of the spec of
+     *        the definition refers to an unknown combinator
+     * @throws MalformedTagException in case of the tag body does not match
+     *        the spec of the definition
+     * @throws ParsingExceptionInterface in case of a combinator fails on
+     *        a malformed input
+     */
     public function parse(TagDefinitionInterface $definition, string $name, string $suffix): TagPayload
     {
         $cursor = new Cursor($suffix);

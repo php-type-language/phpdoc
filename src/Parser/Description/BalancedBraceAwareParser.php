@@ -60,7 +60,8 @@ final class BalancedBraceAwareParser implements DescriptionParserInterface
      * parsed inline tags.
      *
      * @return list<ComponentInterface>
-     * @throws ParsingExceptionInterface
+     * @throws ParsingExceptionInterface in case of an inline tag cannot be
+     *        parsed
      */
     private function getComponents(string $description): array
     {

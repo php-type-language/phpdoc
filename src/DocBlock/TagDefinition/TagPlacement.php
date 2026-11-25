@@ -10,7 +10,8 @@ namespace TypeLang\PhpDoc\DocBlock\TagDefinition;
 enum TagPlacement
 {
     /**
-     * The tag is only valid inline, inside a description as a "{@tag}" sequence.
+     * The tag is only valid inline, inside a description as a "{@tag}"
+     * sequence.
      */
     case Inline;
 

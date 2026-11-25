@@ -92,7 +92,10 @@ final class RegistryDumper
      * or the first name sharing the instance (in registry order) when there is
      * no such name.
      *
-     * @return array<non-empty-string, array{non-empty-string, TagDefinitionInterface}>
+     * @return array<
+     *     non-empty-string,
+     *     array{non-empty-string, TagDefinitionInterface},
+     * >
      */
     private function groupByDefinition(DocBlockParser $parser): array
     {

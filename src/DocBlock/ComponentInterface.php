@@ -9,8 +9,5 @@ namespace TypeLang\PhpDoc\DocBlock;
  */
 interface ComponentInterface extends \Stringable
 {
-    /**
-     * Returns the string representation of the component.
-     */
     public function __toString(): string;
 }

@@ -122,6 +122,8 @@ final class Generator
     /**
      * @param non-empty-string $class
      * @return non-empty-string
+     * @throws \LogicException in case of the class is outside of the root
+     *        namespace
      */
     private static function getPath(string $class): string
     {

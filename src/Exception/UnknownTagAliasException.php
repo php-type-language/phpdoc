@@ -18,6 +18,9 @@ final class UnknownTagAliasException extends InvalidTagAliasException
         $message = 'Unable to find tag definition for "%s" tag alias in alias chain [%s]';
         $pathAsString = \implode(' > ', [$alias, ...$path]);
 
-        return new self(\sprintf($message, $alias, $pathAsString), previous: $prev);
+        return new self(
+            \sprintf($message, \addcslashes($alias, '"'), $pathAsString),
+            previous: $prev,
+        );
     }
 }

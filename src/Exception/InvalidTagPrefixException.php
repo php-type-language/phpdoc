@@ -15,6 +15,6 @@ final class InvalidTagPrefixException extends InvalidTagNameException
     {
         $message = 'The tag name must starts with the "@" character';
 
-        return new static($source, $offset, $message);
+        return new self($source, $offset, $message);
     }
 }

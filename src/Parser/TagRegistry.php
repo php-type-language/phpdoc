@@ -11,7 +11,10 @@ use TypeLang\PhpDoc\TagRegistryInterface;
  * The tag definitions keyed by the lower-case tag name, built by
  * {@see TagRegistryBuilder} with the aliases already resolved.
  *
- * @template-implements \IteratorAggregate<non-empty-lowercase-string, TagDefinitionInterface>
+ * @template-implements \IteratorAggregate<
+ *     non-empty-lowercase-string,
+ *     TagDefinitionInterface,
+ * >
  */
 final class TagRegistry implements TagRegistryInterface, \IteratorAggregate
 {
@@ -34,7 +37,12 @@ final class TagRegistry implements TagRegistryInterface, \IteratorAggregate
 
     public function getIterator(): \Traversable
     {
-        /** @var \ArrayIterator<non-empty-lowercase-string, TagDefinitionInterface> */
+        /**
+         * @var \ArrayIterator<
+         *     non-empty-lowercase-string,
+         *     TagDefinitionInterface,
+         * >
+         */
         return new \ArrayIterator($this->definitions);
     }
 

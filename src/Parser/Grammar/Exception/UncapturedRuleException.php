@@ -17,7 +17,7 @@ final class UncapturedRuleException extends GrammarException
 
     public static function becauseValueNotCaptured(string $name, ?\Throwable $previous = null): self
     {
-        $message = \sprintf('No value captured under "%s"', $name);
+        $message = \sprintf('No value captured under "%s"', \addcslashes($name, '"'));
 
         return new self($name, $message, 0, $previous);
     }

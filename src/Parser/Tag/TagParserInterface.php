@@ -21,7 +21,7 @@ interface TagParserInterface
      *  - "@tag With\TypeName $andVariableName And description"
      *  - etc...
      *
-     * @throws ParsingExceptionInterface
+     * @throws ParsingExceptionInterface in case of the tag cannot be parsed
      */
     public function parse(string $definition): TagInterface;
 }

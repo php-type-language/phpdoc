@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Parser\Splitter;
 
 /**
- * @readonly This class is read-only, but is marked with an ANNOTATION instead
- *           of a native modifier. This is required to allow object creation
- *           via `clone`, which speeds up object instantiation by bypassing
- *           the constructor call.
+ * @readonly
  */
 final class Segment
 {

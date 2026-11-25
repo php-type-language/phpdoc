@@ -11,7 +11,8 @@ final class RecursiveTagAliasException extends InvalidTagAliasException
      * definition because its references form a cycle.
      *
      * @param non-empty-string $alias
-     * @param list<non-empty-string> $path chain of aliases visited before the cycle was detected
+     * @param list<non-empty-string> $path chain of aliases visited before the
+     *        cycle was detected
      */
     public static function becauseAliasIsRecursive(string $alias, array $path, ?\Throwable $prev = null): self
     {
@@ -19,6 +20,9 @@ final class RecursiveTagAliasException extends InvalidTagAliasException
             . ' because recursive references [%s] were found';
         $pathAsString = \implode(' > ', [...$path, \reset($path)]);
 
-        return new self(\sprintf($message, $alias, $pathAsString), previous: $prev);
+        return new self(
+            \sprintf($message, \addcslashes($alias, '"'), $pathAsString),
+            previous: $prev,
+        );
     }
 }
