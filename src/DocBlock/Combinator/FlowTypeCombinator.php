@@ -7,7 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 use TypeLang\PhpDoc\DocBlock\Tag\FlowType;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads a taint flow kind, that is one of the {@see FlowType} keywords.
@@ -23,7 +22,7 @@ final class FlowTypeCombinator implements CombinatorInterface
         $flow = FlowType::tryFrom($cursor->readPhpIdentifier());
 
         if ($flow === null) {
-            throw new NoMatchException('Expected a flow type (one of'
+            $cursor->fail('Expected a flow type (one of'
                 . ' "TaintSource", "TaintSink", "TaintSpecialize" or "TaintUnescape")');
         }
 

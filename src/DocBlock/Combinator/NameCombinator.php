@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads a template parameter name, that is a single identifier.
@@ -25,7 +24,7 @@ final class NameCombinator implements CombinatorInterface
         $name = $cursor->readPhpIdentifier();
 
         if ($name === '') {
-            throw new NoMatchException('Expected a name');
+            $cursor->fail('Expected a name');
         }
 
         return $name;

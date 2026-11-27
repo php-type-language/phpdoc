@@ -10,7 +10,9 @@ use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
+use TypeLang\PhpDoc\Exception\ParsingExceptionInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
+use TypeLang\PhpDoc\Parser\Grammar\Exception\InvalidCombinatorForDefinitionException;
 use TypeLang\PhpDoc\TagFactoryInterface;
 use TypeLang\PhpDoc\TagRegistryInterface;
 
@@ -67,6 +69,10 @@ final class TagFactory implements TagFactoryInterface
         return new GenericTagDefinition($name);
     }
 
+    /**
+     * @throws InvalidCombinatorForDefinitionException in case of the spec of
+     *         the definition refers to an unknown combinator
+     */
     public function create(string $name, string $suffix): TagInterface
     {
         $definition = $this->registry->find($name)
@@ -74,7 +80,7 @@ final class TagFactory implements TagFactoryInterface
 
         try {
             $result = $this->parser->parse($definition, $name, $suffix);
-        } catch (\Throwable $e) {
+        } catch (ParsingExceptionInterface $e) {
             return new InvalidTag($e, $name, Description::createIfNotEmpty($suffix));
         }
 

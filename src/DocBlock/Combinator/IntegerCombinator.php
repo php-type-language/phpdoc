@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads a non-negative integer.
@@ -27,7 +26,7 @@ final class IntegerCombinator implements CombinatorInterface
         $digits = $cursor->readWhile(self::DIGITS);
 
         if ($digits === '') {
-            throw new NoMatchException('Expected an integer');
+            $cursor->fail('Expected an integer');
         }
 
         // The run consists solely of digits, so the value is never negative.

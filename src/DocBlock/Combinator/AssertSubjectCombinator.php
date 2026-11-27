@@ -11,7 +11,6 @@ use TypeLang\PhpDoc\DocBlock\Reference\VariablePropertyReference;
 use TypeLang\PhpDoc\DocBlock\Reference\VariableReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads what an assertion is written of.
@@ -38,7 +37,7 @@ final class AssertSubjectCombinator implements CombinatorInterface
 
         // A subject is a single word: nothing but whitespace may follow it.
         if ($subject === null || $cursor->readWord() !== '') {
-            throw new NoMatchException('Expected a variable, a property or a method');
+            $cursor->fail('Expected a variable, a property or a method');
         }
 
         return $subject;

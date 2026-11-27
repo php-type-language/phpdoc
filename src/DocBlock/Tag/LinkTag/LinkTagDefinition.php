@@ -6,6 +6,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\LinkTag;
 
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\Spec;
@@ -22,7 +23,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
  * relation defined by this occurrence.
  *
  * ```
- * "@link" <URI> [ <Description> ]
+ * "@link" ( <URL> | <URI> ) [ <Description> ]
  * ```
  *
  * @generated from resources/model/standard.xml, edit the model instead
@@ -42,7 +43,10 @@ final class LinkTagDefinition extends TagDefinition
         parent::__construct(
             name: self::getCanonicalName(),
             spec: Spec::sequence(
-                Spec::rule(UriCombinator::NAME, 'uri'),
+                Spec::oneOf(
+                    Spec::rule(UrlCombinator::NAME, 'uri'),
+                    Spec::rule(UriCombinator::NAME, 'uri'),
+                ),
                 Spec::maybe(
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),

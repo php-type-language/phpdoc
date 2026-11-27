@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator\LegacyUrlValidator;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator\UrlValidatorInterface;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator\WhatWgUrlValidator;
 use TypeLang\PhpDoc\DocBlock\Reference\UrlReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
- * Reads a URL, that is a word carrying a scheme.
+ * Reads a URL with a host as defined by WHATWG: `https://example.com/path`.
  *
- * A word without a scheme is not a URL and is left for the following
- * combinators.
+ * A word without a scheme or a host is not a URL and is left for the
+ * following combinators.
  *
  * @template-implements CombinatorInterface<UrlReference>
  */
@@ -21,23 +23,30 @@ final class UrlCombinator implements CombinatorInterface
 {
     public const NAME = 'URL';
 
-    public function __invoke(Cursor $cursor): UrlReference
+    private readonly UrlValidatorInterface $validator;
+
+    public function __construct(?UrlValidatorInterface $validator = null)
     {
-        $word = $cursor->readWord();
-
-        if ($word === '' || !self::isUrl($word)) {
-            throw new NoMatchException('Expected a URL');
-        }
-
-        return new UrlReference($word);
+        $this->validator = $validator ?? self::createValidator();
     }
 
-    private static function isUrl(string $word): bool
+    public function __invoke(Cursor $cursor): UrlReference
     {
-        if (\PHP_VERSION_ID >= 80500) {
-            return \Uri\WhatWg\Url::parse($word) !== null;
+        $url = $cursor->readWord();
+
+        if ($url === '' || !$this->validator->isValid($url)) {
+            $cursor->fail('Expected a URL');
         }
 
-        return \is_string(\parse_url($word, \PHP_URL_SCHEME));
+        return new UrlReference($url);
+    }
+
+    private static function createValidator(): UrlValidatorInterface
+    {
+        if (\PHP_VERSION_ID >= 80500) {
+            return new WhatWgUrlValidator();
+        }
+
+        return new LegacyUrlValidator();
     }
 }

@@ -8,7 +8,6 @@ use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads the trailing description, consuming everything that is left and
@@ -32,7 +31,7 @@ final class DescriptionCombinator implements CombinatorInterface
         $text = \rtrim($cursor->readRemainder());
 
         if ($text === '') {
-            throw new NoMatchException('Expected a description');
+            $cursor->fail('Expected a description');
         }
 
         return $this->descriptionParser->parse($text);

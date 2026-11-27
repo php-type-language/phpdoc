@@ -67,7 +67,7 @@ Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
   name: link
   creates: TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTag
   placement: Any
-  grammar: seq(<URI> as uri, maybe(<Description> as description))
+  grammar: seq(oneOf(<URL> as uri, <URI> as uri), maybe(<Description> as description))
 @method
   definition: TypeLang\PhpDoc\DocBlock\Tag\MethodTag\MethodTagDefinition
   name: method
@@ -194,7 +194,7 @@ Version: TypeLang\PhpDoc\DocBlock\Combinator\VersionCombinator
   name: see
   creates: TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTag
   placement: Any
-  grammar: seq(oneOf(<Reference> as ref, <URI> as ref), maybe(<Description> as description))
+  grammar: seq(oneOf(<Reference> as ref, <URL> as ref, <URI> as ref), maybe(<Description> as description))
 @suppress
   definition: TypeLang\PhpDoc\DocBlock\Tag\SuppressTag\SuppressTagDefinition
   name: suppress

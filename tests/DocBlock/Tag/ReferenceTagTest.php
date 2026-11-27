@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TypeLang\PhpDoc\DocBlock\Reference\ClassMethodReference;
 use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
+use TypeLang\PhpDoc\DocBlock\Reference\UrlReference;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\LinkTag\LinkTag;
 use TypeLang\PhpDoc\DocBlock\Tag\ReferencedTagInterface;
@@ -59,6 +60,35 @@ final class ReferenceTagTest extends TagTestCase
         self::assertSame('https://example.com', (string) $tag->reference);
         self::assertSame('Project homepage.', (string) $tag->description);
         self::assertSame('@link https://example.com Project homepage.', (string) $tag);
+    }
+
+    #[Test]
+    public function linkParsesUrlBeyondAscii(): void
+    {
+        $tag = self::parseTag('@link https://пример.рф/путь Homepage.');
+
+        self::assertInstanceOf(LinkTag::class, $tag);
+        self::assertInstanceOf(UrlReference::class, $tag->reference);
+        self::assertSame('https://пример.рф/путь', (string) $tag->reference);
+    }
+
+    #[Test]
+    public function linkParsesRelativeUri(): void
+    {
+        $tag = self::parseTag('@link docs/index.html');
+
+        self::assertInstanceOf(LinkTag::class, $tag);
+        self::assertNotInstanceOf(UrlReference::class, $tag->reference);
+        self::assertInstanceOf(UriReference::class, $tag->reference);
+    }
+
+    #[Test]
+    public function seeParsesUrlBeyondAscii(): void
+    {
+        $tag = self::parseTag('@see https://пример.рф/путь');
+
+        self::assertInstanceOf(SeeTag::class, $tag);
+        self::assertInstanceOf(UrlReference::class, $tag->reference);
     }
 
     #[Test]

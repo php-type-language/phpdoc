@@ -236,7 +236,10 @@
         </description>
         <grammar>
             <sequence>
-                <rule name="URI" as="uri"/>
+                <one-of>
+                    <rule name="URL" as="uri"/>
+                    <rule name="URI" as="uri"/>
+                </one-of>
                 <maybe>
                     <rule name="Description" as="description"/>
                 </maybe>
@@ -897,6 +900,7 @@
             <sequence>
                 <one-of>
                     <rule name="Reference" as="ref" parameter="reference"/>
+                    <rule name="URL" as="ref" parameter="reference"/>
                     <rule name="URI" as="ref" parameter="reference"/>
                 </one-of>
                 <maybe>

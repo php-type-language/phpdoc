@@ -9,7 +9,6 @@ use TypeLang\Parser\TypeParser;
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\Type\TypeNode;
 
 /**
@@ -40,13 +39,13 @@ class TypeCombinator implements CombinatorInterface
         $source = $cursor->readRemainder();
 
         if ($source === '') {
-            throw new NoMatchException('Expected a type');
+            $cursor->fail('Expected a type');
         }
 
         $result = $this->typeParser->partial($source);
 
         if (!$result instanceof SuccessfulParsedResult) {
-            throw new NoMatchException($result->message);
+            $cursor->fail($result->message);
         }
 
         $cursor->moveTo($start + $result->offset);
@@ -56,7 +55,7 @@ class TypeCombinator implements CombinatorInterface
         $consumed = \rtrim(\substr($source, 0, $result->offset));
 
         if ($consumed === '') {
-            throw new NoMatchException('Expected a type');
+            $cursor->fail('Expected a type');
         }
 
         return new TypeReference($result->type, $consumed);

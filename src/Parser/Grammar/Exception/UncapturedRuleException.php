@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\Parser\Grammar\Exception;
 final class UncapturedRuleException extends GrammarException
 {
     public function __construct(
-        public string $name,
+        public readonly string $name,
         string $message = '',
         int $code = 0,
         ?\Throwable $previous = null,

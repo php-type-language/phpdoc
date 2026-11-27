@@ -18,4 +18,5 @@ phpunit.xml export-ignore
 /.github export-ignore
 /bin export-ignore
 /build export-ignore
+/resources export-ignore
 /tests export-ignore

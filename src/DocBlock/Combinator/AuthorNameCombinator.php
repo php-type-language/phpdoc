@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads an author name, that is everything up to an optional "<email>".
@@ -25,7 +24,7 @@ final class AuthorNameCombinator implements CombinatorInterface
         $name = \rtrim($cursor->readUntil('<'));
 
         if ($name === '') {
-            throw new NoMatchException('Expected an author name');
+            $cursor->fail('Expected an author name');
         }
 
         return $name;

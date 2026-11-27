@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads an email address up to its closing ">".
@@ -25,7 +24,7 @@ final class EmailCombinator implements CombinatorInterface
         $email = \trim($cursor->readUntil('>'));
 
         if ($email === '') {
-            throw new NoMatchException('Expected an email address');
+            $cursor->fail('Expected an email address');
         }
 
         return $email;

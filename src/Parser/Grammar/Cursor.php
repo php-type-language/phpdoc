@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypeLang\PhpDoc\Parser\Grammar;
 
+use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
+
 /**
  * A reading position over a tag suffix that grammar rules consume from.
  *
@@ -299,6 +301,17 @@ final class Cursor
         $this->moveTo($this->length);
 
         return $rest;
+    }
+
+    /**
+     * Rejects the input at the current position: the grammar rolls the cursor
+     * back and tries the next alternative.
+     *
+     * @throws NoMatchException in case of the input does not fit
+     */
+    public function fail(string $message = ''): never
+    {
+        throw new NoMatchException($message);
     }
 
     /**

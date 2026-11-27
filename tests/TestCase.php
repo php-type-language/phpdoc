@@ -10,6 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\TypeCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\VariableCombinator;
 use TypeLang\PhpDoc\Parser\Description\BalancedBraceAwareParser;
 use TypeLang\PhpDoc\Parser\Description\DescriptionParserInterface;
@@ -35,6 +36,7 @@ abstract class TestCase extends BaseTestCase
 
         $baseRules = [
             UriCombinator::NAME => new UriCombinator(),
+            UrlCombinator::NAME => new UrlCombinator(),
             ReferenceCombinator::NAME => new ReferenceCombinator(),
             TypeCombinator::NAME => new TypeCombinator(typeParser: $typeParser),
             VariableCombinator::NAME => new VariableCombinator(),

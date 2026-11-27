@@ -13,7 +13,6 @@ use TypeLang\PhpDoc\DocBlock\Reference\SymbolReference;
 use TypeLang\PhpDoc\DocBlock\Reference\VariableReference;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads a reference to a code element: a class, a function, a class method, a
@@ -29,7 +28,7 @@ final class ReferenceCombinator implements CombinatorInterface
 
         // A reference is a single word: nothing but whitespace may follow it.
         if ($reference === null || $cursor->readWord() !== '') {
-            throw new NoMatchException('Expected a code reference');
+            $cursor->fail('Expected a code reference');
         }
 
         return $reference;

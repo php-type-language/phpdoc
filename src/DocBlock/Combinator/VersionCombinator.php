@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads a version number, that is a word beginning with a digit. Anything that
@@ -27,13 +26,13 @@ final class VersionCombinator implements CombinatorInterface
     {
         // A version begins with a digit.
         if (\strspn($cursor->peek(1), self::DIGITS) === 0) {
-            throw new NoMatchException('Expected a version');
+            $cursor->fail('Expected a version');
         }
 
         $version = $cursor->readWord();
 
         if ($version === '') {
-            throw new NoMatchException('Expected a version');
+            $cursor->fail('Expected a version');
         }
 
         return $version;

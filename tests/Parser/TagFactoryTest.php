@@ -7,8 +7,11 @@ namespace TypeLang\PhpDoc\Tests\Parser;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTag;
 use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
+use TypeLang\PhpDoc\Exception\MalformedTagException;
+use TypeLang\PhpDoc\Parser\Grammar\Exception\InvalidCombinatorForDefinitionException;
 use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistry;
@@ -57,6 +60,44 @@ final class TagFactoryTest extends TestCase
         );
 
         self::assertInstanceOf(FinalTag::class, $factory->create('final', ''));
+    }
+
+    public function testMalformedBodyIsAnInvalidTag(): void
+    {
+        $factory = new TagFactory(
+            registry: new TagRegistry(['final' => new FinalTagDefinition()]),
+            combinators: self::combinators(),
+        );
+
+        $tag = $factory->create('final', 'unexpected');
+
+        self::assertInstanceOf(InvalidTag::class, $tag);
+        self::assertInstanceOf(MalformedTagException::class, $tag->reason);
+    }
+
+    public function testUnknownCombinatorIsThrown(): void
+    {
+        $factory = new TagFactory(new TagRegistry(['final' => new FinalTagDefinition()]));
+
+        $this->expectException(InvalidCombinatorForDefinitionException::class);
+
+        $factory->create('final', 'some description');
+    }
+
+    public function testErrorOfCombinatorIsThrown(): void
+    {
+        $factory = new TagFactory(
+            registry: new TagRegistry(['final' => new FinalTagDefinition()]),
+            combinators: [
+                DescriptionCombinator::NAME => static function (): never {
+                    throw new \Error('Broken combinator');
+                },
+            ],
+        );
+
+        $this->expectExceptionObject(new \Error('Broken combinator'));
+
+        $factory->create('final', 'some description');
     }
 
     /**

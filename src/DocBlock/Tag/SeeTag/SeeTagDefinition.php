@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\DocBlock\Tag\SeeTag;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\ReferenceCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Reference\CodeReference;
 use TypeLang\PhpDoc\DocBlock\Reference\UriReference;
@@ -29,7 +30,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
  * The `@see` tag cannot refer to a namespace element.
  *
  * ```
- * "@see" ( <Reference> | <URI> ) [ <Description> ]
+ * "@see" ( <Reference> | <URL> | <URI> ) [ <Description> ]
  * ```
  *
  * @generated from resources/model/standard.xml, edit the model instead
@@ -51,6 +52,7 @@ final class SeeTagDefinition extends TagDefinition
             spec: Spec::sequence(
                 Spec::oneOf(
                     Spec::rule(ReferenceCombinator::NAME, 'ref'),
+                    Spec::rule(UrlCombinator::NAME, 'ref'),
                     Spec::rule(UriCombinator::NAME, 'ref'),
                 ),
                 Spec::maybe(

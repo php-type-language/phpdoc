@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\Tests\Parser\Grammar;
 use PHPUnit\Framework\Attributes\Test;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Combinator\UriCombinator;
+use TypeLang\PhpDoc\DocBlock\Combinator\UrlCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\Description\TaggedDescription;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
@@ -26,7 +27,7 @@ final class DefinitionTest extends TestCase
     #[Test]
     public function ruleStringifiesToItsGrammar(): void
     {
-        self::assertSame('<URI> [ <Description> ]', (string) (new LinkTagDefinition())->spec);
+        self::assertSame('( <URL> | <URI> ) [ <Description> ]', (string) (new LinkTagDefinition())->spec);
     }
 
     #[Test]
@@ -75,7 +76,7 @@ final class DefinitionTest extends TestCase
         self::assertInstanceOf(InvalidTag::class, $tag);
         self::assertInstanceOf(MalformedTagException::class, $tag->reason);
         self::assertSame(
-            'Malformed "@link" tag, expected: <URI> [ <Description> ]',
+            'Malformed "@link" tag, expected: ( <URL> | <URI> ) [ <Description> ]',
             $tag->reason->getMessage(),
         );
     }
@@ -121,6 +122,7 @@ final class DefinitionTest extends TestCase
     {
         $grammar = new Grammar();
 
+        $grammar->add(UrlCombinator::NAME, new UrlCombinator());
         $grammar->add(UriCombinator::NAME, new UriCombinator());
         $grammar->add(DescriptionCombinator::NAME, new DescriptionCombinator(self::descriptions()));
 

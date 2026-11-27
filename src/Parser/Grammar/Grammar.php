@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Parser\Grammar;
 
 use TypeLang\PhpDoc\Parser\Grammar\Exception\InvalidCombinatorException;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\PhpDoc\Parser\Grammar\Rule\MatchRule;
 
 /**
  * The named terminals ({@see MatchRule}) that tag definitions may reference.
  *
- * A reader reads its value from the {@see Cursor} and returns it, or throws a
- * {@see NoMatchException} when the input does not fit.
+ * A reader reads its value from the {@see Cursor} and returns it, or calls
+ * {@see Cursor::fail()} when the input does not fit.
  *
  * ```
  * $grammar->add('URI', static function (Cursor $cursor): string {
  *     $uri = $cursor->readWord();
  *
  *     if ($uri === '') {
- *         throw new NoMatchException('Expected a URI');
+ *         $cursor->fail('Expected a URI');
  *     }
  *
  *     return $uri;

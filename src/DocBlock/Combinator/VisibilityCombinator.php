@@ -7,7 +7,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 use TypeLang\PhpDoc\DocBlock\Tag\Visibility;
 use TypeLang\PhpDoc\Parser\Grammar\CombinatorInterface;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 
 /**
  * Reads an access level, that is one of the "public", "protected" or
@@ -24,7 +23,7 @@ final class VisibilityCombinator implements CombinatorInterface
         $access = Visibility::tryFrom($cursor->readWord());
 
         if ($access === null) {
-            throw new NoMatchException('Expected an access (one of "public", "protected" or "private") level');
+            $cursor->fail('Expected an access (one of "public", "protected" or "private") level');
         }
 
         return $access;

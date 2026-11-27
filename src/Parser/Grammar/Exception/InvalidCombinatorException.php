@@ -7,7 +7,7 @@ namespace TypeLang\PhpDoc\Parser\Grammar\Exception;
 class InvalidCombinatorException extends GrammarException
 {
     final public function __construct(
-        public string $name,
+        public readonly string $name,
         string $message = '',
         int $code = 0,
         ?\Throwable $previous = null,

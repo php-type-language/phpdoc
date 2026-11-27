@@ -6,7 +6,6 @@ namespace TypeLang\PhpDoc\DocBlock\Combinator;
 
 use TypeLang\PhpDoc\DocBlock\Reference\TypeReference;
 use TypeLang\PhpDoc\Parser\Grammar\Cursor;
-use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\Type\Callable\CallableTypeNode;
 
 /**
@@ -23,7 +22,7 @@ final class CallableTypeCombinator extends TypeCombinator
         $type = parent::__invoke($cursor);
 
         if (!$type->type instanceof CallableTypeNode) {
-            throw new NoMatchException('Expected a callable type');
+            $cursor->fail('Expected a callable type');
         }
 
         return $type;
