@@ -40,6 +40,11 @@ final class PhanForbidUndeclaredMagicMethodsTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-forbid-undeclared-magic-methods` tag forbids calling
+                undeclared magic methods on the class it decorates, so only documented
+                methods may be called.
+                TEXT,
         );
     }
 

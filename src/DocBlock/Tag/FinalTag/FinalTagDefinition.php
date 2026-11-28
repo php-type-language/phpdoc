@@ -38,6 +38,9 @@ final class FinalTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@final` tag declares that an element must not be overridden or extended.
+                TEXT,
         );
     }
 

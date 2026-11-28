@@ -37,6 +37,10 @@ final class InternalTagDefinition extends TagDefinition
             spec: Spec::maybe(
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
+            description: <<<'TEXT'
+                The `@internal` tag marks an element as internal to its package, or documents
+                information meant only for the maintainers of that package.
+                TEXT,
         );
     }
 

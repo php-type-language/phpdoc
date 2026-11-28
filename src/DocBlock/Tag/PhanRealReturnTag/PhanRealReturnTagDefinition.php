@@ -44,6 +44,10 @@ final class PhanRealReturnTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-real-return` tag documents the actual native return type of a
+                function or method, kept distinct from the documented `@return` type.
+                TEXT,
         );
     }
 

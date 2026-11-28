@@ -49,6 +49,10 @@ final class PhanSuppressNextLineTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-suppress-next-line` tag silences the listed issue types
+                reported on the next line.
+                TEXT,
         );
     }
 

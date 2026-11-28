@@ -42,6 +42,10 @@ final class PsalmCheckTypeTagDefinition extends TagDefinition
                 Spec::rule(TypeCombinator::NAME, 'type'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-check-type` tag reports an issue unless the inferred type of the
+                given variable is assignable to the expected type.
+                TEXT,
         );
     }
 

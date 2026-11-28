@@ -44,6 +44,10 @@ final class RequireExtendsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@require-extends` tag constrains a trait so it may only be used by a
+                class that extends the given type.
+                TEXT,
         );
     }
 

@@ -40,6 +40,11 @@ final class ReadonlyAllowPrivateMutationTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@readonly-allow-private-mutation` tag allows a readonly property to
+                be mutated from within the declaring class, rather than only during
+                initialization.
+                TEXT,
         );
     }
 

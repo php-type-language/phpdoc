@@ -39,6 +39,10 @@ final class SubpackageTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@subpackage` tag categorizes elements into a logical subdivision below
+                their package.
+                TEXT,
         );
     }
 

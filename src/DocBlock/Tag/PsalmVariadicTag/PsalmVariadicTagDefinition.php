@@ -39,6 +39,10 @@ final class PsalmVariadicTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-variadic` tag declares that a class's magic
+                `__call`/`__callStatic` methods accept a variadic list of arguments.
+                TEXT,
         );
     }
 

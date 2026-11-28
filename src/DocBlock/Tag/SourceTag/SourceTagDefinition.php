@@ -46,6 +46,10 @@ final class SourceTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Inline,
+            description: <<<'TEXT'
+                The `@source` tag points at a range of lines of the documented element's
+                source, starting at a line and optionally spanning a number of lines.
+                TEXT,
         );
     }
 

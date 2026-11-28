@@ -43,6 +43,10 @@ final class NameTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@name` tag assigns an alias to a procedural page or global variable so
+                that it can be referred to by that alias in the generated documentation.
+                TEXT,
         );
     }
 

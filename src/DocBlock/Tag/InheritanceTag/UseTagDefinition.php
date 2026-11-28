@@ -47,6 +47,13 @@ final class UseTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@use` tag allows to extend templated traits, providing the concrete
+                type arguments of the used trait.
+
+                The `@use` tag makes a generic trait concrete by providing the type
+                arguments for its template parameters.
+                TEXT,
         );
     }
 

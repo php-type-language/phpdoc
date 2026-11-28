@@ -47,6 +47,13 @@ final class ImplementsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@implements` tag allows to extend templated interfaces, providing the
+                concrete type arguments of the implemented interface.
+
+                The `@implements` tag makes a generic interface concrete by providing the
+                type arguments for its template parameters.
+                TEXT,
         );
     }
 

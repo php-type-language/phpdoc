@@ -51,6 +51,15 @@ final class LinkTagDefinition extends TagDefinition
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
+            description: <<<'TEXT'
+                The `@link` tag can be used to define a relation, or link, between
+                the element, or part of the long description when used inline, to a URI.
+
+                The URI MUST be complete and well-formed as specified in RFC2396.
+
+                The `@link` tag MAY have a description appended to indicate the type of
+                relation defined by this occurrence.
+                TEXT,
         );
     }
 

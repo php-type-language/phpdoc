@@ -17,6 +17,9 @@ use TypeLang\PhpDoc\Parser\Grammar\Exception\NoMatchException;
 use TypeLang\PhpDoc\Parser\Grammar\Grammar;
 
 /**
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc\Parser
+ *
  * @phpstan-import-type CombinatorType from CombinatorInterface
  */
 final class TagSpecificationParser

@@ -56,6 +56,9 @@ final class TemplateCovariantTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@template-covariant` tag declares a covariant generic type parameter.
+                TEXT,
         );
     }
 

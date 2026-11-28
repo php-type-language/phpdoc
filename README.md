@@ -38,7 +38,7 @@ comment's description and tags:
 ```php
 use TypeLang\PhpDoc\DocBlockParser;
 
-$parser = DocBlockParser::createDefault();
+$parser = DocBlockParser::create();
 
 $block = $parser->parse(<<<'PHPDOC'
     /**

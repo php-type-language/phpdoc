@@ -56,6 +56,9 @@ final class TemplateTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@template` tag declares an invariant generic type parameter.
+                TEXT,
         );
     }
 

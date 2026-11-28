@@ -34,6 +34,15 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="TextType">
+        <xs:annotation>
+            <xs:documentation>Text with at least one character other than whitespace.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[\s\S]*\S[\s\S]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="TagNameType">
         <xs:annotation>
             <xs:documentation>Tag name without the leading "@".</xs:documentation>
@@ -135,7 +144,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="summary" type="xs:string"/>
+            <xs:element name="summary" type="TextType"/>
             <xs:element name="description" type="xs:string" minOccurs="0"/>
             <xs:element name="grammar" type="GrammarType"/>
             <xs:element name="example" type="ExampleType" minOccurs="0" maxOccurs="unbounded"/>

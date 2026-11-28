@@ -43,6 +43,10 @@ final class PsalmTaintSourceTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-taint-source` tag marks the return value as a taint source
+                of the given type.
+                TEXT,
         );
     }
 

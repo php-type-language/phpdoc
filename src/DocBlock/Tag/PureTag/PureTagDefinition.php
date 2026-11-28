@@ -40,6 +40,11 @@ final class PureTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@pure` tag declares a function or method as pure, meaning it is
+                free of side effects: calling it repeatedly with the same arguments
+                always produces the same result, without observably mutating any state.
+                TEXT,
         );
     }
 

@@ -51,6 +51,13 @@ final class ImportTypeAliasTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                A tag that imports a type alias declared elsewhere, optionally rebinding it
+                to a local name.
+
+                The import-type tag brings a type alias declared elsewhere into the current
+                scope, optionally rebinding it to a local name after "as".
+                TEXT,
         );
     }
 

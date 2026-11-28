@@ -39,6 +39,10 @@ final class PsalmIgnoreNullableReturnTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-ignore-nullable-return` tag ignores a possible `null` value
+                in the return type.
+                TEXT,
         );
     }
 

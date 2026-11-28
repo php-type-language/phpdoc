@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace TypeLang\PhpDoc\Parser\Splitter;
 
 /**
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc
+ *
  * @readonly
  */
 final class Segment

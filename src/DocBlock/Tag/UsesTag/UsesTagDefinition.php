@@ -43,6 +43,9 @@ final class UsesTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@uses` tag indicates that the described element uses the referenced one.
+                TEXT,
         );
     }
 

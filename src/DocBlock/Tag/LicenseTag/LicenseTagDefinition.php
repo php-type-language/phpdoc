@@ -49,6 +49,12 @@ final class LicenseTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@license` tag pointing to the license text by a URL.
+
+                The `@license` tag documents the license that applies to an element, given
+                either as a URL to the license text or by its name.
+                TEXT,
         );
     }
 

@@ -44,6 +44,10 @@ final class YieldTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@yield` tag documents the type yielded by a `Generator`, distinct
+                from the type it returns on completion.
+                TEXT,
         );
     }
 

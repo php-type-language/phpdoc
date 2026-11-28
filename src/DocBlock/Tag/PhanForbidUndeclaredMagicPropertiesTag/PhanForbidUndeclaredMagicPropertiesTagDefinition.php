@@ -40,6 +40,11 @@ final class PhanForbidUndeclaredMagicPropertiesTagDefinition extends TagDefiniti
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-forbid-undeclared-magic-properties` tag forbids accessing
+                undeclared magic properties on the class it decorates, so only
+                documented properties may be accessed.
+                TEXT,
         );
     }
 

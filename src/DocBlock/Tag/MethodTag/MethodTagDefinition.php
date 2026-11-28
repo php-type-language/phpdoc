@@ -56,6 +56,14 @@ final class MethodTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@method` tag declares a "magic" method that can be called on the
+                described class, described as a callable carrying its name, parameters and
+                return type.
+
+                The method is written as a callable, either carrying its own return type or
+                having it spelled out in front of the signature.
+                TEXT,
         );
     }
 

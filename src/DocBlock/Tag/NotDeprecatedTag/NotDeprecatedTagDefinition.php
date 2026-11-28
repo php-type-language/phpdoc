@@ -39,6 +39,10 @@ final class NotDeprecatedTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@not-deprecated` tag marks an element as explicitly not deprecated,
+                overriding a `@deprecated` tag it would otherwise inherit from a parent.
+                TEXT,
         );
     }
 

@@ -50,6 +50,16 @@ final class ThrowsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@throws` tag indicates the type of "\Throwable" that an element may
+                throw.
+
+                The `@throws` tag indicates that a function or method is able to throw
+                a specific type of "\Throwable" (an exception or an error).
+
+                The `@throws` tag MAY be followed by a description explaining when and why
+                the "\Throwable" is thrown.
+                TEXT,
         );
     }
 

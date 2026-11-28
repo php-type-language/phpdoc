@@ -43,6 +43,10 @@ final class PhpcsSuppressTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phpcsSuppress` tag suppresses the named coding-standard check for
+                the element it decorates.
+                TEXT,
         );
     }
 

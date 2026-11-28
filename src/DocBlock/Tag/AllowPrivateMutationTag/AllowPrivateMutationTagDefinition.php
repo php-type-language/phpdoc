@@ -39,6 +39,10 @@ final class AllowPrivateMutationTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@allow-private-mutation` tag allows a private-scope mutation of an
+                otherwise immutable property.
+                TEXT,
         );
     }
 

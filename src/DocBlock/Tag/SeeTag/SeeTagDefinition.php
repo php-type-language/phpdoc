@@ -16,7 +16,7 @@ use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinition;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagPayload;
 
 /**
- * The `@see` tag can be used to define a {@see CodeReference element}.
+ * The `@see` tag can be used to define a reference to another element or to a URI.
  *
  * When defining a reference to other elements, you can refer to a specific
  * element by appending a double colon and providing the name of that element
@@ -59,6 +59,20 @@ final class SeeTagDefinition extends TagDefinition
                     Spec::rule(DescriptionCombinator::NAME, 'description'),
                 ),
             ),
+            description: <<<'TEXT'
+                The `@see` tag can be used to define a reference to another element or to a URI.
+
+                When defining a reference to other elements, you can refer to a specific
+                element by appending a double colon and providing the name of that element
+                (also called the 'Fully Qualified Name' or _FQN_).
+
+                A URI MUST be complete and well-formed as specified in RFC 2396.
+
+                The `@see` tag SHOULD have a description to provide additional information
+                regarding the relationship between the element and its target.
+
+                The `@see` tag cannot refer to a namespace element.
+                TEXT,
         );
     }
 

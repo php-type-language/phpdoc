@@ -44,6 +44,10 @@ final class MixinTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@mixin` tag declares that the members of the referenced type are made
+                available on the described class.
+                TEXT,
         );
     }
 

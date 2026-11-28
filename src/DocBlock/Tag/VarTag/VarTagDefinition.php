@@ -48,6 +48,10 @@ final class VarTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@var` tag documents the type of a property, constant or inline
+                variable, optionally naming the variable it applies to.
+                TEXT,
         );
     }
 

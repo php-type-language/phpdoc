@@ -13,6 +13,9 @@ use TypeLang\PhpDoc\Parser\Splitter\SplitterInterface;
  *
  * A line opening with "@" starts a new tag. Any line before the first tag
  * belongs to the description, and any non-tag line after a tag continues it.
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc
  */
 final class DocBlockAnalyzer
 {

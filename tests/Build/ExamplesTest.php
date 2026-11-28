@@ -25,7 +25,7 @@ final class ExamplesTest extends TestCase
     #[DataProvider('exampleDataProvider')]
     public function testExampleIsParsed(string $name, Example $example): void
     {
-        $parser = DocBlockParser::createDefault();
+        $parser = DocBlockParser::create();
         $found = false;
         $docblocks = self::getDocBlocks($example->code);
 

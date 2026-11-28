@@ -46,6 +46,10 @@ final class ParamOutTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@param-out` tag documents the type a by-reference argument holds after
+                the function or method returns.
+                TEXT,
         );
     }
 

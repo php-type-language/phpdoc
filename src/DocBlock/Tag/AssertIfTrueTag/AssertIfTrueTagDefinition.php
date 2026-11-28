@@ -30,7 +30,13 @@ final class AssertIfTrueTagDefinition extends AssertionTagDefinition
 
     public function __construct()
     {
-        parent::__construct(self::getCanonicalName());
+        parent::__construct(
+            name: self::getCanonicalName(),
+            description: <<<'TEXT'
+                The `@assert-if-true` tag asserts the given type for a subject, but
+                only when the function returns `true`.
+                TEXT,
+        );
     }
 
     protected function createAssertion(

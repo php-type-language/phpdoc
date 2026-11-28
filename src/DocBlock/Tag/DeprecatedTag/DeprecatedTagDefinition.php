@@ -45,6 +45,10 @@ final class DeprecatedTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@deprecated` tag marks an element as deprecated, optionally since
+                a given version.
+                TEXT,
         );
     }
 

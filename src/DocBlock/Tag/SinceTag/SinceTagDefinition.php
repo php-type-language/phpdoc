@@ -44,6 +44,9 @@ final class SinceTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@since` tag documents the version at which an element became available.
+                TEXT,
         );
     }
 

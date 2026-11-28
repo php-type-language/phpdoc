@@ -39,6 +39,10 @@ final class PsalmIgnoreVariableMethodTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-ignore-variable-method` tag suppresses "undefined method"
+                issues for methods called on the annotated variable.
+                TEXT,
         );
     }
 

@@ -30,7 +30,13 @@ final class AssertTagDefinition extends AssertionTagDefinition
 
     public function __construct()
     {
-        parent::__construct(self::getCanonicalName());
+        parent::__construct(
+            name: self::getCanonicalName(),
+            description: <<<'TEXT'
+                The `@assert` tag asserts that the given subject is narrowed to the type it
+                carries once the call returns.
+                TEXT,
+        );
     }
 
     protected function createAssertion(

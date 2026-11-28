@@ -39,6 +39,10 @@ final class PsalmIgnoreFalsableReturnTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-ignore-falsable-return` tag ignores a possible `false` value
+                in the return type.
+                TEXT,
         );
     }
 

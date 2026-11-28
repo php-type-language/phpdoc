@@ -39,6 +39,10 @@ final class PhpStanIgnoreNextLineTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phpstan-ignore-next-line` tag silences any error reported on the
+                next line.
+                TEXT,
         );
     }
 

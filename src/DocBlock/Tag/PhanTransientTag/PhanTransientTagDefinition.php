@@ -39,6 +39,10 @@ final class PhanTransientTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-transient` tag marks a property as excluded from
+                serialization.
+                TEXT,
         );
     }
 

@@ -57,6 +57,10 @@ final class TemplateContravariantTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@template-contravariant` tag declares a contravariant generic type
+                parameter.
+                TEXT,
         );
     }
 

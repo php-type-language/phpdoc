@@ -45,6 +45,11 @@ final class SelfOutTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@self-out` tag documents the refined type of `$this` after a method
+                call, letting callers see a narrower object type than the one they
+                started with.
+                TEXT,
         );
     }
 

@@ -37,7 +37,7 @@ final class RegistrySnapshotTest extends TestCase
 
     public function testDefaultParserMatchesSnapshot(): void
     {
-        $parser = DocBlockParser::createDefault();
+        $parser = DocBlockParser::create();
         $dumper = new RegistryDumper();
 
         self::assertSnapshot('default.txt', $dumper->dumpSummary($parser));

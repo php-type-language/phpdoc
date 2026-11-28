@@ -9,6 +9,9 @@ use TypeLang\PhpDoc\DocBlock\DocBlock;
 /**
  * This interface is responsible for reading significant
  * sections of the {@see DocBlock} comment.
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc
  */
 interface SplitterInterface
 {

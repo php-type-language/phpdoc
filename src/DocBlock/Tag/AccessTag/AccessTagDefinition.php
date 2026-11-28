@@ -43,6 +43,9 @@ final class AccessTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@access` tag documents the visibility of an element.
+                TEXT,
         );
     }
 

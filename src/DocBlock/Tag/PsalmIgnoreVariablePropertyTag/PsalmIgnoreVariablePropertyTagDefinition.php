@@ -39,6 +39,10 @@ final class PsalmIgnoreVariablePropertyTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-ignore-variable-property` tag suppresses "undefined
+                property" issues for properties accessed on the annotated variable.
+                TEXT,
         );
     }
 

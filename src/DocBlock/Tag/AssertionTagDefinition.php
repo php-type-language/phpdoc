@@ -48,11 +48,14 @@ abstract class AssertionTagDefinition extends TagDefinition
 
     /**
      * @param non-empty-string $name
+     * @param non-empty-string|null $description what the tag means, in
+     *        markdown
      */
-    public function __construct(string $name)
+    public function __construct(string $name, ?string $description = null)
     {
         parent::__construct(
             name: $name,
+            description: $description,
             spec: Spec::sequence(
                 // Each of the prefixes is captured under a name of its own.
                 // The longest one is offered first ("!=" before "!").

@@ -102,6 +102,23 @@ final class ModelLoaderTest extends TestCase
         (new ModelLoader())->load($this->directory);
     }
 
+    public function testSummaryOfWhitespaceIsRejected(): void
+    {
+        $this->write(<<<'XML'
+            <model>
+                <tag name="x" class="App\XTag">
+                    <summary>   </summary>
+                    <grammar><rule name="Description"/></grammar>
+                </tag>
+            </model>
+            XML);
+
+        $this->expectException(ModelException::class);
+        $this->expectExceptionMessage("Element 'summary': [facet 'pattern']");
+
+        (new ModelLoader())->load($this->directory);
+    }
+
     private function write(string $xml): void
     {
         \file_put_contents($this->directory . '/one.xml', '<?xml version="1.0"?>' . "\n" . $xml);

@@ -50,6 +50,9 @@ final class AuthorTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@author` tag documents the author of an element.
+                TEXT,
         );
     }
 

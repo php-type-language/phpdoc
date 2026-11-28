@@ -39,6 +39,10 @@ final class ImmutableTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@immutable` tag declares a class as immutable, meaning none of its state
+                can change after construction.
+                TEXT,
         );
     }
 

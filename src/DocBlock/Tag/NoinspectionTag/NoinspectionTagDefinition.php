@@ -43,6 +43,10 @@ final class NoinspectionTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@noinspection` tag suppresses the named IDE inspection for the
+                element that follows it.
+                TEXT,
         );
     }
 

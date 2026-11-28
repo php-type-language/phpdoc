@@ -39,6 +39,10 @@ final class PsalmConsistentTemplatesTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-consistent-templates` tag requires that all subclasses use
+                the same template parameters as the parent.
+                TEXT,
         );
     }
 

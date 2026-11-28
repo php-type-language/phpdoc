@@ -39,6 +39,10 @@ final class ConsistentConstructorTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@consistent-constructor` tag requires that all subclasses declare a
+                constructor compatible with the parent's.
+                TEXT,
         );
     }
 

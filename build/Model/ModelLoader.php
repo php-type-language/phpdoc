@@ -145,6 +145,9 @@ final class ModelLoader
         $placement = $this->findAttribute($element, 'placement') ?? 'any';
         $grammar = $this->getChild($element, 'grammar');
         $parameters = [];
+        $summary = $this->getText($element, 'summary');
+
+        \assert($summary !== '');
 
         return new Tag(
             name: $this->getAttribute($element, 'name'),
@@ -158,7 +161,7 @@ final class ModelLoader
                 default => TagPlacement::Any,
             },
             package: $this->findAttribute($element, 'package') ?? $default,
-            summary: $this->getText($element, 'summary'),
+            summary: $summary,
             description: $this->findText($element, 'description') ?? '',
             grammar: $this->readRule($this->getChildren($grammar)[0], $parameters),
             parameters: $parameters,

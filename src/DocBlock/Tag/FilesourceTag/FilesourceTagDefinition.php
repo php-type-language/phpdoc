@@ -39,6 +39,10 @@ final class FilesourceTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@filesource` tag tells documentation tooling to include the source of
+                the current file in its output.
+                TEXT,
         );
     }
 

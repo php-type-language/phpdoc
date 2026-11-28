@@ -44,6 +44,9 @@ final class VersionTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@version` tag documents the current version of an element.
+                TEXT,
         );
     }
 

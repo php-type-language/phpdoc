@@ -39,6 +39,10 @@ final class PhpStanIgnoreLineTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phpstan-ignore-line` tag silences any error reported on the
+                current line.
+                TEXT,
         );
     }
 

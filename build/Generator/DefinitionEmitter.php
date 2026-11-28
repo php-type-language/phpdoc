@@ -51,13 +51,24 @@ final class DefinitionEmitter
 
     private function getDocblock(Tag $tag): string
     {
+        return self::getDescription($tag) . "\n\n```\n" . self::renderGrammar($tag) . "\n```";
+    }
+
+    /**
+     * The description of the tag the definition carries: the summary and
+     * the description of the model.
+     *
+     * @return non-empty-string
+     */
+    public static function getDescription(Tag $tag): string
+    {
         $result = $tag->summary;
 
         if ($tag->description !== '') {
             $result .= "\n\n" . $tag->description;
         }
 
-        return $result . "\n\n```\n" . self::renderGrammar($tag) . "\n```";
+        return $result;
     }
 
     /**
@@ -95,6 +106,8 @@ final class DefinitionEmitter
             $result .= '            placement: ' . $imports->add(TagPlacement::class) . '::'
                 . $tag->placement->name . ",\n";
         }
+
+        $result .= '            description: ' . PhpFile::renderNowdoc(self::getDescription($tag), 16) . ",\n";
 
         return $result . "        );\n    }\n";
     }

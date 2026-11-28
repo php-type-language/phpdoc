@@ -39,6 +39,10 @@ final class PureUnlessCallableIsImpureTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@pure-unless-callable-is-impure` tag declares a function pure unless a
+                callable it receives is itself impure.
+                TEXT,
         );
     }
 

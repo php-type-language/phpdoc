@@ -43,6 +43,10 @@ final class PsalmTaintEscapeTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-taint-escape` tag marks a value as no longer tainted after
+                passing through the described element.
+                TEXT,
         );
     }
 

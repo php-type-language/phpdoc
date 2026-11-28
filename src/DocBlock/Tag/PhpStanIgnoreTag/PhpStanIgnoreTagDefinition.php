@@ -49,6 +49,10 @@ final class PhpStanIgnoreTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phpstan-ignore` tag silences the listed error identifiers reported
+                on the current line.
+                TEXT,
         );
     }
 

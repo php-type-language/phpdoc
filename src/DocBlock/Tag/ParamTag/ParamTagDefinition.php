@@ -56,6 +56,14 @@ final class ParamTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@param` tag documents a single argument of a function or method.
+
+                The `@param` tag MAY be followed by a description that clarifies the
+                meaning of the argument. The variable of a by-reference argument is
+                prefixed with `&`, of a variadic one with `...`, of a variadic
+                by-reference one with both.
+                TEXT,
         );
     }
 

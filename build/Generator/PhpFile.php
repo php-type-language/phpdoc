@@ -92,6 +92,33 @@ final class PhpFile
     }
 
     /**
+     * Renders the text as a nowdoc string, each line and the closing marker
+     * indented by the given number of spaces.
+     *
+     * @throws \LogicException in case of a line of the text starts with the
+     *         marker and would close the nowdoc
+     */
+    public static function renderNowdoc(string $text, int $indent): string
+    {
+        $pad = \str_repeat(' ', $indent);
+        $result = "<<<'TEXT'\n";
+
+        foreach (\explode("\n", $text) as $line) {
+            if (\preg_match('/^\s*TEXT(?![A-Za-z0-9_\x80-\xFF])/', $line) === 1) {
+                throw new \LogicException('The text has a line closing the nowdoc');
+            }
+
+            if ($line !== '') {
+                $result .= $pad . $line;
+            }
+
+            $result .= "\n";
+        }
+
+        return $result . $pad . 'TEXT';
+    }
+
+    /**
      * Whether the file was produced by the generator.
      */
     public static function isGenerated(string $contents): bool

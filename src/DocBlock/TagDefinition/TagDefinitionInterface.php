@@ -18,6 +18,8 @@ use TypeLang\PhpDoc\Parser\Grammar\Rule\RuleInterface;
  *        the tag body
  * @property-read TagPlacement $placement where the tag may appear: only
  *        inline, only as a block tag, or anywhere
+ * @property-read non-empty-string|null $description what the tag means, in
+ *        markdown, {@see null} in case of it is not described
  */
 interface TagDefinitionInterface extends \Stringable
 {

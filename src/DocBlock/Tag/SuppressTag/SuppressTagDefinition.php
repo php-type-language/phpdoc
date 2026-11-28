@@ -49,6 +49,10 @@ final class SuppressTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@suppress` tag silences the listed diagnostics that would otherwise be
+                reported for an element.
+                TEXT,
         );
     }
 

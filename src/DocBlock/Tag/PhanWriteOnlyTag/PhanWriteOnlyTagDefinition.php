@@ -39,6 +39,10 @@ final class PhanWriteOnlyTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-write-only` tag declares that a property may only ever be
+                written, never read.
+                TEXT,
         );
     }
 

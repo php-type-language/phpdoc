@@ -46,6 +46,12 @@ final class TypeAliasTagDefinition extends TagDefinition
                 Spec::rule(TypeCombinator::NAME, 'type'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                A tag that declares a local type alias: a name bound to a type expression.
+
+                The type-alias tag binds a name to a type expression, with an optional "="
+                between the two.
+                TEXT,
         );
     }
 

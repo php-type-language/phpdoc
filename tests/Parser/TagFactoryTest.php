@@ -7,6 +7,7 @@ namespace TypeLang\PhpDoc\Tests\Parser;
 use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTag;
 use TypeLang\PhpDoc\DocBlock\Tag\FinalTag\FinalTagDefinition;
+use TypeLang\PhpDoc\DocBlock\Tag\GenericTagDefinition;
 use TypeLang\PhpDoc\DocBlock\Tag\InvalidTag;
 use TypeLang\PhpDoc\DocBlock\Tag\Tag;
 use TypeLang\PhpDoc\DocBlock\TagDefinition\TagDefinitionInterface;
@@ -27,6 +28,11 @@ final class TagFactoryTest extends TestCase
 
         self::assertSame(Tag::class, $tag::class);
         self::assertSame('Custom-Tag', $tag->name);
+    }
+
+    public function testDefinitionOfUnknownTagHasNoDescription(): void
+    {
+        self::assertNull((new GenericTagDefinition('custom-tag'))->description);
     }
 
     public function testUnknownTagDefinitionIsCreatedByLowerCaseName(): void

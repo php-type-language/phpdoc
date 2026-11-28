@@ -40,6 +40,11 @@ final class PsalmIgnoreVarTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-ignore-var` tag excludes the immediately following `@var`
+                annotation from type inference, falling back to the inferred type
+                instead of the declared one.
+                TEXT,
         );
     }
 

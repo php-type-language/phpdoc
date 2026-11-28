@@ -39,6 +39,10 @@ final class CodingStandardsIgnoreLineTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@codingStandardsIgnoreLine` tag ignores a single line of code for
+                coding-standard checks.
+                TEXT,
         );
     }
 

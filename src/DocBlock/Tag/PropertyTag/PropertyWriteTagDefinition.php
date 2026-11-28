@@ -45,6 +45,9 @@ final class PropertyWriteTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@property-write` tag declares a magic property that can only be written.
+                TEXT,
         );
     }
 

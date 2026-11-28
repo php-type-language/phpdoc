@@ -43,6 +43,10 @@ final class ParamLaterInvokedCallableTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@param-later-invoked-callable` tag marks a callable argument that is
+                invoked after the function or method returns.
+                TEXT,
         );
     }
 

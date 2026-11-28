@@ -30,7 +30,7 @@ abstract class TagTestCase extends TestCase
      */
     protected static function parseTags(string $docBlock): array
     {
-        return (self::$defaultParser ??= DocBlockParser::createDefault())
+        return (self::$defaultParser ??= DocBlockParser::create())
             ->parse($docBlock)
             ->tags;
     }

@@ -39,6 +39,10 @@ final class PhanSideEffectFreeTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-side-effect-free` tag declares a function or method as free
+                of side effects.
+                TEXT,
         );
     }
 

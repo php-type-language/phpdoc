@@ -44,6 +44,10 @@ final class PsalmIfThisIsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-if-this-is` tag narrows the type of `$this` inside a method
+                when the given type matches.
+                TEXT,
         );
     }
 

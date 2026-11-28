@@ -46,6 +46,10 @@ final class ParamClosureThisTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@param-closure-this` tag documents the bound "$this" type of closure
+                passed as an argument.
+                TEXT,
         );
     }
 

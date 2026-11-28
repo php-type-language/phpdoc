@@ -45,6 +45,9 @@ final class PropertyReadTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@property-read` tag declares a magic property that can only be read.
+                TEXT,
         );
     }
 

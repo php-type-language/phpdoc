@@ -37,7 +37,7 @@ final class SnapshotCommand extends ModelCommand
             $this->write($output, $directory . '/' . $name . '.txt', $dumper->dumpPlatform($platform));
         }
 
-        $this->write($output, $directory . '/default.txt', $dumper->dumpSummary(DocBlockParser::createDefault()));
+        $this->write($output, $directory . '/default.txt', $dumper->dumpSummary(DocBlockParser::create()));
 
         return self::SUCCESS;
     }

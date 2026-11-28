@@ -39,6 +39,10 @@ final class PsalmNoSealMethodsTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-no-seal-methods` tag allows a class to declare magic methods
+                beyond those already documented.
+                TEXT,
         );
     }
 

@@ -43,6 +43,10 @@ final class PsalmTraceTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-trace` tag outputs the inferred type of the given variable, for
+                debugging purposes.
+                TEXT,
         );
     }
 

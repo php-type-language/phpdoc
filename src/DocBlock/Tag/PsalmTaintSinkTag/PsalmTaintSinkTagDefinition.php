@@ -40,6 +40,10 @@ final class PsalmTaintSinkTagDefinition extends TagDefinition
                 Spec::rule(VariableCombinator::NAME, 'variable'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-taint-sink` tag marks the given variable as a sink where tainted
+                data of the named taint type must never arrive.
+                TEXT,
         );
     }
 

@@ -882,7 +882,7 @@
 
     <tag name="see" class="TypeLang\PhpDoc\DocBlock\Tag\SeeTag\SeeTag">
         <summary>
-            The `@see` tag can be used to define a {@see CodeReference element}.
+            The `@see` tag can be used to define a reference to another element or to a URI.
         </summary>
         <description>
             When defining a reference to other elements, you can refer to a specific

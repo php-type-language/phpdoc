@@ -39,6 +39,10 @@ final class IgnoreTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@ignore` tag tells documentation tooling to skip the element it is
+                attached to.
+                TEXT,
         );
     }
 

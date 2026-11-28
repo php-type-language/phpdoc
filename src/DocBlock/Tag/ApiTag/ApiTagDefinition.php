@@ -39,6 +39,10 @@ final class ApiTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@api` tag marks an element as part of the public, supported API of its
+                package.
+                TEXT,
         );
     }
 

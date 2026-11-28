@@ -39,6 +39,10 @@ final class ReadonlyTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@readonly` tag declares that a property may only be written once, during
+                initialization.
+                TEXT,
         );
     }
 

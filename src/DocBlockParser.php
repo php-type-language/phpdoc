@@ -10,6 +10,7 @@ use TypeLang\PhpDoc\DocBlock\Combinator\DescriptionCombinator;
 use TypeLang\PhpDoc\DocBlock\Description\DescriptionInterface;
 use TypeLang\PhpDoc\DocBlock\DocBlock;
 use TypeLang\PhpDoc\DocBlock\Tag\TagInterface;
+use TypeLang\PhpDoc\Exception\InvalidTagAliasException;
 use TypeLang\PhpDoc\Exception\ParsingException;
 use TypeLang\PhpDoc\Exception\PhpDocExceptionInterface;
 use TypeLang\PhpDoc\Exception\TagParsingException;
@@ -28,6 +29,7 @@ use TypeLang\PhpDoc\Parser\Tag\TagParserInterface;
 use TypeLang\PhpDoc\Parser\TagFactory;
 use TypeLang\PhpDoc\Parser\TagRegistryBuilder;
 use TypeLang\PhpDoc\Platform\PlatformInterface;
+use TypeLang\Type\TypeNode;
 
 /**
  * @phpstan-import-type CombinatorType from CombinatorInterface
@@ -43,27 +45,39 @@ final class DocBlockParser implements DocBlockParserInterface
     private readonly DescriptionParserInterface $descriptionParser;
 
     /**
-     * @param iterable<mixed, PlatformInterface> $platforms tag platforms, a
-     *        later one overrides an entry of an earlier one with the same name
-     * @param TypeParser $typeParser parser of the types inside tags
+     * @param iterable<mixed, PlatformInterface>|null $platforms tag
+     *        platforms, a later one overrides an entry of an earlier one with
+     *        the same name, every platform shipped with the library in case
+     *        of {@see null}
+     * @param TypeParser<TypeNode> $typeParser parser of the types inside tags
+     * @throws InvalidTagAliasException in case of an alias of the platforms
+     *         cannot be resolved to a definition
      */
     public function __construct(
-        iterable $platforms = [],
+        ?iterable $platforms = null,
         TypeParser $typeParser = new TypeParser(),
     ) {
-        $platforms = \is_array($platforms)
-            ? \array_values($platforms)
-            : \iterator_to_array($platforms, false);
+        // Boot all tag definitions
+        $this->tags = self::createTagRegistry($platforms = match (true) {
+            $platforms === null => BuiltinPlatforms::create(),
+            \is_array($platforms) => \array_values($platforms),
+            default => \iterator_to_array($platforms, false),
+        });
 
-        $this->tags = $this->createTagRegistry($platforms);
-        $this->factory = $this->createTagFactory(
+        $this->factory = self::createTagFactory(
             registry: $this->tags,
-            combinators: $this->createCombinators($platforms, $typeParser),
+            combinators: $this->createCombinators(
+                platforms: $platforms,
+                typeParser: $typeParser->forType(),
+            ),
         );
 
-        $this->docBlockAnalyzer = $this->createAnalyzer($this->createDocBlockSplitter());
-        $this->tagParser = $this->createTagParser($this->factory);
-        $this->descriptionParser = $this->createDescriptionParser($this->tagParser);
+        $this->docBlockAnalyzer = self::createAnalyzer(
+            splitter: self::createDocBlockSplitter(),
+        );
+
+        $this->tagParser = self::createTagParser($this->factory);
+        $this->descriptionParser = self::createDescriptionParser($this->tagParser);
     }
 
     /**
@@ -72,34 +86,40 @@ final class DocBlockParser implements DocBlockParserInterface
      * @param iterable<mixed, PlatformInterface> $additionalPlatforms platforms
      *        loaded after the built-in ones, overriding their entries with the
      *        same name
-     * @param TypeParser $typeParser parser of the types inside tags
+     * @param TypeParser<TypeNode> $typeParser parser of the types inside tags
+     * @throws InvalidTagAliasException in case of an alias of the platforms
+     *         cannot be resolved to a definition
      */
-    public static function createDefault(
+    public static function create(
         iterable $additionalPlatforms = [],
         TypeParser $typeParser = new TypeParser(),
     ): self {
+        if ($additionalPlatforms instanceof \Traversable) {
+            $additionalPlatforms = \iterator_to_array($additionalPlatforms, false);
+        }
+
         return new self([
             ...BuiltinPlatforms::create(),
-            ...(\is_array($additionalPlatforms)
-                ? \array_values($additionalPlatforms)
-                : \iterator_to_array($additionalPlatforms, false)),
+            ...\array_values($additionalPlatforms),
         ], $typeParser);
     }
 
-    private function createAnalyzer(SplitterInterface $splitter): DocBlockAnalyzer
+    private static function createAnalyzer(SplitterInterface $splitter): DocBlockAnalyzer
     {
         return new DocBlockAnalyzer($splitter);
     }
 
-    private function createDocBlockSplitter(): SplitterInterface
+    private static function createDocBlockSplitter(): SplitterInterface
     {
         return new StringSplitter();
     }
 
     /**
      * @param list<PlatformInterface> $platforms
+     * @throws InvalidTagAliasException in case of an alias cannot be resolved
+     *         to a definition
      */
-    private function createTagRegistry(array $platforms): TagRegistryInterface
+    private static function createTagRegistry(array $platforms): TagRegistryInterface
     {
         $definitions = [];
         $aliases = [];
@@ -154,7 +174,7 @@ final class DocBlockParser implements DocBlockParserInterface
     /**
      * @param array<non-empty-string, CombinatorType> $combinators
      */
-    private function createTagFactory(TagRegistryInterface $registry, array $combinators): TagFactoryInterface
+    private static function createTagFactory(TagRegistryInterface $registry, array $combinators): TagFactoryInterface
     {
         return new TagFactory(
             registry: $registry,
@@ -162,12 +182,12 @@ final class DocBlockParser implements DocBlockParserInterface
         );
     }
 
-    private function createTagParser(TagFactoryInterface $factory): TagParserInterface
+    private static function createTagParser(TagFactoryInterface $factory): TagParserInterface
     {
         return new StringTagParser($factory);
     }
 
-    private function createDescriptionParser(TagParserInterface $parser): DescriptionParserInterface
+    private static function createDescriptionParser(TagParserInterface $parser): DescriptionParserInterface
     {
         return new BalancedBraceAwareParser($parser);
     }

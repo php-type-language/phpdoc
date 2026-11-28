@@ -43,6 +43,10 @@ final class PsalmAssertUntaintedTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-assert-untainted` tag asserts that the given variable holds no
+                tainted data from this point on.
+                TEXT,
         );
     }
 

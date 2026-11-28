@@ -42,6 +42,9 @@ final class UnusedParamTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@unused-param` tag marks an argument that is intentionally left unused.
+                TEXT,
         );
     }
 

@@ -45,6 +45,11 @@ final class PhanClosureScopeTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-closure-scope` tag binds the type of `$this` inside a
+                `Closure`, so the closure body is analyzed as though bound to an
+                instance of the given class.
+                TEXT,
         );
     }
 

@@ -45,6 +45,11 @@ final class PsalmScopeThisTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-scope-this` tag binds the type of `$this` inside a
+                `Closure`, so the closure body is type-checked as if it were a method of
+                the given class.
+                TEXT,
         );
     }
 

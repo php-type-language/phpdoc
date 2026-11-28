@@ -44,6 +44,10 @@ final class RequireImplementsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@require-implements` tag constrains a trait so it may only be used by a
+                class that implements the given interface.
+                TEXT,
         );
     }
 

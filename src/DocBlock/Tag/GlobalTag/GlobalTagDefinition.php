@@ -45,6 +45,9 @@ final class GlobalTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@global` tag documents a global variable that a function relies on.
+                TEXT,
         );
     }
 

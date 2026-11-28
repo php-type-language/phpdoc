@@ -44,6 +44,11 @@ final class PsalmTaintUnescapeTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-taint-unescape` tag marks a value as tainted again after
+                passing through the described element, reversing an earlier
+                `@psalm-taint-escape`.
+                TEXT,
         );
     }
 

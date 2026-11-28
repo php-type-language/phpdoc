@@ -57,12 +57,14 @@ final class Tag
         public readonly ?string $package,
         /**
          * One sentence: the docblock of the tag class and the first paragraph
-         * of the docblock of the definition class.
+         * of the docblock and of the description of the definition class.
+         *
+         * @var non-empty-string
          */
         public readonly string $summary,
         /**
-         * Paragraphs of the docblock of the definition class following the
-         * summary, as written in the model.
+         * Paragraphs of the docblock and of the description of the
+         * definition class following the summary, as written in the model.
          */
         public readonly string $description,
         /**

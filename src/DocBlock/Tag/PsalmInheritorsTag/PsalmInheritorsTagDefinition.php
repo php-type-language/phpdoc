@@ -44,6 +44,10 @@ final class PsalmInheritorsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-inheritors` tag restricts which classes are allowed to
+                extend or implement the described type.
+                TEXT,
         );
     }
 

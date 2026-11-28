@@ -39,6 +39,10 @@ final class SealPropertiesTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@seal-properties` tag forbids declaring magic properties beyond those
+                already documented.
+                TEXT,
         );
     }
 

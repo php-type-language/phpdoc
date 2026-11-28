@@ -42,6 +42,9 @@ final class CodingStandardsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@codingStandards` tag names a coding standard for reference.
+                TEXT,
         );
     }
 

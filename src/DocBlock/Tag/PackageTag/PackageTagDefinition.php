@@ -38,6 +38,9 @@ final class PackageTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@package` tag categorizes elements into a logical subdivision.
+                TEXT,
         );
     }
 

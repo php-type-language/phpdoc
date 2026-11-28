@@ -40,6 +40,11 @@ final class CodingStandardsIgnoreEndTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@codingStandardsIgnoreEnd` tag ends a block of code started by
+                `@codingStandardsIgnoreStart`, resuming coding-standard checks from this
+                point on.
+                TEXT,
         );
     }
 

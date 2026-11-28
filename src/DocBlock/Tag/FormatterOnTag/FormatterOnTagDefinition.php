@@ -39,6 +39,10 @@ final class FormatterOnTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@formatter:on` tag re-enables automatic code formatting from this
+                point on, pairing with an earlier `@formatter:off`.
+                TEXT,
         );
     }
 

@@ -40,6 +40,11 @@ final class PsalmMutationFreeTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-mutation-free` tag declares that a method never mutates any
+                state, whether observable from outside the object or purely internal to
+                it.
+                TEXT,
         );
     }
 

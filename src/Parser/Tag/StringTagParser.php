@@ -21,6 +21,9 @@ use TypeLang\PhpDoc\TagFactoryInterface;
  *
  * ```
  *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc
+ *
  * @name
  * @name the description text
  * ```

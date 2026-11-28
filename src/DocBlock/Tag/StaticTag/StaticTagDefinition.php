@@ -38,6 +38,9 @@ final class StaticTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@static` tag declares a method or property as static.
+                TEXT,
         );
     }
 

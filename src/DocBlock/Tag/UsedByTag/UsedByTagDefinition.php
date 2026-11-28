@@ -44,6 +44,10 @@ final class UsedByTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@used-by` tag indicates that the described element is used by the
+                referenced one.
+                TEXT,
         );
     }
 

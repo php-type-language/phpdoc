@@ -38,6 +38,9 @@ final class AbstractTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@abstract` tag declares an element as abstract.
+                TEXT,
         );
     }
 

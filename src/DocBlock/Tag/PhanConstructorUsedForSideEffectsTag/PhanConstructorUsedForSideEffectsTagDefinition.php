@@ -40,6 +40,11 @@ final class PhanConstructorUsedForSideEffectsTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-constructor-used-for-side-effects` tag declares that a
+                constructor's return value is intentionally discarded by callers,
+                suppressing the issue raised for an unused `new` expression.
+                TEXT,
         );
     }
 

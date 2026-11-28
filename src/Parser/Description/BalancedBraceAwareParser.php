@@ -17,6 +17,9 @@ use TypeLang\PhpDoc\Parser\Tag\TagParserInterface;
  * A description parser that extracts inline tags using a brace-aware scanner.
  *
  * An inline tag is any `{@...}` sequence whose curly braces are balanced.
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal TypeLang\PhpDoc
  */
 final class BalancedBraceAwareParser implements DescriptionParserInterface
 {

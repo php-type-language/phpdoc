@@ -39,6 +39,10 @@ final class PhpStanImpureTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phpstan-impure` tag declares a function or method as impure, that
+                is, having side effects.
+                TEXT,
         );
     }
 

@@ -44,6 +44,15 @@ final class CodingStandardsIgnoreStartTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@codingStandardsIgnoreStart` tag starts a block of code excluded
+                from coding-standard checks, closed by a matching
+                `@codingStandardsIgnoreEnd`.
+
+                The `@codingstandardsignorestart` tag starts a block of code excluded
+                from coding-standard checks, closed by a matching
+                `@codingStandardsIgnoreEnd`.
+                TEXT,
         );
     }
 

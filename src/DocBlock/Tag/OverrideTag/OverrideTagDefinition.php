@@ -38,6 +38,9 @@ final class OverrideTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@override` tag marks a method as overriding an inherited definition.
+                TEXT,
         );
     }
 

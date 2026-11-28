@@ -48,6 +48,10 @@ final class StaticVarTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@staticvar` tag documents the type of static variable declared within
+                a function or method, optionally naming the variable it applies to.
+                TEXT,
         );
     }
 

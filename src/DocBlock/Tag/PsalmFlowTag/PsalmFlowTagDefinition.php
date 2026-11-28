@@ -43,6 +43,10 @@ final class PsalmFlowTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-flow` tag describes how tainted data flows through a function,
+                optionally naming the parameter the flow applies to.
+                TEXT,
         );
     }
 

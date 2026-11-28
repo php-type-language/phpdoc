@@ -38,6 +38,9 @@ final class TodoTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@todo` tag records a task that still needs to be done for an element.
+                TEXT,
         );
     }
 

@@ -39,6 +39,10 @@ final class PsalmNoSealPropertiesTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-no-seal-properties` tag allows a class to declare magic
+                properties beyond those already documented.
+                TEXT,
         );
     }
 

@@ -44,6 +44,10 @@ final class ExpectedExceptionTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@expectedException` tag declares the `Throwable` a test method is
+                expected to throw.
+                TEXT,
         );
     }
 

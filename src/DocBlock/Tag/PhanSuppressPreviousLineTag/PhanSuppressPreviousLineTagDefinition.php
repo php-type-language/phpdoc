@@ -49,6 +49,10 @@ final class PhanSuppressPreviousLineTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-suppress-previous-line` tag silences the listed issue types
+                reported on the previous line.
+                TEXT,
         );
     }
 

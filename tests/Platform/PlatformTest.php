@@ -30,6 +30,22 @@ use TypeLang\PhpDoc\Tests\TestCase;
 
 final class PlatformTest extends TestCase
 {
+    public function testParserWithoutPlatformsLoadsEveryBuiltinPlatform(): void
+    {
+        $parser = new DocBlockParser();
+
+        foreach (self::platformDataProvider() as [$platform]) {
+            foreach ($platform->getTags() as $name => $_) {
+                self::assertTrue($parser->tags->has($name));
+            }
+        }
+    }
+
+    public function testParserWithEmptyListOfPlatformsHasNoTags(): void
+    {
+        self::assertFalse((new DocBlockParser([]))->tags->has('param'));
+    }
+
     #[DataProvider('platformDataProvider')]
     public function testPlatformAloneBuildsParser(PlatformInterface $platform): void
     {

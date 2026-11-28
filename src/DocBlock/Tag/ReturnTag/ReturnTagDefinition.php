@@ -46,6 +46,12 @@ final class ReturnTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@return` tag documents the return value of a function or method.
+
+                The `@return` tag MAY be followed by a description that clarifies the
+                meaning of the returned value.
+                TEXT,
         );
     }
 

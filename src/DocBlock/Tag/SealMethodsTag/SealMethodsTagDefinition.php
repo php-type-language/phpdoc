@@ -39,6 +39,10 @@ final class SealMethodsTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@seal-methods` tag forbids declaring magic methods beyond those already
+                documented.
+                TEXT,
         );
     }
 

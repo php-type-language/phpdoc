@@ -38,6 +38,9 @@ final class InheritDocTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Inline,
+            description: <<<'TEXT'
+                The `@inheritDoc` tag reuses the documentation of the parent element.
+                TEXT,
         );
     }
 

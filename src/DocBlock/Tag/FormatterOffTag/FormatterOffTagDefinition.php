@@ -40,6 +40,11 @@ final class FormatterOffTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@formatter:off` tag disables automatic code formatting from this
+                point on, until a matching `@formatter:on` is found further down the
+                file.
+                TEXT,
         );
     }
 

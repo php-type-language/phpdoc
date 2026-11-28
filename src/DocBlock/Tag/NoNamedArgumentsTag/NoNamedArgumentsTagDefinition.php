@@ -39,6 +39,10 @@ final class NoNamedArgumentsTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@no-named-arguments` tag indicates that the argument names may change
+                and must not be relied upon by callers.
+                TEXT,
         );
     }
 

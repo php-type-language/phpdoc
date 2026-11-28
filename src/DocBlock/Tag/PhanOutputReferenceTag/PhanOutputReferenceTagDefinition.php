@@ -39,6 +39,10 @@ final class PhanOutputReferenceTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-output-reference` tag marks a by-reference argument as
+                output-only.
+                TEXT,
         );
     }
 

@@ -39,6 +39,10 @@ final class PsalmStubOverrideTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-stub-override` tag marks a stub declaration as intentionally
+                overriding the real signature.
+                TEXT,
         );
     }
 

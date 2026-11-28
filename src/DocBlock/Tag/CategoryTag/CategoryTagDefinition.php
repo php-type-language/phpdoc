@@ -38,6 +38,9 @@ final class CategoryTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@category` tag organizes groups of packages together.
+                TEXT,
         );
     }
 

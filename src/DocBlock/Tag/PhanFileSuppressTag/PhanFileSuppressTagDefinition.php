@@ -49,6 +49,10 @@ final class PhanFileSuppressTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-file-suppress` tag silences the listed issue types for the
+                whole file it appears in, rather than just a single element or line.
+                TEXT,
         );
     }
 

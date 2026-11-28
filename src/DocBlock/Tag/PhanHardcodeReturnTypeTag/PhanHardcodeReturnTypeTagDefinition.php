@@ -44,6 +44,10 @@ final class PhanHardcodeReturnTypeTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-hardcode-return-type` tag forces the documented return type
+                to be used instead of the type otherwise inferred from the method body.
+                TEXT,
         );
     }
 

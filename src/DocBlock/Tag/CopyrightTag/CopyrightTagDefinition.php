@@ -38,6 +38,9 @@ final class CopyrightTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@copyright` tag documents the copyright information of an element.
+                TEXT,
         );
     }
 

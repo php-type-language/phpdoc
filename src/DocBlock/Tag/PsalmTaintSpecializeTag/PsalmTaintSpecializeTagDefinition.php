@@ -40,6 +40,11 @@ final class PsalmTaintSpecializeTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-taint-specialize` tag tracks tainted data separately per
+                call site, rather than merging taint information from all callers
+                together.
+                TEXT,
         );
     }
 

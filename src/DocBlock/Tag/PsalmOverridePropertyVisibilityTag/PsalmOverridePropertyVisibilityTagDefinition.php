@@ -40,6 +40,11 @@ final class PsalmOverridePropertyVisibilityTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@psalm-override-property-visibility` tag allows a subclass to
+                override an inherited property with a different visibility than the
+                parent declares.
+                TEXT,
         );
     }
 

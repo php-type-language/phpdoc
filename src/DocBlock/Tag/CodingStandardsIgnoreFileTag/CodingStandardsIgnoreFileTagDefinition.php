@@ -39,6 +39,10 @@ final class CodingStandardsIgnoreFileTagDefinition extends TagDefinition
                 Spec::rule(DescriptionCombinator::NAME, 'description'),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@codingStandardsIgnoreFile` tag ignores the whole file for
+                coding-standard checks.
+                TEXT,
         );
     }
 

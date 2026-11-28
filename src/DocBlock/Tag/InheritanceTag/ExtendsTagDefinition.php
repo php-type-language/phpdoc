@@ -47,6 +47,13 @@ final class ExtendsTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@extends` tag allows to extend templated classes and interfaces,
+                providing the concrete type arguments of the parent.
+
+                The `@extends` tag makes a generic parent class or interface concrete by
+                providing the type arguments for its template parameters.
+                TEXT,
         );
     }
 

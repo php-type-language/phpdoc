@@ -46,6 +46,10 @@ final class PropertyTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@property` tag declares a magic property that can be both read and
+                written.
+                TEXT,
         );
     }
 

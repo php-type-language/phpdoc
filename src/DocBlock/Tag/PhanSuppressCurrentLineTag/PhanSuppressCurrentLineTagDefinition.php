@@ -49,6 +49,10 @@ final class PhanSuppressCurrentLineTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@phan-suppress-current-line` tag silences the listed issue types
+                reported on the current line.
+                TEXT,
         );
     }
 

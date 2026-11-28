@@ -43,6 +43,10 @@ final class ParamImmediatelyInvokedCallableTagDefinition extends TagDefinition
                 ),
             ),
             placement: TagPlacement::Block,
+            description: <<<'TEXT'
+                The `@param-immediately-invoked-callable` tag marks a callable argument that
+                is invoked before the function or method returns.
+                TEXT,
         );
     }
 
